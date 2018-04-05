@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:background="@drawable/bg_start"
+    android:baselineAligned="false">
+
+    <ImageView
+        android:layout_width="10dp"
+        android:layout_height="48dp" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/logo"
+            android:layout_width="wrap_content"
+            android:layout_height="240dp"
+            android:layout_weight="1"
+            android:scaleType="fitCenter"
+            android:src="@drawable/logo"/>
+    </LinearLayout>
+
+    <ImageView
+        android:layout_width="10dp"
+        android:layout_height="20dp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center">
+
+        <EditText
+            android:id="@+id/LoginPhoneNumber"
+            android:layout_width="240dp"
+            android:layout_height="40dp"
+            android:alpha="0.8"
+            android:background="@drawable/shape_white"
+            android:textColor="@color/darkslategrey"
+            android:textSize="15sp"
+            android:hint="手机号"
+            android:maxLength="11"
+            android:inputType="phone"/>
+    </LinearLayout>
+
+    <ImageView
+        android:layout_width="10dp"
+        android:layout_height="10dp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center">
+
+        <EditText
+            android:id="@+id/LoginPassword"
+            android:layout_width="240dp"
+            android:layout_height="40dp"
+            android:alpha="0.8"
+            android:ems="10"
+            android:inputType="textPassword"
+            android:background="@drawable/shape_white"
+            android:textColor="@color/darkslategrey"
+            android:textSize="15sp"
+            android:maxLength="16"
+            android:hint="密码" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center">
+
+        <CheckBox
+            android:id="@+id/LoginRemindPassword"
+            android:layout_width="110dp"
+            android:layout_height="40dp"
+            android:textColor="@color/whitesmoke"
+            android:textSize="15sp"
+            android:text="记住密码" />
+
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="40dp" />
+
+        <CheckBox
+            android:id="@+id/AutomaticLogin"
+            android:layout_width="110dp"
+            android:layout_height="40dp"
+            android:textColor="@color/whitesmoke"
+            android:textSize="15sp"
+            android:text="自动登录" />
+
+    </LinearLayout>
+
+
+    <Button
+        android:id="@+id/LoginDetermination"
+        android:layout_width="240dp"
+        android:layout_height="40dp"
+        android:background="@drawable/shape_white"
+        android:textSize="17sp"
+        android:textColor="@color/darkslategrey"
+        android:alpha="0.95"
+        android:text="登录" />
+
+    <ImageView
+        android:id="@+id/blank3"
+        android:layout_width="30dp"
+        android:layout_height="50dp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center">
+
+        <Button
+            android:id="@+id/Forget"
+            android:layout_width="180dp"
+            android:layout_height="40dp"
+            android:background="@android:color/transparent"
+            android:textColor="@color/whitesmoke"
+            android:textSize="17sp"
+            android:text="忘记密码？"
+            />
+
+        <Button
+            android:id="@+id/NewRegister"
+            android:layout_width="180dp"
+            android:layout_height="40dp"
+            android:background="@android:color/transparent"
+            android:text="没有账号？点此注册"
+            android:textColor="@color/whitesmoke"
+            android:textSize="17sp" />
+
+    </LinearLayout>
+
+
+
+</LinearLayout>

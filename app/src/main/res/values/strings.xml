@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">交立达</string>
+
+    <!--生成 IClientProfile 的对象 profile，该对象存放 AccessKeyID 和 AccessKeySecret 和默认的地域信息-->
+    <string name="access_key_id">LTAItaX9qsWv7Jsk</string>
+    <string name="access_key_secret">IhVcLTv4W32HvXZ1bFcHALnwQWrUkJ</string>
+    <string name="region_id">cn-beijing</string>
+    <string name="title_activity_pub_foot">Pub_footActivity</string>
+    <string name="title_activity_p__message">P_MessageActivity</string>
+    <string name="title_activity_message_list">MessageListActivity</string>
+
+</resources>
