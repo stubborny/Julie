@@ -9,6 +9,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ImageView;
@@ -20,6 +21,8 @@ import android.widget.Toast;
 import com.bjtu.julie.Fragment.FootManFragment;
 import com.bjtu.julie.Fragment.MessageFragment;
 import com.bjtu.julie.Fragment.SettingFragment;
+import com.bjtu.julie.Service.PollingService;
+import com.bjtu.julie.Util.PollingUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -63,12 +66,17 @@ public class MainActivity  extends AppCompatActivity implements View.OnClickList
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        Log.e("System.out.print","Start polling service");
+        PollingUtils.startPollingService(this, 5, PollingService.class, PollingService.ACTION);
+
         setContentView(R.layout.activity_main);
         fragmentManager = getFragmentManager();
         mainActivity=this;
         initViews(); //初始化界面，并设置四个tab的监听
         setTabSelection(0); //第一次启动时开启第0个tab
         viewPager.setCurrentItem(0, false);
+
     }
 
     /*
@@ -257,5 +265,12 @@ public class MainActivity  extends AppCompatActivity implements View.OnClickList
                 break;
         }
     }
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        //Stop polling service
+        Log.e("System.out.print","Stop polling service...");
 
+        PollingUtils.stopPollingService(this, PollingService.class, PollingService.ACTION);
+    }
 }

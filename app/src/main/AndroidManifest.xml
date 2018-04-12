@@ -29,7 +29,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+        <activity
+            android:name=".MainActivity"
+            android:launchMode="singleTask">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -45,22 +47,19 @@
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:theme="@android:style/Theme.Translucent.NoTitleBar"
             android:windowSoftInputMode="stateHidden|adjustResize" />
-        <activity android:name=".DepositActivity"></activity>
+        <activity android:name=".DepositActivity" />
         <activity
             android:name="com.alipay.sdk.app.H5PayActivity"
             android:configChanges="orientation|keyboardHidden|navigation|screenSize"
             android:exported="false"
             android:screenOrientation="behind"
-            android:windowSoftInputMode="adjustResize|stateHidden" >
-        </activity>
+            android:windowSoftInputMode="adjustResize|stateHidden" />
         <activity
             android:name="com.alipay.sdk.app.H5AuthActivity"
             android:configChanges="orientation|keyboardHidden|navigation"
             android:exported="false"
             android:screenOrientation="behind"
-            android:windowSoftInputMode="adjustResize|stateHidden" >
-        </activity>
-
+            android:windowSoftInputMode="adjustResize|stateHidden" />
         <activity
             android:name=".Activity.Pub_footActivity"
             android:label="@string/title_activity_pub_foot"
@@ -69,6 +68,17 @@
             android:name=".Activity.P_MessageActivity"
             android:label="@string/title_activity_p__message"
             android:theme="@style/AppTheme" />
+        <activity android:name=".Activity.MessageActivity"></activity>
+        <service
+            android:name="com.bjtu.julie.Service.PollingService"
+            android:enabled="true"
+            android:exported="false" >
+            <intent-filter>
+                <action android:name="com.bjtu.julie.Service.PollingService" />
+
+                <category android:name="android.intent.category.default" />
+            </intent-filter>
+        </service>
     </application>
 
 </manifest>

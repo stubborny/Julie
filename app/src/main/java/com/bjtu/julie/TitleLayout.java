@@ -21,12 +21,7 @@ public class TitleLayout extends LinearLayout {
                 ((Activity)getContext()).finish();
             }
         });
-        titleOk.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(getContext(),"发布信息成功",Toast.LENGTH_SHORT).show();
-            }
-        });
+
 
     }
 }

@@ -36,7 +36,7 @@ public class MessageAdaper extends RecyclerView.Adapter<MessageAdaper.ViewHolder
     }
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent,int viewType){
-        View view= LayoutInflater.from(parent.getContext()).inflate(R.layout.exchange,parent,false);
+        View view= LayoutInflater.from(parent.getContext()).inflate(R.layout.message_item,parent,false);
        final ViewHolder holder=new ViewHolder(view);
         holder.messView.setOnClickListener(new View.OnClickListener(){
             @Override

@@ -3,263 +3,228 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:weightSum="1">
+    android:orientation="vertical">
 
     <com.bjtu.julie.TitleLayout
         android:layout_width="match_parent"
-        android:layout_height="10dp"
-        android:layout_weight="0.23">
+        android:layout_height="wrap_content">
+
         <include layout="@layout/title1" />
     </com.bjtu.julie.TitleLayout>
 
+    <EditText
+        android:id="@+id/pubFootEdit"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:background="@null"
+        android:gravity="top"
+        android:hint="帮取快递，食堂带饭等"
+        android:textColorHint="@color/darkgrey"
+        android:textSize="15sp" />
+
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="@color/lightgrey" />
+
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="120dp"
-        android:orientation="horizontal"
-        android:layout_weight="0.10"
+        android:layout_height="40dp"
         android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp">
+        android:layout_marginRight="10dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="送达地址"
+            android:textColor="@color/black"
+            android:textSize="15sp" />
 
         <EditText
-            android:id="@+id/pubFootEdit"
-            android:layout_width="match_parent"
-            android:layout_height="149dp"
+            android:id="@+id/pubFootAddress_Edit"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="20dp"
+            android:layout_marginStart="20dp"
+            android:layout_weight="1"
             android:background="@null"
-            android:hint="帮取快递，食堂带饭等"
-            android:gravity="top"
+            android:hint="请填写送达地址"
             android:textColorHint="@color/darkgrey"
-            android:textSize="15dp"/>
+            android:textSize="15sp" />
+
     </LinearLayout>
+
+
     <View
         android:layout_width="match_parent"
         android:layout_height="0.5dp"
-        android:background="@color/lightgrey"/>
+        android:background="@color/lightgrey" />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="40dp"
-        android:layout_weight="0.01"
-        android:orientation="horizontal"
         android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp">
+        android:layout_marginRight="10dp"
+        android:orientation="horizontal">
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="40dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="附加要求"
+            android:textColor="@color/black"
+            android:textSize="15sp" />
 
-            <TextView
-                android:id="@+id/pubFootAddress"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:text="送达地址"
-                android:textColor="@color/black"
-                android:textSize="15dp" />
+        <EditText
+            android:id="@+id/pubFootAddition_Edit"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="20dp"
+            android:layout_marginStart="20dp"
+            android:layout_weight="1"
+            android:background="@null"
+            android:hint="请填写您的要求"
+            android:textColorHint="@color/darkgrey"
+            android:textSize="15sp" />
 
-            <EditText
-                android:id="@+id/pubFootAddress_Edit"
-                android:layout_width="260dp"
-                android:layout_height="match_parent"
-                android:layout_alignParentRight="true"
-                android:layout_weight="1"
-                android:background="@null"
-                android:hint="请填写送达地址"
-                android:textColorHint="@color/darkgrey"
-                android:textSize="15dp"/>
-
-        </RelativeLayout>
     </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="打赏路费"
+            android:textColor="@color/black"
+            android:textSize="15sp" />
+
+        <EditText
+            android:id="@+id/pubFootMoney_Edit"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="20dp"
+            android:layout_marginStart="20dp"
+            android:layout_weight="1"
+            android:background="@null"
+            android:hint="请填写费用"
+            android:inputType="number|numberDecimal"
+            android:textColorHint="@color/darkgrey"
+            android:textSize="15sp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="优惠券"
+            android:textColor="@color/black"
+            android:textSize="15sp" />
+
+        <TextView
+            android:id="@+id/pubFootDiscount_Edit"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="35dp"
+            android:layout_marginStart="35dp"
+            android:layout_weight="1"
+            android:background="@null"
+            android:gravity="center_vertical"
+            android:hint="选择可用优惠券"
+            android:textColorHint="@color/darkgrey"
+            android:textSize="15sp" />
+
+        <TextView
+            android:id="@+id/pubFootChooseDiscount"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="选择"
+            android:textColor="@color/blue"
+            android:textSize="15dp" />
+
+    </LinearLayout>
+
     <View
         android:layout_width="match_parent"
         android:layout_height="0.5dp"
-        android:background="@color/lightgrey"/>
+        android:background="@color/lightgrey" />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="40dp"
-        android:orientation="horizontal"
         android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp">
+        android:layout_marginRight="10dp"
+        android:orientation="horizontal">
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="40dp">
-            <TextView
-                android:id="@+id/pubFootAddition"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:text="附加要求"
-                android:gravity="center"
-                android:textSize="15dp"
-                android:textColor="@color/black"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="联系电话"
+            android:textColor="@color/black"
+            android:textSize="15sp" />
 
-            <EditText
-                android:id="@+id/pubFootAddition_Edit"
-                android:layout_width="260dp"
-                android:layout_height="match_parent"
-                android:layout_alignParentRight="true"
-                android:background="@null"
-                android:hint="请填写您的要求"
-                android:textColorHint="@color/darkgrey"
-                android:textSize="15dp"/>
-        </RelativeLayout>
+        <EditText
+            android:id="@+id/pubFootPhone_Edit"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="20dp"
+            android:layout_marginStart="20dp"
+            android:layout_weight="1"
+            android:background="@null"
+            android:hint="请填写联系电话"
+            android:inputType="phone"
+            android:textColorHint="@color/darkgrey"
+            android:textSize="15sp" />
 
-
-    </LinearLayout>
-
-    <LinearLayout
-
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:layout_weight="0.01"
-        android:orientation="horizontal"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp">
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-            <TextView
-                android:id="@+id/pubFootMoney"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:text="打赏路费"
-                android:textColor="@color/black"
-                android:textSize="15dp" />
-
-            <EditText
-                android:id="@+id/pubFootMoney_Edit"
-                android:layout_width="260dp"
-                android:layout_height="match_parent"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentTop="true"
-                android:background="@null"
-                android:hint="请填写费用"
-                android:textColorHint="@color/darkgrey"
-                android:textSize="15dp"/>
-        </RelativeLayout>
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="40dp"
-        android:layout_weight="0.01"
-        android:orientation="horizontal"
         android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp">
+        android:layout_marginRight="10dp"
+        android:orientation="horizontal">
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="联系姓名"
+            android:textColor="@color/black"
+            android:textSize="15sp" />
 
-            <TextView
-                android:id="@+id/pubFootDiscount"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:text="优惠券"
-                android:textColor="@color/black"
-                android:textSize="15dp" />
+        <EditText
+            android:id="@+id/pubFootName_Edit"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="20dp"
+            android:layout_marginStart="20dp"
+            android:layout_weight="1"
+            android:background="@null"
+            android:hint="请填写联系人姓名"
+            android:textColorHint="@color/darkgrey"
+            android:textSize="15sp" />
 
-            <EditText
-                android:id="@+id/pubFootDiscount_Edit"
-                android:layout_width="260dp"
-                android:layout_height="match_parent"
-                android:layout_alignBaseline="@+id/pubFootChooseDiscount"
-                android:layout_alignBottom="@+id/pubFootChooseDiscount"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentRight="true"
-                android:layout_weight="1"
-                android:background="@null"
-                android:hint="选择可用优惠券"
-                android:textColorHint="@color/darkgrey"
-                android:textSize="15dp"/>
-
-            <TextView
-                android:id="@+id/pubFootChooseDiscount"
-                android:layout_width="50dp"
-                android:layout_height="match_parent"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentRight="true"
-                android:gravity="center"
-                android:text="选择"
-                android:textColor="@color/blue"
-                android:textSize="15dp" />
-        </RelativeLayout>
     </LinearLayout>
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="0.5dp"
-        android:background="@color/lightgrey"/>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:layout_weight="0.01"
-        android:orientation="horizontal"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp">
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <TextView
-                android:id="@+id/pubFootPhone"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:text="联系电话"
-                android:textColor="@color/black"
-                android:textSize="15dp" />
-
-            <EditText
-                android:id="@+id/pubFootPhone_Edit"
-                android:layout_width="260dp"
-                android:layout_height="match_parent"
-                android:layout_alignParentRight="true"
-                android:layout_weight="1"
-                android:background="@null"
-                android:hint="请填写联系电话"
-                android:textColorHint="@color/darkgrey"
-                android:textSize="15dp"/>
-
-        </RelativeLayout>
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:layout_weight="0.01"
-        android:orientation="horizontal"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp">
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <TextView
-                android:id="@+id/pubFootName"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:text="联系姓名"
-                android:textColor="@color/black"
-                android:textSize="15dp" />
-
-            <EditText
-                android:id="@+id/pubFootName_Edit"
-                android:layout_width="260dp"
-                android:layout_height="match_parent"
-                android:layout_alignParentRight="true"
-                android:layout_weight="1"
-                android:background="@null"
-                android:hint="请填写联系人姓名"
-                android:textColorHint="@color/darkgrey"
-                android:textSize="15dp"/>
-
-        </RelativeLayout>
-    </LinearLayout>
 </LinearLayout>
