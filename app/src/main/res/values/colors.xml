@@ -3,7 +3,7 @@
     <color name="colorPrimary">#003f51</color><!--首要颜色-->
     <color name="colorPrimaryDark">#374cc3</color><!--首要颜色暗色-->
     <color name="colorAccent">#FF4081</color><!--色彩强调-->
-    <color name="theme">#66998F</color>
+    <color name="theme">#3399CC</color>
 
     <color name="black">#000000</color><!--黑色 -->
     <color name="white">#FFFFFF</color><!--白色-->

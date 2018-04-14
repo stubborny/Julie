@@ -13,7 +13,7 @@ public class SettingFragment extends Fragment{
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View settingLayout = inflater.inflate(R.layout.activity_setting, container, false);
+        View settingLayout = inflater.inflate(R.layout.activity_user, container, false);
         return settingLayout;
     }
 
