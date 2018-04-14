@@ -8,6 +8,5 @@
     <string name="title_activity_pub_foot">Pub_footActivity</string>
     <string name="title_activity_p__message">P_MessageActivity</string>
     <string name="title_activity_message_list">MessageListActivity</string>
-    <string name="title_activity_authenticate">AuthenticateActivity</string>
 
 </resources>

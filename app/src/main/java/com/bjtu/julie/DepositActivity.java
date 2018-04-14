@@ -12,7 +12,6 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
-import com.bjtu.julie.R;
 
 import com.alipay.sdk.app.EnvUtils;
 import com.alipay.sdk.app.PayTask;
@@ -54,7 +53,7 @@ public class DepositActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         //沙箱环境，不用可注释
         EnvUtils.setEnv(EnvUtils.EnvEnum.SANDBOX);
-       setContentView(R.layout.activity_deposit);
+        setContentView(R.layout.activity_deposit);
     }
 
     @SuppressLint("HandlerLeak")
