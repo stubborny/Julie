@@ -128,16 +128,15 @@
 
         </LinearLayout>
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="8dp"
-            android:background="#EEEED1"
-            android:focusable="true"
-            android:focusableInTouchMode="true" />
-
         <android.support.v7.widget.RecyclerView
             android:id="@+id/recycle_order_item"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="8dp"
+            android:background="@color/theme"
+            android:focusable="true"
+            android:focusableInTouchMode="true" />
     </LinearLayout>
 </ScrollView>

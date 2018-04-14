@@ -2,33 +2,98 @@ package com.bjtu.julie.Model;
 
 
 public class Order {
-    private String title;
-    private String money;
+    private String footId;
+
+    public Order(String footId, String userpicUrl, String username, String state, String content, String address, String reward, String time) {
+        this.footId = footId;
+        this.userpicUrl = userpicUrl;
+        this.nickname = username;
+        this.state = state;
+        this.content = content;
+        this.address = address;
+        this.reward = reward;
+        this.time = time;
+    }
+
+    private String userpicUrl;
+    private String nickname;
+    private String state;
+    private String content;
     private String address;
+    private String reward;
     private String time;
 
-    public Order(String title,String money,String address, String time){
-        this.title=title;
-        this.money=money;
-        this.address=address;
-        this.time=time;
-
+    public Order(String userpicUrl, String username, String state, String content, String address, String reward, String time) {
+        this.userpicUrl = userpicUrl;
+        this.nickname = username;
+        this.state = state;
+        this.content = content;
+        this.address = address;
+        this.reward = reward;
+        this.time = time;
     }
 
-    public String getTitle() {
-        return title;
+    public String getFootId() {
+        return footId;
     }
 
-    public String getMoney() {
-        return money;
+    public void setFootId(String footId) {
+        this.footId = footId;
     }
 
-    public String getTime() {
-        return time;
+    public String getUserpicUrl() {
+        return userpicUrl;
+    }
+
+    public void setUserpicUrl(String userpicUrl) {
+        this.userpicUrl = userpicUrl;
+    }
+
+    public String getUsername() {
+        return nickname;
+    }
+
+    public void setUsername(String username) {
+        this.nickname = username;
+    }
+
+    public String getState() {
+        return state;
+    }
+
+    public void setState(String state) {
+        this.state = state;
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
     }
 
     public String getAddress() {
         return address;
     }
 
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getReward() {
+        return reward;
+    }
+
+    public void setReward(String reward) {
+        this.reward = reward;
+    }
+
+    public String getTime() {
+        return time;
+    }
+
+    public void setTime(String time) {
+        this.time = time;
+    }
 }
