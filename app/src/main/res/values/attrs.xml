@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="shapeimageview">
+        <attr name="border_size" format="dimension" />
+        <attr name="in_border_color" format="color" />
+        <attr name="out_border_color" format="color"/>
+        <attr name="shape_type" format="string"/>
+    </declare-styleable>
+</resources>

@@ -3,7 +3,7 @@
     <color name="colorPrimary">#003f51</color><!--首要颜色-->
     <color name="colorPrimaryDark">#374cc3</color><!--首要颜色暗色-->
     <color name="colorAccent">#FF4081</color><!--色彩强调-->
-    <color name="theme">#66998F</color>
+    <color name="theme">#3399CC</color>
 
     <color name="black">#000000</color><!--黑色 -->
     <color name="white">#FFFFFF</color><!--白色-->
@@ -15,7 +15,7 @@
     <color name="antiquewhite">#faebd7</color><!--古董白 -->
     <color name="navajowhite">#ffdead</color><!--纳瓦白 -->
     <color name="grey">#808080</color><!--灰色 -->
-    <color name="gainsboro">#dcdcdc</color><!--淡灰色 -->
+    <color name="gainsboro">#e7e7e7</color><!--淡灰色 -->
     <color name="lightgrey">#d3d3d3</color><!--亮灰色 -->
     <color name="darkgrey">#a9a9a9</color><!--暗灰色 -->
     <color name="dimgrey">#696969</color><!--暗灰色 -->
