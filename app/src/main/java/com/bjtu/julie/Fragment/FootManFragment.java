@@ -24,6 +24,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
+
 import com.bjtu.julie.R;
 
 import org.json.JSONArray;
@@ -44,18 +45,8 @@ public class FootManFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View orderLayout = inflater.inflate(R.layout.activity_foot_man, container, false);
-        initGuide();
-        RecyclerView recyclerView = (RecyclerView) orderLayout.findViewById(R.id.recycle_order_item);
-        FullyLinearLayoutManager layoutManager = new FullyLinearLayoutManager(getActivity());
-        recyclerView.setLayoutManager(layoutManager);
-        FootManAdaper adapter = new FootManAdaper(orderlist);
-        recyclerView.setAdapter(adapter);
-        unbinder = ButterKnife.bind(this, orderLayout);
-        return orderLayout;
-    }
-
-    private void initGuide() {
+        final View orderLayout = inflater.inflate(R.layout.activity_foot_man, container, false);
+        //initGuide();
         String url = "http://39.107.225.80:8080//julieServer/FootManServlet";
         RequestParams params = new RequestParams(url);
         x.http().get(params, new Callback.CommonCallback<String>() {
@@ -64,18 +55,26 @@ public class FootManFragment extends Fragment {
                 try {
                     JSONObject jb = new JSONObject(result);
 
-                    JSONArray orderArray=jb.getJSONArray("orderList");
-                    if(orderArray.length()>0){
-                        for(int i=0;i<orderArray.length();i++){
+                    JSONArray orderArray = jb.getJSONArray("orderList");
+                    if (orderArray.length() > 0) {
+                        for (int i = 0; i < orderArray.length(); i++) {
                             // 遍历 jsonarray 数组，把每一个对象转成 json 对象
                             JSONObject job = orderArray.getJSONObject(i);
-                            Order exorder = new Order(job.getString("footId"),job.getString("userpicUrl"),job.getString("username"),job.getString("state"),job.getString("content"),job.getString("address"),job.getString("reward"),job.getString("time"));
+                            Order exorder = new Order(job.getString("footId"), job.getString("userpicUrl"), job.getString("username"), job.getString("state"), job.getString("content"), job.getString("address"), job.getString("reward"), job.getString("time"));
                             orderlist.add(exorder);
                         }
                     }
                     //Log.i("AAA", String.valueOf(jb.getInt("code"))+jb.getString("msg"));
                     Toast.makeText(x.app(), jb.getString("msg"), Toast.LENGTH_LONG).show();
+                    RecyclerView recyclerView = (RecyclerView) orderLayout.findViewById(R.id.recycle_order_item);
+                    FullyLinearLayoutManager layoutManager = new FullyLinearLayoutManager(getActivity());
 
+                    recyclerView.setLayoutManager(layoutManager);
+                    recyclerView.setNestedScrollingEnabled(false);
+
+                    FootManAdaper adapter = new FootManAdaper(orderlist);
+                    recyclerView.setAdapter(adapter);
+                    unbinder = ButterKnife.bind(this, orderLayout);
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -97,6 +96,14 @@ public class FootManFragment extends Fragment {
 
             }
         });
+
+        return orderLayout;
+    }
+
+    private void initGuide() {
+
+//        Order exorder = new Order("footId", "userpicUrl", "username", "1", "content", "address", "reward", "2018-09-09 09:12:33.0");
+//        orderlist.add(exorder);
     }
 
     @Override

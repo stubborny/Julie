@@ -7,10 +7,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.bjtu.julie.Activity.FootDetail;
-import com.bjtu.julie.Activity.MessageDetail;
+import com.bjtu.julie.Activity.MessageDetailActivity;
 import com.bjtu.julie.Model.Exchange;
 import com.bjtu.julie.R;
 
@@ -46,7 +44,7 @@ public class MessageAdaper extends RecyclerView.Adapter<MessageAdaper.ViewHolder
             public void onClick(View v){
                 int position=holder.getAdapterPosition();
                 Exchange exchange=mMessList.get(position);
-                Intent intent = new Intent(v.getContext(),MessageDetail .class);
+                Intent intent = new Intent(v.getContext(),MessageDetailActivity.class);
                 v.getContext().startActivity(intent);
             }
         });

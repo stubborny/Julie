@@ -82,8 +82,8 @@
         </service>
 
         <activity android:name=".Activity.DiscountActivity" />
-        <activity android:name=".Activity.FootDetail" />
-        <activity android:name=".Activity.MessageDetail"></activity>
+        <activity android:name=".Activity.FootDetailActivity" />
+        <activity android:name=".Activity.MessageDetailActivity"></activity>
     </application>
 
 </manifest>

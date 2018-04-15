@@ -9,139 +9,161 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="52dp"
-        android:orientation="horizontal"
-        android:background="@color/colorPrimaryDark">
+        android:background="@color/colorPrimaryDark"
+        android:orientation="horizontal">
+
         <Button
-            android:id="@+id/FootDetailBack_btn"
+            android:id="@+id/foot_detail_btn_back"
             android:layout_width="53dp"
             android:layout_height="match_parent"
+            android:background="@color/colorPrimaryDark"
             android:gravity="center"
             android:text="返回"
             android:textColor="@color/white"
-            android:background="@color/colorPrimaryDark"
-            android:textSize="15dp"
-            />
+            android:textSize="15dp" />
+
         <TextView
-            android:id="@+id/DetailTitle"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
             android:text="详情"
-            android:gravity="center"
-            android:textSize="25dp"
             android:textColor="@color/white"
-            android:layout_weight="1" />
+            android:textSize="25dp" />
     </LinearLayout>
-    <LinearLayout
+
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="45dp"
-        android:orientation="horizontal"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp">
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginTop="8dp">
 
-        <ImageView
-            android:id="@+id/foootUserImage"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:src="@mipmap/bbb_pic"/>
-
-        <TextView
-            android:id="@+id/foootUserName"
-            android:layout_width="200dp"
-            android:layout_height="match_parent"
-            android:gravity="center_vertical"
-            android:layout_marginLeft="10dp"
-            android:text="哒哒哒" />
-
-        <TextView
-            android:id="@+id/foootTime"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:text="2018年3月8日" />
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
-    </LinearLayout>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="5dp">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="53dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:orientation="horizontal">
+                <ImageView
+                    android:id="@+id/foot_detail_img_userpic"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    android:background="@mipmap/loading" />
 
-        <TextView
-            android:id="@+id/foootContent"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="出售加湿器，有意者联系"
-            android:textSize="15dp"/>
+                <TextView
+                    android:id="@+id/foot_detail_text_nickname"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginLeft="5dp"
+                    android:layout_toEndOf="@+id/foot_detail_img_userpic"
+                    android:layout_toRightOf="@+id/foot_detail_img_userpic"
+                    android:gravity="center" />
 
-    </LinearLayout>
+                <TextView
+                    android:id="@+id/foot_detail_text_time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginRight="30dp"
+                    android:gravity="center"
+                    android:text="3小时前" />
+
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/foot_detail_text_content"
+                android:layout_width="match_parent"
+                android:layout_height="90dp"
+                android:scrollbars="vertical"
+                android:textSize="15dp" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:background="@color/lightgrey" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:gravity="center">
+
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:background="@mipmap/address" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="地址   " />
+
+                <TextView
+                    android:id="@+id/foot_detail_text_address"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:textColor="@color/darkgrey" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:background="@color/lightgrey" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:gravity="center">
+
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:background="@mipmap/reward" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="赏金   " />
+
+                <TextView
+                    android:id="@+id/foot_detail_text_reward"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:textColor="@color/darkgrey" />
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+    </RelativeLayout>
 
     <View
         android:layout_width="match_parent"
         android:layout_height="5dp"
-        android:background="@color/lightgrey"/>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="34dp"
-        android:orientation="horizontal"
-        android:layout_weight="0.01"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp">
-
-        <ImageView
-            android:id="@+id/imageView"
-            android:layout_width="15dp"
-            android:layout_height="match_parent"
-            app:srcCompat="@mipmap/ic_room_black_24dp"
-            android:layout_weight="0.05" />
-
-        <TextView
-            android:id="@+id/detail_address"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_weight="0.95"
-            android:text="送到12号楼"
-            android:textSize="15dp"
-            android:gravity="center_vertical"/>
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="34dp"
-        android:orientation="horizontal"
-        android:layout_weight="0.01"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp">
-
-
-        <ImageView
-            android:id="@+id/imageView3"
-            android:layout_width="15dp"
-            android:layout_height="match_parent"
-            android:layout_weight="0.05"
-            app:srcCompat="@mipmap/ic_monetization_on_black_24dp" />
-
-        <TextView
-            android:id="@+id/detail_money"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_weight="0.95"
-            android:text="已在线支付报酬5元"
-            android:textSize="15dp"
-            android:gravity="center_vertical"/>
-    </LinearLayout>
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="5dp"
-        android:background="@color/lightgrey"/>
+        android:background="@color/lightgrey" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="100dp"
-        android:orientation="horizontal"
         android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp">
+        android:layout_marginRight="10dp"
+        android:orientation="horizontal">
 
         <com.lhz.stateprogress.StateProgressView
             android:id="@+id/spv"
@@ -152,43 +174,62 @@
             app:color_circle_stroke="#dbdbdb"
             app:color_line_normal="#dbdbdb"
             app:color_line_state="#1296db"
-            app:line_height="9dp"
             app:color_text_normal="#bfbfbf"
             app:color_text_state="#1296db"
             app:is_line_radius="false"
+            app:line_height="9dp"
             app:radius_circle_fill="10dp"
-            app:radius_circle_stroke="12dp"/>
+            app:radius_circle_stroke="12dp" />
     </LinearLayout>
+
     <View
         android:layout_width="match_parent"
         android:layout_height="5dp"
-        android:background="@color/lightgrey"/>
+        android:background="@color/lightgrey" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="133dp"
-        android:orientation="horizontal"
-        android:layout_weight="1.07">
+        android:layout_weight="1.07"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="5dp"
+            android:gravity="center"
+            android:text="评论列表   " />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="@color/lightgrey" />
 
         <ListView
-            android:id="@+id/footCommList"
+            android:id="@+id/foot_detail_comment_list"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:transcriptMode="normal"
-            android:fastScrollEnabled="true"/>
+            android:layout_marginEnd="3dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="3dp"
+            android:layout_marginStart="10dp"
+            android:fastScrollEnabled="true"
+            android:transcriptMode="normal" />
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="67dp"
+        android:layout_marginBottom="10dp"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
-        android:layout_marginBottom="10dp"
         android:orientation="horizontal">
 
 
         <Button
-            android:id="@+id/receiveOrder_btn"
+            android:id="@+id/foot_detail_btn_receive"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
@@ -200,12 +241,13 @@
 
 
         <Button
-            android:id="@+id/comment_btn"
+            android:id="@+id/foot_detail_btn_comment"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:layout_marginLeft="20dp"
             android:layout_weight="1"
+            android:alpha="0.95"
             android:background="@color/royalblue"
             android:text="评论"
             android:textColor="@color/white"

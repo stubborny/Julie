@@ -7,13 +7,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import org.xutils.x;
 
-import com.bjtu.julie.Activity.FootDetail;
-import com.bjtu.julie.Activity.MessageDetail;
-import com.bjtu.julie.Model.Exchange;
+import com.bjtu.julie.Activity.FootDetailActivity;
 import com.bjtu.julie.Model.Order;
 import com.bjtu.julie.R;
 import com.bjtu.julie.Util.DateUtil;
@@ -64,7 +61,8 @@ public class FootManAdaper extends RecyclerView.Adapter<FootManAdaper.ViewHolder
             public void onClick(View v){
                 int position=holder.getAdapterPosition();
                 Order order=mOrderList.get(position);
-                Intent intent = new Intent(v.getContext(), FootDetail.class);
+                Intent intent = new Intent(v.getContext(), FootDetailActivity.class);
+                intent.putExtra("order",order);
                 v.getContext().startActivity(intent);
             }
         });
@@ -81,7 +79,7 @@ public class FootManAdaper extends RecyclerView.Adapter<FootManAdaper.ViewHolder
                 .setLoadingDrawableId(R.mipmap.loading)
                 .build();
         x.image().bind(holder.mImgUserpic, order.getUserpicUrl(), imageOptions);
-        holder.mTextUsername.setText(order.getUsername());
+        holder.mTextUsername.setText(order.getNickname());
         holder.mTextAddress.setText(order.getAddress());
         holder.mTextConent.setText(order.getContent());
         if (order.getState().equals("1")) {

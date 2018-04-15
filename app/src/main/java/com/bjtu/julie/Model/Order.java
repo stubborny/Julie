@@ -1,7 +1,9 @@
 package com.bjtu.julie.Model;
 
 
-public class Order {
+import java.io.Serializable;
+
+public class Order implements Serializable {
     private String footId;
 
     public Order(String footId, String userpicUrl, String username, String state, String content, String address, String reward, String time) {
@@ -49,11 +51,11 @@ public class Order {
         this.userpicUrl = userpicUrl;
     }
 
-    public String getUsername() {
+    public String getNickname() {
         return nickname;
     }
 
-    public void setUsername(String username) {
+    public void setNickname(String username) {
         this.nickname = username;
     }
 
