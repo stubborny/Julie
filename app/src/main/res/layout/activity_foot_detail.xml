@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:weightSum="1">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="52dp"
+        android:orientation="horizontal"
+        android:background="@color/colorPrimaryDark">
+        <Button
+            android:id="@+id/FootDetailBack_btn"
+            android:layout_width="53dp"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="返回"
+            android:textColor="@color/white"
+            android:background="@color/colorPrimaryDark"
+            android:textSize="15dp"
+            />
+        <TextView
+            android:id="@+id/DetailTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="详情"
+            android:gravity="center"
+            android:textSize="25dp"
+            android:textColor="@color/white"
+            android:layout_weight="1" />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:orientation="horizontal"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp">
+
+        <ImageView
+            android:id="@+id/foootUserImage"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@mipmap/bbb_pic"/>
+
+        <TextView
+            android:id="@+id/foootUserName"
+            android:layout_width="200dp"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:layout_marginLeft="10dp"
+            android:text="哒哒哒" />
+
+        <TextView
+            android:id="@+id/foootTime"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="2018年3月8日" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="53dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/foootContent"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="出售加湿器，有意者联系"
+            android:textSize="15dp"/>
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="5dp"
+        android:background="@color/lightgrey"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="34dp"
+        android:orientation="horizontal"
+        android:layout_weight="0.01"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp">
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="15dp"
+            android:layout_height="match_parent"
+            app:srcCompat="@mipmap/ic_room_black_24dp"
+            android:layout_weight="0.05" />
+
+        <TextView
+            android:id="@+id/detail_address"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="0.95"
+            android:text="送到12号楼"
+            android:textSize="15dp"
+            android:gravity="center_vertical"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="34dp"
+        android:orientation="horizontal"
+        android:layout_weight="0.01"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp">
+
+
+        <ImageView
+            android:id="@+id/imageView3"
+            android:layout_width="15dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.05"
+            app:srcCompat="@mipmap/ic_monetization_on_black_24dp" />
+
+        <TextView
+            android:id="@+id/detail_money"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="0.95"
+            android:text="已在线支付报酬5元"
+            android:textSize="15dp"
+            android:gravity="center_vertical"/>
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="5dp"
+        android:background="@color/lightgrey"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:orientation="horizontal"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp">
+
+        <com.lhz.stateprogress.StateProgressView
+            android:id="@+id/spv"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="10dp"
+            app:color_circle_fill="#1296db"
+            app:color_circle_stroke="#dbdbdb"
+            app:color_line_normal="#dbdbdb"
+            app:color_line_state="#1296db"
+            app:line_height="9dp"
+            app:color_text_normal="#bfbfbf"
+            app:color_text_state="#1296db"
+            app:is_line_radius="false"
+            app:radius_circle_fill="10dp"
+            app:radius_circle_stroke="12dp"/>
+    </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="5dp"
+        android:background="@color/lightgrey"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="133dp"
+        android:orientation="horizontal"
+        android:layout_weight="1.07">
+
+        <ListView
+            android:id="@+id/footCommList"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:transcriptMode="normal"
+            android:fastScrollEnabled="true"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="67dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="10dp"
+        android:orientation="horizontal">
+
+
+        <Button
+            android:id="@+id/receiveOrder_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1"
+            android:background="@color/darkturquoise"
+            android:text="我要接单"
+            android:textColor="@color/white"
+            android:textSize="20dp" />
+
+
+        <Button
+            android:id="@+id/comment_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="20dp"
+            android:layout_weight="1"
+            android:background="@color/royalblue"
+            android:text="评论"
+            android:textColor="@color/white"
+            android:textSize="20dp" />
+    </LinearLayout>
+</LinearLayout>

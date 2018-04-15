@@ -1,5 +1,6 @@
 package com.bjtu.julie.Adapter;
 
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,6 +9,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bjtu.julie.Activity.FootDetail;
+import com.bjtu.julie.Activity.MessageDetail;
 import com.bjtu.julie.Model.Exchange;
 import com.bjtu.julie.R;
 
@@ -43,15 +46,8 @@ public class MessageAdaper extends RecyclerView.Adapter<MessageAdaper.ViewHolder
             public void onClick(View v){
                 int position=holder.getAdapterPosition();
                 Exchange exchange=mMessList.get(position);
-                Toast.makeText(v.getContext(),"you clicked view",Toast.LENGTH_SHORT).show();
-            }
-        });
-        holder.messImage.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v) {
-                int position = holder.getAdapterPosition();
-                Exchange exchange = mMessList.get(position);
-                Toast.makeText(v.getContext(), "you clicked image", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(v.getContext(),MessageDetail .class);
+                v.getContext().startActivity(intent);
             }
         });
         return holder;

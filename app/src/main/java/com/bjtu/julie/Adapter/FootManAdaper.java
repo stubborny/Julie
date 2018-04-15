@@ -1,5 +1,6 @@
 package com.bjtu.julie.Adapter;
 
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,6 +11,8 @@ import android.widget.Toast;
 
 import org.xutils.x;
 
+import com.bjtu.julie.Activity.FootDetail;
+import com.bjtu.julie.Activity.MessageDetail;
 import com.bjtu.julie.Model.Exchange;
 import com.bjtu.julie.Model.Order;
 import com.bjtu.julie.R;
@@ -56,7 +59,15 @@ public class FootManAdaper extends RecyclerView.Adapter<FootManAdaper.ViewHolder
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.order_item, parent, false);
         final ViewHolder holder = new ViewHolder(view);
-
+        holder.orderView.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                int position=holder.getAdapterPosition();
+                Order order=mOrderList.get(position);
+                Intent intent = new Intent(v.getContext(), FootDetail.class);
+                v.getContext().startActivity(intent);
+            }
+        });
         return holder;
     }
 

@@ -68,17 +68,22 @@
             android:name=".Activity.P_MessageActivity"
             android:label="@string/title_activity_p__message"
             android:theme="@style/AppTheme" />
-        <activity android:name=".Activity.MessageActivity"></activity>
+        <activity android:name=".Activity.MessageActivity" />
+
         <service
-            android:name="com.bjtu.julie.Service.PollingService"
+            android:name=".Service.PollingService"
             android:enabled="true"
-            android:exported="false" >
+            android:exported="false">
             <intent-filter>
                 <action android:name="com.bjtu.julie.Service.PollingService" />
 
                 <category android:name="android.intent.category.default" />
             </intent-filter>
         </service>
+
+        <activity android:name=".Activity.DiscountActivity" />
+        <activity android:name=".Activity.FootDetail" />
+        <activity android:name=".Activity.MessageDetail"></activity>
     </application>
 
 </manifest>

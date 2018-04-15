@@ -1,5 +1,6 @@
 package com.bjtu.julie.Activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -54,6 +55,14 @@ public class Pub_footActivity extends AppCompatActivity {
         if (actionbar != null) {
             actionbar.hide();
         }
+        TextView choose=(TextView)findViewById(R.id.pubFootChooseDiscount);
+        choose.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent =new Intent(Pub_footActivity.this,DiscountActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     @OnClick({R.id.pubOkButton, R.id.pubFootChooseDiscount})

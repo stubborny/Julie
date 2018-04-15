@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:weightSum="1"
+        android:fitsSystemWindows="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="52dp"
+            android:orientation="horizontal"
+            android:background="@color/colorPrimaryDark">
+            <Button
+                android:id="@+id/MessDetailBack_btn"
+                android:layout_width="53dp"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="返回"
+                android:textColor="@color/white"
+                android:background="@color/colorPrimaryDark"
+                android:textSize="15dp"
+                />
+            <TextView
+                android:id="@+id/DetailTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="详情"
+                android:gravity="center"
+                android:textSize="25dp"
+                android:textColor="@color/white"
+                android:layout_weight="1" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:orientation="horizontal"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp">
+
+            <ImageView
+                android:id="@+id/messUserImage"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@mipmap/aaa_pic"/>
+
+            <TextView
+                android:id="@+id/messUserName"
+                android:layout_width="200dp"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:layout_marginLeft="10dp"
+                android:text="哒哒哒" />
+
+            <TextView
+                android:id="@+id/foootTime"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="2018年3月8日" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="53dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:orientation="horizontal"
+            android:layout_weight="0.10">
+
+            <TextView
+                android:id="@+id/foootContent"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="出售加湿器，有意者联系"
+                android:textSize="15dp"/>
+
+        </LinearLayout>
+
+        <View
+            android:id="@+id/view"
+            android:layout_width="match_parent"
+            android:layout_height="5dp"
+            android:background="@color/lightgrey" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:orientation="horizontal"
+            android:layout_marginRight="10dp"
+            android:layout_marginLeft="10dp">
+
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="评论(3)"
+                android:gravity="center_vertical"/>
+
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="收藏"
+                android:gravity="center_vertical|right"
+                />
+        </LinearLayout>
+        <View
+            android:id="@+id/view2"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/lightgrey" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="255dp"
+            android:orientation="horizontal"
+            android:weightSum="1"
+            android:layout_weight="0.65">
+            <ListView
+                android:id="@+id/messCommList"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:transcriptMode="normal"
+                android:fastScrollEnabled="true"/>
+        </LinearLayout>
+        <View
+            android:id="@+id/view3"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/lightgrey" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:orientation="horizontal"
+            android:weightSum="1"
+            android:layout_weight="0.15"
+            android:layout_marginBottom="5dp">
+
+            <ImageButton
+                android:id="@+id/expression_Btn"
+                android:layout_width="42dp"
+                android:layout_height="37dp"
+                android:src="@mipmap/smile"
+                android:layout_gravity="bottom"/>
+
+            <EditText
+                android:id="@+id/editText"
+                android:layout_width="200dp"
+                android:layout_height="35dp"
+                android:layout_gravity="bottom"
+                android:layout_marginLeft="5dp"
+                android:background="@drawable/edit_bg"
+                android:textCursorDrawable="@null" />
+
+            <Button
+                android:id="@+id/comment_btn"
+                android:layout_width="63dp"
+                android:layout_height="28dp"
+                android:layout_gravity="bottom"
+                android:layout_marginLeft="20dp"
+                android:background="@color/royalblue"
+                android:text="评论"
+                android:textColor="@color/white"
+                android:textSize="15dp"
+                android:transcriptMode="normal"/>
+        </LinearLayout>
+    </LinearLayout>
+</ScrollView>
