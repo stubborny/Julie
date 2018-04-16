@@ -85,7 +85,7 @@
         <activity android:name=".Activity.PublishActivity" />
         <activity android:name=".Activity.RecieveActivity" />
         <activity android:name=".Activity.UserInfoActivity" />
-        <activity android:name=".Activity.WalletActivity"></activity>
+        <activity android:name=".Activity.WalletActivity" />
     </application>
 
 </manifest>
