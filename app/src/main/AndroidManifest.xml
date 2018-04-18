@@ -29,9 +29,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity
-            android:name=".MainActivity"
-            android:launchMode="singleTask">
+        <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -68,17 +66,21 @@
             android:name=".Activity.P_MessageActivity"
             android:label="@string/title_activity_p__message"
             android:theme="@style/AppTheme" />
-        <activity android:name=".Activity.MessageActivity"></activity>
+
         <service
-            android:name="com.bjtu.julie.Service.PollingService"
+            android:name=".Service.PollingService"
             android:enabled="true"
-            android:exported="false" >
+            android:exported="false">
             <intent-filter>
                 <action android:name="com.bjtu.julie.Service.PollingService" />
 
                 <category android:name="android.intent.category.default" />
             </intent-filter>
         </service>
+
+        <activity android:name=".Activity.RechargeActivity" />
+        <activity android:name=".Activity.WithdrawActivity" />
+        <activity android:name=".Activity.PayActivity"></activity>
     </application>
 
 </manifest>
