@@ -164,7 +164,7 @@
             android:textSize="15sp"
             android:layout_gravity="center_vertical"
             android:gravity="center_vertical"
-            android:layout_marginLeft="10sp"/>
+            android:layout_marginLeft="20sp"/>
 
     <Button
         android:layout_width="match_parent"
