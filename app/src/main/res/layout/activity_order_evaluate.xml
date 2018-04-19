@@ -46,7 +46,7 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="15dp"
-            android:background="@color/whitesmoke"/>
+            android:background="@color/white"/>
 
         <LinearLayout
             android:layout_width="wrap_content"
