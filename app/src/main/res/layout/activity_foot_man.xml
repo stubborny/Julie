@@ -136,7 +136,7 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="8dp"
-            android:background="@color/theme"
+            android:background="@color/background"
             android:focusable="true"
             android:focusableInTouchMode="true" />
     </LinearLayout>

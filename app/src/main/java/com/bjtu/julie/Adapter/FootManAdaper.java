@@ -11,6 +11,8 @@ import android.widget.TextView;
 import org.xutils.x;
 
 import com.bjtu.julie.Activity.FootDetailActivity;
+import com.bjtu.julie.Activity.FootDetailOwnerActivity;
+import com.bjtu.julie.Activity.FootDetailVisitorActivity;
 import com.bjtu.julie.Model.Order;
 import com.bjtu.julie.R;
 import com.bjtu.julie.Util.DateUtil;
@@ -61,7 +63,14 @@ public class FootManAdaper extends RecyclerView.Adapter<FootManAdaper.ViewHolder
             public void onClick(View v){
                 int position=holder.getAdapterPosition();
                 Order order=mOrderList.get(position);
-                Intent intent = new Intent(v.getContext(), FootDetailActivity.class);
+                /**
+                 * 如果是发单者，跳转到FootDetailOwnerActivity
+                 * 否则 如果订单状态为1新发布，跳转到FootDetailActivity
+                 *      否则 判断是接单者，跳转到FootDetailActivity
+                 *                 游客，跳转到FootDetailVisitorActivity
+                 *
+                 */
+                Intent intent = new Intent(v.getContext(), FootDetailVisitorActivity.class);
                 intent.putExtra("order",order);
                 v.getContext().startActivity(intent);
             }

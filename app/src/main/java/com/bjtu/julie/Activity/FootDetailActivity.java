@@ -1,6 +1,7 @@
 package com.bjtu.julie.Activity;
 
 import android.os.Bundle;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.text.method.ScrollingMovementMethod;
@@ -8,11 +9,14 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bjtu.julie.Adapter.CommentAdapter;
+import com.bjtu.julie.Fragment.ContactDialogFragment;
 import com.bjtu.julie.Model.Comment;
 import com.bjtu.julie.Model.Order;
 import com.bjtu.julie.R;
@@ -58,6 +62,14 @@ public class FootDetailActivity extends AppCompatActivity {
     @BindView(R.id.foot_detail_btn_comment)
     Button footDetailBtnComment;
     Order order;
+    int oState;
+    List<String> list;
+    @BindView(R.id.foot_detail_text_phone)
+    TextView footDetailTextPhone;
+    @BindView(R.id.foot_detail_layout_phone)
+    LinearLayout footDetailLayoutPhone;
+    @BindView(R.id.foot_detail_layout_receive_phone)
+    RelativeLayout footDetailLayoutReceivePhone;
     private List<Comment> commList = new ArrayList<>();
 
     @Override
@@ -80,9 +92,26 @@ public class FootDetailActivity extends AppCompatActivity {
         footDetailTextAddress.setText(order.getAddress());
         footDetailTextTime.setText(new DateUtil().diffDate(order.getTime().substring(0, 19)));
         footDetailTextReward.setText("已支付在线报酬" + order.getReward() + "元");
+        footDetailTextPhone.setText(order.getPhone());
+        footDetailLayoutPhone.setVisibility(View.VISIBLE);
+        footDetailLayoutReceivePhone.setVisibility(View.GONE);
 
+        oState = Integer.valueOf(order.getState());
+        if (oState == 1) {
+            footDetailBtnReceive.setText("我要接单");
+            footDetailLayoutPhone.setVisibility(View.GONE);
+        } else if (oState == 2) {
+            footDetailBtnReceive.setText("送达后点我");
+        } else if (oState == 3) {
+            //判断是否评价过 没有 可评价同学，已经评价过按钮设置为不可点击状态，字改为已评价
+            footDetailBtnReceive.setText("可评价同学");
+        } else if (oState == 4) {
+            //判断是否评价过 没有 可评价同学，已经评价过按钮设置为不可点击状态，字改为已评价
+            footDetailBtnReceive.setText("可评价同学");
+        }
         //物流节点
-        final List<String> list = new ArrayList<String>();
+        list = new ArrayList<String>();
+        //list.add("");
         list.add("新发布");
         list.add("被抢啦");
         list.add("已送达");
@@ -100,7 +129,6 @@ public class FootDetailActivity extends AppCompatActivity {
         RequestParams params = new RequestParams(url);
         params.addParameter("footId", order.getFootId());
         x.http().get(params, new Callback.CommonCallback<String>() {
-
             public void onSuccess(String result) {
                 try {
                     JSONObject jb = new JSONObject(result);
@@ -110,7 +138,7 @@ public class FootDetailActivity extends AppCompatActivity {
                         for (int i = 0; i < orderArray.length(); i++) {
                             // 遍历 jsonarray 数组，把每一个对象转成 json 对象
                             JSONObject job = orderArray.getJSONObject(i);
-                            Comment comm = new Comment(job.getString("footId"),job.getInt("userId"),job.getString("userpicUrl"),job.getString("nickname"),job.getInt("floor"),job.getString("comment"),job.getString("time"));
+                            Comment comm = new Comment(job.getString("footId"), job.getInt("userId"), job.getString("userpicUrl"), job.getString("nickname"), job.getInt("floor"), job.getString("comment"), job.getString("time"));
                             commList.add(comm);
                         }
                     }
@@ -146,6 +174,99 @@ public class FootDetailActivity extends AppCompatActivity {
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.foot_detail_btn_receive:
+                //页面改变--
+                // 接单者按钮字改为联系发单者，同时更新订单状态，变为被抢了，
+                //发单者按钮字改变为联系接单者，界面显示接单者电话！
+                //发单者及接单者之外的同学，订单详情页隐藏接单按钮，只剩评论功能
+                //1.更新订单状态
+
+                if (oState == 1) {
+                    //Toast.makeText(this, "接单按钮点击了", Toast.LENGTH_LONG).show();
+                    String url = "http://39.107.225.80:8080/julieServer/UpdateOrderServlet";
+                    RequestParams params = new RequestParams(url);
+                    params.addParameter("userId", "3");
+                    params.addParameter("footId", order.getFootId());
+                    params.addParameter("state", "2");
+                    x.http().get(params, new Callback.CommonCallback<String>() {
+                        public void onSuccess(String result) {
+                            try {
+                                JSONObject jb = new JSONObject(result);
+                                //Log.i("AAA", String.valueOf(jb.getInt("code"))+jb.getString("msg"));
+                                if (jb.getInt("code") == 1) {
+                                    Toast.makeText(x.app(), "接单成功", Toast.LENGTH_LONG).show();
+                                    FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+                                    ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
+                                    //第二个参数 1表示接单者，0表示发单者
+                                    ContactDialogFragment cDialog = new ContactDialogFragment().newInstance(order.getPhone(), 1);
+                                    cDialog.show(ft, "ContactDialog");
+                                    footDetailLayoutPhone.setVisibility(View.VISIBLE);
+                                    footDetailTextPhone.setText(order.getPhone());
+                                    footDetailBtnReceive.setText("送达后点我");
+                                    oState = 2;//修改当前订单状态
+                                    spv.setItems(list, 1, 200);
+                                } else {
+                                    Toast.makeText(x.app(), jb.getString("msg"), Toast.LENGTH_LONG).show();
+                                }
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                        }
+
+                        //请求异常后的回调方法
+                        @Override
+                        public void onError(Throwable ex, boolean isOnCallback) {
+                        }
+
+                        //主动调用取消请求的回调方法
+                        @Override
+                        public void onCancelled(CancelledException cex) {
+                        }
+
+                        @Override
+                        public void onFinished() {
+
+                        }
+                    });
+                } else if (oState == 2) {
+                    //Toast.makeText(this, "接单按钮点击了", Toast.LENGTH_LONG).show();
+                    String url = "http://39.107.225.80:8080/julieServer/UpdateOrderServlet";
+                    RequestParams params = new RequestParams(url);
+                    params.addParameter("footId", order.getFootId());
+                    params.addParameter("state", "3");
+                    x.http().get(params, new Callback.CommonCallback<String>() {
+                        public void onSuccess(String result) {
+                            try {
+                                JSONObject jb = new JSONObject(result);
+                                //Log.i("AAA", String.valueOf(jb.getInt("code"))+jb.getString("msg"));
+                                if (jb.getInt("code") == 1) {
+                                    Toast.makeText(x.app(), "确认送达", Toast.LENGTH_LONG).show();
+                                    footDetailBtnReceive.setText("可评价同学");
+                                    oState = 3;//修改当前订单状态
+                                    spv.setItems(list, 2, 200);
+                                } else {
+                                    Toast.makeText(x.app(), jb.getString("msg"), Toast.LENGTH_LONG).show();
+                                }
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                        }
+
+                        //请求异常后的回调方法
+                        @Override
+                        public void onError(Throwable ex, boolean isOnCallback) {
+                        }
+
+                        //主动调用取消请求的回调方法
+                        @Override
+                        public void onCancelled(CancelledException cex) {
+                        }
+
+                        @Override
+                        public void onFinished() {
+
+                        }
+                    });
+                }
                 break;
             case R.id.foot_detail_btn_comment:
                 final EditText et = new EditText(this);
@@ -168,7 +289,7 @@ public class FootDetailActivity extends AppCompatActivity {
                         params.addParameter("userId", "1");
                         params.addParameter("footId", order.getFootId());
                         params.addParameter("comment", input);
-                        x.http().get(params, new org.xutils.common.Callback.CommonCallback<String>() {
+                        x.http().get(params, new Callback.CommonCallback<String>() {
                             public void onSuccess(String result) {
                                 try {
                                     JSONObject jb = new JSONObject(result);
@@ -206,5 +327,14 @@ public class FootDetailActivity extends AppCompatActivity {
                 finish();
                 break;
         }
+    }
+
+    @OnClick(R.id.foot_detail_text_phone)
+    public void onViewClicked() {
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+        ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
+        //第二个参数 1表示接单者，0表示发单者
+        ContactDialogFragment cDialog = new ContactDialogFragment().newInstance(order.getPhone(), 1);
+        cDialog.show(ft, "ContactDialog");
     }
 }

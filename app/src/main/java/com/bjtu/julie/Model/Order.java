@@ -6,7 +6,7 @@ import java.io.Serializable;
 public class Order implements Serializable {
     private String footId;
 
-    public Order(String footId, String userpicUrl, String username, String state, String content, String address, String reward, String time) {
+    public Order(String footId, String userpicUrl, String username, String state, String content, String address, String reward, String time,String phone) {
         this.footId = footId;
         this.userpicUrl = userpicUrl;
         this.nickname = username;
@@ -15,6 +15,7 @@ public class Order implements Serializable {
         this.address = address;
         this.reward = reward;
         this.time = time;
+        this.phone=phone;
     }
 
     private String userpicUrl;
@@ -25,15 +26,16 @@ public class Order implements Serializable {
     private String reward;
     private String time;
 
-    public Order(String userpicUrl, String username, String state, String content, String address, String reward, String time) {
-        this.userpicUrl = userpicUrl;
-        this.nickname = username;
-        this.state = state;
-        this.content = content;
-        this.address = address;
-        this.reward = reward;
-        this.time = time;
+    public String getPhone() {
+        return phone;
     }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    private String phone;
+
 
     public String getFootId() {
         return footId;
