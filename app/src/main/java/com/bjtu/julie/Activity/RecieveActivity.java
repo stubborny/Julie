@@ -13,8 +13,7 @@ import butterknife.OnClick;
 import com.bjtu.julie.R;
 
 public class RecieveActivity extends AppCompatActivity {
-    @BindView(R.id.myrecieve_backward)
-    Button backButton;
+
     @BindView(R.id.Irecieve)
     ListView Irecieve;
 
@@ -24,13 +23,6 @@ public class RecieveActivity extends AppCompatActivity {
         setContentView(R.layout.activity_recieve);
     }
 
-    @OnClick(R.id.myrecieve_backward)
-    public void onMyrecieveBackwardClicked() {
 
-        Intent intent = new Intent(RecieveActivity.this, UserActivity.class);
-        startActivity(intent);
-        finish();
-
-    }
 
 }

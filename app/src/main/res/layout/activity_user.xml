@@ -5,6 +5,10 @@
     android:layout_height="match_parent"
     android:background="@color/white"
     android:orientation="vertical">
+    <ScrollView
+        android:id="@+id/scrollView1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -41,7 +45,7 @@
                         android:id="@+id/user1_iv_prehead"
                         android:layout_width="100dp"
                         android:layout_height="100dp"
-                        android:src="@drawable/headtest" />
+                        android:src="@mipmap/headtest" />
 
 
                 </LinearLayout>
@@ -53,7 +57,7 @@
                     android:id="@+id/user1_tv_prename"
                     android:layout_width="wrap_content"
                     android:layout_height="25dp"
-                    android:text="猩猩"
+                    android:text="登录/注册"
                     android:textColor="@color/whitesmoke"
                     android:textSize="19sp" />
                 <!--android:textStyle="italic|bold"斜体-->
@@ -80,7 +84,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:layout_weight="3"
-                    android:src="@drawable/ic_action_database"/>
+                    android:src="@mipmap/ic_action_database"/>
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
@@ -97,11 +101,14 @@
                 android:layout_weight="2"
                 android:layout_height="match_parent"
                 android:orientation="vertical">
+
                 <ImageView
+                    android:id="@+id/imageView3"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:layout_weight="3"
-                    android:src="@drawable/ic_action_document"/>
+                    android:src="@mipmap/ic_action_document" />
+
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
@@ -122,7 +129,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:layout_weight="3"
-                    android:src="@drawable/ic_action_emo_basic"/>
+                    android:src="@mipmap/ic_action_emo_basic"/>
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
@@ -139,11 +146,14 @@
                 android:layout_weight="2"
                 android:layout_height="match_parent"
                 android:orientation="vertical">
+
                 <ImageView
+                    android:id="@+id/imageView4"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:layout_weight="3"
-                    android:src="@drawable/ic_action_creditcard"/>
+                    android:src="@mipmap/ic_action_creditcard" />
+
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
@@ -181,7 +191,7 @@
                     android:layout_height="40dp"
                     android:layout_gravity="center"
                     android:layout_weight="2"
-                    android:src="@drawable/ic_action_ticket" />
+                    android:src="@mipmap/ic_action_ticket" />
 
                 <TextView
                     android:layout_width="0dp"
@@ -219,11 +229,13 @@
                     android:layout_height="wrap_content" />
 
                 <ImageView
+                    android:id="@+id/imageView5"
                     android:layout_width="0dp"
-                    android:layout_weight="2"
                     android:layout_height="40dp"
                     android:layout_gravity="center"
-                    android:src="@drawable/ic_action_help"/>
+                    android:layout_weight="2"
+                    android:src="@mipmap/ic_action_help" />
+
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
@@ -257,11 +269,13 @@
                     android:layout_height="wrap_content" />
 
                 <ImageView
+                    android:id="@+id/imageView6"
                     android:layout_width="0dp"
-                    android:layout_weight="2"
                     android:layout_height="40dp"
                     android:layout_gravity="center"
-                    android:src="@drawable/ic_action_gear"/>
+                    android:layout_weight="2"
+                    android:src="@mipmap/ic_action_gear" />
+
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
@@ -300,7 +314,7 @@
                     android:layout_weight="2"
                     android:layout_height="40dp"
                     android:layout_gravity="center"
-                    android:src="@drawable/ic_action_sms"/>
+                    android:src="@mipmap/ic_action_sms"/>
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
@@ -338,13 +352,51 @@
                     android:layout_weight="2"
                     android:layout_height="40dp"
                     android:layout_gravity="center"
-                    android:src="@drawable/ic_action_info"/>
+                    android:src="@mipmap/ic_action_info"/>
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="4"
                     android:gravity="left|center"
                     android:text="更新"
+                    android:textSize="19dp"
+                    android:textColor="@color/dimgrey"/>
+                <ImageView
+                    android:layout_width="0dp"
+                    android:layout_weight="2"
+                    android:layout_height="20dp"
+                    android:layout_gravity="center"/>
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content" />
+
+            </LinearLayout>
+            <!--  注销  -->
+            <LinearLayout
+                android:id="@+id/ll_exit"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:orientation="horizontal"
+                android:visibility="invisible">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_weight="0.5"
+                    android:layout_height="wrap_content" />
+
+                <ImageView
+                    android:layout_width="0dp"
+                    android:layout_weight="2"
+                    android:layout_height="40dp"
+                    android:layout_gravity="center"
+                    android:src="@mipmap/ic_action_info"/>
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="4"
+                    android:gravity="left|center"
+                    android:text="注销"
                     android:textSize="19dp"
                     android:textColor="@color/dimgrey"/>
                 <ImageView
@@ -366,8 +418,6 @@
 
         </LinearLayout>
 
-
-
     </LinearLayout>
-
+</ScrollView>
 </FrameLayout>

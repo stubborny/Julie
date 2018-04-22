@@ -184,6 +184,7 @@ public class RegActivity extends AppCompatActivity {
                                     JSONObject jb = new JSONObject(result);
                                     //Log.i("AAA", String.valueOf(jb.getInt("code"))+jb.getString("msg"));
                                     Toast.makeText(x.app(), jb.getString("msg"), Toast.LENGTH_LONG).show();
+                                    finish();
 
                                 } catch (JSONException e) {
                                     e.printStackTrace();
