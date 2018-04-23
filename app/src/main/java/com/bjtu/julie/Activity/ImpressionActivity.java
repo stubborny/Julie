@@ -44,7 +44,7 @@ public class ImpressionActivity extends AppCompatActivity {
     LinearLayout changeAll;
     private String name;
     private List<UserInfo> userinfoList=new ArrayList<>();
-    private UserInfo userinfo = new UserInfo(null,null,null,null,null,null);
+    private UserInfo userinfo = new UserInfo(null,null,null,null,null);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,55 +55,13 @@ public class ImpressionActivity extends AppCompatActivity {
         name = sp.getString("name", "null");
        impressionName.setText(name);
 
-        //加载个人信息
-        String url = "http://39.107.225.80:8080//julieServer/ShowInfoServlet";
 
-        RequestParams params = new RequestParams(url);
-        params.addParameter("username", name);
-        //Toast.makeText(getActivity(),"you clicked button 1",Toast.LENGTH_SHORT).show();
-        x.http().get(params, new Callback.CommonCallback<String>() {
-            @Override
-            public void onSuccess(String result) {
-                try {
-                    JSONObject jb = new JSONObject(result);
-                    JSONArray infoArray = jb.getJSONArray("uiList");
-                    if(infoArray.length()>0){
-                        for(int i = 0;i<infoArray.length();i++) {
-                            JSONObject job = infoArray.getJSONObject(i);
-                            //String username,String picString,String sex,String location,String describe, String nickname
-                            userinfo = new UserInfo(job.getString("username"),job.getString("picStrring"),
-                                    job.getString("sex"),job.getString("location"),job.getString("describe"),job.getString("nickname"));
-                            userinfoList.add(userinfo);
-                        }
-                    }
-                    Toast.makeText(x.app(), jb.getString("msg"), Toast.LENGTH_LONG).show();
 
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }
-            //请求异常后的回调方法
-            @Override
-            public void onError(Throwable ex, boolean isOnCallback) {
-                //Toast.makeText(getActivity(),"you clicked button 1",Toast.LENGTH_SHORT).show();
-            }
-            //主动调用取消请求的回调方法
-            @Override
-            public void onCancelled(CancelledException cex) {
-                //Toast.makeText(getActivity(),"you clicked button 1",Toast.LENGTH_SHORT).show();
-            }
-            @Override
-            public void onFinished() {
-                //Toast.makeText(getActivity(),"you clicked button 1",Toast.LENGTH_SHORT).show();
-
-            }
-        });
-
-        String s = userinfo.getPicString();
+        /*String s = userinfo.getPicString();
         if(s!=null){
             byte[] bytes = Base64.decode(s,Base64.DEFAULT);
             impressionHead.setImageBitmap(BitmapFactory.decodeByteArray(bytes,0,bytes.length));
-        }
+        }*/
     }
 
     @OnClick({R.id.impression_head, R.id.impression_name, R.id.ll_info, R.id.total_thumb_up, R.id.total_thumb_down, R.id.change_all})

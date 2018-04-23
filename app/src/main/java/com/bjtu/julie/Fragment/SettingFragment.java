@@ -14,6 +14,8 @@ import android.os.Environment;
 import android.os.Message;
 import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.util.Base64;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -27,18 +29,31 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bjtu.julie.Activity.FeedBackActivity;
+import com.bjtu.julie.Activity.ForgetActivity;
+import com.bjtu.julie.Activity.ImpressionActivity;
 import com.bjtu.julie.Activity.LoginActivity;
 import com.bjtu.julie.Activity.PublishActivity;
+import com.bjtu.julie.Activity.QuestionActivity;
 import com.bjtu.julie.Activity.RecieveActivity;
+import com.bjtu.julie.Activity.TicketActivity;
 import com.bjtu.julie.Activity.UserInfoActivity;
 import com.bjtu.julie.Activity.WalletActivity;
+import com.bjtu.julie.Adapter.MessageAdaper;
+import com.bjtu.julie.FullyLinearLayoutManager;
 import com.bjtu.julie.MainActivity;
+import com.bjtu.julie.Model.Exchange;
+import com.bjtu.julie.Model.UserInfo;
 import com.bjtu.julie.MyApplication;
 import com.bjtu.julie.R;
 import com.bjtu.julie.View.ShapeImageView;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.xutils.common.Callback;
+import org.xutils.http.RequestParams;
+import org.xutils.x;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -46,6 +61,11 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -91,8 +111,12 @@ public class SettingFragment extends Fragment {
     ImageView imageView6;
     @BindView(R.id.ll_exit)
     LinearLayout llExit;
+    private String picUrl = null;
+    private  String userpicstring = "haha";
 
-
+   private String name;
+    private List<UserInfo> userinfoList=new ArrayList<>();
+    private UserInfo userinfo = new UserInfo(null,null,null,null,null);
     //final MyApplication us = (MyApplication) getActivity().getApplication();
 
     @Override
@@ -103,10 +127,55 @@ public class SettingFragment extends Fragment {
         final MyApplication us = (MyApplication) getActivity().getApplication();
         if (us.getStatus() == 1) {
             SharedPreferences sp = getContext().getSharedPreferences("userInfo", Context.MODE_PRIVATE);
-            String name = sp.getString("name", "null");
+            name = sp.getString("name", "null");
             user1TvPrename.setText(name);
             llExit.setVisibility(View.VISIBLE);
         }
+        //下载图片URL
+        String url = "http://39.107.225.80:8080//julieServer/ShowPicServlet";
+        RequestParams params = new RequestParams(name);
+        //Toast.makeText(getActivity(),"you clicked button 1",Toast.LENGTH_SHORT).show();
+        x.http().get(params, new Callback.CommonCallback<String>() {
+            @Override
+            public void onSuccess(String result) {
+                try {
+                    JSONObject jb = new JSONObject(result);
+                   picUrl = String.valueOf(jb.getString("picUrl"));
+
+                    //Log.i("AAA", String.valueOf(jb.getInt("code"))+jb.getString("msg"));
+                    Toast.makeText(x.app(), jb.getString("msg"), Toast.LENGTH_LONG).show();
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+
+                }
+
+            }
+
+            //请求异常后的回调方法
+            @Override
+            public void onError(Throwable ex, boolean isOnCallback) {
+                //Toast.makeText(getActivity(),"you clicked button 1",Toast.LENGTH_SHORT).show();
+            }
+
+            //主动调用取消请求的回调方法
+            @Override
+            public void onCancelled(CancelledException cex) {
+                //Toast.makeText(getActivity(),"you clicked button 1",Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onFinished() {
+                //Toast.makeText(getActivity(),"you clicked button 1",Toast.LENGTH_SHORT).show();
+            }
+        });
+
+if(picUrl!=null){
+    user1IvPrehead.setImageBitmap(getImage(picUrl));
+}
+
+
+
         return settingLayout;
     }
 
@@ -115,6 +184,7 @@ public class SettingFragment extends Fragment {
         super.onDestroyView();
         unbinder.unbind();
     }
+
 
     @OnClick(R.id.ll_exit)
     public void onViewClicked() {
@@ -188,7 +258,8 @@ public class SettingFragment extends Fragment {
         if (us.getStatus() == 0) {
             Toast.makeText(getContext(), "请先登录", Toast.LENGTH_SHORT).show();
         } else {
-            Toast.makeText(getContext(), "已经登录", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(getContext(),ImpressionActivity.class);
+            startActivity(intent);
         }
     }
 
@@ -214,8 +285,8 @@ public class SettingFragment extends Fragment {
         if (us.getStatus() == 0) {
             Toast.makeText(getContext(), "请先登录", Toast.LENGTH_SHORT).show();
         } else {
-            //暂无可用抵用券
-            Toast.makeText(getContext(), "暂无可用抵用券", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(getContext(),TicketActivity.class);
+            startActivity(intent);
         }
     }
 
@@ -225,7 +296,8 @@ public class SettingFragment extends Fragment {
         if (us.getStatus() == 0) {
             Toast.makeText(getContext(), "请先登录", Toast.LENGTH_SHORT).show();
         } else {
-            Toast.makeText(getContext(), "更改中……", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(getContext(),QuestionActivity.class);
+            startActivity(intent);
         }
     }
 
@@ -247,7 +319,8 @@ public class SettingFragment extends Fragment {
             Toast.makeText(getContext(), "请先登录", Toast.LENGTH_SHORT).show();
         } else {
 
-            Toast.makeText(getContext(), "联系开发人员", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(getContext(), FeedBackActivity.class);
+            startActivity(intent);
         }
     }
 
@@ -359,11 +432,89 @@ public class SettingFragment extends Fragment {
                 user1IvPrehead.setImageBitmap(bitmap);
                 c.close();
                 //上传
-                ByteArrayOutputStream baos = new ByteArrayOutputStream();
-                String picstring = Base64.encodeToString(baos.toByteArray(), Base64.DEFAULT);
-                int n = picstring.length();
+              userpicstring =  bitmapToBase64(bitmap);
+                //连接
+              String url = "http://39.107.225.80:8080/julieServer/ChangePicServlet";
+                RequestParams params = new RequestParams(url);
+                params.addParameter("username",user1TvPrename.getText());
+                params.addParameter("userpicstring",userpicstring);
+                x.http().get(params, new org.xutils.common.Callback.CommonCallback<String>() {
+
+                    public void onSuccess(String result) {
+                        try {
+                            if(!TextUtils.isEmpty(result)) {
+                                JSONObject jb = new JSONObject(result);
+                                Toast.makeText(x.app(), jb.getString("msg"), Toast.LENGTH_LONG).show();
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+                    }
+
+                    //请求异常后的回调方法
+                    @Override
+                    public void onError(Throwable ex, boolean isOnCallback) {
+                    }
+
+                    //主动调用取消请求的回调方法
+                    @Override
+                    public void onCancelled(CancelledException cex) {
+                    }
+
+                    @Override
+                    public void onFinished() {
+
+                    }
+                });
             }
         }
     }
+
+    public static String bitmapToBase64(Bitmap bitmap) {
+        String result = null;
+        ByteArrayOutputStream baos = null;
+        try {
+            if (bitmap != null) {
+                baos = new ByteArrayOutputStream();
+                bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+                baos.flush();
+                baos.close();
+                byte[] bitmapBytes = baos.toByteArray();
+                result = Base64.encodeToString(bitmapBytes, Base64.DEFAULT);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (baos != null) {
+                    baos.flush();
+                    baos.close();
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        return result;
+    }
+
+    public static Bitmap getImage(String path){
+        try {
+            HttpURLConnection conn = (HttpURLConnection) new URL(path).openConnection();
+            conn.setConnectTimeout(5000);
+            conn.setRequestMethod("GET");
+            System.out.println("tdw1");
+            if(conn.getResponseCode() == 200){
+                InputStream inputStream = conn.getInputStream();
+                Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
+                return bitmap;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+
 }
 

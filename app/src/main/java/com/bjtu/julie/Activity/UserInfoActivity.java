@@ -37,7 +37,7 @@ import static com.bjtu.julie.R.id.tv_userInfo_id;
 
 public class UserInfoActivity extends Activity {
     private List<UserInfo> userinfoList=new ArrayList<>();
-   private UserInfo userinfo = new UserInfo(null,null,null,null,null,null);
+   private UserInfo userinfo = new UserInfo(null,null,null,null,null);
     @BindView(R.id.textView)
     TextView textView;
     //声明变量
@@ -57,7 +57,7 @@ public class UserInfoActivity extends Activity {
     EditText tvUserInfoLocation;
     @BindView(R.id.tv_userInfo_introduction)
     EditText tvUserInfoIntroduction;
-private String sex;
+private String sex = "male";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -84,7 +84,7 @@ private String sex;
                         for(int i = 0;i<infoArray.length();i++) {
                             JSONObject job = infoArray.getJSONObject(i);
                             //String username,String picString,String sex,String location,String describe, String nickname
-                              userinfo = new UserInfo(job.getString("username"),job.getString("picStrring"),
+                              userinfo = new UserInfo(job.getString("username"),
                                     job.getString("sex"),job.getString("location"),job.getString("describe"),job.getString("nickname"));
                             userinfoList.add(userinfo);
 
@@ -151,7 +151,7 @@ private String sex;
         params.addParameter("usersex", sex);
         params.addParameter("userlocation", tvUserInfoLocation.getText().toString());
         params.addParameter("userdescribe", tvUserInfoIntroduction.getText().toString());
-
+        params.addParameter("nickname", tvUserInfoName.getText().toString());
         x.http().get(params, new org.xutils.common.Callback.CommonCallback<String>() {
 
             public void onSuccess(String result) {
