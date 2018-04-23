@@ -177,36 +177,6 @@
                         android:layout_width="110dp"
                         android:layout_height="match_parent"
                         android:gravity="right|center"
-                        android:text="生日："
-                        android:textColor="@color/darkslategrey"
-                        android:textSize="16sp" />
-
-                    <EditText
-                        android:id="@+id/tv_userInfo_birth"
-                        android:layout_width="200dp"
-                        android:layout_height="match_parent"
-                        android:background="@drawable/bg_edittext_selector"
-                        android:gravity="left|center"
-
-                        android:textColor="@color/black"
-                        android:textSize="14sp" />
-
-                </LinearLayout>
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="10dp"
-                    android:layout_margin="2dp" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="30dp"
-                    android:gravity="center">
-
-                    <TextView
-                        android:layout_width="110dp"
-                        android:layout_height="match_parent"
-                        android:gravity="right|center"
                         android:text="位置："
                         android:textColor="@color/darkslategrey"
                         android:textSize="16sp" />
