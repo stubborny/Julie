@@ -104,10 +104,12 @@ public class FootDetailActivity extends AppCompatActivity {
             footDetailBtnReceive.setText("送达后点我");
         } else if (oState == 3) {
             //判断是否评价过 没有 可评价同学，已经评价过按钮设置为不可点击状态，字改为已评价
-            footDetailBtnReceive.setText("可评价同学");
+            footDetailBtnReceive.setText("已送达");
+            footDetailBtnReceive.setBackgroundColor(footDetailBtnReceive.getResources().getColor(R.color.darkgrey));
         } else if (oState == 4) {
             //判断是否评价过 没有 可评价同学，已经评价过按钮设置为不可点击状态，字改为已评价
-            footDetailBtnReceive.setText("可评价同学");
+            footDetailBtnReceive.setText("已结单");
+            footDetailBtnReceive.setBackgroundColor(footDetailBtnReceive.getResources().getColor(R.color.darkgrey));
         }
         //物流节点
         list = new ArrayList<String>();
@@ -240,7 +242,8 @@ public class FootDetailActivity extends AppCompatActivity {
                                 //Log.i("AAA", String.valueOf(jb.getInt("code"))+jb.getString("msg"));
                                 if (jb.getInt("code") == 1) {
                                     Toast.makeText(x.app(), "确认送达", Toast.LENGTH_LONG).show();
-                                    footDetailBtnReceive.setText("可评价同学");
+                                    footDetailBtnReceive.setText("已经送达");
+                                    footDetailBtnReceive.setBackgroundColor(footDetailBtnReceive.getResources().getColor(R.color.darkgrey));
                                     oState = 3;//修改当前订单状态
                                     spv.setItems(list, 2, 200);
                                 } else {
@@ -282,6 +285,10 @@ public class FootDetailActivity extends AppCompatActivity {
                         String input = et.getText().toString();
                         if (input.equals("")) {
                             Toast.makeText(getApplicationContext(), "还没输入哦", Toast.LENGTH_LONG).show();
+                            return;
+                        }
+                        if (input.length()>50) {
+                            Toast.makeText(getApplicationContext(), "字数太多啦", Toast.LENGTH_LONG).show();
                             return;
                         }
                         String url = "http://39.107.225.80:8080/julieServer/PubCommentServlet";

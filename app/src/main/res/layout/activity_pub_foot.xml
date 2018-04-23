@@ -70,7 +70,8 @@
         android:layout_height="40dp"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:visibility="gone">
 
         <TextView
             android:layout_width="wrap_content"
@@ -193,6 +194,7 @@
             android:background="@null"
             android:hint="请填写联系电话"
             android:inputType="phone"
+            android:text="15510798789"
             android:textColorHint="@color/darkgrey"
             android:textSize="15sp" />
 
@@ -222,6 +224,7 @@
             android:layout_weight="1"
             android:background="@null"
             android:hint="请填写联系人姓名"
+            android:text="张凯雅"
             android:textColorHint="@color/darkgrey"
             android:textSize="15sp" />
 

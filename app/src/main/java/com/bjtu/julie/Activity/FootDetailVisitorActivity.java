@@ -161,6 +161,10 @@ public class FootDetailVisitorActivity extends AppCompatActivity {
                             Toast.makeText(getApplicationContext(), "还没输入哦", Toast.LENGTH_LONG).show();
                             return;
                         }
+                        if (input.length()>50) {
+                            Toast.makeText(getApplicationContext(), "字数太多啦", Toast.LENGTH_LONG).show();
+                            return;
+                        }
                         String url = "http://39.107.225.80:8080/julieServer/PubCommentServlet";
                         RequestParams params = new RequestParams(url);
                         params.addParameter("userId", "1");

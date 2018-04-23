@@ -66,6 +66,15 @@
     </item>
     <item
         is-multidex="false"
+        jar="C:\Users\carrey\.gradle\caches\modules-2\files-2.1\org.greenrobot\eventbus\3.1.1\5cd91fd014f5b72292f959748c20a2cefefae77d\eventbus-3.1.1.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="26.0.0"
+        sha1="5cd91fd014f5b72292f959748c20a2cefefae77d">
+        <dex dex="D:\Android\Julie\3\Julie\app\build\intermediates\pre-dexed\debug\eventbus-3.1.1_6a152d9355b042e3db5bf1979a2f6c8783d0bee4.jar" />
+    </item>
+    <item
+        is-multidex="false"
         jar="C:\Users\carrey\AppData\Local\Android\Sdk\extras\android\m2repository\com\android\support\support-annotations\26.0.0-alpha1\support-annotations-26.0.0-alpha1.jar"
         jumboMode="false"
         optimize="true"
@@ -192,21 +201,21 @@
     </item>
     <item
         is-multidex="false"
-        jar="D:\Android\Julie\3\Julie\app\build\intermediates\exploded-aar\com.android.support\support-compat\26.0.0-alpha1\jars\classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="26.0.0"
-        sha1="8df0e365e40beb151bc42dee20817721a6cab7b0">
-        <dex dex="D:\Android\Julie\3\Julie\app\build\intermediates\pre-dexed\debug\com.android.support-support-compat-26.0.0-alpha1_d73e3675c3c5b44d3497bc7d3fc8e6c0783b6741.jar" />
-    </item>
-    <item
-        is-multidex="false"
         jar="C:\Users\carrey\.gradle\caches\modules-2\files-2.1\com.jakewharton\butterknife-annotations\8.5.1\bb67dad90bab7cd77a8f7f1b8442b47e3a2326bc\butterknife-annotations-8.5.1.jar"
         jumboMode="false"
         optimize="true"
         revision="26.0.0"
         sha1="bb67dad90bab7cd77a8f7f1b8442b47e3a2326bc">
         <dex dex="D:\Android\Julie\3\Julie\app\build\intermediates\pre-dexed\debug\butterknife-annotations-8.5.1_d095183a0edd392b6d4a15e2897d9770ccac2d47.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="D:\Android\Julie\3\Julie\app\build\intermediates\exploded-aar\com.android.support\support-compat\26.0.0-alpha1\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="26.0.0"
+        sha1="8df0e365e40beb151bc42dee20817721a6cab7b0">
+        <dex dex="D:\Android\Julie\3\Julie\app\build\intermediates\pre-dexed\debug\com.android.support-support-compat-26.0.0-alpha1_d73e3675c3c5b44d3497bc7d3fc8e6c0783b6741.jar" />
     </item>
 
 </items>

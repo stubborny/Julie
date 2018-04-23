@@ -100,6 +100,7 @@ public class FootDetailOwnerActivity extends AppCompatActivity {
         oState = Integer.valueOf(order.getState());
         if (oState == 1) {
             footDetailBtnReceive.setText("等待接单");
+            footDetailBtnReceive.setBackgroundColor(footDetailBtnReceive.getResources().getColor(R.color.darkgrey));
             footDetailBtnReceive.setClickable(false);
             footDetailLayoutReceivePhone.setVisibility(View.GONE);
         } else if (oState == 2) {
@@ -244,6 +245,10 @@ public class FootDetailOwnerActivity extends AppCompatActivity {
                         String input = et.getText().toString();
                         if (input.equals("")) {
                             Toast.makeText(getApplicationContext(), "还没输入哦", Toast.LENGTH_LONG).show();
+                            return;
+                        }
+                        if (input.length()>50) {
+                            Toast.makeText(getApplicationContext(), "字数太多啦", Toast.LENGTH_LONG).show();
                             return;
                         }
                         String url = "http://39.107.225.80:8080/julieServer/PubCommentServlet";

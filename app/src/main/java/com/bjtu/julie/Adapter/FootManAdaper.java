@@ -64,13 +64,13 @@ public class FootManAdaper extends RecyclerView.Adapter<FootManAdaper.ViewHolder
                 int position=holder.getAdapterPosition();
                 Order order=mOrderList.get(position);
                 /**
-                 * 如果是发单者，跳转到FootDetailOwnerActivity
-                 * 否则 如果订单状态为1新发布，跳转到FootDetailActivity
-                 *      否则 判断是接单者，跳转到FootDetailActivity
-                 *                 游客，跳转到FootDetailVisitorActivity
+                 * 如果是发单者，跳转到 FootDetailOwnerActivity
+                 * 否则 如果订单状态为1新发布，跳转到 FootDetailActivity
+                 *      否则 判断是接单者，跳转到  FootDetailActivity
+                 *                 游客，跳转到 FootDetailVisitorActivity
                  *
                  */
-                Intent intent = new Intent(v.getContext(), FootDetailVisitorActivity.class);
+                Intent intent = new Intent(v.getContext(), FootDetailActivity.class);
                 intent.putExtra("order",order);
                 v.getContext().startActivity(intent);
             }
@@ -95,10 +95,13 @@ public class FootManAdaper extends RecyclerView.Adapter<FootManAdaper.ViewHolder
             holder.mTextState.setText("新发布");
         } else if (order.getState().equals("2")) {
             holder.mTextState.setText("被抢啦");
+            holder.mTextState.setTextColor(holder.mTextState.getResources().getColor(R.color.darkgrey));
         } else if (order.getState().equals("3")) {
             holder.mTextState.setText("已送达");
+            holder.mTextState.setTextColor(holder.mTextState.getResources().getColor(R.color.darkgrey));
         } else if (order.getState().equals("4")) {
             holder.mTextState.setText("已结单");
+            holder.mTextState.setTextColor(holder.mTextState.getResources().getColor(R.color.darkgrey));
         }
         holder.mTextReward.setText("赏金" + order.getReward() + "元");
         holder.mTextTime.setText(new DateUtil().diffDate(order.getTime().substring(0,19)));

@@ -29,7 +29,7 @@
             android:gravity="center"
             android:text="详情"
             android:textColor="@color/white"
-            android:textSize="25dp" />
+            android:textSize="25sp" />
     </LinearLayout>
 
     <RelativeLayout
