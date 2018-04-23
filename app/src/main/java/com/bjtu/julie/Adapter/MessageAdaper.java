@@ -11,6 +11,11 @@ import android.widget.TextView;
 import com.bjtu.julie.Activity.MessageDetailActivity;
 import com.bjtu.julie.Model.Exchange;
 import com.bjtu.julie.R;
+import com.bjtu.julie.Util.DateUtil;
+
+import org.w3c.dom.Text;
+import org.xutils.image.ImageOptions;
+import org.xutils.x;
 
 import java.util.List;
 
@@ -20,20 +25,29 @@ import java.util.List;
 
 public class MessageAdaper extends RecyclerView.Adapter<MessageAdaper.ViewHolder> {
     private List<Exchange> mMessList;
+    Integer number;
 
     static class ViewHolder extends RecyclerView.ViewHolder{
         View messView;
+
         ImageView messImage;
         TextView messName;
+        TextView messContent;
+        TextView messTime;
+        TextView messComment;
         public ViewHolder(View view){
             super(view);
             messView=view;
             messImage=(ImageView) view.findViewById(R.id.messUserImage);
             messName=(TextView) view.findViewById(R.id.messUserName);
+            messTime=(TextView)view.findViewById(R.id.messPubTime);
+            messContent=(TextView)view.findViewById(R.id.messContent);
+            messComment=(TextView)view.findViewById(R.id.messComment);
         }
     }
     public  MessageAdaper(List<Exchange> MessList){
         mMessList=MessList;
+        //number=mMessList.size();
     }
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent,int viewType){
@@ -45,6 +59,7 @@ public class MessageAdaper extends RecyclerView.Adapter<MessageAdaper.ViewHolder
                 int position=holder.getAdapterPosition();
                 Exchange exchange=mMessList.get(position);
                 Intent intent = new Intent(v.getContext(),MessageDetailActivity.class);
+                intent.putExtra("exchange",exchange);
                 v.getContext().startActivity(intent);
             }
         });
@@ -53,8 +68,18 @@ public class MessageAdaper extends RecyclerView.Adapter<MessageAdaper.ViewHolder
     @Override
     public void  onBindViewHolder(ViewHolder holder,int position){
         Exchange exchange=mMessList.get(position);
-        holder.messImage.setImageResource(exchange.getImageId());
+        ImageOptions imageOptions = new ImageOptions.Builder()
+                .setIgnoreGif(false)//是否忽略gif图。false表示不忽略。不写这句，默认是true
+                .setImageScaleType(ImageView.ScaleType.CENTER_CROP)
+                .setFailureDrawableId(R.mipmap.load_error)
+                .setLoadingDrawableId(R.mipmap.loading)
+                .build();
+        x.image().bind(holder.messImage, exchange.getUserpicUrl(), imageOptions);
+
         holder.messName.setText(exchange.getName());
+        holder.messContent.setText(exchange.getContent());
+        holder.messTime.setText(new DateUtil().diffDate(exchange.getTime().substring(0,19)));
+        holder.messComment.setText("评论（"+ exchange.getcommentNum()+")");
     }
     @Override
     public int getItemCount(){

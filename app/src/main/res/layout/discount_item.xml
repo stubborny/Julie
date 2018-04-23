@@ -15,69 +15,74 @@
             android:layout_width="98dp"
             android:layout_height="match_parent"
             android:orientation="vertical"
-            android:gravity="center"
             android:weightSum="1">
 
             <TextView
-                android:id="@+id/discount_text_money"
+                android:id="@+id/DiscountMoney"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="￥3.9"
+                android:layout_weight="0.63"
                 android:gravity="center"
-                android:textSize="30sp"
+                android:textSize="30dp"
                 android:textColor="@color/red"/>
 
             <TextView
-                android:id="@+id/discount_text_usable"
+                android:id="@+id/DiscountUsable"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center"
-                android:layout_marginTop="10dp"
-                android:text="满5元可用" />
+                android:text="满5元可用"
+                android:layout_weight="0.30"
+                android:gravity="center"/>
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
+            android:layout_width="188dp"
+            android:layout_height="90dp"
             android:orientation="vertical"
-            android:layout_weight="1"
-            android:layout_marginBottom="5dp">
+            android:weightSum="1">
 
             <TextView
-                android:id="@+id/discount_text_name"
+                android:id="@+id/DiscountName"
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
+                android:layout_height="wrap_content"
                 android:text="女生节限时特惠"
-                android:layout_weight="1"
+                android:layout_weight="0.44"
                 android:gravity="center_vertical"
-                android:textSize="20sp"
+                android:textSize="20dp"
                 android:textColor="@color/black"/>
 
             <TextView
-                android:id="@+id/discount_text_deadline"
+                android:id="@+id/DiscountDeadline"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="2018-5-12到期"
+                android:layout_weight="0.32"
                 android:gravity="center_vertical"/>
 
             <TextView
-                android:id="@+id/discount_text_limit"
+                android:id="@+id/DiscountLimit"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="不可与其他优惠叠加" />
+                android:text="不可与其他优惠叠加"
+                android:layout_weight="0.32" />
         </LinearLayout>
 
-        <CheckBox
-            android:id="@+id/discount_cbox_choose"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginStart="10dp"
-            android:layout_gravity="center"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <CheckBox
+                android:id="@+id/ChooseCheckBox"
+                android:layout_width="62dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="right" />
+        </LinearLayout>
     </LinearLayout>
     <View
         android:id="@+id/view"
         android:layout_width="match_parent"
-        android:layout_height="5dp"
-        android:background="@color/background" />
+        android:layout_height="10dp"
+        android:background="@color/gainsboro" />
 </LinearLayout>

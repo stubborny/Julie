@@ -68,8 +68,7 @@
             android:name=".Activity.P_MessageActivity"
             android:label="@string/title_activity_p__message"
             android:theme="@style/AppTheme" />
-        <activity android:name=".Activity.FootDetailOwnerActivity" />
-        <activity android:name=".Activity.FootDetailVisitorActivity" />
+        <activity android:name=".Activity.MessageActivity" />
 
         <service
             android:name=".Service.PollingService"

@@ -25,6 +25,7 @@
             android:layout_marginTop="10dp">
 
             <LinearLayout
+                android:onClick="payDeposit"
                 android:id="@+id/push_order"
                 android:layout_width="0dp"
                 android:layout_height="80dp"
@@ -136,7 +137,7 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="8dp"
-            android:background="@color/background"
+            android:background="@color/theme"
             android:focusable="true"
             android:focusableInTouchMode="true" />
     </LinearLayout>

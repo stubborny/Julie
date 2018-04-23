@@ -9,14 +9,14 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="52dp"
-        android:background="@color/theme"
+        android:background="@color/colorPrimaryDark"
         android:orientation="horizontal">
 
         <Button
             android:id="@+id/foot_detail_btn_back"
             android:layout_width="53dp"
             android:layout_height="match_parent"
-            android:background="@color/theme"
+            android:background="@color/colorPrimaryDark"
             android:gravity="center"
             android:text="返回"
             android:textColor="@color/white"
@@ -29,7 +29,7 @@
             android:gravity="center"
             android:text="详情"
             android:textColor="@color/white"
-            android:textSize="25sp" />
+            android:textSize="25dp" />
     </LinearLayout>
 
     <RelativeLayout
@@ -66,11 +66,9 @@
                     android:layout_height="match_parent"
                     android:layout_alignParentTop="true"
                     android:layout_marginLeft="5dp"
-                    android:layout_marginStart="5dp"
                     android:layout_toEndOf="@+id/foot_detail_img_userpic"
                     android:layout_toRightOf="@+id/foot_detail_img_userpic"
-                    android:gravity="center"
-                    android:textSize="18sp" />
+                    android:gravity="center" />
 
                 <TextView
                     android:id="@+id/foot_detail_text_time"
@@ -137,18 +135,17 @@
                     android:background="@mipmap/reward" />
 
                 <TextView
-                    android:id="@+id/foot_detail_text_reward"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:gravity="center_vertical"
-                    android:textColor="@color/darkgrey" />
-
-                <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:gravity="center"
                     android:text="赏金   " />
 
+                <TextView
+                    android:id="@+id/foot_detail_text_reward"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:textColor="@color/darkgrey" />
             </LinearLayout>
 
 
@@ -158,131 +155,37 @@
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="0.5dp"
+        android:layout_height="5dp"
         android:background="@color/lightgrey" />
 
-    <com.lhz.stateprogress.StateProgressView
-        android:id="@+id/spv"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="80dp"
-        app:color_circle_fill="#1296db"
-        app:color_circle_stroke="#dbdbdb"
-        app:color_line_normal="#dbdbdb"
-        app:color_line_state="#1296db"
-        app:color_text_normal="#bfbfbf"
-        app:color_text_state="#1296db"
-        app:is_line_radius="false"
-        app:line_height="9dp"
-        app:radius_circle_fill="10dp"
-        app:radius_circle_stroke="12dp" />
+        android:layout_height="100dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:orientation="horizontal">
+
+        <com.lhz.stateprogress.StateProgressView
+            android:id="@+id/spv"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="10dp"
+            app:color_circle_fill="#1296db"
+            app:color_circle_stroke="#dbdbdb"
+            app:color_line_normal="#dbdbdb"
+            app:color_line_state="#1296db"
+            app:color_text_normal="#bfbfbf"
+            app:color_text_state="#1296db"
+            app:is_line_radius="false"
+            app:line_height="9dp"
+            app:radius_circle_fill="10dp"
+            app:radius_circle_stroke="12dp" />
+    </LinearLayout>
 
     <View
         android:layout_width="match_parent"
         android:layout_height="5dp"
         android:background="@color/lightgrey" />
-
-    <LinearLayout
-        android:id="@+id/foot_detail_layout_phone"
-        android:layout_width="match_parent"
-        android:layout_height="30dp"
-        android:gravity="center"
-        android:visibility="gone">
-
-        <ImageView
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:background="@mipmap/mob_phone" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:text="联系发单者   " />
-
-        <TextView
-            android:id="@+id/foot_detail_text_phone"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center_vertical"
-            android:text="15510798789"
-            android:textColor="@color/royalblue" />
-    </LinearLayout>
-
-    <RelativeLayout
-        android:id="@+id/foot_detail_layout_receive_phone"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_marginBottom="10dp"
-        android:layout_marginLeft="5dp"
-        android:layout_marginStart="5dp"
-        android:layout_marginTop="5dp"
-        android:visibility="gone">
-
-        <ImageView
-            android:id="@+id/foot_detail_img_receive_userpic"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"
-            android:background="@mipmap/loading" />
-
-        <TextView
-            android:id="@+id/foot_detail_text_receive_nickname"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_marginLeft="5dp"
-            android:layout_marginStart="5dp"
-            android:layout_toEndOf="@+id/foot_detail_img_receive_userpic"
-            android:layout_toRightOf="@+id/foot_detail_img_receive_userpic"
-            android:gravity="center"
-            android:textSize="18sp" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_above="@+id/linearLayout"
-            android:layout_marginLeft="20dp"
-            android:layout_marginStart="20dp"
-            android:layout_toEndOf="@+id/foot_detail_text_receive_nickname"
-            android:layout_toRightOf="@+id/foot_detail_text_receive_nickname"
-            android:gravity="center"
-            android:text="接了您的单"
-            android:textColor="@color/darkgrey" />
-
-        <LinearLayout
-            android:id="@+id/linearLayout"
-            android:layout_width="match_parent"
-            android:layout_height="30dp"
-            android:layout_below="@+id/foot_detail_text_receive_nickname"
-            android:layout_marginLeft="10dp"
-            android:layout_marginStart="10dp"
-            android:layout_toEndOf="@+id/foot_detail_img_receive_userpic"
-            android:layout_toRightOf="@+id/foot_detail_img_receive_userpic"
-            android:gravity="center">
-
-            <ImageView
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:background="@mipmap/mob_phone" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:text="联系接单者   " />
-
-            <TextView
-                android:id="@+id/foot_detail_text_receive_phone"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center_vertical"
-                android:text="15510798789"
-                android:textColor="@color/royalblue" />
-        </LinearLayout>
-
-    </RelativeLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -327,27 +230,25 @@
 
         <Button
             android:id="@+id/foot_detail_btn_receive"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:layout_weight="1"
-            android:background="@color/theme"
+            android:background="@color/darkturquoise"
             android:text="我要接单"
             android:textColor="@color/white"
             android:textSize="20dp" />
 
-        <View
-            android:id="@+id/foot_detail_view"
-            android:layout_width="20dp"
-            android:layout_height="match_parent"/>
+
         <Button
             android:id="@+id/foot_detail_btn_comment"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
+            android:layout_marginLeft="20dp"
             android:layout_weight="1"
             android:alpha="0.95"
-            android:background="@color/theme"
+            android:background="@color/royalblue"
             android:text="评论"
             android:textColor="@color/white"
             android:textSize="20dp" />
