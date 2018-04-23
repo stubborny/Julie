@@ -10,6 +10,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bjtu.julie.Model.UserManager;
 import com.bjtu.julie.R;
 
 import org.json.JSONException;
@@ -27,8 +28,8 @@ import butterknife.OnClick;
 
 public class Pub_footActivity extends AppCompatActivity {
 
-    @BindView(R.id.pubOkButton)
-    Button pubOkButton;
+    @BindView(R.id.title_text)
+    TextView titleText;
     @BindView(R.id.pubFootEdit)
     EditText pubFootEdit;
     @BindView(R.id.pubFootAddress_Edit)
@@ -46,6 +47,7 @@ public class Pub_footActivity extends AppCompatActivity {
     @BindView(R.id.pubFootName_Edit)
     EditText pubFootNameEdit;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,21 +57,25 @@ public class Pub_footActivity extends AppCompatActivity {
         if (actionbar != null) {
             actionbar.hide();
         }
-        TextView choose=(TextView)findViewById(R.id.pubFootChooseDiscount);
+        TextView choose = (TextView) findViewById(R.id.pubFootChooseDiscount);
         choose.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent =new Intent(Pub_footActivity.this,DiscountActivity.class);
+                Intent intent = new Intent(Pub_footActivity.this, DiscountActivity.class);
                 startActivity(intent);
             }
         });
+        titleText.setText("发布");
+
     }
 
-    @OnClick({R.id.pubOkButton, R.id.pubFootChooseDiscount})
+    @OnClick({R.id.title_btn_ok, R.id.pubFootChooseDiscount})
     public void onViewClicked(View view) {
         switch (view.getId()) {
-            case R.id.pubOkButton:
-                if (pubFootEdit.getText().toString().equals("")) {
+            case R.id.title_btn_ok:
+                if (!UserManager.getInstance().isLogined()) {
+                    Toast.makeText(getApplicationContext(), "还没登陆哦", Toast.LENGTH_SHORT).show();
+                } else if (pubFootEdit.getText().toString().equals("")) {
                     Toast.makeText(getApplicationContext(), "不说说你要做什么？？", Toast.LENGTH_SHORT).show();
                     pubFootEdit.requestFocus();
                 } else if (pubFootAddressEdit.getText().toString().equals("")) {
@@ -91,7 +97,7 @@ public class Pub_footActivity extends AppCompatActivity {
                     String url = "http://39.107.225.80:8080/julieServer/PubFootServlet";
                     RequestParams params = new RequestParams(url);
                     params.setCharset("utf-8");
-                    params.addParameter("userId", "1");
+                    params.addParameter("userId", UserManager.getInstance().getUser().getId());
                     params.addParameter("content", pubFootEdit.getText().toString());
                     params.addParameter("address", pubFootAddressEdit.getText().toString());
                     params.addParameter("reward", pubFootMoneyEdit.getText().toString());

@@ -19,6 +19,7 @@ import com.bjtu.julie.Adapter.CommentAdapter;
 import com.bjtu.julie.Fragment.ContactDialogFragment;
 import com.bjtu.julie.Model.Comment;
 import com.bjtu.julie.Model.Order;
+import com.bjtu.julie.Model.UserManager;
 import com.bjtu.julie.R;
 import com.bjtu.julie.Util.DateUtil;
 import com.lhz.stateprogress.StateProgressView;
@@ -39,8 +40,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class FootDetailOwnerActivity extends AppCompatActivity {
-    @BindView(R.id.foot_detail_btn_back)
-    Button footDetailBtnBack;
+
     @BindView(R.id.foot_detail_img_userpic)
     ImageView footDetailImgUserpic;
     @BindView(R.id.foot_detail_text_nickname)
@@ -74,12 +74,20 @@ public class FootDetailOwnerActivity extends AppCompatActivity {
     TextView footDetailTextReceivePhone;
     @BindView(R.id.foot_detail_layout_receive_phone)
     RelativeLayout footDetailLayoutReceivePhone;
+    @BindView(R.id.title_text)
+    TextView titleText;
+    @BindView(R.id.title_btn_ok)
+    TextView titleBtnOk;
     private List<Comment> commList = new ArrayList<>();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_foot_detail);
         ButterKnife.bind(this);
+
+        titleText.setText("详情");
+        titleBtnOk.setText("");
         footDetailTextContent.setMovementMethod(ScrollingMovementMethod.getInstance());
         order = (Order) getIntent().getSerializableExtra("order");
         ImageOptions imageOptions = new ImageOptions.Builder()
@@ -175,7 +183,7 @@ public class FootDetailOwnerActivity extends AppCompatActivity {
 
     }
 
-    @OnClick({R.id.foot_detail_btn_receive, R.id.foot_detail_btn_back, R.id.foot_detail_btn_comment})
+    @OnClick({R.id.foot_detail_btn_receive, R.id.foot_detail_btn_comment})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.foot_detail_btn_receive:
@@ -190,7 +198,7 @@ public class FootDetailOwnerActivity extends AppCompatActivity {
                     //第二个参数 1表示接单者，0表示发单者
                     ContactDialogFragment cDialog = new ContactDialogFragment().newInstance(footDetailTextReceivePhone.getText().toString(), 0);
                     cDialog.show(ft, "ContactDialog");
-                }else if(oState==3){
+                } else if (oState == 3) {
                     //确认送达按钮点击了，更新订单状态
                     String url = "http://39.107.225.80:8080/julieServer/UpdateOrderServlet";
                     RequestParams params = new RequestParams(url);
@@ -247,13 +255,13 @@ public class FootDetailOwnerActivity extends AppCompatActivity {
                             Toast.makeText(getApplicationContext(), "还没输入哦", Toast.LENGTH_LONG).show();
                             return;
                         }
-                        if (input.length()>50) {
+                        if (input.length() > 50) {
                             Toast.makeText(getApplicationContext(), "字数太多啦", Toast.LENGTH_LONG).show();
                             return;
                         }
                         String url = "http://39.107.225.80:8080/julieServer/PubCommentServlet";
                         RequestParams params = new RequestParams(url);
-                        params.addParameter("userId", "1");
+                        params.addParameter("userId", UserManager.getInstance().getUser().getId());
                         params.addParameter("footId", order.getFootId());
                         params.addParameter("comment", input);
                         x.http().get(params, new Callback.CommonCallback<String>() {
@@ -290,9 +298,7 @@ public class FootDetailOwnerActivity extends AppCompatActivity {
                     }
                 });
                 break;
-            case R.id.foot_detail_btn_back:
-                finish();
-                break;
+
         }
     }
 
@@ -315,7 +321,7 @@ public class FootDetailOwnerActivity extends AppCompatActivity {
                     JSONObject jb = new JSONObject(result);
                     //Log.i("AAA", String.valueOf(jb.getInt("code"))+jb.getString("msg"));
                     if (jb.getInt("code") == 1) {
-                        JSONObject job=jb.getJSONObject("data");
+                        JSONObject job = jb.getJSONObject("data");
                         footDetailTextReceiveNickname.setText(job.getString("nickname"));
                         footDetailTextReceivePhone.setText(job.getString("username"));
                         ImageOptions imageOptions = new ImageOptions.Builder()

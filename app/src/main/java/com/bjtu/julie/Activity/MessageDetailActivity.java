@@ -1,8 +1,7 @@
 package com.bjtu.julie.Activity;
 
-import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.text.method.ScrollingMovementMethod;
 import android.view.View;
 import android.widget.Button;
@@ -15,7 +14,7 @@ import android.widget.Toast;
 import com.bjtu.julie.Adapter.CommentAdapter;
 import com.bjtu.julie.Model.Comment;
 import com.bjtu.julie.Model.Exchange;
-import com.bjtu.julie.Model.Order;
+import com.bjtu.julie.Model.UserManager;
 import com.bjtu.julie.R;
 import com.bjtu.julie.Util.DateUtil;
 
@@ -56,13 +55,22 @@ public class MessageDetailActivity extends AppCompatActivity {
     Button commentBtn;
 
     Exchange exchange;
-    private List<Comment> commList=new ArrayList<>();
+    @BindView(R.id.title_btn_back)
+    TextView titleBtnBack;
+    @BindView(R.id.title_text)
+    TextView titleText;
+    @BindView(R.id.title_btn_ok)
+    TextView titleBtnOk;
+    private List<Comment> commList = new ArrayList<>();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_message_detail);
         //初始化评论信息
         //initMessCommInfo();
+        titleBtnOk.setText("");
+        titleText.setText("详情");
         ButterKnife.bind(this);
         messDetailContent.setMovementMethod(ScrollingMovementMethod.getInstance());
         exchange = (Exchange) getIntent().getSerializableExtra("exchange");
@@ -94,7 +102,8 @@ public class MessageDetailActivity extends AppCompatActivity {
 //            }
 //        });
     }
-    private void initMessCommInfo(){
+
+    private void initMessCommInfo() {
 //        Comment comm1=new Comment("走你",R.mipmap.ccc_pic);
 //        commList.add(comm1);
 //        Comment comm2=new Comment("就是俺",R.mipmap.bbb_pic);
@@ -116,7 +125,7 @@ public class MessageDetailActivity extends AppCompatActivity {
                         for (int i = 0; i < orderArray.length(); i++) {
                             // 遍历 jsonarray 数组，把每一个对象转成 json 对象
                             JSONObject job = orderArray.getJSONObject(i);
-                            Comment comm = new Comment(job.getString("footId"),job.getInt("userId"),job.getString("userpicUrl"),job.getString("nickname"),job.getInt("floor"),job.getString("comment"),job.getString("time"));
+                            Comment comm = new Comment(job.getString("footId"), job.getInt("userId"), job.getString("userpicUrl"), job.getString("nickname"), job.getInt("floor"), job.getString("comment"), job.getString("time"));
                             commList.add(comm);
                         }
                     }
@@ -149,7 +158,7 @@ public class MessageDetailActivity extends AppCompatActivity {
 
     }
 
-    @OnClick({ R.id.MessDetailBack_btn, R.id.comment_btn})
+    @OnClick({R.id.MessDetailBack_btn, R.id.comment_btn})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.comment_btn:
@@ -161,10 +170,10 @@ public class MessageDetailActivity extends AppCompatActivity {
                 }
                 String url = "http://39.107.225.80:8080/julieServer/PubMessCommentServlet";
                 RequestParams params = new RequestParams(url);
-                params.addParameter("userId", "1");
+                params.addParameter("userId", UserManager.getInstance().getUser().getId());
                 params.addParameter("messId", exchange.getMessId());
                 params.addParameter("comment", input);
-                x.http().get(params, new org.xutils.common.Callback.CommonCallback<String>() {
+                x.http().get(params, new Callback.CommonCallback<String>() {
                     public void onSuccess(String result) {
                         try {
                             JSONObject jb = new JSONObject(result);

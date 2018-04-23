@@ -4,28 +4,15 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bjtu.julie.Activity.P_MessageActivity;
 import com.bjtu.julie.Activity.Pub_footActivity;
 import com.bjtu.julie.Adapter.FootManAdaper;
 import com.bjtu.julie.FullyLinearLayoutManager;
 import com.bjtu.julie.Model.Order;
-
-import java.util.ArrayList;
-import java.util.List;
-
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
-import butterknife.Unbinder;
-
 import com.bjtu.julie.R;
 
 import org.json.JSONArray;
@@ -35,12 +22,15 @@ import org.xutils.common.Callback;
 import org.xutils.http.RequestParams;
 import org.xutils.x;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+import butterknife.Unbinder;
+
 public class FootManFragment extends Fragment {
     public List<Order> orderlist = new ArrayList<>();
-    @BindView(R.id.push_order)
-    LinearLayout pushOrder;
-    @BindView(R.id.push_message)
-    LinearLayout pushMessage;
     Unbinder unbinder;
 
     @Override
@@ -48,7 +38,6 @@ public class FootManFragment extends Fragment {
                              Bundle savedInstanceState) {
         final View orderLayout = inflater.inflate(R.layout.activity_foot_man, container, false);
         //initGuide();
-        unbinder = ButterKnife.bind(this, orderLayout);
         String url = "http://39.107.225.80:8080//julieServer/FootManServlet";
         RequestParams params = new RequestParams(url);
         x.http().get(params, new Callback.CommonCallback<String>() {
@@ -62,7 +51,7 @@ public class FootManFragment extends Fragment {
                         for (int i = 0; i < orderArray.length(); i++) {
                             // 遍历 jsonarray 数组，把每一个对象转成 json 对象
                             JSONObject job = orderArray.getJSONObject(i);
-                            Order exorder = new Order(job.getString("footId"), job.getString("userpicUrl"), job.getString("username"), job.getString("state"), job.getString("content"), job.getString("address"), job.getString("reward"), job.getString("time"));
+                            Order exorder = new Order(job.getString("footId"), job.getInt("userId"), job.getInt("receiveId"), job.getString("userpicUrl"), job.getString("username"), job.getString("state"), job.getString("content"), job.getString("address"), job.getString("reward"), job.getString("time"), job.getString("phone"));
                             orderlist.add(exorder);
                         }
                     }
@@ -100,6 +89,7 @@ public class FootManFragment extends Fragment {
             }
         });
 
+        unbinder = ButterKnife.bind(this, orderLayout);
         return orderLayout;
     }
 
@@ -117,7 +107,7 @@ public class FootManFragment extends Fragment {
 
     @OnClick({R.id.push_order, R.id.push_message})
     public void onViewClicked(View view) {
-        switch ( -view.getId()) {
+        switch (view.getId()) {
             case R.id.push_order:
                 Intent intent = new Intent(getActivity(), Pub_footActivity.class);
                 startActivity(intent);

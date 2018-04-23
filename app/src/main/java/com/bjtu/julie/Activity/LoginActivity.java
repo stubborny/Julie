@@ -1,6 +1,8 @@
 package com.bjtu.julie.Activity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -10,6 +12,10 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.bjtu.julie.MainActivity;
+import com.bjtu.julie.Model.User;
+import com.bjtu.julie.Model.UserManager;
+import com.bjtu.julie.MyApplication;
 import com.bjtu.julie.R;
 
 import org.json.JSONException;
@@ -33,13 +39,15 @@ public class LoginActivity extends AppCompatActivity {
     private CheckBox checkBoxLoginChoose;
     private CheckBox checkBoxRemindPassword;
     private CheckBox checkBoxAutomaticLogin;
+    private SharedPreferences sp;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-
         init();//初始化界面
+        final MyApplication us = (MyApplication) getApplication();
         /**
          * 登陆按钮点击事件
          */
@@ -49,7 +57,7 @@ public class LoginActivity extends AppCompatActivity {
                 //判断手机号码是否合法
                 Pattern p = Pattern.compile("^((13[0-9])|(14[5|7])|(15([0-3]|[5-9]))|(17[013678])|(18[0,5-9]))\\d{8}$");
                 Matcher m = p.matcher(textPhoneNumber.getText().toString());
-                if(m.matches()==false) {
+                if (m.matches() == false) {
                     Toast.makeText(getApplicationContext(), "请输入真实有效的手机号！",
                             Toast.LENGTH_SHORT).show();
                     return;
@@ -64,13 +72,27 @@ public class LoginActivity extends AppCompatActivity {
                     public void onSuccess(String result) {
                         try {
                             JSONObject jb = new JSONObject(result);
-                           //Log.i("AAA", String.valueOf(jb.getInt("code"))+jb.getString("msg"));
-                            Toast.makeText(x.app(), jb.getString("msg"), Toast.LENGTH_LONG).show();
+                            //Log.i("AAA", String.valueOf(jb.getInt("code"))+jb.getString("msg"));
 
+                            Toast.makeText(x.app(), jb.getString("msg"), Toast.LENGTH_LONG).show();
+                            if (jb.getInt("code") == 1) {
+                                us.setStatus(1);//设置用户状态为在线
+                                //SharedPreferences记住用户名还行
+                                JSONObject job = jb.getJSONObject("data");
+                                User user = new User(job.getString("username"), job.getString("password"), job.getInt("id"), job.getString("userpicUrl"), job.getString("nickname"));
+                                UserManager userManager = UserManager.getInstance();
+                                userManager.setUser(user);
+//                                sp = getSharedPreferences("userInfo", Context.MODE_PRIVATE);
+//                                SharedPreferences.Editor edit = sp.edit();
+//                                edit.putString("name",textPhoneNumber.getText().toString());
+//                                edit.apply();
+//                                finish();
+                                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                                startActivity(intent);
+                            }
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
-
                     }
 
                     //请求异常后的回调方法

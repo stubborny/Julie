@@ -1,6 +1,7 @@
 package com.bjtu.julie;
 
 import android.app.FragmentManager;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Handler;
 import android.support.v4.app.Fragment;
@@ -27,8 +28,8 @@ import com.bjtu.julie.Util.PollingUtils;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity  extends AppCompatActivity implements View.OnClickListener,
-        ViewPager.OnPageChangeListener{
+public class MainActivity extends AppCompatActivity implements View.OnClickListener,
+        ViewPager.OnPageChangeListener {
 
     private FootManFragment FootManFragment;
     private MessageFragment messageFragment;
@@ -67,15 +68,18 @@ public class MainActivity  extends AppCompatActivity implements View.OnClickList
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        Log.e("System.out.print","Start polling service");
+        Log.e("System.out.print", "Start polling service");
         PollingUtils.startPollingService(this, 5, PollingService.class, PollingService.ACTION);
 
         setContentView(R.layout.activity_main);
         fragmentManager = getFragmentManager();
-        mainActivity=this;
+        mainActivity = this;
         initViews(); //初始化界面，并设置四个tab的监听
-        setTabSelection(0); //第一次启动时开启第0个tab
-        viewPager.setCurrentItem(0, false);
+
+        Intent intent = getIntent();
+
+        setTabSelection(2);
+        viewPager.setCurrentItem(2, false);
 
     }
 
@@ -92,7 +96,7 @@ public class MainActivity  extends AppCompatActivity implements View.OnClickList
 //        FragmentTransaction transaction = fragmentManager.beginTransaction();
 //        //隐藏所有的fragment，防止有多个界面显示在界面上
 //        hideFragments(transaction);
-        switch(index){
+        switch (index) {
             case 0:
                 //当点击消息tab时，改变控件的图片和文字颜色
                 footmanImage.setImageResource(R.mipmap.ic_directions_run_black_24dp);
@@ -177,11 +181,11 @@ public class MainActivity  extends AppCompatActivity implements View.OnClickList
         messageLayout = findViewById(R.id.message_layout);
         settingLayout = findViewById(R.id.setting_layout);
 
-        footmanImage= (ImageView) findViewById(R.id.footman_image);
+        footmanImage = (ImageView) findViewById(R.id.footman_image);
         messageImage = (ImageView) findViewById(R.id.message_image);
         settingImage = (ImageView) findViewById(R.id.setting_image);
 
-        footmanText=(TextView)findViewById(R.id.footman_text);
+        footmanText = (TextView) findViewById(R.id.footman_text);
         messageText = (TextView) findViewById(R.id.message_text);
         settingText = (TextView) findViewById(R.id.setting_text);
 
@@ -190,7 +194,7 @@ public class MainActivity  extends AppCompatActivity implements View.OnClickList
         settingLayout.setOnClickListener(this);
         // 设置数据源
         FootManFragment = new FootManFragment();
-        messageFragment  = new MessageFragment();
+        messageFragment = new MessageFragment();
         settingFragment = new SettingFragment();
 
         mFragment.clear();
@@ -222,6 +226,7 @@ public class MainActivity  extends AppCompatActivity implements View.OnClickList
 
 
     }
+
     @Override
     public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
     }
@@ -245,7 +250,7 @@ public class MainActivity  extends AppCompatActivity implements View.OnClickList
     @Override
     public void onClick(View v) {
         // TODO Auto-generated method stub
-        switch(v.getId()){
+        switch (v.getId()) {
             case R.id.footman_layout:
                 //点击消息tab，选中第一个tab
                 setTabSelection(0);
@@ -265,11 +270,12 @@ public class MainActivity  extends AppCompatActivity implements View.OnClickList
                 break;
         }
     }
+
     @Override
     protected void onDestroy() {
         super.onDestroy();
         //Stop polling service
-        Log.e("System.out.print","Stop polling service...");
+        Log.e("System.out.print", "Stop polling service...");
 
         PollingUtils.stopPollingService(this, PollingService.class, PollingService.ACTION);
     }

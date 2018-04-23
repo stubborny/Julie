@@ -1,7 +1,6 @@
 package com.bjtu.julie.Activity;
 
 import android.os.Bundle;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.text.method.ScrollingMovementMethod;
@@ -14,9 +13,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bjtu.julie.Adapter.CommentAdapter;
-import com.bjtu.julie.Fragment.ContactDialogFragment;
 import com.bjtu.julie.Model.Comment;
 import com.bjtu.julie.Model.Order;
+import com.bjtu.julie.Model.UserManager;
 import com.bjtu.julie.R;
 import com.bjtu.julie.Util.DateUtil;
 import com.lhz.stateprogress.StateProgressView;
@@ -35,6 +34,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+
 
 public class FootDetailVisitorActivity extends AppCompatActivity {
     @BindView(R.id.foot_detail_img_userpic)
@@ -60,6 +60,10 @@ public class FootDetailVisitorActivity extends AppCompatActivity {
     Button footDetailBtnReceive;
     @BindView(R.id.foot_detail_view)
     View footDetailView;
+    @BindView(R.id.title_text)
+    TextView titleText;
+    @BindView(R.id.title_btn_ok)
+    TextView titleBtnOk;
     private List<Comment> commList = new ArrayList<>();
 
     @Override
@@ -67,6 +71,8 @@ public class FootDetailVisitorActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_foot_detail);
         ButterKnife.bind(this);
+        titleText.setText("详情");
+        titleBtnOk.setText("");
         footDetailTextContent.setMovementMethod(ScrollingMovementMethod.getInstance());
         order = (Order) getIntent().getSerializableExtra("order");
         ImageOptions imageOptions = new ImageOptions.Builder()
@@ -142,10 +148,14 @@ public class FootDetailVisitorActivity extends AppCompatActivity {
 
     }
 
-    @OnClick({R.id.foot_detail_btn_receive, R.id.foot_detail_btn_back, R.id.foot_detail_btn_comment})
+    @OnClick({R.id.foot_detail_btn_receive, R.id.foot_detail_btn_comment})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.foot_detail_btn_comment:
+                if (!UserManager.getInstance().isLogined()) {
+                    Toast.makeText(getApplicationContext(), "还没登陆哦", Toast.LENGTH_SHORT).show();
+                    return;
+                }
                 final EditText et = new EditText(this);
                 final AlertDialog dialog = new AlertDialog.Builder(this).setTitle("评论")
                         .setIcon(R.mipmap.comment)
@@ -161,13 +171,13 @@ public class FootDetailVisitorActivity extends AppCompatActivity {
                             Toast.makeText(getApplicationContext(), "还没输入哦", Toast.LENGTH_LONG).show();
                             return;
                         }
-                        if (input.length()>50) {
+                        if (input.length() > 50) {
                             Toast.makeText(getApplicationContext(), "字数太多啦", Toast.LENGTH_LONG).show();
                             return;
                         }
                         String url = "http://39.107.225.80:8080/julieServer/PubCommentServlet";
                         RequestParams params = new RequestParams(url);
-                        params.addParameter("userId", "1");
+                        params.addParameter("userId", UserManager.getInstance().getUser().getId());
                         params.addParameter("footId", order.getFootId());
                         params.addParameter("comment", input);
                         x.http().get(params, new Callback.CommonCallback<String>() {
@@ -204,9 +214,7 @@ public class FootDetailVisitorActivity extends AppCompatActivity {
                     }
                 });
                 break;
-            case R.id.foot_detail_btn_back:
-                finish();
-                break;
+
         }
     }
 }
