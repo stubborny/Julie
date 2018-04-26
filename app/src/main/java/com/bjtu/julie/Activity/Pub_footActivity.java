@@ -34,8 +34,8 @@ public class Pub_footActivity extends AppCompatActivity {
     EditText pubFootEdit;
     @BindView(R.id.pubFootAddress_Edit)
     EditText pubFootAddressEdit;
-    @BindView(R.id.pubFootAddition_Edit)
-    EditText pubFootAdditionEdit;
+   // @BindView(R.id.pubFootAddition_Edit)
+    //EditText pubFootAdditionEdit;
     @BindView(R.id.pubFootMoney_Edit)
     EditText pubFootMoneyEdit;
     @BindView(R.id.pubFootDiscount_Edit)

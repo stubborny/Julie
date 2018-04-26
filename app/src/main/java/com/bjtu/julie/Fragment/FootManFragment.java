@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.bjtu.julie.Activity.MessageDetailActivity;
 import com.bjtu.julie.Activity.P_MessageActivity;
 import com.bjtu.julie.Activity.Pub_footActivity;
 import com.bjtu.julie.Adapter.FootManAdaper;

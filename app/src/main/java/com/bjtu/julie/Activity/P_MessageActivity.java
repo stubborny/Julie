@@ -1,7 +1,11 @@
 package com.bjtu.julie.Activity;
 
+import android.app.Activity;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
@@ -10,6 +14,7 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bjtu.julie.Fragment.MessageFragment;
 import com.bjtu.julie.Model.UserManager;
 import com.bjtu.julie.R;
 import com.bjtu.julie.Util.PollingUtils;
@@ -24,6 +29,8 @@ import java.util.regex.Pattern;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+
+import static java.security.AccessController.getContext;
 
 public class P_MessageActivity extends AppCompatActivity {
 
@@ -51,7 +58,6 @@ public class P_MessageActivity extends AppCompatActivity {
         pubMessTitle=(TextView) findViewById(R.id.title_text);
         pubOkButton = (TextView) findViewById(R.id.title_btn_ok);
         pubMessEdit = (EditText) findViewById(R.id.pubMessEdit);
-        pubMessImageBut = (ImageButton) findViewById(R.id.pubMessImageBut);
         pubMessNameEdit = (EditText) findViewById(R.id.pubMessNameEdit);
         pubMessChatEdit = (EditText) findViewById(R.id.pubMessChatEdit);
         pubMessPhoneEdit = (EditText) findViewById(R.id.pubMessPhoneEdit);
@@ -61,7 +67,7 @@ public class P_MessageActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                if (!UserManager.getInstance().isLogined()) {
+               if (!UserManager.getInstance().isLogined()) {
                     Toast.makeText(getApplicationContext(), "还没登陆哦", Toast.LENGTH_SHORT).show();
                 } else if (pubMessEdit.getText().toString().equals("")) {
                     Toast.makeText(getApplicationContext(), "不说点什么？？", Toast.LENGTH_SHORT).show();
@@ -75,45 +81,62 @@ public class P_MessageActivity extends AppCompatActivity {
                 } else if (pubMessNameEdit.getText().toString().equals("")) {
                     Toast.makeText(getApplicationContext(), "记得填联系姓名", Toast.LENGTH_SHORT).show();
                     pubMessNameEdit.requestFocus();
-                } else {
-                    String url = "http://39.107.225.80:8080/julieServer/PubMessServlet";
-                    RequestParams params = new RequestParams(url);
-                    params.setCharset("utf-8");
-                    params.addParameter("userId", UserManager.getInstance().getUser().getId());
-                    params.addParameter("content", pubMessEdit.getText().toString());
-                    params.addParameter("wechat", pubMessChatEdit.getText().toString());
-                    params.addParameter("phone", pubMessPhoneEdit.getText().toString());
-                    params.addParameter("name", pubMessNameEdit.getText().toString());
+                } else {AlertDialog.Builder builder=new AlertDialog.Builder(P_MessageActivity.this);
+                   builder.setTitle("");
+                   builder.setMessage("是否确认发布该消息?");
+                   builder .setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                       @Override
+                       public void onClick(DialogInterface dialogInterface, int i) {
+                           String url = "http://39.107.225.80:8080/julieServer/PubMessServlet";
+                           RequestParams params = new RequestParams(url);
+                           params.setCharset("utf-8");
+                           params.addParameter("userId", UserManager.getInstance().getUser().getId());
+                           params.addParameter("content", pubMessEdit.getText().toString());
+                           params.addParameter("wechat", pubMessChatEdit.getText().toString());
+                           params.addParameter("phone", pubMessPhoneEdit.getText().toString());
+                           params.addParameter("name", pubMessNameEdit.getText().toString());
+                           x.http().get(params, new Callback.CommonCallback<String>() {
 
-                    x.http().get(params, new Callback.CommonCallback<String>() {
+                               public void onSuccess(String result) {
+                                   try {
+                                       JSONObject jb = new JSONObject(result);
+                                       Toast.makeText(x.app(), jb.getString("msg"), Toast.LENGTH_LONG).show();
+                                       finish();
+                                       //Log.i("AAA", String.valueOf(jb.getInt("code"))+jb.getString("msg"));
+                                   } catch (JSONException e) {
+                                       e.printStackTrace();
+                                   }
 
-                        public void onSuccess(String result) {
-                            try {
-                                JSONObject jb = new JSONObject(result);
-                                Toast.makeText(x.app(), jb.getString("msg"), Toast.LENGTH_LONG).show();
-                                finish();
-                                //Log.i("AAA", String.valueOf(jb.getInt("code"))+jb.getString("msg"));
-                            } catch (JSONException e) {
-                                e.printStackTrace();
-                            }
+                               }
 
-                        }
+                               //请求异常后的回调方法
+                               @Override
+                               public void onError(Throwable ex, boolean isOnCallback) {
+                               }
 
-                        //请求异常后的回调方法
-                        @Override
-                        public void onError(Throwable ex, boolean isOnCallback) {
-                        }
+                               //主动调用取消请求的回调方法
+                               @Override
+                               public void onCancelled(CancelledException cex) {
+                               }
 
-                        //主动调用取消请求的回调方法
-                        @Override
-                        public void onCancelled(CancelledException cex) {
-                        }
+                               @Override
+                               public void onFinished() {
 
-                        @Override
-                        public void onFinished() {
+                               }
+                           });
+                           Toast.makeText(P_MessageActivity.this,"发布成功",Toast.LENGTH_SHORT).show();
+                       }
+                   });
+                   builder .setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                       @Override
+                       public void onClick(DialogInterface dialogInterface, int i) {
+                           //((Activity) getContext()).finish();
+                       }
+                   });
+                   AlertDialog b=builder .create();
+                   b .show();
 
-                        }
-                    });
+
                 }
             }
         });

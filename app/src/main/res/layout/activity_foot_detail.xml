@@ -71,7 +71,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="90dp"
                 android:scrollbars="vertical"
-                android:textSize="15dp" />
+                android:textSize="15sp" />
 
             <View
                 android:layout_width="match_parent"
@@ -110,13 +110,18 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="30dp"
-                android:gravity="center">
+                android:gravity="center"
+                android:orientation="horizontal">
 
                 <ImageView
                     android:layout_width="20dp"
                     android:layout_height="20dp"
                     android:background="@mipmap/reward" />
-
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="赏金   " />
                 <TextView
                     android:id="@+id/foot_detail_text_reward"
                     android:layout_width="match_parent"
@@ -124,11 +129,7 @@
                     android:gravity="center_vertical"
                     android:textColor="@color/darkgrey" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:gravity="center"
-                    android:text="赏金   " />
+
 
             </LinearLayout>
 
@@ -152,7 +153,6 @@
         app:color_line_state="#1296db"
         app:color_text_normal="#bfbfbf"
         app:color_text_state="#1296db"
-        app:is_line_radius="false"
         app:line_height="9dp"
         app:radius_circle_fill="10dp"
         app:radius_circle_stroke="12dp" />
@@ -315,7 +315,7 @@
             android:background="@color/theme"
             android:text="我要接单"
             android:textColor="@color/white"
-            android:textSize="20dp" />
+            android:textSize="20sp" />
 
         <View
             android:id="@+id/foot_detail_view"
@@ -331,6 +331,6 @@
             android:background="@color/theme"
             android:text="评论"
             android:textColor="@color/white"
-            android:textSize="20dp" />
+            android:textSize="20sp" />
     </LinearLayout>
 </LinearLayout>

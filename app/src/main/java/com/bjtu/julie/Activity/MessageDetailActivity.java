@@ -1,6 +1,7 @@
 package com.bjtu.julie.Activity;
 
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.text.method.ScrollingMovementMethod;
 import android.view.View;
@@ -43,8 +44,8 @@ public class MessageDetailActivity extends AppCompatActivity {
     TextView messDetailTextTime;
     @BindView(R.id.foootContent)
     TextView messDetailContent;
-    @BindView(R.id.editText)
-    EditText messCommentEditText;
+    //@BindView(R.id.editText)
+    //EditText messCommentEditText;
     @BindView(R.id.textView2)
     TextView textViewShowComment;
     @BindView(R.id.textView)
@@ -158,56 +159,72 @@ public class MessageDetailActivity extends AppCompatActivity {
 
     }
 
-    @OnClick({R.id.MessDetailBack_btn, R.id.comment_btn})
+    @OnClick({R.id.title_btn_back, R.id.comment_btn})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.comment_btn:
 
-                String input = messCommentEditText.getText().toString();
-                if (input.equals("")) {
-                    Toast.makeText(getApplicationContext(), "还没输入哦", Toast.LENGTH_LONG).show();
+                if (!UserManager.getInstance().isLogined()) {
+                    Toast.makeText(getApplicationContext(), "还没登陆哦", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                String url = "http://39.107.225.80:8080/julieServer/PubMessCommentServlet";
-                RequestParams params = new RequestParams(url);
-                params.addParameter("userId", UserManager.getInstance().getUser().getId());
-                params.addParameter("messId", exchange.getMessId());
-                params.addParameter("comment", input);
-                x.http().get(params, new Callback.CommonCallback<String>() {
-                    public void onSuccess(String result) {
-                        try {
-                            JSONObject jb = new JSONObject(result);
-                            //Log.i("AAA", String.valueOf(jb.getInt("code"))+jb.getString("msg"));
-                            if (jb.getInt("code") == 1) {
-                                Toast.makeText(x.app(), jb.getString("msg"), Toast.LENGTH_LONG).show();
-                                messCommentEditText.setText("");
-                            } else {
-                                Toast.makeText(x.app(), jb.getString("msg"), Toast.LENGTH_LONG).show();
-                            }
-                        } catch (JSONException e) {
-                            e.printStackTrace();
+                final EditText et = new EditText(this);
+                final AlertDialog dialog = new AlertDialog.Builder(this).setTitle("评论")
+                        .setIcon(R.mipmap.comment)
+                        .setView(et)
+                        .setPositiveButton("确定", null)
+                        .setNegativeButton("取消", null)
+                        .show();
+                dialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        String input = et.getText().toString();
+                        if (input.equals("")) {
+                            Toast.makeText(getApplicationContext(), "还没输入哦", Toast.LENGTH_LONG).show();
+                            return;
                         }
-                    }
+                        String url = "http://39.107.225.80:8080/julieServer/PubMessCommentServlet";
+                        RequestParams params = new RequestParams(url);
+                        params.addParameter("userId", UserManager.getInstance().getUser().getId());
+                        params.addParameter("messId", exchange.getMessId());
+                        params.addParameter("comment", input);
+                        x.http().get(params, new Callback.CommonCallback<String>() {
+                            public void onSuccess(String result) {
+                                try {
+                                    JSONObject jb = new JSONObject(result);
+                                    //Log.i("AAA", String.valueOf(jb.getInt("code"))+jb.getString("msg"));
+                                    if (jb.getInt("code") == 1) {
+                                        Toast.makeText(x.app(), jb.getString("msg"), Toast.LENGTH_LONG).show();
+                                        dialog.dismiss();
+                                    } else {
+                                        Toast.makeText(x.app(), jb.getString("msg"), Toast.LENGTH_LONG).show();
+                                    }
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+                            }
 
-                    //请求异常后的回调方法
-                    @Override
-                    public void onError(Throwable ex, boolean isOnCallback) {
-                    }
+                            //请求异常后的回调方法
+                            @Override
+                            public void onError(Throwable ex, boolean isOnCallback) {
+                            }
 
-                    //主动调用取消请求的回调方法
-                    @Override
-                    public void onCancelled(CancelledException cex) {
-                    }
+                            //主动调用取消请求的回调方法
+                            @Override
+                            public void onCancelled(CancelledException cex) {
+                            }
 
-                    @Override
-                    public void onFinished() {
+                            @Override
+                            public void onFinished() {
 
+                            }
+                        });
                     }
                 });
 
 
                 break;
-            case R.id.MessDetailBack_btn:
+            case R.id.title_btn_back://MessDetailBack_btn
                 finish();
                 break;
         }
