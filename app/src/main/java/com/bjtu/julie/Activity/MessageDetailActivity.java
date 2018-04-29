@@ -1,6 +1,7 @@
 package com.bjtu.julie.Activity;
 
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.text.method.ScrollingMovementMethod;
 import android.view.View;
@@ -56,7 +57,6 @@ public class MessageDetailActivity extends AppCompatActivity {
     Button commentBtn;
 
     Exchange exchange;
-
     @BindView(R.id.title_btn_back)
     TextView titleBtnBack;
     @BindView(R.id.title_text)
@@ -169,7 +169,7 @@ public class MessageDetailActivity extends AppCompatActivity {
 
     }
 
-    @OnClick({R.id.comment_btn})
+    @OnClick({R.id.title_btn_back, R.id.comment_btn})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.comment_btn:
@@ -203,6 +203,46 @@ public class MessageDetailActivity extends AppCompatActivity {
                         }
                     }
 
+                if (!UserManager.getInstance().isLogined()) {
+                    Toast.makeText(getApplicationContext(), "还没登陆哦", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                final EditText et = new EditText(this);
+                final AlertDialog dialog = new AlertDialog.Builder(this).setTitle("评论")
+                        .setIcon(R.mipmap.comment)
+                        .setView(et)
+                        .setPositiveButton("确定", null)
+                        .setNegativeButton("取消", null)
+                        .show();
+                dialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        String input = et.getText().toString();
+                        if (input.equals("")) {
+                            Toast.makeText(getApplicationContext(), "还没输入哦", Toast.LENGTH_LONG).show();
+                            return;
+                        }
+                        String url = "http://39.107.225.80:8080/julieServer/PubMessCommentServlet";
+                        RequestParams params = new RequestParams(url);
+                        params.addParameter("userId", UserManager.getInstance().getUser().getId());
+                        params.addParameter("messId", exchange.getMessId());
+                        params.addParameter("comment", input);
+                        x.http().get(params, new Callback.CommonCallback<String>() {
+                            public void onSuccess(String result) {
+                                try {
+                                    JSONObject jb = new JSONObject(result);
+                                    //Log.i("AAA", String.valueOf(jb.getInt("code"))+jb.getString("msg"));
+                                    if (jb.getInt("code") == 1) {
+                                        Toast.makeText(x.app(), jb.getString("msg"), Toast.LENGTH_LONG).show();
+                                        dialog.dismiss();
+                                    } else {
+                                        Toast.makeText(x.app(), jb.getString("msg"), Toast.LENGTH_LONG).show();
+                                    }
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+
                     //请求异常后的回调方法
                     @Override
                     public void onError(Throwable ex, boolean isOnCallback) {
@@ -216,10 +256,15 @@ public class MessageDetailActivity extends AppCompatActivity {
                     @Override
                     public void onFinished() {
 
+                            }
+                        });
                     }
                 });
 
 
+                break;
+            case R.id.title_btn_back://MessDetailBack_btn
+                finish();
                 break;
         }
     }

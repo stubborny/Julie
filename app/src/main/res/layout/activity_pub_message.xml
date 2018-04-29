@@ -4,8 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:weightSum="1"
-    >
+    android:weightSum="1">
 
     <com.bjtu.julie.TitleLayout
         android:layout_width="match_parent"
@@ -14,152 +13,158 @@
         <include layout="@layout/title1" />
     </com.bjtu.julie.TitleLayout>
 
-    <LinearLayout
+    <ScrollView
+        android:id="@+id/scrollView3"
         android:layout_width="match_parent"
-        android:layout_height="83dp"
-        android:layout_weight="0.25"
-        android:orientation="horizontal"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp">
+        android:layout_height="wrap_content">
 
-        <EditText
-            android:id="@+id/pubMessEdit"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@null"
-            android:hint="发布换课，闲置物品售卖等信息"
-            android:textSize="15dp"
-            android:gravity="top"
-            android:textColorHint="@color/darkgrey"/>
-    </LinearLayout>
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="0.5dp"
-        android:background="@color/lightgrey"/>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:orientation="horizontal"
-        android:weightSum="1"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp">
-        <ImageButton
-            android:id="@+id/pubMessImageBut"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_weight="0.22"
-            app:srcCompat="@android:drawable/ic_menu_camera"
-            android:background="@null"/>
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_weight="0.25"
+                android:orientation="horizontal">
 
-    </LinearLayout>
+                <EditText
+                    android:id="@+id/pubMessEdit"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@null"
+                    android:gravity="top"
+                    android:hint="发布换课，闲置物品售卖等信息"
+                    android:textColorHint="@color/darkgrey"
+                    android:textSize="15sp"
+                    android:maxLines="5"
+                    android:textCursorDrawable="@null"/>
+            </LinearLayout>
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="0.5dp"
-        android:background="@color/lightgrey"/>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:layout_weight="0.01"
-        android:orientation="horizontal"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp">
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="8dp"
+                android:background="@color/lightgrey" />
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_weight="0.01"
+                android:orientation="horizontal">
 
-            <TextView
-                android:id="@+id/pubMessName"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:text="联系姓名"
-                android:textColor="@color/black"
-                android:textSize="15dp" />
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
 
-            <EditText
-                android:id="@+id/pubMessNameEdit"
-                android:layout_width="260dp"
-                android:layout_height="match_parent"
-                android:layout_alignParentRight="true"
-                android:background="@null"
-                android:hint="请填写联系人姓名"
-                android:textSize="15dp"
-                android:textColorHint="@color/darkgrey"/>
-        </RelativeLayout>
-    </LinearLayout>
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="0.2dp"
-        android:background="@color/lightgrey" />
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:orientation="horizontal"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp">
+                    <TextView
+                        android:id="@+id/pubMessName"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:text="联系姓名"
+                        android:textColor="@color/black"
+                        android:textSize="15sp" />
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-            <TextView
-                android:id="@+id/pubMessChat"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:text="联系微信"
-                android:gravity="center"
-                android:textSize="15dp"
-                android:textColor="@color/black"
-                />
+                    <EditText
+                        android:id="@+id/pubMessNameEdit"
+                        android:layout_width="260dp"
+                        android:layout_height="match_parent"
+                        android:layout_alignParentRight="true"
+                        android:background="@null"
+                        android:hint="请填写联系人姓名"
+                        android:textColorHint="@color/darkgrey"
+                        android:textSize="15sp"
+                        android:maxLines="1"
+                        android:textCursorDrawable="@null"/>
+                </RelativeLayout>
+            </LinearLayout>
 
-            <EditText
-                android:id="@+id/pubMessChatEdit"
-                android:layout_width="260dp"
-                android:layout_height="match_parent"
-                android:background="@null"
-                android:hint="请填写联系人微信"
-                android:textSize="15dp"
-                android:textColorHint="@color/darkgrey"
-                android:layout_alignBaseline="@+id/pubMessChat"
-                android:layout_alignBottom="@+id/pubMessChat"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentEnd="true" />
-        </RelativeLayout>
-    </LinearLayout>
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="0.2dp"
-        android:background="@color/lightgrey"/>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:layout_weight="0.01"
-        android:orientation="horizontal"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp">
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-            <TextView
-                android:id="@+id/pubMessPhone"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:text="联系电话"
-                android:textColor="@color/black"
-                android:textSize="15dp" />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.2dp"
+                android:background="@color/lightgrey" />
 
-            <EditText
-                android:id="@+id/pubMessPhoneEdit"
-                android:layout_width="260dp"
-                android:layout_height="match_parent"
-                android:layout_alignParentRight="true"
-                android:background="@null"
-                android:hint="请填写联系人电话"
-                android:textSize="15dp"
-                android:textColorHint="@color/darkgrey"/>
-        </RelativeLayout>
-    </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:orientation="horizontal">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:id="@+id/pubMessChat"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:text="联系微信"
+                        android:textColor="@color/black"
+                        android:textSize="15sp" />
+
+                    <EditText
+                        android:id="@+id/pubMessChatEdit"
+                        android:layout_width="260dp"
+                        android:layout_height="match_parent"
+                        android:layout_alignBaseline="@+id/pubMessChat"
+                        android:layout_alignBottom="@+id/pubMessChat"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentRight="true"
+                        android:background="@null"
+                        android:hint="请填写联系人微信"
+                        android:textColorHint="@color/darkgrey"
+                        android:textSize="15sp"
+                        android:maxLines="1"
+                        android:textCursorDrawable="@null"/>
+                </RelativeLayout>
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.2dp"
+                android:background="@color/lightgrey" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_weight="0.01"
+                android:orientation="horizontal">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:id="@+id/pubMessPhone"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:text="联系电话"
+                        android:textColor="@color/black"
+                        android:textSize="15sp" />
+
+                    <EditText
+                        android:id="@+id/pubMessPhoneEdit"
+                        android:layout_width="260dp"
+                        android:layout_height="match_parent"
+                        android:layout_alignParentRight="true"
+                        android:background="@null"
+                        android:hint="请填写联系人电话"
+                        android:textColorHint="@color/darkgrey"
+                        android:textSize="15sp"
+                        android:maxLines="1"
+                        android:textCursorDrawable="@null"/>
+                </RelativeLayout>
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
 </LinearLayout>

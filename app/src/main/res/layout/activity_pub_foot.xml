@@ -12,220 +12,278 @@
         <include layout="@layout/title1" />
     </com.bjtu.julie.TitleLayout>
 
-    <EditText
-        android:id="@+id/pubFootEdit"
+    <ScrollView
+        android:id="@+id/scrollView2"
         android:layout_width="match_parent"
-        android:layout_height="150dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:background="@null"
-        android:gravity="top"
-        android:hint="帮取快递，食堂带饭等"
-        android:textColorHint="@color/darkgrey"
-        android:textSize="15sp" />
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <EditText
+                android:id="@+id/pubFootEdit"
+                android:layout_width="match_parent"
+                android:layout_height="140dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:background="@null"
+                android:gravity="top"
+                android:hint="帮取快递，食堂带饭等"
+                android:textColorHint="@color/darkgrey"
+                android:textCursorDrawable="@null"
+                android:textSize="15sp"
+                android:minLines="1"
+                android:maxLines="6"/>
 
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="0.5dp"
-        android:background="@color/lightgrey" />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:background="@color/lightgrey" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:orientation="horizontal">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:orientation="horizontal">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:text="送达地址"
-            android:textColor="@color/black"
-            android:textSize="15sp" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="送达地址"
+                    android:textColor="@color/black"
+                    android:textSize="15sp" />
 
-        <EditText
-            android:id="@+id/pubFootAddress_Edit"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="20dp"
-            android:layout_marginStart="20dp"
-            android:layout_weight="1"
-            android:background="@null"
-            android:hint="请填写送达地址"
-            android:textColorHint="@color/darkgrey"
-            android:textSize="15sp" />
+                <EditText
+                    android:id="@+id/pubFootAddress_Edit"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginStart="20dp"
+                    android:layout_weight="1"
+                    android:background="@null"
+                    android:hint="请填写送达地址"
+                    android:textColorHint="@color/darkgrey"
+                    android:textCursorDrawable="@null"
+                    android:textSize="15sp"
+                    android:maxLines="1"/>
 
-    </LinearLayout>
+            </LinearLayout>
 
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="0.5dp"
-        android:background="@color/lightgrey" />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="5dp"
+                android:background="@color/lightgrey" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:orientation="horizontal"
-        android:visibility="gone">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:orientation="horizontal">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:text="附加要求"
-            android:textColor="@color/black"
-            android:textSize="15sp" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="附加需求"
+                    android:textColor="@color/black"
+                    android:textSize="15sp" />
 
-        <EditText
-            android:id="@+id/pubFootAddition_Edit"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="20dp"
-            android:layout_marginStart="20dp"
-            android:layout_weight="1"
-            android:background="@null"
-            android:hint="请填写您的要求"
-            android:textColorHint="@color/darkgrey"
-            android:textSize="15sp" />
 
-    </LinearLayout>
+                <TextView
+                    android:id="@+id/addNeed1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:background="@drawable/textview_border"
+                    android:layout_marginLeft="20dp"
+                    android:gravity="center_vertical"
+                    android:text="送到宿舍"
+                    android:textColor="@color/darkgrey"
+                    android:textSize="13sp" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:orientation="horizontal">
+                <TextView
+                    android:id="@+id/addNeed2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:background="@drawable/textview_border"
+                    android:layout_marginLeft="11dp"
+                    android:gravity="center_vertical"
+                    android:text="代为保管"
+                    android:textColor="@color/darkgrey"
+                    android:textSize="13sp" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:text="打赏路费"
-            android:textColor="@color/black"
-            android:textSize="15sp" />
+                <TextView
+                    android:id="@+id/addNeed3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:background="@drawable/textview_border"
+                    android:layout_marginLeft="11dp"
+                    android:gravity="center_vertical"
+                    android:text="超过十斤"
+                    android:textColor="@color/darkgrey"
+                    android:textSize="13sp" />
 
-        <EditText
-            android:id="@+id/pubFootMoney_Edit"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="20dp"
-            android:layout_marginStart="20dp"
-            android:layout_weight="1"
-            android:background="@null"
-            android:hint="请填写费用"
-            android:inputType="number|numberDecimal"
-            android:textColorHint="@color/darkgrey"
-            android:textSize="15sp" />
+                <TextView
+                    android:id="@+id/addNeed4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:background="@drawable/textview_border"
+                    android:layout_marginLeft="11dp"
+                    android:gravity="center_vertical"
+                    android:text="轻拿轻放"
+                    android:textColor="@color/darkgrey"
+                    android:textSize="13sp" />
+            </LinearLayout>
 
-    </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:orientation="horizontal">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:orientation="horizontal">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="打赏路费"
+                    android:textColor="@color/black"
+                    android:textSize="15sp" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:text="优惠券"
-            android:textColor="@color/black"
-            android:textSize="15sp" />
+                <EditText
+                    android:id="@+id/pubFootMoney_Edit"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginStart="20dp"
+                    android:layout_weight="1"
+                    android:background="@null"
+                    android:hint="请填写费用"
+                    android:inputType="number|numberDecimal"
+                    android:textColorHint="@color/darkgrey"
+                    android:textCursorDrawable="@null"
+                    android:textSize="15sp"
+                    android:maxLines="1"/>
 
-        <TextView
-            android:id="@+id/pubFootDiscount_Edit"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="35dp"
-            android:layout_marginStart="35dp"
-            android:layout_weight="1"
-            android:background="@null"
-            android:gravity="center_vertical"
-            android:hint="选择可用优惠券"
-            android:textColorHint="@color/darkgrey"
-            android:textSize="15sp" />
+            </LinearLayout>
 
-        <TextView
-            android:id="@+id/pubFootChooseDiscount"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:text="选择"
-            android:textColor="@color/blue"
-            android:textSize="15dp" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:orientation="horizontal">
 
-    </LinearLayout>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="优惠券"
+                    android:textColor="@color/black"
+                    android:textSize="15sp" />
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="0.5dp"
-        android:background="@color/lightgrey" />
+                <TextView
+                    android:id="@+id/pubFootDiscount_Edit"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="35dp"
+                    android:layout_marginStart="35dp"
+                    android:layout_weight="1"
+                    android:background="@null"
+                    android:gravity="center_vertical"
+                    android:hint="选择可用优惠券"
+                    android:textColorHint="@color/darkgrey"
+                    android:textSize="15sp" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:orientation="horizontal">
+                <TextView
+                    android:id="@+id/pubFootChooseDiscount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.26"
+                    android:gravity="center"
+                    android:text="选择 >"
+                    android:textColor="@color/deepskyblue"
+                    android:textSize="15sp" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:text="联系电话"
-            android:textColor="@color/black"
-            android:textSize="15sp" />
+            </LinearLayout>
 
-        <EditText
-            android:id="@+id/pubFootPhone_Edit"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="20dp"
-            android:layout_marginStart="20dp"
-            android:layout_weight="1"
-            android:background="@null"
-            android:hint="请填写联系电话"
-            android:inputType="phone"
-            android:textColorHint="@color/darkgrey"
-            android:textSize="15sp" />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="5dp"
+                android:background="@color/lightgrey" />
 
-    </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:orientation="horizontal">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:orientation="horizontal">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="联系电话"
+                    android:textColor="@color/black"
+                    android:textSize="15sp" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:text="联系姓名"
-            android:textColor="@color/black"
-            android:textSize="15sp" />
+                <EditText
+                    android:id="@+id/pubFootPhone_Edit"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginStart="20dp"
+                    android:layout_weight="1"
+                    android:background="@null"
+                    android:hint="请填写联系电话"
+                    android:inputType="phone"
+                    android:textColorHint="@color/darkgrey"
+                    android:textCursorDrawable="@null"
+                    android:textSize="15sp"
+                    android:maxLines="1"/>
 
-        <EditText
-            android:id="@+id/pubFootName_Edit"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="20dp"
-            android:layout_marginStart="20dp"
-            android:layout_weight="1"
-            android:background="@null"
-            android:hint="请填写联系人姓名"
-            android:textColorHint="@color/darkgrey"
-            android:textSize="15sp" />
+            </LinearLayout>
 
-    </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:orientation="horizontal">
 
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="联系姓名"
+                    android:textColor="@color/black"
+                    android:textSize="15sp" />
+
+                <EditText
+                    android:id="@+id/pubFootName_Edit"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginStart="20dp"
+                    android:layout_weight="1"
+                    android:background="@null"
+                    android:hint="请填写联系人姓名"
+                    android:textColorHint="@color/darkgrey"
+                    android:textCursorDrawable="@null"
+                    android:textSize="15sp"
+                    android:maxLines="1"/>
+
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
 </LinearLayout>

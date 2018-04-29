@@ -125,9 +125,15 @@ public class FootDetailActivity extends AppCompatActivity {
         list.add("被抢啦");
         list.add("已送达");
         list.add("已结单");
-        spv.setItems(list, Integer.valueOf(order.getState()) - 1, 200);
-        //spv.setItems(list,0, 200);
+        spv.setItems(list );
+        /*if(oState==1){
+            //spv.startAnim(-1, 200);
+        }else {
+            spv.startAnim(Integer.valueOf(order.getState()) - 1, 200);
+        }*/
 
+
+        //spv.setItems(list,0, 200);
         initFootCommInfo();
 
 
@@ -216,7 +222,7 @@ public class FootDetailActivity extends AppCompatActivity {
                                     footDetailTextPhone.setText(order.getPhone());
                                     footDetailBtnReceive.setText("送达后点我");
                                     oState = 2;//修改当前订单状态
-                                    spv.setItems(list, 1, 200);
+                                    spv.setItems(list, 0, 200);
                                 } else {
                                     Toast.makeText(x.app(), jb.getString("msg"), Toast.LENGTH_LONG).show();
                                 }
