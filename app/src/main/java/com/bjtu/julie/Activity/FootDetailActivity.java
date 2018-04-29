@@ -197,7 +197,7 @@ public class FootDetailActivity extends AppCompatActivity {
                     //Toast.makeText(this, "接单按钮点击了", Toast.LENGTH_LONG).show();
                     String url = "http://39.107.225.80:8080/julieServer/UpdateOrderServlet";
                     RequestParams params = new RequestParams(url);
-                    params.addParameter("userId", "3");
+                    params.addParameter("userId", UserManager.getInstance().getUser().getId());
                     params.addParameter("footId", order.getFootId());
                     params.addParameter("state", "2");
                     x.http().get(params, new Callback.CommonCallback<String>() {

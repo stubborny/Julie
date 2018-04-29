@@ -3,21 +3,12 @@
 
     <item
         is-multidex="false"
-        jar="D:\Android\Julie\8\Julie\app\build\intermediates\exploded-aar\com.android.support\animated-vector-drawable\26.0.0-alpha1\jars\classes.jar"
+        jar="D:\Android\Julie\8\Julie\app\build\intermediates\exploded-aar\com.jimi_wu\PTLRecyclerView\1.1.1\jars\classes.jar"
         jumboMode="false"
         optimize="true"
         revision="26.0.0"
-        sha1="88246166d5afb106f532f6e6deae683c66b42c89">
-        <dex dex="D:\Android\Julie\8\Julie\app\build\intermediates\pre-dexed\debug\com.android.support-animated-vector-drawable-26.0.0-alpha1_40ff39c77f0feee0e183618f65c91d62fffa1338.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="D:\Android\Julie\8\Julie\app\build\intermediates\exploded-aar\com.android.support\support-v4\26.0.0-alpha1\jars\classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="26.0.0"
-        sha1="d7c42c80f6509b9ea4db28ca7859ffae08ec5741">
-        <dex dex="D:\Android\Julie\8\Julie\app\build\intermediates\pre-dexed\debug\com.android.support-support-v4-26.0.0-alpha1_8143265c9e7104b6552ed589594e7316a1b1c40a.jar" />
+        sha1="3e4763cf6d25e15167d92fc8d05fa1b6d66ae28f">
+        <dex dex="D:\Android\Julie\8\Julie\app\build\intermediates\pre-dexed\debug\com.jimi_wu-PTLRecyclerView-1.1.1_78740723fb200ae370e46ccd1c9169f7c61219be.jar" />
     </item>
     <item
         is-multidex="false"
@@ -27,24 +18,6 @@
         revision="26.0.0"
         sha1="5f108b956a57d6371d7ebe6bccf4c1faa3ccc511">
         <dex dex="D:\Android\Julie\8\Julie\app\build\intermediates\pre-dexed\debug\alipaySdk-20180316_5599b652ec58856801a4bad807c950c2ba46da31.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="D:\Android\Julie\8\Julie\app\libs\MobTools-2016.1012.1447.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="26.0.0"
-        sha1="1dbc3cd678d140053d9fc9ac01d9fc1db0b75a22">
-        <dex dex="D:\Android\Julie\8\Julie\app\build\intermediates\pre-dexed\debug\MobTools-2016.1012.1447_f8903a0bcb276062d62658c1b342e863a8ff2a52.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="C:\Users\carrey\.gradle\caches\modules-2\files-2.1\com.loopj.android\android-async-http\1.4.9\386a4339ffe52d5d63e80f9bed8d2b1d1a418249\android-async-http-1.4.9.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="26.0.0"
-        sha1="386a4339ffe52d5d63e80f9bed8d2b1d1a418249">
-        <dex dex="D:\Android\Julie\8\Julie\app\build\intermediates\pre-dexed\debug\android-async-http-1.4.9_03d65a775b5afc17fd957f9abde1117bb72a12f1.jar" />
     </item>
     <item
         is-multidex="false"
@@ -63,24 +36,6 @@
         revision="26.0.0"
         sha1="8df0e365e40beb151bc42dee20817721a6cab7b0">
         <dex dex="D:\Android\Julie\8\Julie\app\build\intermediates\pre-dexed\debug\com.android.support-support-compat-26.0.0-alpha1_df4c24d89d7e87abdfe02ee348c2667aa213a783.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="C:\Users\carrey\.gradle\caches\modules-2\files-2.1\org.greenrobot\eventbus\3.1.1\5cd91fd014f5b72292f959748c20a2cefefae77d\eventbus-3.1.1.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="26.0.0"
-        sha1="5cd91fd014f5b72292f959748c20a2cefefae77d">
-        <dex dex="D:\Android\Julie\8\Julie\app\build\intermediates\pre-dexed\debug\eventbus-3.1.1_6a152d9355b042e3db5bf1979a2f6c8783d0bee4.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="C:\Users\carrey\AppData\Local\Android\Sdk\extras\android\m2repository\com\android\support\support-annotations\26.0.0-alpha1\support-annotations-26.0.0-alpha1.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="26.0.0"
-        sha1="023ee503b631f69511e335a061ea008f8da60f40">
-        <dex dex="D:\Android\Julie\8\Julie\app\build\intermediates\pre-dexed\debug\support-annotations-26.0.0-alpha1_83657d98181798b7799872bfc28911917d95f15b.jar" />
     </item>
     <item
         is-multidex="false"
@@ -120,15 +75,6 @@
     </item>
     <item
         is-multidex="false"
-        jar="D:\Android\Julie\8\Julie\app\build\intermediates\exploded-aar\com.android.support\support-fragment\26.0.0-alpha1\jars\classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="26.0.0"
-        sha1="18d31838aa4fcc768a8a0516e22cc13b94655d89">
-        <dex dex="D:\Android\Julie\8\Julie\app\build\intermediates\pre-dexed\debug\com.android.support-support-fragment-26.0.0-alpha1_3c390757cd9d10e243fe148b3285870224a4a0dc.jar" />
-    </item>
-    <item
-        is-multidex="false"
         jar="D:\Android\Julie\8\Julie\app\build\intermediates\exploded-aar\com.android.support\support-vector-drawable\26.0.0-alpha1\jars\classes.jar"
         jumboMode="false"
         optimize="true"
@@ -138,21 +84,120 @@
     </item>
     <item
         is-multidex="false"
-        jar="C:\Users\carrey\.gradle\caches\modules-2\files-2.1\cz.msebera.android\httpclient\4.3.6\526a9f794eab830eae4f23a62c572878b3f491ab\httpclient-4.3.6.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="26.0.0"
-        sha1="526a9f794eab830eae4f23a62c572878b3f491ab">
-        <dex dex="D:\Android\Julie\8\Julie\app\build\intermediates\pre-dexed\debug\httpclient-4.3.6_1bf9c37adbf893a861bf975497157ef4b0eccda4.jar" />
-    </item>
-    <item
-        is-multidex="false"
         jar="D:\Android\Julie\8\Julie\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\26.0.0-alpha1\jars\classes.jar"
         jumboMode="false"
         optimize="true"
         revision="26.0.0"
         sha1="47471eb19df288158b00b8d9cfa41bce7373f5cc">
         <dex dex="D:\Android\Julie\8\Julie\app\build\intermediates\pre-dexed\debug\com.android.support-appcompat-v7-26.0.0-alpha1_c7185311055d87ee813f218609dfbd81925e639e.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="D:\Android\Julie\8\Julie\app\build\intermediates\exploded-aar\SMSSDK-2.1.2\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="26.0.0"
+        sha1="e771b37b443378199ab670e072a4469f363533ac">
+        <dex dex="D:\Android\Julie\8\Julie\app\build\intermediates\pre-dexed\debug\intermediates-exploded-aar-SMSSDK-2.1.2_31db86aa23ccdd0ae7cdb4c8afa9f5fb831925a3.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\carrey\.gradle\caches\modules-2\files-2.1\com.jakewharton\butterknife-annotations\8.5.1\bb67dad90bab7cd77a8f7f1b8442b47e3a2326bc\butterknife-annotations-8.5.1.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="26.0.0"
+        sha1="bb67dad90bab7cd77a8f7f1b8442b47e3a2326bc">
+        <dex dex="D:\Android\Julie\8\Julie\app\build\intermediates\pre-dexed\debug\butterknife-annotations-8.5.1_d095183a0edd392b6d4a15e2897d9770ccac2d47.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="D:\Android\Julie\8\Julie\app\libs\MobCommons-2016.1012.1447.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="26.0.0"
+        sha1="247197e11f7c035dd417c0a15306da9e2f220547">
+        <dex dex="D:\Android\Julie\8\Julie\app\build\intermediates\pre-dexed\debug\MobCommons-2016.1012.1447_cf326ff0e565e6edd20d818560a5605fdbc5d025.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="D:\Android\Julie\8\Julie\app\build\intermediates\exploded-aar\com.android.support\design\25.2.0\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="26.0.0"
+        sha1="ea6a989b83d19b1b461281e0475a6cd6514897f8">
+        <dex dex="D:\Android\Julie\8\Julie\app\build\intermediates\pre-dexed\debug\com.android.support-design-25.2.0_bc0409042b1964c633e69edcd5be63b716523e66.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="D:\Android\Julie\8\Julie\app\build\intermediates\exploded-aar\com.android.support\animated-vector-drawable\26.0.0-alpha1\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="26.0.0"
+        sha1="88246166d5afb106f532f6e6deae683c66b42c89">
+        <dex dex="D:\Android\Julie\8\Julie\app\build\intermediates\pre-dexed\debug\com.android.support-animated-vector-drawable-26.0.0-alpha1_40ff39c77f0feee0e183618f65c91d62fffa1338.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="D:\Android\Julie\8\Julie\app\build\intermediates\exploded-aar\com.android.support\support-v4\26.0.0-alpha1\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="26.0.0"
+        sha1="d7c42c80f6509b9ea4db28ca7859ffae08ec5741">
+        <dex dex="D:\Android\Julie\8\Julie\app\build\intermediates\pre-dexed\debug\com.android.support-support-v4-26.0.0-alpha1_8143265c9e7104b6552ed589594e7316a1b1c40a.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="D:\Android\Julie\8\Julie\app\libs\MobTools-2016.1012.1447.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="26.0.0"
+        sha1="1dbc3cd678d140053d9fc9ac01d9fc1db0b75a22">
+        <dex dex="D:\Android\Julie\8\Julie\app\build\intermediates\pre-dexed\debug\MobTools-2016.1012.1447_f8903a0bcb276062d62658c1b342e863a8ff2a52.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\carrey\.gradle\caches\modules-2\files-2.1\com.loopj.android\android-async-http\1.4.9\386a4339ffe52d5d63e80f9bed8d2b1d1a418249\android-async-http-1.4.9.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="26.0.0"
+        sha1="386a4339ffe52d5d63e80f9bed8d2b1d1a418249">
+        <dex dex="D:\Android\Julie\8\Julie\app\build\intermediates\pre-dexed\debug\android-async-http-1.4.9_03d65a775b5afc17fd957f9abde1117bb72a12f1.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\carrey\AppData\Local\Android\Sdk\extras\android\m2repository\com\android\support\support-annotations\26.0.0-alpha1\support-annotations-26.0.0-alpha1.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="26.0.0"
+        sha1="023ee503b631f69511e335a061ea008f8da60f40">
+        <dex dex="D:\Android\Julie\8\Julie\app\build\intermediates\pre-dexed\debug\support-annotations-26.0.0-alpha1_83657d98181798b7799872bfc28911917d95f15b.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\carrey\.gradle\caches\modules-2\files-2.1\org.greenrobot\eventbus\3.1.1\5cd91fd014f5b72292f959748c20a2cefefae77d\eventbus-3.1.1.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="26.0.0"
+        sha1="5cd91fd014f5b72292f959748c20a2cefefae77d">
+        <dex dex="D:\Android\Julie\8\Julie\app\build\intermediates\pre-dexed\debug\eventbus-3.1.1_6a152d9355b042e3db5bf1979a2f6c8783d0bee4.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="D:\Android\Julie\8\Julie\app\build\intermediates\exploded-aar\com.android.support\support-fragment\26.0.0-alpha1\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="26.0.0"
+        sha1="18d31838aa4fcc768a8a0516e22cc13b94655d89">
+        <dex dex="D:\Android\Julie\8\Julie\app\build\intermediates\pre-dexed\debug\com.android.support-support-fragment-26.0.0-alpha1_3c390757cd9d10e243fe148b3285870224a4a0dc.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\carrey\.gradle\caches\modules-2\files-2.1\cz.msebera.android\httpclient\4.3.6\526a9f794eab830eae4f23a62c572878b3f491ab\httpclient-4.3.6.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="26.0.0"
+        sha1="526a9f794eab830eae4f23a62c572878b3f491ab">
+        <dex dex="D:\Android\Julie\8\Julie\app\build\intermediates\pre-dexed\debug\httpclient-4.3.6_1bf9c37adbf893a861bf975497157ef4b0eccda4.jar" />
     </item>
     <item
         is-multidex="false"
@@ -174,15 +219,6 @@
     </item>
     <item
         is-multidex="false"
-        jar="D:\Android\Julie\8\Julie\app\build\intermediates\exploded-aar\SMSSDK-2.1.2\jars\classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="26.0.0"
-        sha1="e771b37b443378199ab670e072a4469f363533ac">
-        <dex dex="D:\Android\Julie\8\Julie\app\build\intermediates\pre-dexed\debug\intermediates-exploded-aar-SMSSDK-2.1.2_31db86aa23ccdd0ae7cdb4c8afa9f5fb831925a3.jar" />
-    </item>
-    <item
-        is-multidex="false"
         jar="D:\Android\Julie\8\Julie\app\build\intermediates\exploded-aar\com.android.support\support-core-utils\26.0.0-alpha1\jars\classes.jar"
         jumboMode="false"
         optimize="true"
@@ -192,12 +228,12 @@
     </item>
     <item
         is-multidex="false"
-        jar="C:\Users\carrey\.gradle\caches\modules-2\files-2.1\com.jakewharton\butterknife-annotations\8.5.1\bb67dad90bab7cd77a8f7f1b8442b47e3a2326bc\butterknife-annotations-8.5.1.jar"
+        jar="D:\Android\Julie\8\Julie\app\build\intermediates\exploded-aar\com.android.support\transition\25.2.0\jars\classes.jar"
         jumboMode="false"
         optimize="true"
         revision="26.0.0"
-        sha1="bb67dad90bab7cd77a8f7f1b8442b47e3a2326bc">
-        <dex dex="D:\Android\Julie\8\Julie\app\build\intermediates\pre-dexed\debug\butterknife-annotations-8.5.1_d095183a0edd392b6d4a15e2897d9770ccac2d47.jar" />
+        sha1="e51c2f662bb72419632af5192553c37e33890a99">
+        <dex dex="D:\Android\Julie\8\Julie\app\build\intermediates\pre-dexed\debug\com.android.support-transition-25.2.0_f219c46eb4267150039a1a8c8e16e6530a329f93.jar" />
     </item>
     <item
         is-multidex="false"
@@ -207,15 +243,6 @@
         revision="26.0.0"
         sha1="9935891f23923f39d002087085d9696568a9f657">
         <dex dex="D:\Android\Julie\8\Julie\app\build\intermediates\pre-dexed\debug\com.android.support-support-media-compat-26.0.0-alpha1_248f034ad08dd290ba3372f985bd51386b466b67.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="D:\Android\Julie\8\Julie\app\libs\MobCommons-2016.1012.1447.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="26.0.0"
-        sha1="247197e11f7c035dd417c0a15306da9e2f220547">
-        <dex dex="D:\Android\Julie\8\Julie\app\build\intermediates\pre-dexed\debug\MobCommons-2016.1012.1447_cf326ff0e565e6edd20d818560a5605fdbc5d025.jar" />
     </item>
 
 </items>

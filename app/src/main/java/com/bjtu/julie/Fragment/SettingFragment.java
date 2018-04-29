@@ -43,7 +43,6 @@ import com.bjtu.julie.Adapter.MessageAdaper;
 import com.bjtu.julie.FullyLinearLayoutManager;
 import com.bjtu.julie.MainActivity;
 import com.bjtu.julie.Model.Exchange;
-import com.bjtu.julie.Model.UserInfo;
 import com.bjtu.julie.Model.UserManager;
 import com.bjtu.julie.MyApplication;
 import com.bjtu.julie.R;
@@ -117,9 +116,10 @@ public class SettingFragment extends Fragment {
     private String userpicstring = "haha";
 
     private String name;
-    private List<UserInfo> userinfoList = new ArrayList<>();
-    private UserInfo userinfo = new UserInfo(null, null, null, null, null);
-    //final MyApplication us = (MyApplication) getActivity().getApplication();
+//    private List<UserInfo> userinfoList = new ArrayList<>();
+//    private UserInfo userinfo = new UserInfo(null, null, null, null, null);
+//    //final MyApplication us = (MyApplication) getActivity().getApplication();
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -130,16 +130,23 @@ public class SettingFragment extends Fragment {
         if (us.getStatus() == 1) {
             SharedPreferences sp = getContext().getSharedPreferences("userInfo", Context.MODE_PRIVATE);
             //name = sp.getString("name", "null");
-            user1TvPrename.setText(UserManager.getInstance().getUser().getNickname());
+            if (UserManager.getInstance().getUser().getNickname().equals("")) {
+                user1TvPrename.setText(UserManager.getInstance().getUser().getUsername());
+            } else {
+                user1TvPrename.setText(UserManager.getInstance().getUser().getNickname());
+            }
             llExit.setVisibility(View.VISIBLE);
-            ImageOptions imageOptions = new ImageOptions.Builder()
-                    .setIgnoreGif(false)//是否忽略gif图。false表示不忽略。不写这句，默认是true
-                    .setImageScaleType(ImageView.ScaleType.CENTER_CROP)
-                    .setFailureDrawableId(R.mipmap.load_error)
-                    .setLoadingDrawableId(R.mipmap.loading)
-                    .setCircular(true)
-                    .build();
-            x.image().bind(user1IvPrehead, UserManager.getInstance().getUser().getUserpicUrl(), imageOptions);
+            if (!UserManager.getInstance().getUser().getUserpicUrl().equals("")) {
+                ImageOptions imageOptions = new ImageOptions.Builder()
+                        .setIgnoreGif(false)//是否忽略gif图。false表示不忽略。不写这句，默认是true
+                        .setImageScaleType(ImageView.ScaleType.CENTER_CROP)
+                        .setFailureDrawableId(R.mipmap.load_error)
+                        .setLoadingDrawableId(R.mipmap.loading)
+                        .setCircular(true)
+                        .build();
+                x.image().bind(user1IvPrehead, UserManager.getInstance().getUser().getUserpicUrl(), imageOptions);
+
+            }
         }
 //              //下载图片URL
 //        String url = "http://39.107.225.80:8080//julieServer/ShowPicServlet";
@@ -435,23 +442,31 @@ public class SettingFragment extends Fragment {
                 BitmapFactory.Options options = new BitmapFactory.Options();
                 options.inSampleSize = 10;
                 Bitmap bitmap = BitmapFactory.decodeFile(imagePath, options);
-                user1IvPrehead.setImageBitmap(bitmap);
+                //user1IvPrehead.setImageBitmap(bitmap);
                 c.close();
                 //上传
                 userpicstring = bitmapToBase64(bitmap);
                 //连接
                 String url = "http://39.107.225.80:8080/julieServer/ChangePicServlet";
                 RequestParams params = new RequestParams(url);
-                params.addParameter("username", user1TvPrename.getText());
+                params.addParameter("username", UserManager.getInstance().getUser().getUsername());
                 params.addParameter("userpicstring", userpicstring);
                 x.http().get(params, new org.xutils.common.Callback.CommonCallback<String>() {
 
                     public void onSuccess(String result) {
+
                         try {
-                            if (!TextUtils.isEmpty(result)) {
-                                JSONObject jb = new JSONObject(result);
-                                Toast.makeText(x.app(), jb.getString("msg"), Toast.LENGTH_LONG).show();
-                            }
+                            JSONObject jb = new JSONObject(result);
+                            Toast.makeText(x.app(), jb.getString("msg"), Toast.LENGTH_LONG).show();
+                            ImageOptions imageOptions = new ImageOptions.Builder()
+                                    .setIgnoreGif(false)//是否忽略gif图。false表示不忽略。不写这句，默认是true
+                                    .setImageScaleType(ImageView.ScaleType.CENTER_CROP)
+                                    .setFailureDrawableId(R.mipmap.load_error)
+                                    .setLoadingDrawableId(R.mipmap.loading)
+                                    .setCircular(true)
+                                    .build();
+                            x.image().bind(user1IvPrehead, UserManager.getInstance().getUser().getUserpicUrl(), imageOptions);
+
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }

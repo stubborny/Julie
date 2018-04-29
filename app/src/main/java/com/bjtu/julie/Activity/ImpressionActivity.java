@@ -11,7 +11,6 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.bjtu.julie.Model.UserInfo;
 import com.bjtu.julie.R;
 import com.bjtu.julie.View.ShapeImageView;
 
@@ -43,8 +42,8 @@ public class ImpressionActivity extends AppCompatActivity {
     @BindView(R.id.change_all)
     LinearLayout changeAll;
     private String name;
-    private List<UserInfo> userinfoList=new ArrayList<>();
-    private UserInfo userinfo = new UserInfo(null,null,null,null,null);
+//    private List<UserInfo> userinfoList=new ArrayList<>();
+//    private UserInfo userinfo = new UserInfo(null,null,null,null,null);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

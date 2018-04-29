@@ -47,9 +47,9 @@ public class MessageFragment extends Fragment {
 
         final View messageLayout = inflater.inflate(R.layout.activity_message, container, false);
         unbinder = ButterKnife.bind(this, messageLayout);
-        titleBtnBack.setText("");
-        titleBtnOk.setText("");
         titleText.setText("消息");
+        titleBtnOk.setText("");
+        titleBtnBack.setText("");
         String url = "http://39.107.225.80:8080//julieServer/MessageServlet";
         RequestParams params = new RequestParams(url);
         //Toast.makeText(getActivity(),"you clicked button 1",Toast.LENGTH_SHORT).show();
@@ -66,8 +66,7 @@ public class MessageFragment extends Fragment {
                             // 遍历 jsonarray 数组，把每一个对象转成 json 对象
                             JSONObject job = messArray.getJSONObject(i);
 
-
-                            Exchange exchange = new Exchange(job.getString("messId"), job.getString("name"), job.getString("userpicUrl"), job.getString("phone"), job.getString("content"), job.getString("wechat"), job.getString("time"), messArray.length());
+                            Exchange exchange = new Exchange(job.getString("messId"), job.getString("name"), job.getString("userpicUrl"), job.getString("phone"), job.getString("content"), job.getString("wechat"), job.getString("time"), job.getString("commentNum"));
                             exchangeList.add(exchange);
                         }
                     }

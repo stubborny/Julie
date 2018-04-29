@@ -14,6 +14,7 @@ import com.bjtu.julie.Adapter.FootManAdaper;
 import com.bjtu.julie.FullyLinearLayoutManager;
 import com.bjtu.julie.Model.Order;
 import com.bjtu.julie.R;
+import com.jimi_wu.ptlrecyclerview.PullToRefresh.PullToRefreshRecyclerView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -37,7 +38,8 @@ public class FootManFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         final View orderLayout = inflater.inflate(R.layout.activity_foot_man, container, false);
-        //initGuide();
+        //initGuide()
+
         String url = "http://39.107.225.80:8080//julieServer/FootManServlet";
         RequestParams params = new RequestParams(url);
         x.http().get(params, new Callback.CommonCallback<String>() {
@@ -103,6 +105,11 @@ public class FootManFragment extends Fragment {
     public void onDestroyView() {
         super.onDestroyView();
         unbinder.unbind();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
     }
 
     @OnClick({R.id.push_order, R.id.push_message})

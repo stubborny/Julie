@@ -31,11 +31,11 @@
                     android:text="信息修改"
                     android:textColor="@color/white"
                     android:textSize="22sp" />
+
                 <Button
                     android:id="@+id/person_save"
                     android:layout_width="90dp"
                     android:layout_height="match_parent"
-                    android:layout_alignParentRight="true"
                     android:background="@color/theme"
                     android:drawablePadding="6dp"
                     android:ellipsize="end"
@@ -46,7 +46,10 @@
                     android:text="保存"
                     android:textColor="@color/white"
                     android:textSize="18sp"
-                    android:visibility="visible" />
+                    android:visibility="visible"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentEnd="true" />
 
             </RelativeLayout>
 
@@ -73,10 +76,6 @@
                     android:textStyle="bold" />
 
 
-
-
-
-
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="30dp"
@@ -100,6 +99,7 @@
                         android:textSize="14sp" />
 
                 </LinearLayout>
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -156,6 +156,8 @@
                         android:layout_width="200dp"
                         android:layout_height="match_parent"
                         android:background="@drawable/bg_edittext_selector"
+                        android:focusable="true"
+                        android:focusableInTouchMode="true"
                         android:gravity="left|center"
 
                         android:textColor="@color/black"
@@ -200,13 +202,13 @@
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="80dp"
                     android:gravity="center">
 
                     <TextView
                         android:layout_width="110dp"
                         android:layout_height="match_parent"
-                        android:gravity="right|center"
+                        android:gravity="right"
                         android:text="个人简介："
                         android:textColor="@color/darkslategrey"
                         android:textSize="16sp" />
@@ -214,9 +216,9 @@
                     <EditText
                         android:id="@+id/tv_userInfo_introduction"
                         android:layout_width="200dp"
-                        android:layout_height="wrap_content"
+                        android:layout_height="match_parent"
+                        android:gravity="start"
                         android:background="@drawable/bg_edittext_selector"
-                        android:gravity="left|center"
                         android:textColor="@color/black"
                         android:textSize="14sp" />
 

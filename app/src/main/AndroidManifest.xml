@@ -77,7 +77,6 @@
             android:name=".Activity.P_MessageActivity"
             android:label="@string/title_activity_p__message"
             android:theme="@style/AppTheme" />
-        <activity android:name=".Activity.MessageActivity" />
 
         <service
             android:name=".Service.PollingService"
@@ -100,6 +99,11 @@
         <activity android:name=".Activity.RecieveActivity" />
         <activity android:name=".Activity.UserInfoActivity" />
         <activity android:name=".Activity.WalletActivity" />
+        <activity android:name=".Activity.FeedBackActivity" />
+        <activity android:name=".Activity.ImpressionActivity" />
+        <activity android:name=".Activity.QuestionActivity" />
+        <activity android:name=".Activity.TicketActivity"></activity>
+
     </application>
 
 </manifest>

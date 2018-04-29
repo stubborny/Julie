@@ -6,6 +6,7 @@ import android.text.method.ScrollingMovementMethod;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -55,12 +56,21 @@ public class MessageDetailActivity extends AppCompatActivity {
     Button commentBtn;
 
     Exchange exchange;
+
     @BindView(R.id.title_btn_back)
     TextView titleBtnBack;
     @BindView(R.id.title_text)
     TextView titleText;
     @BindView(R.id.title_btn_ok)
     TextView titleBtnOk;
+    @BindView(R.id.view)
+    View view;
+    @BindView(R.id.view2)
+    View view2;
+    @BindView(R.id.view3)
+    View view3;
+    @BindView(R.id.expression_Btn)
+    ImageButton expressionBtn;
     private List<Comment> commList = new ArrayList<>();
 
     @Override
@@ -69,9 +79,10 @@ public class MessageDetailActivity extends AppCompatActivity {
         setContentView(R.layout.activity_message_detail);
         //初始化评论信息
         //initMessCommInfo();
+        ButterKnife.bind(this);
+
         titleBtnOk.setText("");
         titleText.setText("详情");
-        ButterKnife.bind(this);
         messDetailContent.setMovementMethod(ScrollingMovementMethod.getInstance());
         exchange = (Exchange) getIntent().getSerializableExtra("exchange");
 
@@ -158,11 +169,14 @@ public class MessageDetailActivity extends AppCompatActivity {
 
     }
 
-    @OnClick({R.id.MessDetailBack_btn, R.id.comment_btn})
+    @OnClick({R.id.comment_btn})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.comment_btn:
-
+                if (!UserManager.getInstance().isLogined()) {
+                    Toast.makeText(getApplicationContext(), "还没登陆哦", Toast.LENGTH_SHORT).show();
+                    return;
+                }
                 String input = messCommentEditText.getText().toString();
                 if (input.equals("")) {
                     Toast.makeText(getApplicationContext(), "还没输入哦", Toast.LENGTH_LONG).show();
@@ -206,9 +220,6 @@ public class MessageDetailActivity extends AppCompatActivity {
                 });
 
 
-                break;
-            case R.id.MessDetailBack_btn:
-                finish();
                 break;
         }
     }
