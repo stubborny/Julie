@@ -45,12 +45,6 @@ public class MessageDetailActivity extends AppCompatActivity {
     TextView messDetailTextTime;
     @BindView(R.id.foootContent)
     TextView messDetailContent;
-    @BindView(R.id.editText)
-    EditText messCommentEditText;
-    @BindView(R.id.textView2)
-    TextView textViewShowComment;
-    @BindView(R.id.textView)
-    TextView textViewLike;
     @BindView(R.id.messCommList)
     ListView footDetailCommentList;
     @BindView(R.id.comment_btn)
@@ -63,14 +57,6 @@ public class MessageDetailActivity extends AppCompatActivity {
     TextView titleText;
     @BindView(R.id.title_btn_ok)
     TextView titleBtnOk;
-    @BindView(R.id.view)
-    View view;
-    @BindView(R.id.view2)
-    View view2;
-    @BindView(R.id.view3)
-    View view3;
-    @BindView(R.id.expression_Btn)
-    ImageButton expressionBtn;
     private List<Comment> commList = new ArrayList<>();
 
     @Override
@@ -169,40 +155,10 @@ public class MessageDetailActivity extends AppCompatActivity {
 
     }
 
-    @OnClick({R.id.title_btn_back, R.id.comment_btn})
+    @OnClick({ R.id.comment_btn})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.comment_btn:
-                if (!UserManager.getInstance().isLogined()) {
-                    Toast.makeText(getApplicationContext(), "还没登陆哦", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-                String input = messCommentEditText.getText().toString();
-                if (input.equals("")) {
-                    Toast.makeText(getApplicationContext(), "还没输入哦", Toast.LENGTH_LONG).show();
-                    return;
-                }
-                String url = "http://39.107.225.80:8080/julieServer/PubMessCommentServlet";
-                RequestParams params = new RequestParams(url);
-                params.addParameter("userId", UserManager.getInstance().getUser().getId());
-                params.addParameter("messId", exchange.getMessId());
-                params.addParameter("comment", input);
-                x.http().get(params, new Callback.CommonCallback<String>() {
-                    public void onSuccess(String result) {
-                        try {
-                            JSONObject jb = new JSONObject(result);
-                            //Log.i("AAA", String.valueOf(jb.getInt("code"))+jb.getString("msg"));
-                            if (jb.getInt("code") == 1) {
-                                Toast.makeText(x.app(), jb.getString("msg"), Toast.LENGTH_LONG).show();
-                                messCommentEditText.setText("");
-                            } else {
-                                Toast.makeText(x.app(), jb.getString("msg"), Toast.LENGTH_LONG).show();
-                            }
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                    }
-
                 if (!UserManager.getInstance().isLogined()) {
                     Toast.makeText(getApplicationContext(), "还没登陆哦", Toast.LENGTH_SHORT).show();
                     return;
@@ -243,30 +199,26 @@ public class MessageDetailActivity extends AppCompatActivity {
                                 }
                             }
 
-                    //请求异常后的回调方法
-                    @Override
-                    public void onError(Throwable ex, boolean isOnCallback) {
-                    }
+                            //请求异常后的回调方法
+                            @Override
+                            public void onError(Throwable ex, boolean isOnCallback) {
+                            }
 
-                    //主动调用取消请求的回调方法
-                    @Override
-                    public void onCancelled(CancelledException cex) {
-                    }
+                            //主动调用取消请求的回调方法
+                            @Override
+                            public void onCancelled(CancelledException cex) {
+                            }
 
-                    @Override
-                    public void onFinished() {
+                            @Override
+                            public void onFinished() {
 
                             }
                         });
                     }
                 });
-
-
-                break;
-            case R.id.title_btn_back://MessDetailBack_btn
-                finish();
                 break;
         }
     }
 }
+
 

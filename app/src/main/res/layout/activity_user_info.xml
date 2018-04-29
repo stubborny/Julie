@@ -82,7 +82,6 @@
                     android:gravity="center">
 
                     <TextView
-                        android:id="@+id/textView"
                         android:layout_width="110dp"
                         android:layout_height="match_parent"
                         android:gravity="right|center"

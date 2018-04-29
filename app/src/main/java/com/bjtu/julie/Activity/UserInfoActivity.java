@@ -37,8 +37,7 @@ import static com.bjtu.julie.R.id.tv_userInfo_id;
 
 
 public class UserInfoActivity extends Activity {
-    @BindView(R.id.textView)
-    TextView textView;
+
     //声明变量
     @BindView(R.id.person_title)
     TextView personTitle;
