@@ -1,9 +1,11 @@
 package com.bjtu.julie.Activity;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.RecyclerView;
 import android.text.method.ScrollingMovementMethod;
 import android.view.View;
 import android.widget.Button;
@@ -16,7 +18,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bjtu.julie.Adapter.CommentAdapter;
+import com.bjtu.julie.Adapter.MyFootManAdapter;
 import com.bjtu.julie.Fragment.ContactDialogFragment;
+import com.bjtu.julie.FullyLinearLayoutManager;
 import com.bjtu.julie.Model.Comment;
 import com.bjtu.julie.Model.Order;
 import com.bjtu.julie.Model.UserManager;
@@ -76,6 +80,12 @@ public class FootDetailOwnerActivity extends AppCompatActivity {
     RelativeLayout footDetailLayoutReceivePhone;
     @BindView(R.id.title_text)
     TextView titleText;
+    @BindView(R.id.foot_detail_text_phone)
+    TextView footDetailTextPhone;
+    @BindView(R.id.linearLayout)
+    LinearLayout linearLayout;
+    @BindView(R.id.foot_detail_view)
+    View footDetailView;
     @BindView(R.id.title_btn_ok)
     TextView titleBtnOk;
     private List<Comment> commList = new ArrayList<>();
@@ -90,6 +100,9 @@ public class FootDetailOwnerActivity extends AppCompatActivity {
         titleBtnOk.setText("");
         footDetailTextContent.setMovementMethod(ScrollingMovementMethod.getInstance());
         order = (Order) getIntent().getSerializableExtra("order");
+        if (order.getState().equals("1")) {
+            titleBtnOk.setText("删除");
+        }
         ImageOptions imageOptions = new ImageOptions.Builder()
                 .setIgnoreGif(false)//是否忽略gif图。false表示不忽略。不写这句，默认是true
                 .setImageScaleType(ImageView.ScaleType.CENTER_CROP)
@@ -183,7 +196,7 @@ public class FootDetailOwnerActivity extends AppCompatActivity {
 
     }
 
-    @OnClick({R.id.foot_detail_btn_receive, R.id.foot_detail_btn_comment})
+    @OnClick({R.id.foot_detail_btn_receive, R.id.foot_detail_btn_comment,R.id.title_btn_ok})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.foot_detail_btn_receive:
@@ -299,8 +312,66 @@ public class FootDetailOwnerActivity extends AppCompatActivity {
                 });
                 break;
 
+            case R.id.title_btn_ok:
+               // String footId = order.getFootId();//把单号发送给服务器
+                //Toast.makeText(this, footId, Toast.LENGTH_SHORT).show();
+
+                AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                builder.setMessage("确定删除吗? ");
+
+                builder.setPositiveButton("确定",new DialogInterface.OnClickListener(){
+                    @Override
+                    public void onClick(DialogInterface dialog, int which){
+                        String url = "http://39.107.225.80:8080//julieServer/DeleMyOrderServlet";
+
+                        RequestParams params = new RequestParams(url);
+                        params.addParameter("footId", order.getFootId());
+
+                        x.http().get(params, new Callback.CommonCallback<String>() {
+
+                            public void onSuccess(String result) {
+                                try {
+                                    JSONObject jb = new JSONObject(result);
+                                    Toast.makeText(x.app(), jb.getString("msg"), Toast.LENGTH_LONG).show();
+                                    finish();
+                                    //Log.i("AAA", String.valueOf(jb.getInt("code"))+jb.getString("msg"));
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+
+                            }
+
+                            //请求异常后的回调方法
+                            @Override
+                            public void onError(Throwable ex, boolean isOnCallback) {
+                            }
+
+                            //主动调用取消请求的回调方法
+                            @Override
+                            public void onCancelled(CancelledException cex) {
+                            }
+
+                            @Override
+                            public void onFinished() {
+
+                            }
+                        });
+                    }
+                }).setNegativeButton("取消", new DialogInterface.OnClickListener(){
+                    @Override
+                    public void onClick(DialogInterface dialog, int which){
+                        return ;
+                    }
+                }).show();
+
+
+
+                break;
+
         }
     }
+
+
 
     @OnClick(R.id.foot_detail_text_receive_phone)
     public void onViewClicked() {
@@ -357,4 +428,6 @@ public class FootDetailOwnerActivity extends AppCompatActivity {
             }
         });
     }
+
+
 }

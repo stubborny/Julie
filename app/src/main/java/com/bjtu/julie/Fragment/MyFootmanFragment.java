@@ -1,18 +1,19 @@
-package com.bjtu.julie.Activity;
+package com.bjtu.julie.Fragment;
+
 
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.ListView;
-import android.widget.Toast;
+import android.view.ViewGroup;
 
+import com.bjtu.julie.Activity.RecieveActivity;
+import com.bjtu.julie.Adapter.FootManAdaper;
 import com.bjtu.julie.Adapter.MyFootManAdapter;
 import com.bjtu.julie.FullyLinearLayoutManager;
-import com.bjtu.julie.MainActivity;
 import com.bjtu.julie.Model.Order;
 import com.bjtu.julie.Model.UserManager;
 import com.bjtu.julie.R;
@@ -30,23 +31,28 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import butterknife.Unbinder;
 
-public class RecieveActivity extends AppCompatActivity {
+/**
+ * A simple {@link Fragment} subclass.
+ */
+public class MyFootmanFragment extends Fragment {
     public List<Order> myorderlist = new ArrayList<>();
+    @BindView(R.id.my_recycle_footman_item)
+    RecyclerView myRecycleFootmanItem;
+    Unbinder unbinder;
 
-    @BindView(R.id.my_recycle_rec_footman_item)
-    RecyclerView myRecycleRecFootmanItem;
+    public MyFootmanFragment() {
+        // Required empty public constructor
+    }
+
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_recieve);
-        ButterKnife.bind(this);
-
-
-        //  final View orderLayout = inflater.inflate(R.layout.fragment_my_footman, container, false);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        final View orderLayout = inflater.inflate(R.layout.fragment_my_footman, container, false);
         //initGuide();
-        String url = "http://39.107.225.80:8080//julieServer/MyRecFootManServlet";
+        String url = "http://39.107.225.80:8080//julieServer/MyFootManServlet";
 
         RequestParams params = new RequestParams(url);
         params.addParameter("userid", UserManager.getInstance().getUser().getId());
@@ -68,8 +74,8 @@ public class RecieveActivity extends AppCompatActivity {
                     }
                     //Log.i("AAA", String.valueOf(jb.getInt("code"))+jb.getString("msg"));
                     //Toast.makeText(x.app(), jb.getString("msg"), Toast.LENGTH_LONG).show();
-                    RecyclerView recyclerView = (RecyclerView)findViewById(R.id.my_recycle_rec_footman_item);
-                    FullyLinearLayoutManager layoutManager = new FullyLinearLayoutManager(RecieveActivity.this);
+                    RecyclerView recyclerView = (RecyclerView) orderLayout.findViewById(R.id.my_recycle_footman_item);
+                    FullyLinearLayoutManager layoutManager = new FullyLinearLayoutManager(getActivity());
 
                     recyclerView.setLayoutManager(layoutManager);
                     recyclerView.setNestedScrollingEnabled(false);
@@ -100,12 +106,18 @@ public class RecieveActivity extends AppCompatActivity {
             }
         });
 
+
+           unbinder = ButterKnife.bind(this, orderLayout);
+        return orderLayout;
     }
 
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        unbinder.unbind();
+    }
 
-
-    @OnClick(R.id.my_recycle_rec_footman_item)
+    @OnClick(R.id.my_recycle_footman_item)
     public void onViewClicked() {
     }
-
 }

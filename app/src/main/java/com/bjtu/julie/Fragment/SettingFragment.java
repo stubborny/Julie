@@ -43,7 +43,6 @@ import com.bjtu.julie.Adapter.MessageAdaper;
 import com.bjtu.julie.FullyLinearLayoutManager;
 import com.bjtu.julie.MainActivity;
 import com.bjtu.julie.Model.Exchange;
-import com.bjtu.julie.Model.UserInfo;
 import com.bjtu.julie.Model.UserManager;
 import com.bjtu.julie.MyApplication;
 import com.bjtu.julie.R;
@@ -60,6 +59,7 @@ import org.xutils.x;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -113,13 +113,14 @@ public class SettingFragment extends Fragment {
     ImageView imageView6;
     @BindView(R.id.ll_exit)
     LinearLayout llExit;
-    private String picUrl = null;
     private String userpicstring = "haha";
 
     private String name;
-    private List<UserInfo> userinfoList = new ArrayList<>();
-    private UserInfo userinfo = new UserInfo(null, null, null, null, null);
-    //final MyApplication us = (MyApplication) getActivity().getApplication();
+//    private List<UserInfo> userinfoList = new ArrayList<>();
+//    private UserInfo userinfo = new UserInfo(null, null, null, null, null);
+//    //final MyApplication us = (MyApplication) getActivity().getApplication();
+
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -130,59 +131,24 @@ public class SettingFragment extends Fragment {
         if (us.getStatus() == 1) {
             SharedPreferences sp = getContext().getSharedPreferences("userInfo", Context.MODE_PRIVATE);
             //name = sp.getString("name", "null");
-            user1TvPrename.setText(UserManager.getInstance().getUser().getNickname());
+            if(UserManager.getInstance().getUser().getNickname().equals("")){
+                user1TvPrename.setText(UserManager.getInstance().getUser().getUsername());
+            }else{
+                user1TvPrename.setText(UserManager.getInstance().getUser().getNickname());
+            }
             llExit.setVisibility(View.VISIBLE);
-            ImageOptions imageOptions = new ImageOptions.Builder()
-                    .setIgnoreGif(false)//是否忽略gif图。false表示不忽略。不写这句，默认是true
-                    .setImageScaleType(ImageView.ScaleType.CENTER_CROP)
-                    .setFailureDrawableId(R.mipmap.load_error)
-                    .setLoadingDrawableId(R.mipmap.loading)
-                    .setCircular(true)
-                    .build();
-            x.image().bind(user1IvPrehead, UserManager.getInstance().getUser().getUserpicUrl(), imageOptions);
+            if (!UserManager.getInstance().getUser().getUserpicUrl().equals("")) {
+                ImageOptions imageOptions = new ImageOptions.Builder()
+                        .setIgnoreGif(false)//是否忽略gif图。false表示不忽略。不写这句，默认是true
+                        .setImageScaleType(ImageView.ScaleType.CENTER_CROP)
+                        .setFailureDrawableId(R.mipmap.load_error)
+                        .setLoadingDrawableId(R.mipmap.loading)
+                        .setCircular(true)
+                        .build();
+                x.image().bind(user1IvPrehead, UserManager.getInstance().getUser().getUserpicUrl(), imageOptions);
+
+            }
         }
-//              //下载图片URL
-//        String url = "http://39.107.225.80:8080//julieServer/ShowPicServlet";
-//        RequestParams params = new RequestParams(name);
-//        //Toast.makeText(getActivity(),"you clicked button 1",Toast.LENGTH_SHORT).show();
-//        x.http().get(params, new Callback.CommonCallback<String>() {
-//            @Override
-//            public void onSuccess(String result) {
-//                try {
-//                    JSONObject jb = new JSONObject(result);
-//                    picUrl = String.valueOf(jb.getString("picUrl"));
-//
-//                    //Log.i("AAA", String.valueOf(jb.getInt("code"))+jb.getString("msg"));
-//                    Toast.makeText(x.app(), jb.getString("msg"), Toast.LENGTH_LONG).show();
-//
-//                } catch (JSONException e) {
-//                    e.printStackTrace();
-//
-//                }
-//
-//            }
-//
-//            //请求异常后的回调方法
-//            @Override
-//            public void onError(Throwable ex, boolean isOnCallback) {
-//                //Toast.makeText(getActivity(),"you clicked button 1",Toast.LENGTH_SHORT).show();
-//            }
-//
-//            //主动调用取消请求的回调方法
-//            @Override
-//            public void onCancelled(CancelledException cex) {
-//                //Toast.makeText(getActivity(),"you clicked button 1",Toast.LENGTH_SHORT).show();
-//            }
-//
-//            @Override
-//            public void onFinished() {
-//                //Toast.makeText(getActivity(),"you clicked button 1",Toast.LENGTH_SHORT).show();
-//            }
-//        });
-//
-//        if (picUrl != null) {
-//            user1IvPrehead.setImageBitmap(getImage(picUrl));
-//        }
         return settingLayout;
     }
 
@@ -264,8 +230,6 @@ public class SettingFragment extends Fragment {
         if (us.getStatus() == 0) {
             Toast.makeText(getContext(), "请先登录", Toast.LENGTH_SHORT).show();
         } else {
-            Intent intent = new Intent(getContext(), ImpressionActivity.class);
-            startActivity(intent);
         }
     }
 
@@ -275,8 +239,7 @@ public class SettingFragment extends Fragment {
         if (us.getStatus() == 0) {
             Toast.makeText(getContext(), "请先登录", Toast.LENGTH_SHORT).show();
         } else {
-            Intent intent = new Intent(getContext(), WalletActivity.class);
-            startActivity(intent);
+            Toast.makeText(getContext(), "已经登录", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -291,8 +254,7 @@ public class SettingFragment extends Fragment {
         if (us.getStatus() == 0) {
             Toast.makeText(getContext(), "请先登录", Toast.LENGTH_SHORT).show();
         } else {
-            Intent intent = new Intent(getContext(), TicketActivity.class);
-            startActivity(intent);
+            Toast.makeText(getContext(), "已经登录", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -302,8 +264,7 @@ public class SettingFragment extends Fragment {
         if (us.getStatus() == 0) {
             Toast.makeText(getContext(), "请先登录", Toast.LENGTH_SHORT).show();
         } else {
-            Intent intent = new Intent(getContext(), QuestionActivity.class);
-            startActivity(intent);
+            Toast.makeText(getContext(), "已经登录", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -324,9 +285,7 @@ public class SettingFragment extends Fragment {
         if (us.getStatus() == 0) {
             Toast.makeText(getContext(), "请先登录", Toast.LENGTH_SHORT).show();
         } else {
-
-            Intent intent = new Intent(getContext(), FeedBackActivity.class);
-            startActivity(intent);
+            Toast.makeText(getContext(), "已经登录", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -423,39 +382,29 @@ public class SettingFragment extends Fragment {
                         e.printStackTrace();
                     }
                 }
-                user1IvPrehead.setImageBitmap(bitmap);
-            } else if (requestCode == 2) {
-                Uri selectedImage = data.getData();
-                String[] filePathColumns = {MediaStore.Images.Media.DATA};
-                Cursor c = getActivity().getContentResolver().query(selectedImage, filePathColumns, null, null, null);
-                c.moveToFirst();
-                int columnIndex = c.getColumnIndex(filePathColumns[0]);
-                String imagePath = c.getString(columnIndex);
+
                 //图片太大无法加载的解决办法，压缩
                 BitmapFactory.Options options = new BitmapFactory.Options();
-                options.inSampleSize = 10;
-                Bitmap bitmap = BitmapFactory.decodeFile(imagePath, options);
-                user1IvPrehead.setImageBitmap(bitmap);
-                c.close();
+                options.inSampleSize = 6;
+                bitmap = BitmapFactory.decodeFile(fileName, options);
+
                 //上传
                 userpicstring = bitmapToBase64(bitmap);
+                String username = UserManager.getInstance().getUser().getUsername();
                 //连接
                 String url = "http://39.107.225.80:8080/julieServer/ChangePicServlet";
                 RequestParams params = new RequestParams(url);
-                params.addParameter("username", user1TvPrename.getText());
+                params.addParameter("username",username);
                 params.addParameter("userpicstring", userpicstring);
                 x.http().get(params, new org.xutils.common.Callback.CommonCallback<String>() {
-
                     public void onSuccess(String result) {
                         try {
-                            if (!TextUtils.isEmpty(result)) {
-                                JSONObject jb = new JSONObject(result);
-                                Toast.makeText(x.app(), jb.getString("msg"), Toast.LENGTH_LONG).show();
-                            }
+                            JSONObject jb = new JSONObject(result);
+                            //Log.i("AAA", String.valueOf(jb.getInt("code"))+jb.getString("msg"));
+                            Toast.makeText(x.app(), jb.getString("msg"), Toast.LENGTH_LONG).show();
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
-
                     }
 
                     //请求异常后的回调方法
@@ -473,9 +422,89 @@ public class SettingFragment extends Fragment {
 
                     }
                 });
+                UserManager.getInstance().getUser().setUserpicUrl(userpicstring);
+                if (!UserManager.getInstance().getUser().getUserpicUrl().equals("")) {
+                    ImageOptions imageOptions = new ImageOptions.Builder()
+                            .setIgnoreGif(false)//是否忽略gif图。false表示不忽略。不写这句，默认是true
+                            .setImageScaleType(ImageView.ScaleType.CENTER_CROP)
+                            .setFailureDrawableId(R.mipmap.load_error)
+                            .setLoadingDrawableId(R.mipmap.loading)
+                            .setCircular(true)
+                            .build();
+                    x.image().bind(user1IvPrehead, UserManager.getInstance().getUser().getUserpicUrl(), imageOptions);
+
+                }
+            } else if (requestCode == 2) {
+                Uri selectedImage = data.getData();
+                String[] filePathColumns = {MediaStore.Images.Media.DATA};
+                Cursor c = getActivity().getContentResolver().query(selectedImage, filePathColumns, null, null, null);
+                c.moveToFirst();
+                int columnIndex = c.getColumnIndex(filePathColumns[0]);
+                String imagePath = c.getString(columnIndex);
+                //图片太大无法加载的解决办法，压缩
+                BitmapFactory.Options options = new BitmapFactory.Options();
+                options.inSampleSize = 10;
+                Bitmap bitmap = BitmapFactory.decodeFile(imagePath, options);
+                //  user1IvPrehead.setImageBitmap(bitmap);
+                //   c.close();
+                //上传
+                userpicstring = bitmapToBase64(bitmap);
+
+
+
+                String username = UserManager.getInstance().getUser().getUsername();
+                //连接
+                String url = "http://39.107.225.80:8080/julieServer/ChangePicServlet";
+                RequestParams params = new RequestParams(url);
+                params.addParameter("username",username);
+                params.addParameter("userpicstring", userpicstring);
+                x.http().get(params, new org.xutils.common.Callback.CommonCallback<String>() {
+                    public void onSuccess(String result) {
+                        try {
+                            JSONObject jb = new JSONObject(result);
+                            //Log.i("AAA", String.valueOf(jb.getInt("code"))+jb.getString("msg"));
+                            Toast.makeText(x.app(), jb.getString("msg"), Toast.LENGTH_LONG).show();
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+
+                    //请求异常后的回调方法
+                    @Override
+                    public void onError(Throwable ex, boolean isOnCallback) {
+                    }
+
+                    //主动调用取消请求的回调方法
+                    @Override
+                    public void onCancelled(CancelledException cex) {
+                    }
+
+                    @Override
+                    public void onFinished() {
+
+                    }
+                });
+
+                UserManager.getInstance().getUser().setUserpicUrl(userpicstring);
+                if (!UserManager.getInstance().getUser().getUserpicUrl().equals("")) {
+                    ImageOptions imageOptions = new ImageOptions.Builder()
+                            .setIgnoreGif(false)//是否忽略gif图。false表示不忽略。不写这句，默认是true
+                            .setImageScaleType(ImageView.ScaleType.CENTER_CROP)
+                            .setFailureDrawableId(R.mipmap.load_error)
+                            .setLoadingDrawableId(R.mipmap.loading)
+                            .setCircular(true)
+                            .build();
+                    x.image().bind(user1IvPrehead, UserManager.getInstance().getUser().getUserpicUrl(), imageOptions);
+
+                }
+
             }
         }
     }
+
+
+
+
 
     public static String bitmapToBase64(Bitmap bitmap) {
         String result = null;
@@ -503,24 +532,5 @@ public class SettingFragment extends Fragment {
         }
         return result;
     }
-
-    public static Bitmap getImage(String path) {
-        try {
-            HttpURLConnection conn = (HttpURLConnection) new URL(path).openConnection();
-            conn.setConnectTimeout(5000);
-            conn.setRequestMethod("GET");
-            System.out.println("tdw1");
-            if (conn.getResponseCode() == 200) {
-                InputStream inputStream = conn.getInputStream();
-                Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
-                return bitmap;
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
-
-
 }
 
