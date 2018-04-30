@@ -7,24 +7,22 @@
     android:baselineAligned="false">
 
     <ImageView
-        android:id="@+id/blank11"
         android:layout_width="10dp"
-        android:layout_height="48dp" />
+        android:layout_height="18dp" />
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center">
+        android:layout_height="60dp"
+        android:gravity="left"
+        android:orientation="horizontal">
 
-
-
+        <TextView
+            android:layout_width="25dp"
+            android:layout_height="match_parent" />
         <ImageView
-            android:id="@+id/logo"
-            android:layout_width="wrap_content"
-            android:layout_height="240dp"
-            android:layout_weight="1"
-            android:scaleType="fitCenter"
-            android:src="@mipmap/logo" />
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:src="@mipmap/logo11" />
     </LinearLayout>
 
     <LinearLayout
@@ -34,9 +32,8 @@
         android:orientation="vertical">
 
         <ImageView
-            android:id="@+id/blank1"
             android:layout_width="10dp"
-            android:layout_height="20dp" />
+            android:layout_height="10dp" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -53,11 +50,10 @@
                 android:inputType="phone"
                 android:maxLength="11"
                 android:textColor="@color/darkslategrey"
-                android:textSize="16dp" />
+                android:textSize="14dp" />
         </LinearLayout>
 
         <ImageView
-            android:id="@+id/blank4"
             android:layout_width="10dp"
             android:layout_height="10dp" />
 
@@ -82,10 +78,9 @@
                 android:background="@drawable/shape_white"
                 android:hint="验证码"
                 android:textColor="@color/darkslategrey"
-                android:textSize="16dp" />
+                android:textSize="14dp" />
 
             <ImageView
-                android:id="@+id/blank6"
                 android:layout_width="20dp"
                 android:layout_height="10dp" />
 
@@ -96,12 +91,12 @@
                 android:alpha="0.95"
                 android:background="@drawable/shape_white"
                 android:text="发送验证码"
+                android:textSize="14sp"
                 android:textColor="@color/darkslategrey" />
 
         </LinearLayout>
 
         <ImageView
-            android:id="@+id/beautifulBlank"
             android:layout_width="10dp"
             android:layout_height="10dp" />
 
@@ -120,7 +115,7 @@
                 android:inputType="textPassword"
                 android:background="@drawable/shape_white"
                 android:textColor="@color/darkslategrey"
-                android:textSize="15sp"
+                android:textSize="14sp"
                 android:maxLength="16"
                 android:hint="新密码"/>
 
@@ -132,7 +127,6 @@
             android:layout_height="wrap_content" />
 
         <ImageView
-            android:id="@+id/beautifulBlank1"
             android:layout_width="10dp"
             android:layout_height="10dp" />
 
@@ -145,10 +139,9 @@
             android:background="@drawable/shape_white"
             android:text="重 设 密 码"
             android:textColor="@color/darkslategrey"
-            android:textSize="17dp" />
+            android:textSize="15dp" />
 
         <ImageView
-            android:id="@+id/blank3"
             android:layout_width="30dp"
             android:layout_height="50dp" />
 

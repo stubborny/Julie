@@ -58,7 +58,7 @@
                     android:layout_height="25dp"
                     android:text="登录/注册"
                     android:textColor="@color/whitesmoke"
-                    android:textSize="19sp" />
+                    android:textSize="17sp" />
                 <!--android:textStyle="italic|bold"斜体-->
 
                 <TextView
@@ -88,7 +88,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:layout_weight="1"
-                    android:gravity="center"
+                    android:gravity="center|top"
+                    android:textSize="11sp"
                     android:textColor="@color/dimgrey"
                     android:text="我的发布"/>
             </LinearLayout>
@@ -112,7 +113,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:layout_weight="1"
-                    android:gravity="center"
+                    android:gravity="center|top"
+                    android:textSize="11sp"
                     android:textColor="@color/dimgrey"
                     android:text="我的抢单"/>
             </LinearLayout>
@@ -133,7 +135,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:layout_weight="1"
-                    android:gravity="center"
+                    android:gravity="center|top"
+                    android:textSize="11sp"
                     android:textColor="@color/dimgrey"
                     android:text="个人印象"/>
             </LinearLayout>
@@ -157,7 +160,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:layout_weight="1"
-                    android:gravity="center"
+                    android:gravity="center|top"
+                    android:textSize="11sp"
                     android:textColor="@color/dimgrey"
                     android:text="我的钱包"/>
             </LinearLayout>
@@ -198,7 +202,7 @@
                     android:layout_weight="4"
                     android:gravity="left|center"
                     android:text="领抵用券"
-                    android:textSize="19dp"
+                    android:textSize="13dp"
                     android:textColor="@color/dimgrey"/>
                 <ImageView
                     android:layout_width="0dp"
@@ -241,7 +245,7 @@
                     android:layout_weight="4"
                     android:gravity="left|center"
                     android:text="常见问题"
-                    android:textSize="19dp"
+                    android:textSize="13dp"
                     android:textColor="@color/dimgrey"/>
                 <ImageView
                     android:layout_width="0dp"
@@ -280,8 +284,48 @@
                     android:layout_height="match_parent"
                     android:layout_weight="4"
                     android:gravity="left|center"
-                    android:text="设置"
-                    android:textSize="19dp"
+                    android:text="修改资料"
+                    android:textSize="13dp"
+                    android:textColor="@color/dimgrey"/>
+                <ImageView
+                    android:layout_width="0dp"
+                    android:layout_weight="2"
+                    android:layout_height="20dp"
+                    android:layout_gravity="center"/>
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content" />
+
+            </LinearLayout>
+
+            <!--  身份认证  -->
+            <LinearLayout
+                android:id="@+id/ll_checking"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_weight="0.5"
+                    android:layout_height="wrap_content" />
+
+                <ImageView
+                    android:id="@+id/imageView7"
+                    android:layout_width="0dp"
+                    android:layout_height="40dp"
+                    android:layout_gravity="center"
+                    android:layout_weight="2"
+                    android:src="@mipmap/ic_action_eye_open" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="4"
+                    android:gravity="left|center"
+                    android:text="身份认证"
+                    android:textSize="13dp"
                     android:textColor="@color/dimgrey"/>
                 <ImageView
                     android:layout_width="0dp"
@@ -320,7 +364,7 @@
                     android:layout_weight="4"
                     android:gravity="left|center"
                     android:text="反馈"
-                    android:textSize="19dp"
+                    android:textSize="13dp"
                     android:textColor="@color/dimgrey"/>
                 <ImageView
                     android:layout_width="0dp"
@@ -358,7 +402,7 @@
                     android:layout_weight="4"
                     android:gravity="left|center"
                     android:text="更新"
-                    android:textSize="19dp"
+                    android:textSize="13dp"
                     android:textColor="@color/dimgrey"/>
                 <ImageView
                     android:layout_width="0dp"
@@ -377,7 +421,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:orientation="horizontal"
-                android:visibility="invisible">
+                android:visibility="visible">
 
                 <TextView
                     android:layout_width="0dp"
@@ -389,15 +433,15 @@
                     android:layout_weight="2"
                     android:layout_height="40dp"
                     android:layout_gravity="center"
-                    android:src="@mipmap/ic_action_info"/>
+                    android:src="@mipmap/ic_action_io"/>
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="4"
                     android:gravity="left|center"
                     android:text="注销"
-                    android:textSize="19dp"
-                    android:textColor="@color/dimgrey"/>
+                    android:textSize="13dp"
+                    android:textColor="@color/saddlebrown"/>
                 <ImageView
                     android:layout_width="0dp"
                     android:layout_weight="2"

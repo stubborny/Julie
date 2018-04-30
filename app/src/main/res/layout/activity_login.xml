@@ -3,29 +3,32 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:gravity="center"
+
     android:background="@mipmap/bg_start"
     android:baselineAligned="false">
 
     <ImageView
         android:layout_width="10dp"
-        android:layout_height="48dp" />
+        android:layout_height="18dp" />
+
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="60dp"
+        android:gravity="left"
+        android:orientation="horizontal">
 
+        <TextView
+            android:layout_width="25dp"
+            android:layout_height="match_parent" />
         <ImageView
-            android:id="@+id/logo"
-            android:layout_width="wrap_content"
-            android:layout_height="240dp"
-            android:layout_weight="1"
-            android:scaleType="fitCenter"
-            android:src="@mipmap/logo"/>
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:src="@mipmap/logo11" />
     </LinearLayout>
 
     <ImageView
         android:layout_width="10dp"
-        android:layout_height="20dp" />
+        android:layout_height="10dp" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -39,7 +42,7 @@
             android:alpha="0.8"
             android:background="@drawable/shape_white"
             android:textColor="@color/darkslategrey"
-            android:textSize="15sp"
+            android:textSize="14sp"
             android:hint="手机号"
             android:maxLength="11"
             android:inputType="phone"/>
@@ -63,7 +66,7 @@
             android:inputType="textPassword"
             android:background="@drawable/shape_white"
             android:textColor="@color/darkslategrey"
-            android:textSize="15sp"
+            android:textSize="14sp"
             android:maxLength="16"
             android:hint="密码" />
     </LinearLayout>
@@ -78,7 +81,7 @@
             android:layout_width="110dp"
             android:layout_height="40dp"
             android:textColor="@color/whitesmoke"
-            android:textSize="15sp"
+            android:textSize="14sp"
             android:text="记住密码" />
 
         <ImageView
@@ -90,31 +93,37 @@
             android:layout_width="110dp"
             android:layout_height="40dp"
             android:textColor="@color/whitesmoke"
-            android:textSize="15sp"
+            android:textSize="14sp"
             android:text="自动登录" />
 
     </LinearLayout>
-
-
-    <Button
-        android:id="@+id/LoginDetermination"
-        android:layout_width="240dp"
-        android:layout_height="40dp"
-        android:background="@drawable/shape_white"
-        android:textSize="17sp"
-        android:textColor="@color/darkslategrey"
-        android:alpha="0.95"
-        android:text="登录" />
-
-    <ImageView
-        android:id="@+id/blank3"
-        android:layout_width="30dp"
-        android:layout_height="50dp" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center">
+
+
+        <Button
+            android:id="@+id/LoginDetermination"
+            android:layout_width="240dp"
+            android:layout_height="40dp"
+            android:background="@drawable/shape_white"
+            android:textSize="15sp"
+            android:textColor="@color/darkslategrey"
+            android:alpha="0.95"
+            android:text="登 录" />
+    </LinearLayout>
+
+
+    <ImageView
+        android:layout_width="30dp"
+        android:layout_height="50dp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="bottom">
 
         <Button
             android:id="@+id/Forget"
@@ -122,7 +131,7 @@
             android:layout_height="40dp"
             android:background="@android:color/transparent"
             android:textColor="@color/whitesmoke"
-            android:textSize="17sp"
+            android:textSize="15sp"
             android:text="忘记密码？"
             />
 
@@ -133,7 +142,7 @@
             android:background="@android:color/transparent"
             android:text="没有账号？点此注册"
             android:textColor="@color/whitesmoke"
-            android:textSize="17sp" />
+            android:textSize="15sp" />
 
     </LinearLayout>
 

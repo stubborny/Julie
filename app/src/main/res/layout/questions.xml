@@ -42,7 +42,7 @@
             android:layout_width="60dp"
             android:layout_height="40dp"
             android:text="Q1:"
-            android:textSize="25dp"
+            android:textSize="20dp"
             android:textColor="@color/theme"
             android:textStyle="bold"/>
         <LinearLayout
@@ -58,7 +58,7 @@
                 android:layout_width="330dp"
                 android:layout_height="wrap_content"
                 android:text="不交押金我可以接单发单吗？"
-                android:textSize="20sp"
+                android:textSize="15sp"
                 android:textColor="@color/dimgrey"/>
         </LinearLayout>
         <TextView
@@ -79,7 +79,7 @@
                 android:layout_width="330dp"
                 android:layout_height="wrap_content"
                 android:text="不可以的哦，在缴纳押金之前只能简单浏览我们的软件，如果对我们的功能感兴趣的话还请缴纳押金后使用啦~"
-                android:textSize="19sp"
+                android:textSize="13sp"
                 android:textColor="@color/theme"/>
 
         </LinearLayout>
@@ -92,7 +92,7 @@
             android:layout_width="60dp"
             android:layout_height="40dp"
             android:text="Q2:"
-            android:textSize="25dp"
+            android:textSize="20dp"
             android:textColor="@color/theme"
             android:textStyle="bold"/>
         <LinearLayout
@@ -108,7 +108,7 @@
                 android:layout_width="330dp"
                 android:layout_height="wrap_content"
                 android:text="我该如何把挣到的钱提现呢？"
-                android:textSize="20sp"
+                android:textSize="15sp"
                 android:textColor="@color/dimgrey"/>
         </LinearLayout>
         <TextView
@@ -129,7 +129,7 @@
                 android:layout_width="330dp"
                 android:layout_height="wrap_content"
                 android:text="在主界面底栏[个人]→[我的钱包]→[提现]中就可以操作啦~"
-                android:textSize="19sp"
+                android:textSize="13sp"
                 android:textColor="@color/theme"/>
 
         </LinearLayout>
