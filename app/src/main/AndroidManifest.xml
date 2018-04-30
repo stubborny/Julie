@@ -42,13 +42,14 @@
             android:launchMode="singleTask">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity android:name=".Activity.FootManActivity" />
         <activity
-            android:name="com.bjtu.julie.Activity.LoginActivity"
-            android:finishOnTaskLaunch="true"></activity>
+            android:name=".Activity.LoginActivity"
+            android:finishOnTaskLaunch="true" />
         <activity android:name=".Activity.RegActivity" />
         <activity android:name=".Activity.ForgetActivity" />
         <activity
@@ -93,17 +94,17 @@
         <activity android:name=".Activity.FootDetailActivity" />
         <activity android:name=".Activity.FootDetailOwnerActivity" />
         <activity android:name=".Activity.FootDetailVisitorActivity" />
-
-        <activity android:name=".Activity.MessageDetailActivity"></activity>
-        <activity android:name="com.bjtu.julie.Activity.PublishActivity" />
+        <activity android:name=".Activity.MessageDetailActivity" />
+        <activity android:name=".Activity.PublishActivity" />
         <activity android:name=".Activity.RecieveActivity" />
         <activity android:name=".Activity.UserInfoActivity" />
         <activity android:name=".Activity.WalletActivity" />
         <activity android:name=".Activity.FeedBackActivity" />
         <activity android:name=".Activity.ImpressionActivity" />
         <activity android:name=".Activity.QuestionActivity" />
-        <activity android:name=".Activity.TicketActivity"></activity>
-
+        <activity android:name=".Activity.TicketActivity" />
+        <activity android:name=".Activity.AuthenticateActivity" />
+        <activity android:name=".Activity.QualificationedActivity"></activity>
     </application>
 
 </manifest>
