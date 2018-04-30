@@ -1,12 +1,12 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 26
-    buildToolsVersion "26.0.0"
+    compileSdkVersion 25
+    buildToolsVersion "27.0.3"
     defaultConfig {
         applicationId "com.bjtu.julie"
         minSdkVersion 15
-        targetSdkVersion 26
+        targetSdkVersion 25
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
@@ -28,8 +28,8 @@ dependencies {
     compile files('libs/MobCommons-2016.1012.1447.jar')
     compile(name: 'SMSSDK-2.1.2', ext: 'aar')
     compile files('libs/alipaySdk-20180316.jar')
-    compile 'com.android.support:appcompat-v7:26+'
-    compile 'com.android.support:recyclerview-v7:26+'
+    compile 'com.android.support:appcompat-v7:25+'
+    compile 'com.android.support:recyclerview-v7:25+'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
     compile 'com.loopj.android:android-async-http:1.4.9'
     compile 'org.xutils:xutils:3.5.0'

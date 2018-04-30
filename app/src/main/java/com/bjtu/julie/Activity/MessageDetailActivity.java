@@ -48,8 +48,8 @@ public class MessageDetailActivity extends AppCompatActivity {
     //EditText messCommentEditText;
     @BindView(R.id.textView2)
     TextView textViewShowComment;
-    @BindView(R.id.textView)
-    TextView textViewLike;
+   // @BindView(R.id.textView)
+    //TextView textViewLike;
     @BindView(R.id.messCommList)
     ListView footDetailCommentList;
     @BindView(R.id.comment_btn)
@@ -70,8 +70,8 @@ public class MessageDetailActivity extends AppCompatActivity {
         setContentView(R.layout.activity_message_detail);
         //初始化评论信息
         //initMessCommInfo();
-        titleBtnOk.setText("");
-        titleText.setText("详情");
+       // titleBtnOk.setText("");
+        //titleText.setText("详情");
         ButterKnife.bind(this);
         messDetailContent.setMovementMethod(ScrollingMovementMethod.getInstance());
         exchange = (Exchange) getIntent().getSerializableExtra("exchange");

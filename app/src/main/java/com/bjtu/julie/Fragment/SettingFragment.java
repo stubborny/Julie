@@ -261,7 +261,8 @@ public class SettingFragment extends Fragment {
     @OnClick(R.id.ll_myimpression)
     public void onLlMyimpressionClicked() {
         final MyApplication us = (MyApplication) getActivity().getApplication();
-        if (us.getStatus() == 0) {
+
+      if (us.getStatus() == 0) {
             Toast.makeText(getContext(), "请先登录", Toast.LENGTH_SHORT).show();
         } else {
             Intent intent = new Intent(getContext(), ImpressionActivity.class);

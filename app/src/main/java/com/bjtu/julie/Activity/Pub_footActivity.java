@@ -34,7 +34,7 @@ public class Pub_footActivity extends AppCompatActivity {
     EditText pubFootEdit;
     @BindView(R.id.pubFootAddress_Edit)
     EditText pubFootAddressEdit;
-   // @BindView(R.id.pubFootAddition_Edit)
+    // @BindView(R.id.pubFootAddition_Edit)
     //EditText pubFootAdditionEdit;
     @BindView(R.id.pubFootMoney_Edit)
     EditText pubFootMoneyEdit;
@@ -46,7 +46,18 @@ public class Pub_footActivity extends AppCompatActivity {
     EditText pubFootPhoneEdit;
     @BindView(R.id.pubFootName_Edit)
     EditText pubFootNameEdit;
-
+    //@BindView(R.id.addNeed1)
+    // TextView addNeed1;
+    @BindView(R.id.addNeed2)
+    TextView addNeed2;
+    @BindView(R.id.addNeed3)
+    TextView addNeed3;
+    @BindView(R.id.addNeed4)
+    TextView addNeed4;
+    private int status1 = 0;
+    private int status2 = 0;
+    private int status3 = 0;
+    private int status4 = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,6 +76,80 @@ public class Pub_footActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+        final TextView addneed1 = (TextView) findViewById(R.id.addNeed1);
+        final TextView addneed2 = (TextView) findViewById(R.id.addNeed2);
+        final TextView addneed3 = (TextView) findViewById(R.id.addNeed3);
+        final TextView addneed4 = (TextView) findViewById(R.id.addNeed4);
+
+        addneed1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                switch (status1) {
+                    case 0:
+                        addneed1.setBackgroundResource(R.drawable.textview_border);
+                        addneed1.setSelected(false);
+                        status1 = 1;
+                        break;
+                    case 1:
+                        addneed1.setBackgroundResource(R.drawable.textview_border_click);
+                        addneed1.setSelected(true);
+                        status1 = 0;
+                        break;
+                }
+            }
+        });
+        addneed2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                switch (status2) {
+                    case 0:
+                        addneed2.setBackgroundResource(R.drawable.textview_border);
+                        addneed2.setSelected(false);
+                        status2 = 1;
+                        break;
+                    case 1:
+                        addneed2.setBackgroundResource(R.drawable.textview_border_click);
+                        addneed2.setSelected(true);
+                        status2 = 0;
+                        break;
+                }
+            }
+        });
+        addneed3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                switch (status3) {
+                    case 0:
+                        addneed3.setBackgroundResource(R.drawable.textview_border);
+                        addneed3.setSelected(false);
+                        status3 = 1;
+                        break;
+                    case 1:
+                        addneed3.setBackgroundResource(R.drawable.textview_border_click);
+                        addneed3.setSelected(true);
+                        status3 = 0;
+                        break;
+                }
+            }
+        });
+        addneed4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                switch (status4) {
+                    case 0:
+                        addneed4.setBackgroundResource(R.drawable.textview_border);
+                        addneed4.setSelected(false);
+                        status4 = 1;
+                        break;
+                    case 1:
+                        addneed4.setBackgroundResource(R.drawable.textview_border_click);
+                        addneed4.setSelected(true);
+                        status4 = 0;
+                        break;
+                }
+            }
+        });
+
         titleText.setText("发布");
 
     }
