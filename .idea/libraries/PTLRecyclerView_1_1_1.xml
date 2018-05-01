@@ -5,6 +5,8 @@
       <root url="file://$PROJECT_DIR$/app/build/intermediates/exploded-aar/com.jimi_wu/PTLRecyclerView/1.1.1/res" />
     </CLASSES>
     <JAVADOC />
-    <SOURCES />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.jimi_wu/PTLRecyclerView/1.1.1/99d9facf4f34bf9c428947d3df36778612915e19/PTLRecyclerView-1.1.1-sources.jar!/" />
+    </SOURCES>
   </library>
 </component>
