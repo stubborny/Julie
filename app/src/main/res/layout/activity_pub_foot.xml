@@ -105,7 +105,7 @@
                     android:layout_marginLeft="20dp"
                     android:gravity="center_vertical"
                     android:text="送到宿舍"
-                    android:textColor="@color/darkgrey"
+                    android:textColor="@drawable/text_color"
                     android:textSize="13sp" />
 
                 <TextView
@@ -117,7 +117,7 @@
                     android:layout_marginLeft="11dp"
                     android:gravity="center_vertical"
                     android:text="代为保管"
-                    android:textColor="@color/darkgrey"
+                    android:textColor="@drawable/text_color"
                     android:textSize="13sp" />
 
                 <TextView
@@ -129,7 +129,7 @@
                     android:layout_marginLeft="11dp"
                     android:gravity="center_vertical"
                     android:text="超过十斤"
-                    android:textColor="@color/darkgrey"
+                    android:textColor="@drawable/text_color"
                     android:textSize="13sp" />
 
                 <TextView
@@ -141,7 +141,7 @@
                     android:layout_marginLeft="11dp"
                     android:gravity="center_vertical"
                     android:text="轻拿轻放"
-                    android:textColor="@color/darkgrey"
+                    android:textColor="@drawable/text_color"
                     android:textSize="13sp" />
             </LinearLayout>
 

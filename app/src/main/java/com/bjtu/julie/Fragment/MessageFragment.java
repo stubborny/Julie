@@ -71,7 +71,7 @@ public class MessageFragment extends Fragment {
                         }
                     }
                     //Log.i("AAA", String.valueOf(jb.getInt("code"))+jb.getString("msg"));
-                    Toast.makeText(x.app(), jb.getString("msg"), Toast.LENGTH_LONG).show();
+                    //Toast.makeText(x.app(), jb.getString("msg"), Toast.LENGTH_LONG).show();
 
                     //finish();
                     RecyclerView recyclerView = (RecyclerView) messageLayout.findViewById(R.id.messRecycleView);

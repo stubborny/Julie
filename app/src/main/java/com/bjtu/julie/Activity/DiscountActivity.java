@@ -12,6 +12,7 @@ import android.widget.Toast;
 import com.bjtu.julie.Adapter.DiscountAdapter;
 import com.bjtu.julie.Model.Discount;
 import com.bjtu.julie.Model.MessageEvent;
+import com.bjtu.julie.Model.UserManager;
 import com.bjtu.julie.R;
 
 import org.greenrobot.eventbus.EventBus;
@@ -38,6 +39,7 @@ public class DiscountActivity extends AppCompatActivity {
     LinearLayout discountLayoutHaving;
     private List<Discount> discountList = new ArrayList<>();
     DiscountAdapter adapter;
+    int udId = -1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,10 +47,10 @@ public class DiscountActivity extends AppCompatActivity {
         setContentView(R.layout.activity_discount);
         ButterKnife.bind(this);
         titleText.setText("使用抵用券");
-
+        udId=Integer.valueOf(getIntent().getStringExtra("ud_id"));
         String url = "http://39.107.225.80:8080//julieServer/DiscountServlet";
         RequestParams params = new RequestParams(url);
-        params.addParameter("userId", "1");
+        params.addParameter("userId", UserManager.getInstance().getUser().getId());
         x.http().get(params, new Callback.CommonCallback<String>() {
             public void onSuccess(String result) {
                 try {
@@ -61,11 +63,11 @@ public class DiscountActivity extends AppCompatActivity {
                             for (int i = 0; i < orderArray.length(); i++) {
                                 // 遍历 jsonarray 数组，把每一个对象转成 json 对象
                                 JSONObject job = orderArray.getJSONObject(i);
-                                Discount discount = new Discount(job.getInt("id"),job.getString("name"), job.getString("money"), job.getString("usable"), job.getString("deadline"), job.getString("limit"));
+                                Discount discount = new Discount(job.getInt("udId"), job.getInt("id"), job.getString("name"), job.getString("money"), job.getString("usable"), job.getString("deadline"), job.getString("limit"));
                                 discountList.add(discount);
                             }
                         }
-                        adapter = new DiscountAdapter(DiscountActivity.this, R.layout.discount_item, discountList);
+                        adapter = new DiscountAdapter(DiscountActivity.this, R.layout.discount_item, discountList,udId);
                         ListView listview = (ListView) findViewById(R.id.discount_list);
                         listview.setAdapter(adapter);
                     } else {
@@ -108,18 +110,22 @@ public class DiscountActivity extends AppCompatActivity {
 
     @OnClick(R.id.title_btn_ok)
     public void onViewClicked() {
+        Discount discount = null;
         if (adapter == null) {
+            EventBus.getDefault().post(new MessageEvent(discount));
             finish();
         } else {
             //根据得到的位置,获取选中item的数据Bean
             int selectPosition = adapter.getSelectPosition();
             //没选
             if (selectPosition == -1) {
-
-            } else {
-                Discount discount = discountList.get(selectPosition);
                 // 发布事件
-                EventBus.getDefault().post(new MessageEvent(discount.getMoney()));
+                EventBus.getDefault().post(new MessageEvent(discount));
+                finish();
+            } else {
+                discount = discountList.get(selectPosition);
+                // 发布事件
+                EventBus.getDefault().post(new MessageEvent(discount));
                 finish();
                 // Toast.makeText(getApplicationContext(), discount.getName(), Toast.LENGTH_SHORT).show();
             }

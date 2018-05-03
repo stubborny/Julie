@@ -19,10 +19,12 @@ public class DiscountAdapter extends ArrayAdapter<Discount> {
     private int resourceId;
     private int tempPosition = -1;  //记录已经点击的CheckBox的位置
     private Context context;
-    public DiscountAdapter(Context context, int textViewResourceId, List<Discount> objects){
+    private int udId;
+    public DiscountAdapter(Context context, int textViewResourceId, List<Discount> objects,int udId){
         super(context,textViewResourceId,objects);
         this.context=context;
         resourceId=textViewResourceId;
+        this.udId=udId;
     }
     @Override
     public View getView(int position, final View convertView, ViewGroup parent){
@@ -35,6 +37,9 @@ public class DiscountAdapter extends ArrayAdapter<Discount> {
         TextView discountUsable=(TextView)view.findViewById(R.id.discount_text_usable);
         CheckBox discountCBoxChoose=(CheckBox)view.findViewById(R.id.discount_cbox_choose);
 
+        if(discount.getUdId()==udId){
+            tempPosition=position;
+        }
         discountCBoxChoose.setId(position);    //设置当前position为CheckBox的id
         discountCBoxChoose.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override

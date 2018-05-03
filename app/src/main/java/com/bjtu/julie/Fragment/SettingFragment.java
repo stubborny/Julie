@@ -126,70 +126,34 @@ public class SettingFragment extends Fragment {
                              Bundle savedInstanceState) {
         View settingLayout = inflater.inflate(R.layout.activity_user, container, false);
         unbinder = ButterKnife.bind(this, settingLayout);
-        final MyApplication us = (MyApplication) getActivity().getApplication();
-        if (us.getStatus() == 1) {
-            SharedPreferences sp = getContext().getSharedPreferences("userInfo", Context.MODE_PRIVATE);
-            //name = sp.getString("name", "null");
+
+        if (UserManager.getInstance().isLogined()) {
+            //已经登陆
             if (UserManager.getInstance().getUser().getNickname().equals("")) {
                 user1TvPrename.setText(UserManager.getInstance().getUser().getUsername());
             } else {
                 user1TvPrename.setText(UserManager.getInstance().getUser().getNickname());
             }
             llExit.setVisibility(View.VISIBLE);
-            if (!UserManager.getInstance().getUser().getUserpicUrl().equals("")) {
-                ImageOptions imageOptions = new ImageOptions.Builder()
-                        .setIgnoreGif(false)//是否忽略gif图。false表示不忽略。不写这句，默认是true
-                        .setImageScaleType(ImageView.ScaleType.CENTER_CROP)
-                        .setFailureDrawableId(R.mipmap.load_error)
-                        .setLoadingDrawableId(R.mipmap.loading)
-                        .setCircular(true)
-                        .build();
-                x.image().bind(user1IvPrehead, UserManager.getInstance().getUser().getUserpicUrl(), imageOptions);
-
-            }
+            ImageOptions imageOptions = new ImageOptions.Builder()
+                    .setIgnoreGif(false)//是否忽略gif图。false表示不忽略。不写这句，默认是true
+                    .setImageScaleType(ImageView.ScaleType.CENTER_CROP)
+                    .setFailureDrawableId(R.mipmap.load_error)
+                    .setLoadingDrawableId(R.mipmap.loading)
+                    .setCircular(true)
+                    .build();
+            x.image().bind(user1IvPrehead, UserManager.getInstance().getUser().getUserpicUrl(), imageOptions);
+        } else {
+            //未登陆
+            ImageOptions imageOptions = new ImageOptions.Builder()
+                    .setIgnoreGif(false)//是否忽略gif图。false表示不忽略。不写这句，默认是true
+                    .setImageScaleType(ImageView.ScaleType.CENTER_CROP)
+                    .setFailureDrawableId(R.mipmap.load_error)
+                    .setLoadingDrawableId(R.mipmap.loading)
+                    .setCircular(true)
+                    .build();
+            x.image().bind(user1IvPrehead, getResources().getString(R.string.default_head), imageOptions);
         }
-//              //下载图片URL
-//        String url = "http://39.107.225.80:8080//julieServer/ShowPicServlet";
-//        RequestParams params = new RequestParams(name);
-//        //Toast.makeText(getActivity(),"you clicked button 1",Toast.LENGTH_SHORT).show();
-//        x.http().get(params, new Callback.CommonCallback<String>() {
-//            @Override
-//            public void onSuccess(String result) {
-//                try {
-//                    JSONObject jb = new JSONObject(result);
-//                    picUrl = String.valueOf(jb.getString("picUrl"));
-//
-//                    //Log.i("AAA", String.valueOf(jb.getInt("code"))+jb.getString("msg"));
-//                    Toast.makeText(x.app(), jb.getString("msg"), Toast.LENGTH_LONG).show();
-//
-//                } catch (JSONException e) {
-//                    e.printStackTrace();
-//
-//                }
-//
-//            }
-//
-//            //请求异常后的回调方法
-//            @Override
-//            public void onError(Throwable ex, boolean isOnCallback) {
-//                //Toast.makeText(getActivity(),"you clicked button 1",Toast.LENGTH_SHORT).show();
-//            }
-//
-//            //主动调用取消请求的回调方法
-//            @Override
-//            public void onCancelled(CancelledException cex) {
-//                //Toast.makeText(getActivity(),"you clicked button 1",Toast.LENGTH_SHORT).show();
-//            }
-//
-//            @Override
-//            public void onFinished() {
-//                //Toast.makeText(getActivity(),"you clicked button 1",Toast.LENGTH_SHORT).show();
-//            }
-//        });
-//
-//        if (picUrl != null) {
-//            user1IvPrehead.setImageBitmap(getImage(picUrl));
-//        }
         return settingLayout;
     }
 

@@ -13,8 +13,8 @@ public class User {
     private String sex;
     private String location;
     private String describe;
-
-    public User(String username, String password, int id, String userpicUrl, String nickname, String sex, String location, String describe) {
+    private String wallet;
+    public User(String username, String password, int id, String userpicUrl, String nickname, String sex, String location, String describe,String wallet) {
         this.username = username;
         this.password = password;
         this.id = id;
@@ -23,7 +23,9 @@ public class User {
         this.sex = sex;
         this.location = location;
         this.describe = describe;
+        this.wallet=wallet;
     }
+
 //
 //    public User(String username, String password, int id, String userpicUrl, String nickname) {
 //        this.username = username;
@@ -32,6 +34,14 @@ public class User {
 //        this.userpicUrl = userpicUrl;
 //        this.nickname = nickname;
 //    }
+
+    public String getWallet() {
+        return wallet;
+    }
+
+    public void setWallet(String wallet) {
+        this.wallet = wallet;
+    }
 
     public String getUserpicUrl() {
         return userpicUrl;

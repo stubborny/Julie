@@ -6,20 +6,14 @@ package com.bjtu.julie.Model;
 
 public class MessageEvent {
     private String message;
-
-    public Discount getDiscount() {
-        return discount;
-    }
-
-    public void setDiscount(Discount discount) {
-        this.discount = discount;
-    }
-
     private Discount discount;
-
 
     public MessageEvent(String message) {
         this.message = message;
+    }
+
+    public MessageEvent(Discount discount) {
+        this.discount = discount;
     }
 
     public String getMessage() {
@@ -28,5 +22,13 @@ public class MessageEvent {
 
     public void setMessage(String message) {
         this.message = message;
+    }
+
+    public Discount getDiscount() {
+        return discount;
+    }
+
+    public void setDiscount(Discount discount) {
+        this.discount = discount;
     }
 }

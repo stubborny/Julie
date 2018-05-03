@@ -7,6 +7,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.bjtu.julie.Activity.MessageDetailActivity;
 import com.bjtu.julie.Activity.P_MessageActivity;
@@ -14,6 +15,7 @@ import com.bjtu.julie.Activity.Pub_footActivity;
 import com.bjtu.julie.Adapter.FootManAdaper;
 import com.bjtu.julie.FullyLinearLayoutManager;
 import com.bjtu.julie.Model.Order;
+import com.bjtu.julie.Model.UserManager;
 import com.bjtu.julie.R;
 import com.jimi_wu.ptlrecyclerview.PullToRefresh.PullToRefreshRecyclerView;
 
@@ -117,10 +119,18 @@ public class FootManFragment extends Fragment {
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.push_order:
+                if (!UserManager.getInstance().isLogined()) {
+                    Toast.makeText(getContext(), "还没登陆哦", Toast.LENGTH_SHORT).show();
+                    return;
+                }
                 Intent intent = new Intent(getActivity(), Pub_footActivity.class);
                 startActivity(intent);
                 break;
             case R.id.push_message:
+                if (!UserManager.getInstance().isLogined()) {
+                    Toast.makeText(getContext(), "还没登陆哦", Toast.LENGTH_SHORT).show();
+                    return;
+                }
                 Intent intent1 = new Intent(getActivity(), P_MessageActivity.class);
                 startActivity(intent1);
                 break;

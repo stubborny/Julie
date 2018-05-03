@@ -5,6 +5,7 @@ package com.bjtu.julie.Model;
  */
 
 public class Discount {
+    private int udId;//用户抵用券id
     private int id;
     private String name;
     private String money;
@@ -12,13 +13,22 @@ public class Discount {
     private String deadline;
     private String limit;
 
-    public Discount(int id,String name, String money, String usable, String deadline, String limit) {
+    public Discount(int udId,int id,String name, String money, String usable, String deadline, String limit) {
+        this.udId=udId;
         this.id=id;
         this.name = name;
         this.money = money;
         this.usable = usable;
         this.deadline = deadline;
         this.limit = limit;
+    }
+
+    public int getUdId() {
+        return udId;
+    }
+
+    public void setUdId(int udId) {
+        this.udId = udId;
     }
 
     public int getId() {
