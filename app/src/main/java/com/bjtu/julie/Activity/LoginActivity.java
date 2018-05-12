@@ -47,6 +47,29 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         init();//初始化界面
+        //判断是否有登陆记录
+
+        //  if ((sp.getString("USER_NAME", "")) != null) {
+        //直接提供用户号码
+        //      textPhoneNumber.setText(sp.getString("PHONENUMBER", ""));
+        //    }
+        //判断是否记住密码
+        //   if (sp.getBoolean("ISCHECK", true)) {
+        //直接提供密码
+        //       textPassword.setText(sp.getString("PASSWORD", ""));
+        //       checkBoxRemindPassword.setChecked(true);
+        //判断是否自动登录
+        //      if (sp.getBoolean("AUTO_ISCHECK", true)) {
+               /* //直接登录
+                checkBoxAutomaticLogin.setChecked(true);
+
+                // 登录信息获取
+                phoneNumber = textPhoneNumber.getText().toString();
+                password = textPassword.getText().toString();
+
+                // 链接服务器
+                loginResultByPassword(phoneNumber, password);*/
+        //   }
         final MyApplication us = (MyApplication) getApplication();
         /**
          * 登陆按钮点击事件
@@ -74,21 +97,46 @@ public class LoginActivity extends AppCompatActivity {
                             JSONObject jb = new JSONObject(result);
                             //Log.i("AAA", String.valueOf(jb.getInt("code"))+jb.getString("msg"));
 
-                            Toast.makeText(x.app(), jb.getString("msg"), Toast.LENGTH_LONG).show();
                             if (jb.getInt("code") == 1) {
                                 us.setStatus(1);//设置用户状态为在线
-                                //SharedPreferences记住用户名还行
+                                //记住密码
+                                //获取修改本地用户信息的能力
+                                //    SharedPreferences.Editor editor = sp.edit();
+                                //修改本地用户信息，更改其记住的号码
+                                //  editor.putString("PHONENUMBER", textPhoneNumber.getText().toString());
+                                //判断是否选择了记住密码
+                                //  if (checkBoxRemindPassword.isChecked()) {
+                                //修改本地用户信息，使之记住密码
+                                //    editor.putBoolean("ISCHECK", true);
+                                //     editor.putString("PASSWORD", textPassword.getText().toString());
+                                //      editor.commit();
+                                //判断是否选择了自动登录
+                                //   if (checkBoxAutomaticLogin.isChecked()) {
+                                //修改本地用户信息，使之能自动登录
+                                //        editor.putBoolean("AUTO_ISCHECK", true);
+                                //       editor.commit();
+                                //     } else {//修改本地用户信息，使之不能自动登录
+                                //         editor.putBoolean("AUTO_ISCHECK", false);
+                                //         editor.commit();
+                                //      }
+                                //  } else {//修改本地用户信息，使之不能记住密码
+                                //       editor.putBoolean("ISCHECK", false);
+                                //      editor.putBoolean("AUTO_ISCHECK", false);
+                                //       editor.commit();
+                                //   }
                                 JSONObject job = jb.getJSONObject("data");
-                                User user = new User(job.getString("username"), job.getString("password"), job.getInt("id"), job.getString("userpicUrl"), job.getString("nickname"));
+                                User user = new User(job.getString("username"), job.getString("password"), job.getInt("id"), job.getString("userpicUrl"), job.getString("nickname"), job.getString("sex"), job.getString("location"), job.getString("describe"),job.getInt("isAuthentication"));
                                 UserManager userManager = UserManager.getInstance();
                                 userManager.setUser(user);
-//                                sp = getSharedPreferences("userInfo", Context.MODE_PRIVATE);
-//                                SharedPreferences.Editor edit = sp.edit();
-//                                edit.putString("name",textPhoneNumber.getText().toString());
+//                               sp = getSharedPreferences("userInfo", Context.MODE_PRIVATE);
+                                //                               SharedPreferences.Editor edit = sp.edit();
+//                              edit.putString("name",textPhoneNumber.getText().toString());
 //                                edit.apply();
 //                                finish();
+                                //   Toast.makeText(x.app(), jb.getString("msg"), Toast.LENGTH_LONG).show();
                                 Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                                 startActivity(intent);
+                                finish();
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -130,6 +178,7 @@ public class LoginActivity extends AppCompatActivity {
         });
 
     }
+    //  }
 
     /*
     界面初始化

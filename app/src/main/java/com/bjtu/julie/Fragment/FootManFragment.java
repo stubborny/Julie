@@ -15,6 +15,7 @@ import com.bjtu.julie.Adapter.FootManAdaper;
 import com.bjtu.julie.FullyLinearLayoutManager;
 import com.bjtu.julie.Model.Order;
 import com.bjtu.julie.R;
+import com.jimi_wu.ptlrecyclerview.PullToRefresh.PullToRefreshRecyclerView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -38,7 +39,8 @@ public class FootManFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         final View orderLayout = inflater.inflate(R.layout.activity_foot_man, container, false);
-        //initGuide();
+        //initGuide()
+
         String url = "http://39.107.225.80:8080//julieServer/FootManServlet";
         RequestParams params = new RequestParams(url);
         x.http().get(params, new Callback.CommonCallback<String>() {
@@ -52,7 +54,9 @@ public class FootManFragment extends Fragment {
                         for (int i = 0; i < orderArray.length(); i++) {
                             // 遍历 jsonarray 数组，把每一个对象转成 json 对象
                             JSONObject job = orderArray.getJSONObject(i);
-                            Order exorder = new Order(job.getString("footId"), job.getInt("userId"), job.getInt("receiveId"), job.getString("userpicUrl"), job.getString("username"), job.getString("state"), job.getString("content"), job.getString("address"), job.getString("reward"), job.getString("time"), job.getString("phone"));
+                            Order exorder = new Order(job.getString("footId"), job.getInt("userId"), job.getInt("receiveId"),
+                                    job.getString("userpicUrl"), job.getString("username"), job.getString("state"), job.getString("content"),
+                                    job.getString("address"), job.getString("reward"), job.getString("time"), job.getString("phone"));
                             orderlist.add(exorder);
                         }
                     }
@@ -104,6 +108,11 @@ public class FootManFragment extends Fragment {
     public void onDestroyView() {
         super.onDestroyView();
         unbinder.unbind();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
     }
 
     @OnClick({R.id.push_order, R.id.push_message})

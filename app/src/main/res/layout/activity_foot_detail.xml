@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:weightSum="1">
+    >
 
     <com.bjtu.julie.TitleLayout
         android:layout_width="match_parent"
@@ -38,8 +38,7 @@
                     android:layout_height="40dp"
                     android:layout_alignParentLeft="true"
                     android:layout_alignParentStart="true"
-                    android:layout_alignParentTop="true"
-                    android:background="@mipmap/loading" />
+                    android:layout_alignParentTop="true" />
 
                 <TextView
                     android:id="@+id/foot_detail_text_nickname"
@@ -267,8 +266,8 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="133dp"
-        android:layout_weight="1.07"
+        android:layout_height="0dp"
+        android:layout_weight="1"
         android:orientation="vertical">
 
         <TextView
@@ -300,7 +299,6 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="67dp"
-        android:layout_marginBottom="10dp"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:orientation="horizontal">

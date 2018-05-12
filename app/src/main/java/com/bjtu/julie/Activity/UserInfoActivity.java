@@ -14,7 +14,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bjtu.julie.MainActivity;
-import com.bjtu.julie.Model.UserInfo;
+import com.bjtu.julie.Model.User;
+import com.bjtu.julie.Model.UserManager;
 import com.bjtu.julie.R;
 
 import org.json.JSONArray;
@@ -36,10 +37,7 @@ import static com.bjtu.julie.R.id.tv_userInfo_id;
 
 
 public class UserInfoActivity extends Activity {
-    private List<UserInfo> userinfoList=new ArrayList<>();
-   private UserInfo userinfo = new UserInfo(null,null,null,null,null);
-    @BindView(R.id.textView)
-    TextView textView;
+
     //声明变量
     @BindView(R.id.person_title)
     TextView personTitle;
@@ -57,66 +55,20 @@ public class UserInfoActivity extends Activity {
     EditText tvUserInfoLocation;
     @BindView(R.id.tv_userInfo_introduction)
     EditText tvUserInfoIntroduction;
-private String sex = "male";
+    private String sex = "male";
+
+    private User user = UserManager.getInstance().getUser();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_info);
         ButterKnife.bind(this);
-        SharedPreferences sp = getSharedPreferences("userInfo", Context.MODE_PRIVATE);
-        String name = sp.getString("name", "null");
-        tvUserInfoId.setText(name);
-
-        //加载个人信息
-        String url = "http://39.107.225.80:8080//julieServer/ShowInfoServlet";
-
-        RequestParams params = new RequestParams(url);
-        params.addParameter("username", tvUserInfoId.getText().toString());
-        //Toast.makeText(getActivity(),"you clicked button 1",Toast.LENGTH_SHORT).show();
-        x.http().get(params, new Callback.CommonCallback<String>() {
-            @Override
-            public void onSuccess(String result) {
-                try {
-                    JSONObject jb = new JSONObject(result);
-                    JSONArray infoArray = jb.getJSONArray("uiList");
-                    if(infoArray.length()>0){
-                        for(int i = 0;i<infoArray.length();i++) {
-                            JSONObject job = infoArray.getJSONObject(i);
-                            //String username,String picString,String sex,String location,String describe, String nickname
-                              userinfo = new UserInfo(job.getString("username"),
-                                    job.getString("sex"),job.getString("location"),job.getString("describe"),job.getString("nickname"));
-                            userinfoList.add(userinfo);
-
-                        }
-                    }
-                    Toast.makeText(x.app(), jb.getString("msg"), Toast.LENGTH_LONG).show();
-
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }
-            //请求异常后的回调方法
-            @Override
-            public void onError(Throwable ex, boolean isOnCallback) {
-                //Toast.makeText(getActivity(),"you clicked button 1",Toast.LENGTH_SHORT).show();
-            }
-            //主动调用取消请求的回调方法
-            @Override
-            public void onCancelled(CancelledException cex) {
-                //Toast.makeText(getActivity(),"you clicked button 1",Toast.LENGTH_SHORT).show();
-            }
-            @Override
-            public void onFinished() {
-                //Toast.makeText(getActivity(),"you clicked button 1",Toast.LENGTH_SHORT).show();
-
-            }
-        });
 
 
-
-      if(userinfo.getSex()!=null) {
-            if (userinfo.getSex() == "female") {
+        tvUserInfoId.setText(user.getUsername());
+        if (user.getSex() != null) {
+            if (user.getSex() == "female") {
                 tvUserInfoSex.setText("♀");
                 tvUserInfoSex.setTextColor(Color.rgb(255, 105, 180));
             } else {
@@ -124,10 +76,9 @@ private String sex = "male";
                 tvUserInfoSex.setTextColor(Color.rgb(135, 206, 235));
             }
         }
-       if(userinfo.getDescribe()!=null|| userinfo.getLocation()!=null) {
-            tvUserInfoIntroduction.setText(userinfo.getDescribe());
-            tvUserInfoLocation.setText(userinfo.getLocation());
-        }
+        tvUserInfoIntroduction.setText(user.getDescribe());
+        tvUserInfoLocation.setText(user.getLocation());
+        tvUserInfoName.setText(user.getNickname());
     }
 
     @OnClick(R.id.tv_userInfo_sex)
@@ -135,11 +86,11 @@ private String sex = "male";
         if (tvUserInfoSex.getText().toString().equals("♂")) {
             tvUserInfoSex.setText("♀");
             tvUserInfoSex.setTextColor(Color.rgb(255, 105, 180));
-            sex="female";
+            sex = "female";
         } else if (tvUserInfoSex.getText().toString().equals("♀")) {
             tvUserInfoSex.setText("♂");
             tvUserInfoSex.setTextColor(Color.rgb(135, 206, 235));
-            sex="male";
+            sex = "male";
         }
     }
 
@@ -147,7 +98,7 @@ private String sex = "male";
     public void onViewClicked() {
         String url = "http://39.107.225.80:8080/julieServer/ChangeInfoServlet";
         RequestParams params = new RequestParams(url);
-        params.addParameter("username", tvUserInfoId.getText().toString());
+        params.addParameter("userId", user.getId());
         params.addParameter("usersex", sex);
         params.addParameter("userlocation", tvUserInfoLocation.getText().toString());
         params.addParameter("userdescribe", tvUserInfoIntroduction.getText().toString());
@@ -157,11 +108,18 @@ private String sex = "male";
             public void onSuccess(String result) {
                 try {
 
-                    if(!TextUtils.isEmpty(result)) {
+                    if (!TextUtils.isEmpty(result)) {
                         JSONObject jb = new JSONObject(result);
                         //Log.i("AAA", String.valueOf(jb.getInt("code"))+jb.getString("msg"));
-                        Toast.makeText(x.app(), jb.getString("msg"), Toast.LENGTH_LONG).show();
-                        startActivity(new Intent(UserInfoActivity.this, MainActivity.class));
+                        if(jb.getInt("code")==1){
+                            Toast.makeText(x.app(), jb.getString("msg"), Toast.LENGTH_LONG).show();
+                            UserManager.getInstance().getUser().setSex(sex);
+                            UserManager.getInstance().getUser().setDescribe(tvUserInfoIntroduction.getText().toString());
+                            UserManager.getInstance().getUser().setNickname(tvUserInfoName.getText().toString());
+                            UserManager.getInstance().getUser().setLocation(tvUserInfoLocation.getText().toString());
+                            startActivity(new Intent(UserInfoActivity.this, MainActivity.class));
+
+                        }
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();

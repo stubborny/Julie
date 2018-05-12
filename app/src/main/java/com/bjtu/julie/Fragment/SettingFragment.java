@@ -11,11 +11,8 @@ import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
-import android.os.Message;
 import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.RecyclerView;
-import android.text.TextUtils;
 import android.util.Base64;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -26,29 +23,20 @@ import android.view.WindowManager;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.bjtu.julie.Activity.FeedBackActivity;
-import com.bjtu.julie.Activity.ForgetActivity;
-import com.bjtu.julie.Activity.ImpressionActivity;
+import com.bjtu.julie.Activity.AuthenticateActivity;
 import com.bjtu.julie.Activity.LoginActivity;
 import com.bjtu.julie.Activity.PublishActivity;
-import com.bjtu.julie.Activity.QuestionActivity;
 import com.bjtu.julie.Activity.RecieveActivity;
-import com.bjtu.julie.Activity.TicketActivity;
 import com.bjtu.julie.Activity.UserInfoActivity;
-import com.bjtu.julie.Activity.WalletActivity;
-import com.bjtu.julie.Adapter.MessageAdaper;
-import com.bjtu.julie.FullyLinearLayoutManager;
 import com.bjtu.julie.MainActivity;
-import com.bjtu.julie.Model.Exchange;
 import com.bjtu.julie.Model.UserManager;
 import com.bjtu.julie.MyApplication;
 import com.bjtu.julie.R;
-import com.bjtu.julie.View.ShapeImageView;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.xutils.common.Callback;
@@ -56,18 +44,11 @@ import org.xutils.http.RequestParams;
 import org.xutils.image.ImageOptions;
 import org.xutils.x;
 
-import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -113,13 +94,16 @@ public class SettingFragment extends Fragment {
     ImageView imageView6;
     @BindView(R.id.ll_exit)
     LinearLayout llExit;
+    @BindView(R.id.ll_authenticate)
+    LinearLayout llAuthenticate;
+    @BindView(R.id.scrollView1)
+    ScrollView scrollView1;
     private String userpicstring = "haha";
 
     private String name;
 //    private List<UserInfo> userinfoList = new ArrayList<>();
 //    private UserInfo userinfo = new UserInfo(null, null, null, null, null);
 //    //final MyApplication us = (MyApplication) getActivity().getApplication();
-
 
 
     @Override
@@ -129,11 +113,11 @@ public class SettingFragment extends Fragment {
         unbinder = ButterKnife.bind(this, settingLayout);
         final MyApplication us = (MyApplication) getActivity().getApplication();
         if (us.getStatus() == 1) {
-            SharedPreferences sp = getContext().getSharedPreferences("userInfo", Context.MODE_PRIVATE);
+            // SharedPreferences sp = getContext().getSharedPreferences("userInfo", Context.MODE_PRIVATE);
             //name = sp.getString("name", "null");
-            if(UserManager.getInstance().getUser().getNickname().equals("")){
+            if (UserManager.getInstance().getUser().getNickname().equals("")) {
                 user1TvPrename.setText(UserManager.getInstance().getUser().getUsername());
-            }else{
+            } else {
                 user1TvPrename.setText(UserManager.getInstance().getUser().getNickname());
             }
             llExit.setVisibility(View.VISIBLE);
@@ -158,18 +142,30 @@ public class SettingFragment extends Fragment {
         unbinder.unbind();
     }
 
-
-    @OnClick(R.id.ll_exit)
-    public void onViewClicked() {
-        final MyApplication us = (MyApplication) getActivity().getApplication();
-        us.setStatus(0);
-        SharedPreferences sp = getContext().getSharedPreferences("userInfo", Context.MODE_PRIVATE);
-        SharedPreferences.Editor edit = sp.edit();
-        edit.putString("name", "登录/注册");
-        edit.apply();
-        getActivity().onBackPressed();
-        Intent intent = new Intent(getContext(), MainActivity.class);
-        startActivity(intent);
+    @OnClick({R.id.ll_authenticate, R.id.ll_exit})
+    public void onViewClicked(View view) {
+        switch (view.getId()) {
+            case R.id.ll_authenticate:
+                final MyApplication us = (MyApplication) getActivity().getApplication();
+                if (us.getStatus() == 0) {
+                    Toast.makeText(getContext(), "请先登录", Toast.LENGTH_SHORT).show();
+                } else {
+                    Intent intent = new Intent(getContext(), AuthenticateActivity.class);
+                    startActivity(intent);
+                }
+                break;
+            case R.id.ll_exit:
+                final MyApplication us1 = (MyApplication) getActivity().getApplication();
+                us1.setStatus(0);
+                SharedPreferences sp = getContext().getSharedPreferences("userInfo", Context.MODE_PRIVATE);
+                SharedPreferences.Editor edit = sp.edit();
+                edit.putString("name", "登录/注册");
+                edit.apply();
+                getActivity().onBackPressed();
+                Intent intent1 = new Intent(getContext(), MainActivity.class);
+                startActivity(intent1);
+                break;
+        }
     }
 
 
@@ -394,9 +390,9 @@ public class SettingFragment extends Fragment {
                 //连接
                 String url = "http://39.107.225.80:8080/julieServer/ChangePicServlet";
                 RequestParams params = new RequestParams(url);
-                params.addParameter("username",username);
+                params.addParameter("username", username);
                 params.addParameter("userpicstring", userpicstring);
-                x.http().get(params, new org.xutils.common.Callback.CommonCallback<String>() {
+                x.http().get(params, new Callback.CommonCallback<String>() {
                     public void onSuccess(String result) {
                         try {
                             JSONObject jb = new JSONObject(result);
@@ -451,14 +447,13 @@ public class SettingFragment extends Fragment {
                 userpicstring = bitmapToBase64(bitmap);
 
 
-
                 String username = UserManager.getInstance().getUser().getUsername();
                 //连接
                 String url = "http://39.107.225.80:8080/julieServer/ChangePicServlet";
                 RequestParams params = new RequestParams(url);
-                params.addParameter("username",username);
+                params.addParameter("username", username);
                 params.addParameter("userpicstring", userpicstring);
-                x.http().get(params, new org.xutils.common.Callback.CommonCallback<String>() {
+                x.http().get(params, new Callback.CommonCallback<String>() {
                     public void onSuccess(String result) {
                         try {
                             JSONObject jb = new JSONObject(result);
@@ -495,15 +490,10 @@ public class SettingFragment extends Fragment {
                             .setCircular(true)
                             .build();
                     x.image().bind(user1IvPrehead, UserManager.getInstance().getUser().getUserpicUrl(), imageOptions);
-
                 }
-
             }
         }
     }
-
-
-
 
 
     public static String bitmapToBase64(Bitmap bitmap) {

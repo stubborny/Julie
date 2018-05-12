@@ -5,8 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="#ffffff"
-    tools:context="com.bjtu.julie.DepositActivity">
+    android:background="#ffffff">
 
     <RelativeLayout
         android:id="@+id/person_titlebar"
@@ -21,7 +20,7 @@
             android:ellipsize="marquee"
             android:gravity="center_horizontal|center"
             android:singleLine="true"
-            android:text="缴纳押金"
+            android:text="开始体验"
             android:textColor="@color/white"
             android:textSize="22sp" />
 
@@ -66,13 +65,13 @@
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:layout_marginLeft="75dp"
-                android:src="@mipmap/ic_indeterminate_check_box_black_24dp"/>
+                android:src="@mipmap/ic_check_box_black_24dp"/>
 
             <ImageView
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:layout_marginLeft="75dp"
-                android:src="@mipmap/ic_check_box_outline_blank_black_24dp"/>
+                android:src="@mipmap/ic_indeterminate_check_box_black_24dp"/>
 
 
         </LinearLayout>
@@ -117,119 +116,55 @@
                 android:text="开始体验"
                 android:textSize="15sp"/>
 
-            <View
-                android:layout_width="15dp"
-                android:layout_height="50dp"
-                android:background="@color/whitesmoke"/>
-
-
-
         </LinearLayout>
 
         <ImageView
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:layout_marginLeft="165dp"
+            android:layout_marginLeft="285dp"
             android:src="@mipmap/rectangle"/>
 
     </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="160dp"
-        android:orientation="vertical">
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <TextView
-                android:layout_width="250dp"
-                android:layout_height="80dp"
-                android:layout_gravity="center"
-                android:gravity="center_vertical"
-                android:text="  押 金"
-                android:textSize="18sp"
-                android:textColor="#000000"/>
-
-            <TextView
-                android:layout_width="120dp"
-                android:layout_height="80dp"
-                android:layout_gravity="center"
-                android:gravity="center"
-                android:text="99元"
-                android:textSize="18sp"
-                android:textColor="#000000"/>
-        </LinearLayout>
-        <TextView
-            android:layout_width="270dp"
-            android:layout_height="40dp"
-            android:gravity="center_vertical"
-            android:text="  极速退款（7个工作日内）"
-            android:textSize="14sp"/>
-
-        <TextView
-            android:layout_width="280dp"
-            android:layout_height="35dp"
-            android:gravity="center_vertical"
-            android:text="  按原路退回至您的支付宝账户"
-            android:textSize="14sp"/>
-
-    </LinearLayout>
     <View
         android:layout_width="match_parent"
-        android:layout_height="30dp"
+        android:layout_height="50dp"
         android:background="#ffffff"/>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:orientation="horizontal">
-
-        <ImageView
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_gravity="center"
-            android:src="@drawable/zhifubao"
-            android:layout_marginLeft="20dp"/>
+        android:layout_height="100dp"
+        android:orientation="vertical">
 
         <TextView
-            android:layout_width="250dp"
-            android:layout_height="50dp"
-            android:layout_gravity="center"
-            android:gravity="center_vertical"
-            android:text="支付宝支付"
-            android:textSize="15sp"
-            android:layout_marginLeft="10dp"/>
-
-        <ImageView
-            android:layout_width="40dp"
+            android:layout_width="match_parent"
             android:layout_height="40dp"
-            android:layout_gravity="center"
-            android:src="@mipmap/ic_offline_pin_black_241dp"/>
+            android:gravity="center_vertical"
+            android:text=" 亲爱的用户，您已完成学生身份认证"
+            android:textSize="15sp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:gravity="center_vertical"
+            android:text="  我们将妥善保管您的押金"
+            android:textSize="15sp"/>
+
     </LinearLayout>
-
     <View
         android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@color/darkslategrey"/>
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="100dp"
+        android:layout_height="120dp"
         android:background="#ffffff"/>
 
     <Button
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:background="@drawable/round_radius2"
-        android:onClick="payDeposit"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
-        android:text="交押金"
-        android:textSize="15sp" />
-
-
+        android:text="开始体验"
+        android:textSize="16sp" />
 
 
 </LinearLayout>
+

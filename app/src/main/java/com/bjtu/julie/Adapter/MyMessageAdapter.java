@@ -34,6 +34,7 @@ public class MyMessageAdapter extends RecyclerView.Adapter<MyMessageAdapter.View
         TextView messContent;
         TextView messTime;
         TextView messComment;
+        TextView messLike;
         public ViewHolder(View view){
             super(view);
             messView=view;
@@ -42,6 +43,7 @@ public class MyMessageAdapter extends RecyclerView.Adapter<MyMessageAdapter.View
             messTime=(TextView)view.findViewById(R.id.messPubTime);
             messContent=(TextView)view.findViewById(R.id.messContent);
             messComment=(TextView)view.findViewById(R.id.messComment);
+            messLike=(TextView)view.findViewById(R.id.messAttention);
         }
     }
 
@@ -80,6 +82,8 @@ public class MyMessageAdapter extends RecyclerView.Adapter<MyMessageAdapter.View
         holder.messContent.setText(exchange.getContent());
         holder.messTime.setText(new DateUtil().diffDate(exchange.getTime().substring(0,19)));
         holder.messComment.setText("评论（"+ exchange.getcommentNum()+")");
+        holder.messLike.setText("收藏（"+exchange.getLikeNum()+")");
+
     }
     @Override
     public int getItemCount(){
