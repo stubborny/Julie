@@ -14,7 +14,26 @@ public class User {
     private String location;
     private String describe;
     private String wallet;
-    public User(String username, String password, int id, String userpicUrl, String nickname, String sex, String location, String describe,String wallet) {
+    private int isAuthentication;//1已认证0未认证
+    private int isLegal;//1合法0非法
+
+    public int getIsLegal() {
+        return isLegal;
+    }
+
+    public void setIsLegal(int isLegal) {
+        this.isLegal = isLegal;
+    }
+
+    public int getIsAuthentication() {
+        return isAuthentication;
+    }
+
+    public void setIsAuthentication(int isAuthentication) {
+        this.isAuthentication = isAuthentication;
+    }
+
+    public User(String username, String password, int id, String userpicUrl, String nickname, String sex, String location, String describe, String wallet,int isAuthentication,int isLegal) {
         this.username = username;
         this.password = password;
         this.id = id;
@@ -24,6 +43,8 @@ public class User {
         this.location = location;
         this.describe = describe;
         this.wallet=wallet;
+        this.isAuthentication=isAuthentication;
+        this.isLegal=isLegal;
     }
 
 //

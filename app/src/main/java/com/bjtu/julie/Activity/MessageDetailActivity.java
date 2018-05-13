@@ -49,7 +49,8 @@ public class MessageDetailActivity extends AppCompatActivity {
     ListView footDetailCommentList;
     @BindView(R.id.comment_btn)
     Button commentBtn;
-
+    @BindView(R.id.imageLike)
+    ImageView imageLike;
     Exchange exchange;
     @BindView(R.id.title_btn_back)
     TextView titleBtnBack;
@@ -58,7 +59,7 @@ public class MessageDetailActivity extends AppCompatActivity {
     @BindView(R.id.title_btn_ok)
     TextView titleBtnOk;
     private List<Comment> commList = new ArrayList<>();
-
+    boolean isLike=false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -86,7 +87,7 @@ public class MessageDetailActivity extends AppCompatActivity {
         //footDetailTextReward.setText("已支付在线报酬" + order.getReward() + "元");
 
         initMessCommInfo();
-
+        initLikeImage();
         //CommentAdapter adapter=new CommentAdapter(MessageDetailActivity.this,R.layout.comment_item,commList);
 //        ListView listview=(ListView)findViewById(R.id.messCommList);
 //        listview.setAdapter(adapter);
@@ -154,13 +155,67 @@ public class MessageDetailActivity extends AppCompatActivity {
         });
 
     }
+    private void initLikeImage() {
 
-    @OnClick({ R.id.comment_btn})
+        if (UserManager.getInstance().isLogined()) {
+            String url = "http://39.107.225.80:8080/julieServer/IsLikeServlet";
+            RequestParams params = new RequestParams(url);
+            params.setCharset("utf-8");
+            params.addParameter("userId", UserManager.getInstance().getUser().getId());
+            //params.addParameter("userId", 1);
+            params.addParameter("messId", exchange.getMessId());
+            x.http().get(params, new Callback.CommonCallback<String>() {
+
+                public void onSuccess(String result) {
+                    try {
+                        JSONObject jb = new JSONObject(result);
+                        if(jb.getString("msg").equals("已收藏")){
+                            imageLike.setImageResource(R.mipmap.like2);
+                            isLike=true;
+                        }
+                        else if(jb.getString("msg").equals("未收藏")){
+                            imageLike.setImageResource(R.mipmap.like1);
+                            isLike=false;
+                        }
+                        //Toast.makeText(x.app(), jb.getString("msg"), Toast.LENGTH_LONG).show();
+                        //finish();
+                        //Log.i("AAA", String.valueOf(jb.getInt("code"))+jb.getString("msg"));
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+
+                }
+
+                //请求异常后的回调方法
+                @Override
+                public void onError(Throwable ex, boolean isOnCallback) {
+                }
+
+                //主动调用取消请求的回调方法
+                @Override
+                public void onCancelled(CancelledException cex) {
+                }
+
+                @Override
+                public void onFinished() {
+
+                }
+            });
+        }else{
+            imageLike.setImageResource(R.mipmap.like1);
+        }
+
+
+    }
+    @OnClick({ R.id.comment_btn,R.id.imageLike})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.comment_btn:
                 if (!UserManager.getInstance().isLogined()) {
                     Toast.makeText(getApplicationContext(), "还没登陆哦", Toast.LENGTH_SHORT).show();
+                    return;
+                }else if (UserManager.getInstance().getUser().getIsLegal()==0) {
+                    Toast.makeText(getApplicationContext(), "信用差，功能暂不可用，请联系客服 （qq:stubborny）", Toast.LENGTH_SHORT).show();
                     return;
                 }
                 final EditText et = new EditText(this);
@@ -216,6 +271,97 @@ public class MessageDetailActivity extends AppCompatActivity {
                         });
                     }
                 });
+                break;
+            case R.id.imageLike:
+                if (!UserManager.getInstance().isLogined()) {
+                    Toast.makeText(getApplicationContext(), "还没登陆哦", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                if(isLike==false){
+                    String url = "http://39.107.225.80:8080/julieServer/PubLikeServlet";
+                    RequestParams params = new RequestParams(url);
+                    params.setCharset("utf-8");
+                    params.addParameter("userId", UserManager.getInstance().getUser().getId());
+                    //params.addParameter("userId", 1);
+                    params.addParameter("messId", exchange.getMessId());
+                    x.http().get(params, new Callback.CommonCallback<String>() {
+
+                        public void onSuccess(String result) {
+                            try {
+                                JSONObject jb = new JSONObject(result);
+                                //
+                                if(jb.getString("msg").equals("收藏成功")) {
+                                    Toast.makeText(x.app(), jb.getString("msg"), Toast.LENGTH_LONG).show();
+                                    imageLike.setImageResource(R.mipmap.like2);
+                                    isLike=true;
+                                }
+                                //finish();
+                                //Log.i("AAA", String.valueOf(jb.getInt("code"))+jb.getString("msg"));
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+
+                        }
+
+                        //请求异常后的回调方法
+                        @Override
+                        public void onError(Throwable ex, boolean isOnCallback) {
+                        }
+
+                        //主动调用取消请求的回调方法
+                        @Override
+                        public void onCancelled(CancelledException cex) {
+                        }
+
+                        @Override
+                        public void onFinished() {
+
+                        }
+                    });
+                    //Toast.makeText(,"发布成功",Toast.LENGTH_SHORT).show();
+                }
+                else{
+                    String url = "http://39.107.225.80:8080/julieServer/DelectLikeServlet";
+                    RequestParams params = new RequestParams(url);
+                    params.setCharset("utf-8");
+                    params.addParameter("userId", UserManager.getInstance().getUser().getId());
+                    //params.addParameter("userId", 1);
+                    params.addParameter("messId", exchange.getMessId());
+                    x.http().get(params, new Callback.CommonCallback<String>() {
+
+                        public void onSuccess(String result) {
+                            try {
+                                JSONObject jb = new JSONObject(result);
+                                //Toast.makeText(x.app(), jb.getString("msg"), Toast.LENGTH_LONG).show();
+                                if(jb.getString("msg").equals("取消收藏成功")) {Toast.makeText(x.app(), jb.getString("msg"), Toast.LENGTH_LONG).show();
+
+                                    imageLike.setImageResource(R.mipmap.like1);
+                                    isLike=true;
+                                }
+                                //finish();
+                                //Log.i("AAA", String.valueOf(jb.getInt("code"))+jb.getString("msg"));
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+
+                        }
+
+                        //请求异常后的回调方法
+                        @Override
+                        public void onError(Throwable ex, boolean isOnCallback) {
+                        }
+
+                        //主动调用取消请求的回调方法
+                        @Override
+                        public void onCancelled(CancelledException cex) {
+                        }
+
+                        @Override
+                        public void onFinished() {
+
+                        }
+                    });
+                }
                 break;
         }
     }

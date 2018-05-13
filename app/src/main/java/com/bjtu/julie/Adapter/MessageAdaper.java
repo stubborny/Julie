@@ -25,7 +25,7 @@ import java.util.List;
 
 public class MessageAdaper extends RecyclerView.Adapter<MessageAdaper.ViewHolder> {
     private List<Exchange> mMessList;
-    Integer number;
+
 
     static class ViewHolder extends RecyclerView.ViewHolder{
         View messView;
@@ -35,6 +35,7 @@ public class MessageAdaper extends RecyclerView.Adapter<MessageAdaper.ViewHolder
         TextView messContent;
         TextView messTime;
         TextView messComment;
+        TextView messLike;
         public ViewHolder(View view){
             super(view);
             messView=view;
@@ -43,6 +44,7 @@ public class MessageAdaper extends RecyclerView.Adapter<MessageAdaper.ViewHolder
             messTime=(TextView)view.findViewById(R.id.messPubTime);
             messContent=(TextView)view.findViewById(R.id.messContent);
             messComment=(TextView)view.findViewById(R.id.messComment);
+            messLike=(TextView)view.findViewById(R.id.messAttention);
         }
     }
     public  MessageAdaper(List<Exchange> MessList){
@@ -80,6 +82,7 @@ public class MessageAdaper extends RecyclerView.Adapter<MessageAdaper.ViewHolder
         holder.messContent.setText(exchange.getContent());
         holder.messTime.setText(new DateUtil().diffDate(exchange.getTime().substring(0,19)));
         holder.messComment.setText("评论（"+ exchange.getcommentNum()+")");
+        holder.messLike.setText("收藏（"+exchange.getLikeNum()+")");
     }
     @Override
     public int getItemCount(){

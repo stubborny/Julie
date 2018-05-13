@@ -188,7 +188,13 @@ public class Pub_footActivity extends AppCompatActivity {
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.title_btn_ok:
-                if (pubFootEdit.getText().toString().equals("")) {
+                if (!UserManager.getInstance().isLogined()) {
+                    Toast.makeText(getApplicationContext(), "还没登陆哦", Toast.LENGTH_SHORT).show();
+                }
+                else if (UserManager.getInstance().getUser().getIsLegal()==0) {
+                    Toast.makeText(getApplicationContext(), "信用差，功能暂不可用，请联系客服 （qq:stubborny）", Toast.LENGTH_SHORT).show();
+
+                } else if (pubFootEdit.getText().toString().equals("")) {
                     Toast.makeText(getApplicationContext(), "不说说你要做什么？？", Toast.LENGTH_SHORT).show();
                     pubFootEdit.requestFocus();
                 } else if (pubFootAddressEdit.getText().toString().equals("")) {

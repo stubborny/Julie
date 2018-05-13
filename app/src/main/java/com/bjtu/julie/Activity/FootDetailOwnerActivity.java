@@ -1,5 +1,6 @@
 package com.bjtu.julie.Activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AlertDialog;
@@ -156,6 +157,10 @@ public class FootDetailOwnerActivity extends AppCompatActivity {
             getReceiver();
             //判断是否评价过 没有 可评价同学，已经评价过按钮设置为不可点击状态，字改为已评价
             footDetailBtnReceive.setText("可评价同学");
+        }if(order.getIsEvaluate()==1){
+            //isEvaluate();
+            footDetailBtnReceive.setText("已评价");
+            footDetailBtnReceive.setBackgroundColor(footDetailBtnReceive.getResources().getColor(R.color.darkgrey));
         }
         //物流节点
         list = new ArrayList<String>();
@@ -271,7 +276,14 @@ public class FootDetailOwnerActivity extends AppCompatActivity {
                         }
                     });
                 }
+                else if(oState == 4){
+                    //Order order=mMessList.get(position);
+                    Intent intent = new Intent(FootDetailOwnerActivity.this,EvaluateActivity.class);
+                    intent.putExtra("order",order);
+                    startActivity(intent);
+                }
                 break;
+
             case R.id.foot_detail_btn_comment:
                 final EditText et = new EditText(this);
                 final AlertDialog dialog = new AlertDialog.Builder(this).setTitle("评论")

@@ -7,8 +7,8 @@ public class Order implements Serializable {
     private String footId;
     private int userId;
     private int receiveId;
-
-    public Order(String footId, int userId, int receiveId, String userpicUrl, String username, String state, String content, String address, String reward, String time, String phone) {
+    private int isEvaluate;
+    public Order(String footId, int userId, int receiveId, String userpicUrl, String username, String state, String content, String address, String reward, String time, String phone,int isEvaluate) {
         this.receiveId = receiveId;
         this.userId = userId;
         this.footId = footId;
@@ -20,6 +20,7 @@ public class Order implements Serializable {
         this.reward = reward;
         this.time = time;
         this.phone = phone;
+        this.isEvaluate=isEvaluate;
     }
 
     private String userpicUrl;
@@ -137,5 +138,13 @@ public class Order implements Serializable {
 
     public void setTime(String time) {
         this.time = time;
+    }
+
+    public int getIsEvaluate() {
+        return isEvaluate;
+    }
+
+    public void setIsEvaluate(int isEvaluate) {
+        this.isEvaluate = isEvaluate;
     }
 }
