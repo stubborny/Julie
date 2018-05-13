@@ -1,6 +1,8 @@
 package com.bjtu.julie.Activity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -10,6 +12,10 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.bjtu.julie.MainActivity;
+import com.bjtu.julie.Model.User;
+import com.bjtu.julie.Model.UserManager;
+import com.bjtu.julie.MyApplication;
 import com.bjtu.julie.R;
 
 import org.json.JSONException;
@@ -33,13 +39,38 @@ public class LoginActivity extends AppCompatActivity {
     private CheckBox checkBoxLoginChoose;
     private CheckBox checkBoxRemindPassword;
     private CheckBox checkBoxAutomaticLogin;
+    private SharedPreferences sp;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-
         init();//初始化界面
+        //判断是否有登陆记录
+
+        //  if ((sp.getString("USER_NAME", "")) != null) {
+        //直接提供用户号码
+        //      textPhoneNumber.setText(sp.getString("PHONENUMBER", ""));
+        //    }
+        //判断是否记住密码
+        //   if (sp.getBoolean("ISCHECK", true)) {
+        //直接提供密码
+        //       textPassword.setText(sp.getString("PASSWORD", ""));
+        //       checkBoxRemindPassword.setChecked(true);
+        //判断是否自动登录
+        //      if (sp.getBoolean("AUTO_ISCHECK", true)) {
+               /* //直接登录
+                checkBoxAutomaticLogin.setChecked(true);
+
+                // 登录信息获取
+                phoneNumber = textPhoneNumber.getText().toString();
+                password = textPassword.getText().toString();
+
+                // 链接服务器
+                loginResultByPassword(phoneNumber, password);*/
+        //   }
+        final MyApplication us = (MyApplication) getApplication();
         /**
          * 登陆按钮点击事件
          */
@@ -49,7 +80,7 @@ public class LoginActivity extends AppCompatActivity {
                 //判断手机号码是否合法
                 Pattern p = Pattern.compile("^((13[0-9])|(14[5|7])|(15([0-3]|[5-9]))|(17[013678])|(18[0,5-9]))\\d{8}$");
                 Matcher m = p.matcher(textPhoneNumber.getText().toString());
-                if(m.matches()==false) {
+                if (m.matches() == false) {
                     Toast.makeText(getApplicationContext(), "请输入真实有效的手机号！",
                             Toast.LENGTH_SHORT).show();
                     return;
@@ -64,13 +95,51 @@ public class LoginActivity extends AppCompatActivity {
                     public void onSuccess(String result) {
                         try {
                             JSONObject jb = new JSONObject(result);
-                           //Log.i("AAA", String.valueOf(jb.getInt("code"))+jb.getString("msg"));
-                            Toast.makeText(x.app(), jb.getString("msg"), Toast.LENGTH_LONG).show();
+                            //Log.i("AAA", String.valueOf(jb.getInt("code"))+jb.getString("msg"));
 
+                            if (jb.getInt("code") == 1) {
+                                us.setStatus(1);//设置用户状态为在线
+                                //记住密码
+                                //获取修改本地用户信息的能力
+                                //    SharedPreferences.Editor editor = sp.edit();
+                                //修改本地用户信息，更改其记住的号码
+                                //  editor.putString("PHONENUMBER", textPhoneNumber.getText().toString());
+                                //判断是否选择了记住密码
+                                //  if (checkBoxRemindPassword.isChecked()) {
+                                //修改本地用户信息，使之记住密码
+                                //    editor.putBoolean("ISCHECK", true);
+                                //     editor.putString("PASSWORD", textPassword.getText().toString());
+                                //      editor.commit();
+                                //判断是否选择了自动登录
+                                //   if (checkBoxAutomaticLogin.isChecked()) {
+                                //修改本地用户信息，使之能自动登录
+                                //        editor.putBoolean("AUTO_ISCHECK", true);
+                                //       editor.commit();
+                                //     } else {//修改本地用户信息，使之不能自动登录
+                                //         editor.putBoolean("AUTO_ISCHECK", false);
+                                //         editor.commit();
+                                //      }
+                                //  } else {//修改本地用户信息，使之不能记住密码
+                                //       editor.putBoolean("ISCHECK", false);
+                                //      editor.putBoolean("AUTO_ISCHECK", false);
+                                //       editor.commit();
+                                //   }
+                                JSONObject job = jb.getJSONObject("data");
+                                User user = new User(job.getString("username"), job.getString("password"), job.getInt("id"), job.getString("userpicUrl"), job.getString("nickname"), job.getString("sex"), job.getString("location"), job.getString("describe"),job.getInt("isAuthentication"),job.getInt("isLegal"));
+                                UserManager userManager = UserManager.getInstance();
+                                userManager.setUser(user);
+//                               sp = getSharedPreferences("userInfo", Context.MODE_PRIVATE);
+                                //                               SharedPreferences.Editor edit = sp.edit();
+//                              edit.putString("name",textPhoneNumber.getText().toString());
+//                                edit.apply();
+//                                finish();
+                                //   Toast.makeText(x.app(), jb.getString("msg"), Toast.LENGTH_LONG).show();
+                                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                                startActivity(intent);
+                            }
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
-
                     }
 
                     //请求异常后的回调方法
@@ -108,6 +177,7 @@ public class LoginActivity extends AppCompatActivity {
         });
 
     }
+    //  }
 
     /*
     界面初始化

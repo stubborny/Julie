@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@drawable/bg_start"
+    android:background="@mipmap/bg_start"
     android:baselineAligned="false">
 
     <ImageView
@@ -24,7 +24,7 @@
             android:layout_height="240dp"
             android:layout_weight="1"
             android:scaleType="fitCenter"
-            android:src="@drawable/logo" />
+            android:src="@mipmap/logo" />
     </LinearLayout>
 
     <LinearLayout

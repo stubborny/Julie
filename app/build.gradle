@@ -28,14 +28,18 @@ dependencies {
     compile files('libs/MobCommons-2016.1012.1447.jar')
     compile(name: 'SMSSDK-2.1.2', ext: 'aar')
     compile files('libs/alipaySdk-20180316.jar')
+
     compile 'com.android.support:appcompat-v7:26.+'
     compile 'com.android.support:recyclerview-v7:26.+'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
     compile 'com.loopj.android:android-async-http:1.4.9'
     compile 'org.xutils:xutils:3.5.0'
     compile 'com.jakewharton:butterknife:8.5.1'
-    annotationProcessor 'com.jakewharton:butterknife-compiler:8.5.1'
+    compile 'com.lhz:StateProgressView:1.0.1'
+    compile 'org.greenrobot:eventbus:3.1.1'
+    compile 'com.jimi_wu:PTLRecyclerView:1.1.1'
     testCompile 'junit:junit:4.12'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:8.5.1'
 }
 
 repositories {

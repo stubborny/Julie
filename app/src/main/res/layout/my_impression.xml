@@ -1,0 +1,130 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/change_all"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical">
+    <com.bjtu.julie.TitleLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <include layout="@layout/title1" />
+    </com.bjtu.julie.TitleLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <!--  头像框  -->
+
+            <LinearLayout
+                android:id="@+id/ll_info"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="20"
+                android:alpha="1"
+                android:background="@color/theme"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="30dp"
+                        android:layout_height="40dp" />
+
+                    <ImageView
+                        android:id="@+id/impression_head"
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:src="@mipmap/headtest" />
+
+
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="30dp"
+                    android:layout_height="wrap_content" />
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:id="@+id/impression_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="25dp"
+                        android:text="id=blabla"
+                        android:textColor="@color/whitesmoke"
+                        android:textSize="19sp" />
+                    <!--android:textStyle="italic|bold"斜体-->
+                    <TextView
+                        android:id="@+id/identification_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="25dp"
+                        android:text="已认证"
+                        android:textColor="@color/whitesmoke"
+                        android:textSize="9sp"
+                        android:layout_gravity="top"
+                        android:gravity="top"
+                        android:layout_marginLeft="7dp" />
+                </LinearLayout>
+                <TextView
+                    android:layout_width="30dp"
+                    android:layout_height="15dp" />
+
+            </LinearLayout>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:orientation="horizontal"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp">
+
+            <TextView
+                android:id="@+id/total_thumb_up"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:textColor="@color/theme"
+                android:textSize="15sp"
+                android:gravity="center_vertical"
+                android:text="印象列表"/>
+            <TextView
+                android:id="@+id/total_grade_text"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="80分"
+                android:textColor="@color/theme"
+                android:textSize="30sp"
+                android:gravity="center_vertical|right"/>
+
+
+        </LinearLayout>
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="10dp"
+            android:src="@color/gainsboro"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/ImpressionRecycleView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="93dp"
+        android:orientation="horizontal"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp">
+
+        <LinearLayout
+            android:layout_width="98dp"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:weightSum="1">
+
+            <TextView
+                android:id="@+id/discount_text_money"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="￥3.9"
+                android:gravity="center"
+                android:textSize="30sp"
+                android:textColor="@color/red"/>
+
+            <TextView
+                android:id="@+id/discount_text_usable"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:layout_marginTop="10dp"
+                android:text="满5元可用" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_weight="1"
+            android:layout_marginBottom="5dp">
+
+            <TextView
+                android:id="@+id/discount_text_name"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:text="女生节限时特惠"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:textSize="20sp"
+                android:textColor="@color/black"/>
+
+            <TextView
+                android:id="@+id/discount_text_deadline"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="2018-5-12到期"
+                android:gravity="center_vertical"/>
+
+            <TextView
+                android:id="@+id/discount_text_limit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="不可与其他优惠叠加" />
+        </LinearLayout>
+
+        <CheckBox
+            android:id="@+id/discount_cbox_choose"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginStart="10dp"
+            android:layout_gravity="center"/>
+    </LinearLayout>
+    <View
+        android:id="@+id/view"
+        android:layout_width="match_parent"
+        android:layout_height="5dp"
+        android:background="@color/background" />
+</LinearLayout>

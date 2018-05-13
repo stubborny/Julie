@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/whitesmoke">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="52dp"
+                android:background="@color/theme">
+
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:ellipsize="marquee"
+                    android:gravity="center_horizontal|center"
+                    android:singleLine="true"
+                    android:text="联系反馈"
+                    android:textColor="@color/white"
+                    android:textSize="22sp" />
+
+            </RelativeLayout>
+        </LinearLayout>
+
+            <EditText
+                   android:id="@+id/feedbackEdit"
+                   android:layout_width="match_parent"
+                   android:layout_height="150dp"
+                   android:background="@color/white"
+                   android:gravity="top"
+                   android:hint="
+         同学你好，如有问题请留言，客服会尽快回复  "
+                   android:textColorHint="@color/darkgrey"
+                   android:textSize="15sp"
+                   android:maxLines="5"
+                   android:textCursorDrawable="@null"/>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="15dp"
+        android:background="@color/whitesmoke"/>
+
+    <Button
+        android:id="@+id/commitFeedback"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:background="@drawable/round_radius2"
+        android:text="提交"
+        android:textSize="16sp" />
+
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="15dp"
+        android:background="@color/whitesmoke"/>
+    <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="紧急情况联系客服微信：starystopshy"/>
+
+
+
+</LinearLayout>
