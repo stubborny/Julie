@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -64,6 +65,16 @@ public class FootDetailVisitorActivity extends AppCompatActivity {
     TextView titleText;
     @BindView(R.id.title_btn_ok)
     TextView titleBtnOk;
+    @BindView(R.id.foot_detail_addNeed1)
+    TextView footDetailAddNeed1;
+    @BindView(R.id.foot_detail_addNeed2)
+    TextView footDetailAddNeed2;
+    @BindView(R.id.foot_detail_addNeed3)
+    TextView footDetailAddNeed3;
+    @BindView(R.id.foot_detail_addNeed4)
+    TextView footDetailAddNeed4;
+    @BindView(R.id.foot_detail_addNeed)
+    LinearLayout footDetailAddNeed;
     private List<Comment> commList = new ArrayList<>();
 
     @Override
@@ -86,8 +97,30 @@ public class FootDetailVisitorActivity extends AppCompatActivity {
         footDetailTextContent.setText(order.getContent());
         footDetailTextAddress.setText(order.getAddress());
         footDetailTextTime.setText(new DateUtil().diffDate(order.getTime().substring(0, 19)));
-        footDetailTextReward.setText("已支付在线报酬" + order.getReward() + "元");
-        footDetailBtnReceive.setVisibility(View.GONE);
+        if (order.getPayOnline() == 1) {
+            footDetailTextReward.setText("报酬" + order.getReward() + "元[已在线支付]");
+        } else {
+            footDetailTextReward.setText("报酬" + order.getReward() + "元[不经平台，线下支付]");
+        }
+        if (order.getAddNeed().equals("0,0,0,0")) {
+            footDetailAddNeed.setVisibility(View.GONE);
+        } else {
+            String[] strArray = null;
+            strArray = order.getAddNeed().split(","); //拆分字符为"," ,然后把结果交给数组strArray
+            if (strArray[0].equals("0")) {
+                footDetailAddNeed1.setVisibility(View.GONE);
+            }
+            if (strArray[1].equals("0")) {
+                footDetailAddNeed2.setVisibility(View.GONE);
+            }
+            if (strArray[2].equals("0")) {
+                footDetailAddNeed3.setVisibility(View.GONE);
+            }
+            if (strArray[3].equals("0")) {
+                footDetailAddNeed4.setVisibility(View.GONE);
+            }
+
+        }        footDetailBtnReceive.setVisibility(View.GONE);
         footDetailView.setVisibility(View.GONE);
         //物流节点
         list = new ArrayList<String>();

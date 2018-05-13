@@ -30,6 +30,25 @@ public class Order implements Serializable {
     private String reward;
     private String time;
 
+    private int payOnline;
+    private String addNeed;
+
+    public int getPayOnline() {
+        return payOnline;
+    }
+
+    public void setPayOnline(int payOnline) {
+        this.payOnline = payOnline;
+    }
+
+    public String getAddNeed() {
+        return addNeed;
+    }
+
+    public void setAddNeed(String addNeed) {
+        this.addNeed = addNeed;
+    }
+
     public int getUserId() {
         return userId;
     }
