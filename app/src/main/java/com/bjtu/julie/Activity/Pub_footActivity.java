@@ -329,6 +329,7 @@ public class Pub_footActivity extends AppCompatActivity {
                             } catch (JSONException e) {
                                 e.printStackTrace();
                             }
+
                         }
 
                         //请求异常后的回调方法

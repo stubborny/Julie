@@ -28,8 +28,7 @@ dependencies {
 
     compile files('libs/MobCommons-2016.1012.1447.jar')
     compile(name: 'SMSSDK-2.1.2', ext: 'aar')
-    //compile files('libs/alipaySdk-20180316.jar')
-    //noinspection GradleCompatible
+    compile files('libs/alipaySdk-20180316.jar')
     compile 'com.android.support:appcompat-v7:26+'
     compile 'com.android.support:recyclerview-v7:26+'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'

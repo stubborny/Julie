@@ -42,7 +42,6 @@
             android:launchMode="singleTask">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -78,6 +77,7 @@
             android:name=".Activity.P_MessageActivity"
             android:label="@string/title_activity_p__message"
             android:theme="@style/AppTheme" />
+        <activity android:name=".Activity.MessageActivity" />
 
         <service
             android:name=".Service.PollingService"

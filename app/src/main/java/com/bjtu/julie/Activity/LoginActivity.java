@@ -177,7 +177,6 @@ public class LoginActivity extends AppCompatActivity {
         });
 
     }
-    //}
 
     /*
     界面初始化

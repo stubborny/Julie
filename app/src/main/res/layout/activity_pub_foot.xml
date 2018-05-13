@@ -105,7 +105,7 @@
                     android:layout_marginLeft="20dp"
                     android:gravity="center_vertical"
                     android:text="送到宿舍"
-                    android:textColor="@drawable/text_color"
+                    android:textColor="@color/darkgrey"
                     android:textSize="13sp" />
 
                 <TextView
