@@ -1,19 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-xmlns:app="http://schemas.android.com/apk/res-auto"
-android:layout_width="match_parent"
-android:layout_height="match_parent"
-android:orientation="vertical"
-    android:weightSum="1">
-    <com.bjtu.julie.TitleLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
-        <include layout="@layout/title1" />
-    </com.bjtu.julie.TitleLayout>
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/messRecycleView"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:weightSum="1">
 
-</LinearLayout>
+        <com.bjtu.julie.TitleLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <include layout="@layout/title1" />
+        </com.bjtu.julie.TitleLayout>
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/messRecycleView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+    <include layout="@layout/menu_layout" />
+
+</RelativeLayout>

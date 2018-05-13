@@ -43,6 +43,7 @@ dependencies {
     compile 'com.jimi_wu:PTLRecyclerView:1.1.1'
 // https://mvnrepository.com/artifact/com.alipay.sdk/alipay-sdk-java
     compile group: 'com.alipay.sdk', name: 'alipay-sdk-java', version: '3.0.0'
+    compile 'com.github.lilei644:SpringActionMenu:1.0.0'
 
 }
 

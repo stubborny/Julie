@@ -1,7 +1,9 @@
 package com.bjtu.julie.Fragment;
 
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -11,10 +13,15 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bjtu.julie.Activity.P_MessageActivity;
+import com.bjtu.julie.Activity.Pub_footActivity;
 import com.bjtu.julie.Adapter.MessageAdaper;
 import com.bjtu.julie.FullyLinearLayoutManager;
 import com.bjtu.julie.Model.Exchange;
+import com.bjtu.julie.Model.UserManager;
 import com.bjtu.julie.R;
+import com.lilei.springactionmenu.ActionMenu;
+import com.lilei.springactionmenu.OnActionItemClickListener;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -40,7 +47,59 @@ public class MessageFragment extends Fragment {
     TextView titleBtnOk;
     private List<Exchange> exchangeList = new ArrayList<>();
     Unbinder unbinder;
+    @BindView(R.id.actionMenu)
+    ActionMenu actionMenu;
 
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        //初始化悬浮菜单按钮选项
+        actionMenu.addView(R.drawable.like, getItemColor(R.color.menuNormalRed), getItemColor(R.color.menuPressRed));
+        actionMenu.addView(R.drawable.write, getItemColor(R.color.menuNormalInfo), getItemColor(R.color.menuPressInfo));
+        actionMenu.setItemClickListener(new OnActionItemClickListener() {
+            @Override
+            public void onItemClick(int index) {
+                switch (index) {
+                    case 0:
+                        //加号按钮，点击后弹出子菜单
+                        break;
+                    case 1:
+                        //从下往上第2个子菜单
+                        //判断是否登录
+                        if (!UserManager.getInstance().isLogined()) {
+                            Toast.makeText(getContext(), "还没登陆哦", Toast.LENGTH_SHORT).show();
+                            return;
+                        }
+                        Intent intent1 = new Intent(getActivity(), P_MessageActivity.class);
+                        startActivity(intent1);
+                        break;
+                    case 2:
+                        //从下往上第3个子菜单
+                        //判断是否登录
+                        if (!UserManager.getInstance().isLogined()) {
+                            Toast.makeText(getContext(), "还没登陆哦", Toast.LENGTH_SHORT).show();
+                            return;
+                        }
+                        Intent intent = new Intent(getActivity(), Pub_footActivity.class);
+                        startActivity(intent);
+                        break;
+                    default:
+                        Toast.makeText(getActivity().getApplicationContext(), "菜单", Toast.LENGTH_SHORT).show();
+                        break;
+                }
+
+            }
+
+            @Override
+            public void onAnimationEnd(boolean isOpen) {
+
+            }
+        });
+    }
+
+    private int getItemColor(int colorID) {
+        return getResources().getColor(colorID);
+    }
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {

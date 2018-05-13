@@ -6,6 +6,12 @@
     <color name="theme">#3399CC</color>
     <color name="background">#9C3399CC</color>
 
+    <!-- action menu color -->
+    <color name="menuNormalRed">#ffff0000</color>
+    <color name="menuPressRed">#ffd2322d</color>
+    <color name="menuNormalInfo">#ff90FB98</color>
+    <color name="menuPressInfo">#ff98ff90</color>
+
     <color name="black">#000000</color><!--黑色 -->
     <color name="white">#FFFFFF</color><!--白色-->
     <color name="snow">#fffafa</color><!--雪白色 -->

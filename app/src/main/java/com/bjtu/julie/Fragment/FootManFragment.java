@@ -2,6 +2,7 @@ package com.bjtu.julie.Fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -9,7 +10,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
-import com.bjtu.julie.Activity.MessageDetailActivity;
 import com.bjtu.julie.Activity.P_MessageActivity;
 import com.bjtu.julie.Activity.Pub_footActivity;
 import com.bjtu.julie.Adapter.FootManAdaper;
@@ -17,7 +17,8 @@ import com.bjtu.julie.FullyLinearLayoutManager;
 import com.bjtu.julie.Model.Order;
 import com.bjtu.julie.Model.UserManager;
 import com.bjtu.julie.R;
-import com.jimi_wu.ptlrecyclerview.PullToRefresh.PullToRefreshRecyclerView;
+import com.lilei.springactionmenu.ActionMenu;
+import com.lilei.springactionmenu.OnActionItemClickListener;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -29,6 +30,7 @@ import org.xutils.x;
 import java.util.ArrayList;
 import java.util.List;
 
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
@@ -36,6 +38,59 @@ import butterknife.Unbinder;
 public class FootManFragment extends Fragment {
     public List<Order> orderlist = new ArrayList<>();
     Unbinder unbinder;
+    @BindView(R.id.actionMenu)
+    ActionMenu actionMenu;
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        //初始化悬浮菜单按钮选项
+        actionMenu.addView(R.drawable.like, getItemColor(R.color.menuNormalRed), getItemColor(R.color.menuPressRed));
+        actionMenu.addView(R.drawable.write, getItemColor(R.color.menuNormalInfo), getItemColor(R.color.menuPressInfo));
+        actionMenu.setItemClickListener(new OnActionItemClickListener() {
+            @Override
+            public void onItemClick(int index) {
+                switch (index) {
+                    case 0:
+                        //加号按钮，点击后弹出子菜单
+                        break;
+                    case 1:
+                        //从下往上第2个子菜单
+                        //判断是否登录
+                        if (!UserManager.getInstance().isLogined()) {
+                            Toast.makeText(getContext(), "还没登陆哦", Toast.LENGTH_SHORT).show();
+                            return;
+                        }
+                        Intent intent1 = new Intent(getActivity(), P_MessageActivity.class);
+                        startActivity(intent1);
+                        break;
+                    case 2:
+                        //从下往上第3个子菜单
+                        //判断是否登录
+                        if (!UserManager.getInstance().isLogined()) {
+                            Toast.makeText(getContext(), "还没登陆哦", Toast.LENGTH_SHORT).show();
+                            return;
+                        }
+                        Intent intent = new Intent(getActivity(), Pub_footActivity.class);
+                        startActivity(intent);
+                        break;
+                    default:
+                        Toast.makeText(getActivity().getApplicationContext(), "菜单", Toast.LENGTH_SHORT).show();
+                        break;
+                }
+
+            }
+
+            @Override
+            public void onAnimationEnd(boolean isOpen) {
+
+            }
+        });
+    }
+
+    private int getItemColor(int colorID) {
+        return getResources().getColor(colorID);
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -100,11 +155,6 @@ public class FootManFragment extends Fragment {
         return orderLayout;
     }
 
-    private void initGuide() {
-
-//        Order exorder = new Order("footId", "userpicUrl", "username", "1", "content", "address", "reward", "2018-09-09 09:12:33.0");
-//        orderlist.add(exorder);
-    }
 
     @Override
     public void onDestroyView() {

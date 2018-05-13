@@ -100,6 +100,7 @@
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/exploded-aar/com.android.support/support-v4/26.0.0-alpha1/jars" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/exploded-aar/com.android.support/support-vector-drawable/26.0.0-alpha1/jars" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/exploded-aar/com.android.support/transition/25.2.0/jars" />
+      <excludeFolder url="file://$MODULE_DIR$/build/intermediates/exploded-aar/com.github.lilei644/SpringActionMenu/1.0.0/jars" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/exploded-aar/com.jakewharton/butterknife/8.5.1/jars" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/exploded-aar/com.jimi_wu/PTLRecyclerView/1.1.1/jars" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/exploded-aar/com.lhz/StateProgressView/1.0.1/jars" />
@@ -162,6 +163,7 @@
     <orderEntry type="library" exported="" name="alipaySdk-20180316" level="project" />
     <orderEntry type="library" exported="" name="MobCommons-2016.1012.1447" level="project" />
     <orderEntry type="library" exported="" name="animated-vector-drawable-26.0.0-alpha1" level="project" />
+    <orderEntry type="library" exported="" name="SpringActionMenu-1.0.0" level="project" />
     <orderEntry type="library" exported="" name="android-async-http-1.4.9" level="project" />
   </component>
 </module>
