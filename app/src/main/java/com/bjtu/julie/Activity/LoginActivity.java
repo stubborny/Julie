@@ -49,8 +49,8 @@ public class LoginActivity extends AppCompatActivity {
         init();//初始化界面
         final MyApplication us = (MyApplication) getApplication();
         /**
-         * 登陆按钮点击事件
-         */
+         * 登陆按钮点击事件0.
+
         buttonLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -77,7 +77,8 @@ public class LoginActivity extends AppCompatActivity {
                             Toast.makeText(x.app(), jb.getString("msg"), Toast.LENGTH_LONG).show();
                             if (jb.getInt("code") == 1) {
                                 us.setStatus(1);//设置用户状态为在线
-                                //SharedPreferences记住用户名还行
+                                //SharedPreferences记住用户名还行22asq
+
                                 JSONObject job = jb.getJSONObject("data");
                                 User user = new User(job.getString("username"), job.getString("password"), job.getInt("id"), job.getString("userpicUrl"), job.getString("nickname"));
                                 UserManager userManager = UserManager.getInstance();

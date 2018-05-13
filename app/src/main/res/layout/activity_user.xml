@@ -270,7 +270,6 @@
                     android:layout_width="0dp"
                     android:layout_weight="0.5"
                     android:layout_height="wrap_content" />
-
                 <ImageView
                     android:id="@+id/imageView6"
                     android:layout_width="0dp"

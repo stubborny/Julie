@@ -9,6 +9,7 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -38,6 +39,8 @@ public class RegActivity extends AppCompatActivity {
     private EditText textIdentifyingCode;
     private Button buttonRegister;
     private Button buttonSendMessage;
+    private Button buttonUserfile;
+    private CheckBox checkUserfile;
     private int i = 60;//倒计时
 
     @Override
@@ -145,6 +148,8 @@ public class RegActivity extends AppCompatActivity {
         textIdentifyingCode = (EditText) findViewById(R.id.RegisterIdentifyingCode);
         buttonSendMessage = (Button) findViewById(R.id.SendIdentify);
         buttonRegister = (Button) findViewById(R.id.RegisterDetermination);
+        checkUserfile = (CheckBox) findViewById(R.id.cb_read_userfile);
+        buttonUserfile = (Button) findViewById(R.id.bt_read_userfile);
 
     }
 

@@ -131,7 +131,6 @@
                 android:text="在主界面底栏[个人]→[我的钱包]→[提现]中就可以操作啦~"
                 android:textSize="13sp"
                 android:textColor="@color/theme"/>
-
         </LinearLayout>
         </LinearLayout>
 
