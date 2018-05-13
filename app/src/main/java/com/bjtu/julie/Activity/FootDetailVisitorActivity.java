@@ -91,6 +91,7 @@ public class FootDetailVisitorActivity extends AppCompatActivity {
                 .setImageScaleType(ImageView.ScaleType.CENTER_CROP)
                 .setFailureDrawableId(R.mipmap.load_error)
                 .setLoadingDrawableId(R.mipmap.loading)
+                .setCircular(true)
                 .build();
         x.image().bind(footDetailImgUserpic, order.getUserpicUrl(), imageOptions);
         footDetailTextNickname.setText(order.getNickname());
@@ -120,7 +121,8 @@ public class FootDetailVisitorActivity extends AppCompatActivity {
                 footDetailAddNeed4.setVisibility(View.GONE);
             }
 
-        }        footDetailBtnReceive.setVisibility(View.GONE);
+        }
+        footDetailBtnReceive.setVisibility(View.GONE);
         footDetailView.setVisibility(View.GONE);
         //物流节点
         list = new ArrayList<String>();
@@ -130,7 +132,6 @@ public class FootDetailVisitorActivity extends AppCompatActivity {
         list.add("已送达");
         list.add("已结单");
         spv.setItems(list, Integer.valueOf(order.getState()) - 1, 200);
-        //spv.setItems(list,0, 200);
         initFootCommInfo();
 
 

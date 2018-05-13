@@ -100,6 +100,7 @@ public class FootManAdaper extends RecyclerView.Adapter<FootManAdaper.ViewHolder
                 .setImageScaleType(ImageView.ScaleType.CENTER_CROP)
                 .setFailureDrawableId(R.mipmap.load_error)
                 .setLoadingDrawableId(R.mipmap.loading)
+                .setCircular(true)
                 .build();
         x.image().bind(holder.mImgUserpic, order.getUserpicUrl(), imageOptions);
         holder.mTextUsername.setText(order.getNickname());

@@ -14,7 +14,6 @@ import android.widget.Toast;
 
 import com.bjtu.julie.Adapter.GradeAdapter;
 import com.bjtu.julie.Model.Grade;
-import com.bjtu.julie.Model.UserInfo;
 import com.bjtu.julie.R;
 import com.bjtu.julie.View.ShapeImageView;
 
@@ -53,10 +52,6 @@ public class ImpressionActivity extends AppCompatActivity {
     TextView titleBtnOk;*/
 
     private String name;
-//    private List<UserInfo> userinfoList=new ArrayList<>();
-//    private UserInfo userinfo = new UserInfo(null,null,null,null,null);
-    private List<UserInfo> userinfoList=new ArrayList<>();
-    private UserInfo userinfo = new UserInfo(null,null,null,null,null);
     private List<Grade> gradeList=new ArrayList<>();
 
     @Override

@@ -13,6 +13,7 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.os.Message;
 import android.provider.MediaStore;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
@@ -103,22 +104,12 @@ public class SettingFragment extends Fragment {
     @BindView(R.id.change_all)
     FrameLayout changeAll;
     Unbinder unbinder;
-
-    @BindView(R.id.imageView4)
-    ImageView imageView4;
-    @BindView(R.id.imageView5)
-    ImageView imageView5;
-    @BindView(R.id.imageView6)
-    ImageView imageView6;
-    @BindView(R.id.ll_exit)
-    LinearLayout llExit;
+    @BindView(R.id.logout)
+    LinearLayout logout;
     private String picUrl = null;
     private String userpicstring = "haha";
 
     private String name;
-//    private List<UserInfo> userinfoList = new ArrayList<>();
-//    private UserInfo userinfo = new UserInfo(null, null, null, null, null);
-//    //final MyApplication us = (MyApplication) getActivity().getApplication();
 
 
     @Override
@@ -134,7 +125,7 @@ public class SettingFragment extends Fragment {
             } else {
                 user1TvPrename.setText(UserManager.getInstance().getUser().getNickname());
             }
-            llExit.setVisibility(View.VISIBLE);
+            logout.setVisibility(View.VISIBLE);
             ImageOptions imageOptions = new ImageOptions.Builder()
                     .setIgnoreGif(false)//是否忽略gif图。false表示不忽略。不写这句，默认是true
                     .setImageScaleType(ImageView.ScaleType.CENTER_CROP)
@@ -144,6 +135,8 @@ public class SettingFragment extends Fragment {
                     .build();
             x.image().bind(user1IvPrehead, UserManager.getInstance().getUser().getUserpicUrl(), imageOptions);
         } else {
+            logout.setVisibility(View.GONE);
+            user1TvPrename.setText("登录/注册");
             //未登陆
             ImageOptions imageOptions = new ImageOptions.Builder()
                     .setIgnoreGif(false)//是否忽略gif图。false表示不忽略。不写这句，默认是true
@@ -164,24 +157,27 @@ public class SettingFragment extends Fragment {
     }
 
 
-    @OnClick(R.id.ll_exit)
+    @OnClick(R.id.logout)
     public void onViewClicked() {
-        final MyApplication us = (MyApplication) getActivity().getApplication();
-        us.setStatus(0);
-        SharedPreferences sp = getContext().getSharedPreferences("userInfo", Context.MODE_PRIVATE);
-        SharedPreferences.Editor edit = sp.edit();
-        edit.putString("name", "登录/注册");
-        edit.apply();
-        getActivity().onBackPressed();
-        Intent intent = new Intent(getContext(), MainActivity.class);
-        startActivity(intent);
+        //Toast.makeText(getContext(), "注销", Toast.LENGTH_SHORT).show();
+        UserManager.getInstance().setUser(null);
+        logout.setVisibility(View.GONE);
+        user1TvPrename.setText("登录/注册");
+        //未登陆
+        ImageOptions imageOptions = new ImageOptions.Builder()
+                .setIgnoreGif(false)//是否忽略gif图。false表示不忽略。不写这句，默认是true
+                .setImageScaleType(ImageView.ScaleType.CENTER_CROP)
+                .setFailureDrawableId(R.mipmap.load_error)
+                .setLoadingDrawableId(R.mipmap.loading)
+                .setCircular(true)
+                .build();
+        x.image().bind(user1IvPrehead, getResources().getString(R.string.default_head), imageOptions);
     }
 
 
     @OnClick(R.id.user1_iv_prehead)
     public void onUser1IvPreheadClicked() {
-        final MyApplication us = (MyApplication) getActivity().getApplication();
-        if (us.getStatus() == 0) {
+        if (!UserManager.getInstance().isLogined()) {
             Intent intent = new Intent(getContext(), LoginActivity.class);
             startActivity(intent);
             getActivity().onBackPressed();
@@ -192,25 +188,23 @@ public class SettingFragment extends Fragment {
 
     @OnClick(R.id.user1_tv_prename)
     public void onUser1TvPrenameClicked() {
-        final MyApplication us = (MyApplication) getActivity().getApplication();
-        if (us.getStatus() == 0) {
+        if (!UserManager.getInstance().isLogined()) {
             Intent intent = new Intent(getContext(), LoginActivity.class);
             startActivity(intent);
             getActivity().onBackPressed();
-        } else {
-            Toast.makeText(getContext(), "已经登录", Toast.LENGTH_SHORT).show();
         }
     }
 
     @OnClick(R.id.ll_info)
     public void onLlInfoClicked() {
-        Toast.makeText(getContext(), "请先登录", Toast.LENGTH_SHORT).show();
+        if (!UserManager.getInstance().isLogined()) {
+            Toast.makeText(getContext(), "请先登录", Toast.LENGTH_SHORT).show();
+        }
     }
 
     @OnClick(R.id.ll_mypublish)
     public void onLlMypublishClicked() {
-        final MyApplication us = (MyApplication) getActivity().getApplication();
-        if (us.getStatus() == 0) {
+        if (!UserManager.getInstance().isLogined()) {
             Toast.makeText(getContext(), "请先登录", Toast.LENGTH_SHORT).show();
         } else {
             Intent intent = new Intent(getContext(), PublishActivity.class);
@@ -220,8 +214,7 @@ public class SettingFragment extends Fragment {
 
     @OnClick(R.id.ll_myrecieve)
     public void onLlMyrecieveClicked() {
-        final MyApplication us = (MyApplication) getActivity().getApplication();
-        if (us.getStatus() == 0) {
+        if (!UserManager.getInstance().isLogined()) {
             Toast.makeText(getContext(), "请先登录", Toast.LENGTH_SHORT).show();
         } else {
             Intent intent = new Intent(getContext(), RecieveActivity.class);
@@ -231,9 +224,7 @@ public class SettingFragment extends Fragment {
 
     @OnClick(R.id.ll_myimpression)
     public void onLlMyimpressionClicked() {
-        final MyApplication us = (MyApplication) getActivity().getApplication();
-
-      if (us.getStatus() == 0) {
+        if (!UserManager.getInstance().isLogined()) {
             Toast.makeText(getContext(), "请先登录", Toast.LENGTH_SHORT).show();
         } else {
             Intent intent = new Intent(getContext(), ImpressionActivity.class);
@@ -243,8 +234,7 @@ public class SettingFragment extends Fragment {
 
     @OnClick(R.id.ll_mywallet)
     public void onLlMywalletClicked() {
-        final MyApplication us = (MyApplication) getActivity().getApplication();
-        if (us.getStatus() == 0) {
+        if (!UserManager.getInstance().isLogined()) {
             Toast.makeText(getContext(), "请先登录", Toast.LENGTH_SHORT).show();
         } else {
             Intent intent = new Intent(getContext(), WalletActivity.class);
@@ -252,15 +242,9 @@ public class SettingFragment extends Fragment {
         }
     }
 
-    @OnClick(R.id.imageView)
-    public void onImageViewClicked() {
-        Toast.makeText(getContext(), "请先登录", Toast.LENGTH_SHORT).show();
-    }
-
     @OnClick(R.id.ll_ticket)
     public void onLlTicketClicked() {
-        final MyApplication us = (MyApplication) getActivity().getApplication();
-        if (us.getStatus() == 0) {
+        if (!UserManager.getInstance().isLogined()) {
             Toast.makeText(getContext(), "请先登录", Toast.LENGTH_SHORT).show();
         } else {
             Intent intent = new Intent(getContext(), TicketActivity.class);
@@ -270,10 +254,9 @@ public class SettingFragment extends Fragment {
 
     @OnClick(R.id.ll_question)
     public void onLlQuestionClicked() {
-        final MyApplication us = (MyApplication) getActivity().getApplication();
-        if (us.getStatus() == 0) {
+        if (!UserManager.getInstance().isLogined()) {
             Toast.makeText(getContext(), "请先登录", Toast.LENGTH_SHORT).show();
-        } else {
+        }  else {
             Intent intent = new Intent(getContext(), QuestionActivity.class);
             startActivity(intent);
         }
@@ -281,8 +264,7 @@ public class SettingFragment extends Fragment {
 
     @OnClick(R.id.ll_setting)
     public void onLlSettingClicked() {
-        final MyApplication us = (MyApplication) getActivity().getApplication();
-        if (us.getStatus() == 0) {
+        if (!UserManager.getInstance().isLogined()) {
             Toast.makeText(getContext(), "请先登录", Toast.LENGTH_SHORT).show();
         } else {
             Intent intent = new Intent(getContext(), UserInfoActivity.class);
@@ -292,8 +274,7 @@ public class SettingFragment extends Fragment {
 
     @OnClick(R.id.ll_feedback)
     public void onLlFeedbackClicked() {
-        final MyApplication us = (MyApplication) getActivity().getApplication();
-        if (us.getStatus() == 0) {
+        if (!UserManager.getInstance().isLogined()) {
             Toast.makeText(getContext(), "请先登录", Toast.LENGTH_SHORT).show();
         } else {
 
@@ -304,8 +285,7 @@ public class SettingFragment extends Fragment {
 
     @OnClick(R.id.ll_update)
     public void onLlUpdateClicked() {
-        final MyApplication us = (MyApplication) getActivity().getApplication();
-        if (us.getStatus() == 0) {
+        if (!UserManager.getInstance().isLogined()) {
             Toast.makeText(getContext(), "请先登录", Toast.LENGTH_SHORT).show();
         } else {
 
@@ -484,6 +464,7 @@ public class SettingFragment extends Fragment {
         return result;
     }
 
+    @Nullable
     public static Bitmap getImage(String path) {
         try {
             HttpURLConnection conn = (HttpURLConnection) new URL(path).openConnection();

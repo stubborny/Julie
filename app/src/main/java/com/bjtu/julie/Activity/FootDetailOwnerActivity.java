@@ -105,6 +105,7 @@ public class FootDetailOwnerActivity extends AppCompatActivity {
                 .setImageScaleType(ImageView.ScaleType.CENTER_CROP)
                 .setFailureDrawableId(R.mipmap.load_error)
                 .setLoadingDrawableId(R.mipmap.loading)
+                .setCircular(true)
                 .build();
         x.image().bind(footDetailImgUserpic, order.getUserpicUrl(), imageOptions);
         footDetailTextNickname.setText(order.getNickname());

@@ -34,17 +34,14 @@
 
                 <LinearLayout
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="138dp"
                     android:orientation="vertical">
-
-                    <TextView
-                        android:layout_width="30dp"
-                        android:layout_height="40dp" />
 
                     <ImageView
                         android:id="@+id/user1_iv_prehead"
                         android:layout_width="100dp"
                         android:layout_height="100dp"
+                        android:layout_marginTop="40dp"
                         android:background="@mipmap/headpic"/>
 
                 </LinearLayout>
@@ -416,7 +413,7 @@
             </LinearLayout>
             <!--  注销  -->
             <LinearLayout
-                android:id="@+id/ll_exit"
+                android:id="@+id/logout"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:orientation="horizontal"
