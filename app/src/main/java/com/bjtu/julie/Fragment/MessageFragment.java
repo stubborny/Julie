@@ -125,7 +125,7 @@ public class MessageFragment extends Fragment {
                             // 遍历 jsonarray 数组，把每一个对象转成 json 对象
                             JSONObject job = messArray.getJSONObject(i);
 
-                            Exchange exchange = new Exchange(job.getString("messId"), job.getString("name"), job.getString("userpicUrl"), job.getString("phone"), job.getString("content"), job.getString("wechat"), job.getString("time"), job.getString("commentNum"));
+                            Exchange exchange = new Exchange(job.getString("messId"), job.getString("name"), job.getString("userpicUrl"), job.getString("phone"), job.getString("content"), job.getString("wechat"), job.getString("time"), job.getString("commentNum"),job.getString("likeNum"));
                             exchangeList.add(exchange);
                         }
                     }

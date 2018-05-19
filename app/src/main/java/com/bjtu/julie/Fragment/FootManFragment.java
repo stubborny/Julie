@@ -111,7 +111,7 @@ public class FootManFragment extends Fragment {
                         for (int i = 0; i < orderArray.length(); i++) {
                             // 遍历 jsonarray 数组，把每一个对象转成 json 对象
                             JSONObject job = orderArray.getJSONObject(i);
-                            Order exorder = new Order(job.getString("footId"), job.getInt("userId"), job.getInt("receiveId"), job.getString("userpicUrl"), job.getString("username"), job.getString("state"), job.getString("content"), job.getString("address"), job.getString("reward"), job.getString("time"), job.getString("phone"));
+                            Order exorder = new Order(job.getString("footId"), job.getInt("userId"), job.getInt("receiveId"), job.getString("userpicUrl"), job.getString("username"), job.getString("state"), job.getString("content"), job.getString("address"), job.getString("reward"), job.getString("time"), job.getString("phone"),Integer.parseInt(job.getString("isEvaluate")));
                             exorder.setPayOnline(job.getInt("payOnline"));
                             exorder.setAddNeed(job.getString("addNeed"));
                             orderlist.add(exorder);

@@ -27,7 +27,7 @@ public class MessageAdaper extends RecyclerView.Adapter<MessageAdaper.ViewHolder
     private List<Exchange> mMessList;
     Integer number;
 
-    static class ViewHolder extends RecyclerView.ViewHolder {
+    static class ViewHolder extends RecyclerView.ViewHolder{
         View messView;
 
         ImageView messImage;
@@ -35,34 +35,33 @@ public class MessageAdaper extends RecyclerView.Adapter<MessageAdaper.ViewHolder
         TextView messContent;
         TextView messTime;
         TextView messComment;
-
-        public ViewHolder(View view) {
+        TextView messLike;
+        public ViewHolder(View view){
             super(view);
-            messView = view;
-            messImage = (ImageView) view.findViewById(R.id.messUserImage);
-            messName = (TextView) view.findViewById(R.id.messUserName);
-            messTime = (TextView) view.findViewById(R.id.messPubTime);
-            messContent = (TextView) view.findViewById(R.id.messContent);
-            messComment = (TextView) view.findViewById(R.id.messComment);
+            messView=view;
+            messImage=(ImageView) view.findViewById(R.id.messUserImage);
+            messName=(TextView) view.findViewById(R.id.messUserName);
+            messTime=(TextView)view.findViewById(R.id.messPubTime);
+            messContent=(TextView)view.findViewById(R.id.messContent);
+            messComment=(TextView)view.findViewById(R.id.messComment);
+            messLike=(TextView)view.findViewById(R.id.messAttention);
         }
     }
-
-    public MessageAdaper(List<Exchange> MessList) {
-        mMessList = MessList;
+    public  MessageAdaper(List<Exchange> MessList){
+        mMessList=MessList;
         //number=mMessList.size();
     }
-
     @Override
-    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.message_item, parent, false);
-        final ViewHolder holder = new ViewHolder(view);
-        holder.messView.setOnClickListener(new View.OnClickListener() {
+    public ViewHolder onCreateViewHolder(ViewGroup parent,int viewType){
+        View view= LayoutInflater.from(parent.getContext()).inflate(R.layout.message_item,parent,false);
+       final ViewHolder holder=new ViewHolder(view);
+        holder.messView.setOnClickListener(new View.OnClickListener(){
             @Override
-            public void onClick(View v) {
-                int position = holder.getAdapterPosition();
-                Exchange exchange = mMessList.get(position);
-                Intent intent = new Intent(v.getContext(), MessageDetailActivity.class);
-                intent.putExtra("exchange", exchange);
+            public void onClick(View v){
+                int position=holder.getAdapterPosition();
+                Exchange exchange=mMessList.get(position);
+                Intent intent = new Intent(v.getContext(),MessageDetailActivity.class);
+                intent.putExtra("exchange",exchange);
                 v.getContext().startActivity(intent);
             }
         });
@@ -70,8 +69,8 @@ public class MessageAdaper extends RecyclerView.Adapter<MessageAdaper.ViewHolder
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
-        Exchange exchange = mMessList.get(position);
+    public void  onBindViewHolder(ViewHolder holder,int position){
+        Exchange exchange=mMessList.get(position);
         ImageOptions imageOptions = new ImageOptions.Builder()
                 .setIgnoreGif(false)//是否忽略gif图。false表示不忽略。不写这句，默认是true
                 .setImageScaleType(ImageView.ScaleType.CENTER_CROP)
@@ -83,12 +82,13 @@ public class MessageAdaper extends RecyclerView.Adapter<MessageAdaper.ViewHolder
 
         holder.messName.setText(exchange.getName());
         holder.messContent.setText(exchange.getContent());
-        holder.messTime.setText(new DateUtil().diffDate(exchange.getTime().substring(0, 19)));
-        holder.messComment.setText("评论（" + exchange.getcommentNum() + ")");
+        holder.messTime.setText(new DateUtil().diffDate(exchange.getTime().substring(0,19)));
+        holder.messComment.setText("评论（"+ exchange.getcommentNum()+")");
+        holder.messLike.setText("收藏（"+exchange.getLikeNum()+")");
     }
 
     @Override
-    public int getItemCount() {
+    public int getItemCount(){
         return mMessList.size();
     }
 }

@@ -45,7 +45,7 @@
     </LinearLayout>
 
     <LinearLayout
-        android:layout_width="match_parent"
+        android:layout_width="332dp"
         android:layout_height="90dp"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
@@ -53,10 +53,16 @@
 
         <TextView
             android:id="@+id/foootContent"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_width="300dp"
+            android:layout_height="90dp"
             android:text="出售加湿器，有意者联系"
             android:textSize="15sp" />
+
+        <ImageView
+            android:id="@+id/imageLike"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            app:srcCompat="@mipmap/like1"/>
 
     </LinearLayout>
 
