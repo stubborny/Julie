@@ -99,15 +99,6 @@ public class DiscountActivity extends AppCompatActivity {
 
     }
 
-//    private void initDiscountInfo() {
-//        Discount dct1 = new Discount("女生节特惠", 3.9, Double.valueOf(5), "2018-05-12", "不与其他优惠叠加");
-//        discountList.add(dct1);
-//        Discount dct2 = new Discount("3.12特惠", 3.2, Double.valueOf(5), "2018-05-12", "不与其他优惠叠加");
-//        discountList.add(dct2);
-//        Discount dct3 = new Discount("五一特惠", 4.8, Double.valueOf(6), "2018-05-12", "不与其他优惠叠加");
-//        discountList.add(dct3);
-//    }
-
     @OnClick(R.id.title_btn_ok)
     public void onViewClicked() {
         Discount discount = null;

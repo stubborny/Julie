@@ -9,9 +9,11 @@ import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bjtu.julie.Model.MessageEvent;
 import com.bjtu.julie.Model.Order;
 import com.bjtu.julie.R;
 
+import org.greenrobot.eventbus.EventBus;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.xutils.common.Callback;
@@ -131,7 +133,9 @@ public class EvaluateActivity extends AppCompatActivity {
                         public void onSuccess(String result) {
                             try {
                                 JSONObject jb = new JSONObject(result);
-                                Toast.makeText(x.app(), jb.getString("msg"), Toast.LENGTH_LONG).show();
+                                Toast.makeText(x.app(), "评价成功", Toast.LENGTH_LONG).show();
+                                // 发布事件
+                                EventBus.getDefault().post(new MessageEvent("评价成功"));
                                 finish();
                             } catch (JSONException e) {
                                 e.printStackTrace();

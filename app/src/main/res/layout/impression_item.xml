@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:orientation="horizontal"
     android:weightSum="1"
 
     android:minHeight="100dp">
 
     <LinearLayout
+        android:id="@+id/head"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
@@ -18,19 +19,20 @@
             android:id="@+id/imp_img_userpic"
             android:layout_width="40dp"
             android:layout_height="40dp" />
-        <TextView
+        <!--TextView
             android:id="@+id/imp_text_floor"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:gravity="center_vertical"
             android:layout_marginTop="3dp"
-            android:text="1楼" />
+            android:text="1楼" /-->
 
     </LinearLayout>
 
     <LinearLayout
+        android:layout_toRightOf="@+id/head"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical">
 
         <RelativeLayout
@@ -83,7 +85,7 @@
             android:layout_marginRight="10dp"
             android:orientation="horizontal">
             <TextView
-                android:id="@+id/imp_text_lable1"
+                android:id="@+id/evaluate1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
@@ -94,34 +96,52 @@
                 android:textSize="13sp" />
 
             <TextView
-                android:id="@+id/imp_text_lable2"
+                android:id="@+id/evaluate2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:background="@drawable/textview_border"
                 android:layout_marginLeft="11dp"
                 android:gravity="center_vertical"
-                android:text="价钱合理"
+                android:text="准时送达"
                 android:textColor="@color/grey"
                 android:textSize="13sp" />
 
             <TextView
-                android:id="@+id/imp_text_lable3"
+                android:id="@+id/evaluate3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:background="@drawable/textview_border"
                 android:layout_marginLeft="11dp"
                 android:gravity="center_vertical"
-                android:text="很有礼貌"
+                android:text="人好看"
                 android:textColor="@color/grey"
                 android:textSize="13sp" />
 
         </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="10dp"/>
+        <TextView
+            android:id="@+id/content"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="11dp"
+            android:gravity="center_vertical"
+            android:text="很有礼貌"
+            android:textColor="@color/grey"
+            android:textSize="18sp" />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="10dp"/>
+        <View
+            android:id="@+id/view"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="@color/gainsboro" />
     </LinearLayout>
-    <View
-        android:id="@+id/view"
-        android:layout_width="match_parent"
-        android:layout_height="2dp"
-        android:background="@color/gainsboro" />
-</LinearLayout>
+
+</RelativeLayout>

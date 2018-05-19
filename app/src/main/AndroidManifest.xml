@@ -103,7 +103,7 @@
         <activity android:name=".Activity.ImpressionActivity" />
         <activity android:name=".Activity.QuestionActivity" />
         <activity android:name=".Activity.TicketActivity" />
-        <activity android:name=".Activity.AuthenticateActivity" />
+        <activity android:name=".Activity.EvaluateActivity" />
         <activity android:name=".Activity.QualificationedActivity"></activity>
     </application>
 

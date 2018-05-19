@@ -165,6 +165,5 @@
     <orderEntry type="library" exported="" name="animated-vector-drawable-26.0.0-alpha1" level="project" />
     <orderEntry type="library" exported="" name="SpringActionMenu-1.0.0" level="project" />
     <orderEntry type="library" exported="" name="android-async-http-1.4.9" level="project" />
-    <orderEntry type="library" exported="" name="android-android-26" level="project" />
   </component>
 </module>

@@ -19,12 +19,16 @@ import android.widget.Toast;
 import com.bjtu.julie.Adapter.CommentAdapter;
 import com.bjtu.julie.Fragment.ContactDialogFragment;
 import com.bjtu.julie.Model.Comment;
+import com.bjtu.julie.Model.MessageEvent;
 import com.bjtu.julie.Model.Order;
 import com.bjtu.julie.Model.UserManager;
 import com.bjtu.julie.R;
 import com.bjtu.julie.Util.DateUtil;
 import com.lhz.stateprogress.StateProgressView;
 
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -96,6 +100,8 @@ public class FootDetailOwnerActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_foot_detail);
         ButterKnife.bind(this);
+        // 注册订阅者
+        EventBus.getDefault().register(this);
 
         titleText.setText("详情");
         titleBtnOk.setText("");
@@ -158,7 +164,8 @@ public class FootDetailOwnerActivity extends AppCompatActivity {
             getReceiver();
             //判断是否评价过 没有 可评价同学，已经评价过按钮设置为不可点击状态，字改为已评价
             footDetailBtnReceive.setText("可评价同学");
-        }if(order.getIsEvaluate()==1){
+        }
+        if (order.getIsEvaluate() == 1) {
             //isEvaluate();
             footDetailBtnReceive.setText("已评价");
             footDetailBtnReceive.setBackgroundColor(footDetailBtnReceive.getResources().getColor(R.color.darkgrey));
@@ -276,11 +283,10 @@ public class FootDetailOwnerActivity extends AppCompatActivity {
 
                         }
                     });
-                }
-                else if(oState == 4){
+                } else if (oState == 4) {
                     //Order order=mMessList.get(position);
-                    Intent intent = new Intent(FootDetailOwnerActivity.this,EvaluateActivity.class);
-                    intent.putExtra("order",order);
+                    Intent intent = new Intent(FootDetailOwnerActivity.this, EvaluateActivity.class);
+                    intent.putExtra("order", order);
                     startActivity(intent);
                 }
                 break;
@@ -402,5 +408,21 @@ public class FootDetailOwnerActivity extends AppCompatActivity {
 
             }
         });
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onMessageEvent(MessageEvent event) {
+        if (event.getMessage().equals("评价成功")) {
+            order.setIsEvaluate(1);
+            footDetailBtnReceive.setText("已评价");
+            footDetailBtnReceive.setBackgroundColor(footDetailBtnReceive.getResources().getColor(R.color.darkgrey));
+            footDetailBtnReceive.setClickable(false);
+        }
     }
 }
