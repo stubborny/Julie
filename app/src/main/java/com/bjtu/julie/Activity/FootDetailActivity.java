@@ -1,5 +1,6 @@
 package com.bjtu.julie.Activity;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AlertDialog;
@@ -18,12 +19,14 @@ import android.widget.Toast;
 import com.bjtu.julie.Adapter.CommentAdapter;
 import com.bjtu.julie.Fragment.ContactDialogFragment;
 import com.bjtu.julie.Model.Comment;
+import com.bjtu.julie.Model.MessageEvent;
 import com.bjtu.julie.Model.Order;
 import com.bjtu.julie.Model.UserManager;
 import com.bjtu.julie.R;
 import com.bjtu.julie.Util.DateUtil;
 import com.lhz.stateprogress.StateProgressView;
 
+import org.greenrobot.eventbus.EventBus;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -132,7 +135,8 @@ public class FootDetailActivity extends AppCompatActivity {
                 footDetailAddNeed4.setVisibility(View.GONE);
             }
 
-        }        footDetailTextPhone.setText(order.getPhone());
+        }
+        footDetailTextPhone.setText(order.getPhone());
         footDetailLayoutPhone.setVisibility(View.VISIBLE);
         footDetailLayoutReceivePhone.setVisibility(View.GONE);
 
@@ -227,92 +231,127 @@ public class FootDetailActivity extends AppCompatActivity {
                 }
                 if (oState == 1) {
                     //Toast.makeText(this, "接单按钮点击了", Toast.LENGTH_LONG).show();
-                    String url = "http://39.107.225.80:8080/julieServer/UpdateOrderServlet";
-                    RequestParams params = new RequestParams(url);
-                    params.addParameter("userId", UserManager.getInstance().getUser().getId());
-                    params.addParameter("footId", order.getFootId());
-                    params.addParameter("state", "2");
-                    x.http().get(params, new Callback.CommonCallback<String>() {
-                        public void onSuccess(String result) {
-                            try {
-                                JSONObject jb = new JSONObject(result);
-                                //Log.i("AAA", String.valueOf(jb.getInt("code"))+jb.getString("msg"));
-                                if (jb.getInt("code") == 1) {
-                                    Toast.makeText(x.app(), "接单成功", Toast.LENGTH_LONG).show();
-                                    FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-                                    ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
-                                    //第二个参数 1表示接单者，0表示发单者
-                                    ContactDialogFragment cDialog = new ContactDialogFragment().newInstance(order.getPhone(), 1);
-                                    cDialog.show(ft, "ContactDialog");
-                                    footDetailLayoutPhone.setVisibility(View.VISIBLE);
-                                    footDetailTextPhone.setText(order.getPhone());
-                                    footDetailBtnReceive.setText("送达后点我");
-                                    oState = 2;//修改当前订单状态
-                                    spv.setItems(list, 0, 200);
-                                } else {
-                                    Toast.makeText(x.app(), jb.getString("msg"), Toast.LENGTH_LONG).show();
+                    AlertDialog.Builder alertdialogbuilder = new AlertDialog.Builder(this);
+                    alertdialogbuilder.setTitle("确认接单");
+                    if (order.getPayOnline() == 1) {
+                        alertdialogbuilder.setMessage("结单后您将获得报酬" + order.getReward() + "元，此单为线上支付，发单者确认结单后钱款将存入您的钱包中，请自行查看");
+                    } else {
+                        alertdialogbuilder.setMessage("结单后您将获得报酬" + order.getReward() + "元，此单为线下支付，不经平台，请自行与发单人联系结清钱款");
+                    }
+                    alertdialogbuilder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            String url = "http://39.107.225.80:8080/julieServer/UpdateOrderServlet";
+                            RequestParams params = new RequestParams(url);
+                            params.addParameter("userId", UserManager.getInstance().getUser().getId());
+                            params.addParameter("footId", order.getFootId());
+                            params.addParameter("state", "2");
+                            x.http().get(params, new Callback.CommonCallback<String>() {
+                                public void onSuccess(String result) {
+                                    try {
+                                        JSONObject jb = new JSONObject(result);
+                                        //Log.i("AAA", String.valueOf(jb.getInt("code"))+jb.getString("msg"));
+                                        if (jb.getInt("code") == 1) {
+                                            Toast.makeText(x.app(), "接单成功", Toast.LENGTH_LONG).show();
+                                            FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+                                            ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
+                                            //第二个参数 1表示接单者，0表示发单者
+                                            ContactDialogFragment cDialog = new ContactDialogFragment().newInstance(order.getPhone(), 1);
+                                            cDialog.show(ft, "ContactDialog");
+                                            footDetailLayoutPhone.setVisibility(View.VISIBLE);
+                                            footDetailTextPhone.setText(order.getPhone());
+                                            footDetailBtnReceive.setText("送达后点我");
+                                            oState = 2;//修改当前订单状态
+                                            spv.setItems(list, 0, 200);
+                                        } else {
+                                            Toast.makeText(x.app(), jb.getString("msg"), Toast.LENGTH_LONG).show();
+                                        }
+                                    } catch (JSONException e) {
+                                        e.printStackTrace();
+                                    }
                                 }
-                            } catch (JSONException e) {
-                                e.printStackTrace();
-                            }
-                        }
 
-                        //请求异常后的回调方法
-                        @Override
-                        public void onError(Throwable ex, boolean isOnCallback) {
-                        }
+                                //请求异常后的回调方法
+                                @Override
+                                public void onError(Throwable ex, boolean isOnCallback) {
+                                }
 
-                        //主动调用取消请求的回调方法
-                        @Override
-                        public void onCancelled(CancelledException cex) {
-                        }
+                                //主动调用取消请求的回调方法
+                                @Override
+                                public void onCancelled(CancelledException cex) {
+                                }
 
-                        @Override
-                        public void onFinished() {
+                                @Override
+                                public void onFinished() {
 
+                                }
+                            });
                         }
                     });
+                    alertdialogbuilder.setNegativeButton("取消", null);
+                    AlertDialog alertdialog1 = alertdialogbuilder.create();
+                    alertdialog1.show();
+
                 } else if (oState == 2) {
                     //Toast.makeText(this, "接单按钮点击了", Toast.LENGTH_LONG).show();
-                    String url = "http://39.107.225.80:8080/julieServer/UpdateOrderServlet";
-                    RequestParams params = new RequestParams(url);
-                    params.addParameter("footId", order.getFootId());
-                    params.addParameter("state", "3");
-                    x.http().get(params, new Callback.CommonCallback<String>() {
-                        public void onSuccess(String result) {
-                            try {
-                                JSONObject jb = new JSONObject(result);
-                                //Log.i("AAA", String.valueOf(jb.getInt("code"))+jb.getString("msg"));
-                                if (jb.getInt("code") == 1) {
-                                    Toast.makeText(x.app(), "确认送达", Toast.LENGTH_LONG).show();
-                                    footDetailBtnReceive.setText("已经送达");
-                                    footDetailBtnReceive.setBackgroundColor(footDetailBtnReceive.getResources().getColor(R.color.darkgrey));
-                                    oState = 3;//修改当前订单状态
-                                    spv.setItems(list, 2, 200);
-                                } else {
-                                    Toast.makeText(x.app(), jb.getString("msg"), Toast.LENGTH_LONG).show();
+                    //Toast.makeText(this, "接单按钮点击了", Toast.LENGTH_LONG).show();
+                    AlertDialog.Builder alertdialogbuilder = new AlertDialog.Builder(this);
+                    alertdialogbuilder.setTitle("确认已送达");
+                    if (order.getPayOnline() == 1) {
+                        alertdialogbuilder.setMessage("发单者确认结单后钱款将存入您的钱包中，请自行查看");
+                    } else {
+                        alertdialogbuilder.setMessage("此单为线下支付，不经平台，请自行与发单人联系结清钱款");
+                    }
+                    alertdialogbuilder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            String url = "http://39.107.225.80:8080/julieServer/UpdateOrderServlet";
+                            RequestParams params = new RequestParams(url);
+                            params.addParameter("footId", order.getFootId());
+                            params.addParameter("state", "3");
+                            x.http().get(params, new Callback.CommonCallback<String>() {
+                                public void onSuccess(String result) {
+                                    try {
+                                        JSONObject jb = new JSONObject(result);
+                                        //Log.i("AAA", String.valueOf(jb.getInt("code"))+jb.getString("msg"));
+                                        if (jb.getInt("code") == 1) {
+                                            Toast.makeText(x.app(), "确认送达", Toast.LENGTH_LONG).show();
+                                            footDetailBtnReceive.setText("已经送达");
+                                            footDetailBtnReceive.setBackgroundColor(footDetailBtnReceive.getResources().getColor(R.color.darkgrey));
+                                            oState = 3;//修改当前订单状态
+                                            spv.setItems(list, 2, 200);
+                                        } else {
+                                            Toast.makeText(x.app(), jb.getString("msg"), Toast.LENGTH_LONG).show();
+                                        }
+                                    } catch (JSONException e) {
+                                        e.printStackTrace();
+                                    }
                                 }
-                            } catch (JSONException e) {
-                                e.printStackTrace();
-                            }
-                        }
 
-                        //请求异常后的回调方法
-                        @Override
-                        public void onError(Throwable ex, boolean isOnCallback) {
-                        }
+                                //请求异常后的回调方法
+                                @Override
+                                public void onError(Throwable ex, boolean isOnCallback) {
+                                }
 
-                        //主动调用取消请求的回调方法
-                        @Override
-                        public void onCancelled(CancelledException cex) {
-                        }
+                                //主动调用取消请求的回调方法
+                                @Override
+                                public void onCancelled(CancelledException cex) {
+                                }
 
-                        @Override
-                        public void onFinished() {
+                                @Override
+                                public void onFinished() {
 
+                                }
+                            });
                         }
                     });
+                    alertdialogbuilder.setNegativeButton("取消", null);
+                    AlertDialog alertdialog1 = alertdialogbuilder.create();
+                    alertdialog1.show();
+
                 }
+                // 发布事件
+                //EventBus.getDefault().post(new MessageEvent("state"));
                 break;
             case R.id.foot_detail_btn_comment:
                 if (!UserManager.getInstance().isLogined()) {
@@ -385,4 +424,5 @@ public class FootDetailActivity extends AppCompatActivity {
         ContactDialogFragment cDialog = new ContactDialogFragment().newInstance(order.getPhone(), 1);
         cDialog.show(ft, "ContactDialog");
     }
+
 }

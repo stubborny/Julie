@@ -125,7 +125,10 @@ public class MessageFragment extends Fragment {
                             // 遍历 jsonarray 数组，把每一个对象转成 json 对象
                             JSONObject job = messArray.getJSONObject(i);
 
-                            Exchange exchange = new Exchange(job.getString("messId"), job.getString("name"), job.getString("userpicUrl"), job.getString("phone"), job.getString("content"), job.getString("wechat"), job.getString("time"), job.getString("commentNum"),job.getString("likeNum"));
+                            Exchange exchange = new Exchange(job.getString("messId") ,job.getInt("userId"),job.getString("name"), job.getString("userpicUrl"),
+                                    job.getString("phone"), job.getString("content"),
+                                    job.getString("wechat"), job.getString("time"), job.getString("commentNum"),job.getString("likeNum"));
+
                             exchangeList.add(exchange);
                         }
                     }
@@ -171,11 +174,11 @@ public class MessageFragment extends Fragment {
 
         //initExchange();
 
-        RecyclerView recyclerView = (RecyclerView) messageLayout.findViewById(R.id.messRecycleView);
-        LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
-        recyclerView.setLayoutManager(layoutManager);
-        MessageAdaper adaper = new MessageAdaper(exchangeList);
-        recyclerView.setAdapter(adaper);
+//        RecyclerView recyclerView = (RecyclerView) messageLayout.findViewById(R.id.messRecycleView);
+//        LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
+//        recyclerView.setLayoutManager(layoutManager);
+//        MessageAdaper adaper = new MessageAdaper(exchangeList);
+//        recyclerView.setAdapter(adaper);
         return messageLayout;
     }
 

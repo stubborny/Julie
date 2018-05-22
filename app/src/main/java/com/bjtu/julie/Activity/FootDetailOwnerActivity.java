@@ -1,10 +1,12 @@
 package com.bjtu.julie.Activity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.RecyclerView;
 import android.text.method.ScrollingMovementMethod;
 import android.view.View;
 import android.widget.Button;
@@ -17,7 +19,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bjtu.julie.Adapter.CommentAdapter;
+import com.bjtu.julie.Adapter.MyFootManAdapter;
 import com.bjtu.julie.Fragment.ContactDialogFragment;
+import com.bjtu.julie.FullyLinearLayoutManager;
 import com.bjtu.julie.Model.Comment;
 import com.bjtu.julie.Model.MessageEvent;
 import com.bjtu.julie.Model.Order;
@@ -81,6 +85,12 @@ public class FootDetailOwnerActivity extends AppCompatActivity {
     RelativeLayout footDetailLayoutReceivePhone;
     @BindView(R.id.title_text)
     TextView titleText;
+    @BindView(R.id.foot_detail_text_phone)
+    TextView footDetailTextPhone;
+    @BindView(R.id.linearLayout)
+    LinearLayout linearLayout;
+    @BindView(R.id.foot_detail_view)
+    View footDetailView;
     @BindView(R.id.title_btn_ok)
     TextView titleBtnOk;
     @BindView(R.id.foot_detail_addNeed1)
@@ -107,6 +117,9 @@ public class FootDetailOwnerActivity extends AppCompatActivity {
         titleBtnOk.setText("");
         footDetailTextContent.setMovementMethod(ScrollingMovementMethod.getInstance());
         order = (Order) getIntent().getSerializableExtra("order");
+        if (order.getState().equals("1")) {
+            titleBtnOk.setText("删除");
+        }
         ImageOptions imageOptions = new ImageOptions.Builder()
                 .setIgnoreGif(false)//是否忽略gif图。false表示不忽略。不写这句，默认是true
                 .setImageScaleType(ImageView.ScaleType.CENTER_CROP)
@@ -169,6 +182,7 @@ public class FootDetailOwnerActivity extends AppCompatActivity {
             //isEvaluate();
             footDetailBtnReceive.setText("已评价");
             footDetailBtnReceive.setBackgroundColor(footDetailBtnReceive.getResources().getColor(R.color.darkgrey));
+            footDetailBtnReceive.setClickable(false);
         }
         //物流节点
         list = new ArrayList<String>();
@@ -202,7 +216,7 @@ public class FootDetailOwnerActivity extends AppCompatActivity {
                         }
                     }
                     //Log.i("AAA", String.valueOf(jb.getInt("code"))+jb.getString("msg"));
-                    Toast.makeText(x.app(), jb.getString("msg"), Toast.LENGTH_LONG).show();
+                    //Toast.makeText(x.app(), jb.getString("msg"), Toast.LENGTH_LONG).show();
                     CommentAdapter adapter = new CommentAdapter(FootDetailOwnerActivity.this, R.layout.comment_item, commList);
                     footDetailCommentList.setAdapter(adapter);
                 } catch (JSONException e) {
@@ -229,7 +243,7 @@ public class FootDetailOwnerActivity extends AppCompatActivity {
 
     }
 
-    @OnClick({R.id.foot_detail_btn_receive, R.id.foot_detail_btn_comment})
+    @OnClick({R.id.foot_detail_btn_receive, R.id.foot_detail_btn_comment,R.id.title_btn_ok})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.foot_detail_btn_receive:
@@ -246,43 +260,61 @@ public class FootDetailOwnerActivity extends AppCompatActivity {
                     cDialog.show(ft, "ContactDialog");
                 } else if (oState == 3) {
                     //确认送达按钮点击了，更新订单状态
-                    String url = "http://39.107.225.80:8080/julieServer/UpdateOrderServlet";
-                    RequestParams params = new RequestParams(url);
-                    params.addParameter("footId", order.getFootId());
-                    params.addParameter("state", "4");
-                    x.http().get(params, new Callback.CommonCallback<String>() {
-                        public void onSuccess(String result) {
-                            try {
-                                JSONObject jb = new JSONObject(result);
-                                //Log.i("AAA", String.valueOf(jb.getInt("code"))+jb.getString("msg"));
-                                if (jb.getInt("code") == 1) {
-                                    Toast.makeText(x.app(), "已结单", Toast.LENGTH_LONG).show();
-                                    footDetailBtnReceive.setText("可评价同学");
-                                    oState = 4;//修改当前订单状态
-                                    spv.setItems(list, 3, 200);
-                                } else {
-                                    Toast.makeText(x.app(), jb.getString("msg"), Toast.LENGTH_LONG).show();
+                    AlertDialog.Builder alertdialogbuilder = new AlertDialog.Builder(this);
+                    alertdialogbuilder.setTitle("确认结单");
+                    if (order.getPayOnline() == 1) {
+                        alertdialogbuilder.setMessage("此单为线上支付，接单人已确认送达（如有意外，请先于接单人联系，无果请联系客服），确认结单后报酬将存入接单人钱包");
+                    } else {
+                        alertdialogbuilder.setMessage("此单为线下支付，不经平台，请自行与接单人联系结清钱款");
+                    }
+                    alertdialogbuilder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            String url = "http://39.107.225.80:8080/julieServer/UpdateOrderServlet";
+                            RequestParams params = new RequestParams(url);
+                            params.addParameter("footId", order.getFootId());
+                            params.addParameter("state", "4");
+                            x.http().get(params, new Callback.CommonCallback<String>() {
+                                public void onSuccess(String result) {
+                                    try {
+                                        JSONObject jb = new JSONObject(result);
+                                        //Log.i("AAA", String.valueOf(jb.getInt("code"))+jb.getString("msg"));
+                                        if (jb.getInt("code") == 1) {
+                                            Toast.makeText(x.app(), "已结单", Toast.LENGTH_SHORT).show();
+                                            footDetailBtnReceive.setText("可评价同学");
+                                            oState = 4;//修改当前订单状态
+                                            spv.setItems(list, 3, 200);
+                                        } else {
+                                            Toast.makeText(x.app(), jb.getString("msg"), Toast.LENGTH_SHORT).show();
+                                        }
+                                    } catch (JSONException e) {
+                                        e.printStackTrace();
+                                    }
                                 }
-                            } catch (JSONException e) {
-                                e.printStackTrace();
-                            }
-                        }
 
-                        //请求异常后的回调方法
-                        @Override
-                        public void onError(Throwable ex, boolean isOnCallback) {
-                        }
+                                //请求异常后的回调方法
+                                @Override
+                                public void onError(Throwable ex, boolean isOnCallback) {
+                                }
 
-                        //主动调用取消请求的回调方法
-                        @Override
-                        public void onCancelled(CancelledException cex) {
-                        }
+                                //主动调用取消请求的回调方法
+                                @Override
+                                public void onCancelled(CancelledException cex) {
+                                }
 
-                        @Override
-                        public void onFinished() {
+                                @Override
+                                public void onFinished() {
 
+                                }
+                            });
                         }
                     });
+                    alertdialogbuilder.setNegativeButton("取消", null);
+                    AlertDialog alertdialog1 = alertdialogbuilder.create();
+                    alertdialog1.show();
+
+
+
                 } else if (oState == 4) {
                     //Order order=mMessList.get(position);
                     Intent intent = new Intent(FootDetailOwnerActivity.this, EvaluateActivity.class);
@@ -304,11 +336,11 @@ public class FootDetailOwnerActivity extends AppCompatActivity {
                     public void onClick(View v) {
                         String input = et.getText().toString();
                         if (input.equals("")) {
-                            Toast.makeText(getApplicationContext(), "还没输入哦", Toast.LENGTH_LONG).show();
+                            Toast.makeText(getApplicationContext(), "还没输入哦", Toast.LENGTH_SHORT).show();
                             return;
                         }
                         if (input.length() > 50) {
-                            Toast.makeText(getApplicationContext(), "字数太多啦", Toast.LENGTH_LONG).show();
+                            Toast.makeText(getApplicationContext(), "字数太多啦", Toast.LENGTH_SHORT).show();
                             return;
                         }
                         String url = "http://39.107.225.80:8080/julieServer/PubCommentServlet";
@@ -322,10 +354,10 @@ public class FootDetailOwnerActivity extends AppCompatActivity {
                                     JSONObject jb = new JSONObject(result);
                                     //Log.i("AAA", String.valueOf(jb.getInt("code"))+jb.getString("msg"));
                                     if (jb.getInt("code") == 1) {
-                                        Toast.makeText(x.app(), jb.getString("msg"), Toast.LENGTH_LONG).show();
+                                        Toast.makeText(x.app(), jb.getString("msg"), Toast.LENGTH_SHORT).show();
                                         dialog.dismiss();
                                     } else {
-                                        Toast.makeText(x.app(), jb.getString("msg"), Toast.LENGTH_LONG).show();
+                                        Toast.makeText(x.app(), jb.getString("msg"), Toast.LENGTH_SHORT).show();
                                     }
                                 } catch (JSONException e) {
                                     e.printStackTrace();
@@ -351,8 +383,66 @@ public class FootDetailOwnerActivity extends AppCompatActivity {
                 });
                 break;
 
+            case R.id.title_btn_ok:
+               // String footId = order.getFootId();//把单号发送给服务器
+                //Toast.makeText(this, footId, Toast.LENGTH_SHORT).show();
+
+                AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                builder.setMessage("确定删除吗? ");
+
+                builder.setPositiveButton("确定",new DialogInterface.OnClickListener(){
+                    @Override
+                    public void onClick(DialogInterface dialog, int which){
+                        String url = "http://39.107.225.80:8080//julieServer/DeleMyOrderServlet";
+
+                        RequestParams params = new RequestParams(url);
+                        params.addParameter("footId", order.getFootId());
+
+                        x.http().get(params, new Callback.CommonCallback<String>() {
+
+                            public void onSuccess(String result) {
+                                try {
+                                    JSONObject jb = new JSONObject(result);
+                                    Toast.makeText(x.app(), jb.getString("msg"), Toast.LENGTH_SHORT).show();
+                                    finish();
+                                    //Log.i("AAA", String.valueOf(jb.getInt("code"))+jb.getString("msg"));
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+
+                            }
+
+                            //请求异常后的回调方法
+                            @Override
+                            public void onError(Throwable ex, boolean isOnCallback) {
+                            }
+
+                            //主动调用取消请求的回调方法
+                            @Override
+                            public void onCancelled(CancelledException cex) {
+                            }
+
+                            @Override
+                            public void onFinished() {
+
+                            }
+                        });
+                    }
+                }).setNegativeButton("取消", new DialogInterface.OnClickListener(){
+                    @Override
+                    public void onClick(DialogInterface dialog, int which){
+                        return ;
+                    }
+                }).show();
+
+
+
+                break;
+
         }
     }
+
+
 
     @OnClick(R.id.foot_detail_text_receive_phone)
     public void onViewClicked() {
@@ -383,10 +473,10 @@ public class FootDetailOwnerActivity extends AppCompatActivity {
                                 .setLoadingDrawableId(R.mipmap.loading)
                                 .build();
                         x.image().bind(footDetailImgReceiveUserpic, job.getString("userpicUrl"), imageOptions);
-                        Toast.makeText(x.app(), jb.getString("msg"), Toast.LENGTH_LONG).show();
+                        Toast.makeText(x.app(), jb.getString("msg"), Toast.LENGTH_SHORT).show();
                         //receivePhone= jb.getString("msg");
                     } else {
-                        Toast.makeText(x.app(), jb.getString("msg"), Toast.LENGTH_LONG).show();
+                        Toast.makeText(x.app(), jb.getString("msg"), Toast.LENGTH_SHORT).show();
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();

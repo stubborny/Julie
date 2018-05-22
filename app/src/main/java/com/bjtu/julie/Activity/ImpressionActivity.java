@@ -3,10 +3,8 @@ package com.bjtu.julie.Activity;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
-import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bjtu.julie.Adapter.GradeAdapter;
 import com.bjtu.julie.FullyLinearLayoutManager;
@@ -40,27 +38,35 @@ public class ImpressionActivity extends AppCompatActivity {
     @BindView(R.id.identification_text)
     TextView identification_text;
     @BindView(R.id.title_btn_ok)
-            TextView title_btn_ok;
+    TextView title_btn_ok;
     Unbinder unbinder;
-
+    //    @BindView(R.id.ll_info)
+//    LinearLayout llInfo;
+//    @BindView(R.id.total_thumb_up)
+//    TextView totalThumbUp;
+//    @BindView(R.id.total_thumb_down)
+//    TextView totalThumbDown;
+//    @BindView(R.id.change_all)
+//    LinearLayout changeAll;
+//    private String name;
     public List<Grade> gradelist = new ArrayList<>();
+    @BindView(R.id.title_text)
+    TextView titleText;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.my_impression);
         unbinder = ButterKnife.bind(this);
+        title_btn_ok.setText("");
+        titleText.setText("个人印象");
+
         initImpression();
 
         initList();
-
-        title_btn_ok.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                finish();
-            }
-        });
     }
+
     @Override
     public void onDestroy() {
         super.onDestroy();
@@ -71,7 +77,7 @@ public class ImpressionActivity extends AppCompatActivity {
         super.onResume();
     }
 
-    public void initList(){
+    public void initList() {
         String url = "http://39.107.225.80:8080//julieServer/MyImpressionServlet";
         RequestParams params = new RequestParams(url);
         params.setCharset("utf-8");
@@ -87,14 +93,14 @@ public class ImpressionActivity extends AppCompatActivity {
                         for (int i = 0; i < impressionArray.length(); i++) {
                             // 遍历 jsonarray 数组，把每一个对象转成 json 对象
                             JSONObject job = impressionArray.getJSONObject(i);
-                            Grade grade = new Grade(job.getInt("receiveId"),job.getString("userpicUrl"), job.getString("name"),job.getInt("rate"),job.getString("time"),job.getString("content"),job.getInt("evaluate1"),job.getInt("evaluate2"),job.getInt("evaluate3"));
+                            Grade grade = new Grade(job.getInt("receiveId"), job.getString("userpicUrl"), job.getString("name"), job.getInt("rate"), job.getString("time"), job.getString("content"), job.getInt("evaluate1"), job.getInt("evaluate2"), job.getInt("evaluate3"));
 
                             gradelist.add(grade);
                         }
                     }
                     //Log.i("AAA", String.valueOf(jb.getInt("code"))+jb.getString("msg"));
                     //Toast.makeText(x.app(), jb.getString("msg"), Toast.LENGTH_LONG).show();
-                    RecyclerView recyclerView = (RecyclerView)findViewById(R.id.ImpressionRecycleView);
+                    RecyclerView recyclerView = (RecyclerView) findViewById(R.id.ImpressionRecycleView);
                     FullyLinearLayoutManager layoutManager = new FullyLinearLayoutManager(ImpressionActivity.this);
 
                     recyclerView.setLayoutManager(layoutManager);
@@ -127,7 +133,7 @@ public class ImpressionActivity extends AppCompatActivity {
         });
     }
 
-    public void initImpression(){
+    public void initImpression() {
         //int userId=UserManager.getInstance().getUser().getId();
 
         String url = "http://39.107.225.80:8080/julieServer/GetScoreServlet";
@@ -141,8 +147,8 @@ public class ImpressionActivity extends AppCompatActivity {
             public void onSuccess(String result) {
                 try {
                     JSONObject jb = new JSONObject(result);
-                    Integer score=jb.getInt("data");
-                    totalGrade.setText(score.toString()+"分");
+                    Integer score = jb.getInt("data");
+                    totalGrade.setText(score.toString() + "分");
                     ImageOptions imageOptions = new ImageOptions.Builder()
                             .setIgnoreGif(false)//是否忽略gif图。false表示不忽略。不写这句，默认是true
                             .setImageScaleType(ImageView.ScaleType.CENTER_CROP)
@@ -151,23 +157,21 @@ public class ImpressionActivity extends AppCompatActivity {
                             .build();
                     x.image().bind(impression_head, UserManager.getInstance().getUser().getUserpicUrl(), imageOptions);
                     impression_name.setText(UserManager.getInstance().getUser().getNickname());
-                    int islegal= UserManager.getInstance().getUser().getIsLegal();
-                    if(UserManager.getInstance().getUser().getIsAuthentication()==0){
-                        if(islegal==0){
+                    int islegal = UserManager.getInstance().getUser().getIsLegal();
+                    if (UserManager.getInstance().getUser().getIsAuthentication() == 0) {
+                        if (islegal == 0) {
                             identification_text.setText("未认证(信用风险)");
-                        }
-                        else {
+                        } else {
                             identification_text.setText("未认证");
                         }
-                    }else{
-                        if(islegal==0){
+                    } else {
+                        if (islegal == 0) {
                             identification_text.setText("已认证(信用风险)");
-                        }
-                        else {
+                        } else {
                             identification_text.setText("已认证");
                         }
                     }
-                    Toast.makeText(x.app(), jb.getString("msg"), Toast.LENGTH_LONG).show();
+                    //Toast.makeText(x.app(), jb.getString("msg"), Toast.LENGTH_LONG).show();
                     //finish();
                     //Log.i("AAA", String.valueOf(jb.getInt("code"))+jb.getString("msg"));
                 } catch (JSONException e) {

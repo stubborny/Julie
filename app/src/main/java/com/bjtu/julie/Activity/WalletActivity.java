@@ -2,7 +2,6 @@ package com.bjtu.julie.Activity;
 
 import android.annotation.SuppressLint;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -17,14 +16,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.alipay.api.AlipayApiException;
-import com.alipay.api.AlipayClient;
-import com.alipay.api.DefaultAlipayClient;
-import com.alipay.api.request.AlipayFundTransToaccountTransferRequest;
-import com.alipay.api.response.AlipayFundTransToaccountTransferResponse;
 import com.alipay.sdk.app.EnvUtils;
 import com.alipay.sdk.app.PayTask;
-import com.bjtu.julie.DepositActivity;
 import com.bjtu.julie.Model.PayResult;
 import com.bjtu.julie.Model.UserManager;
 import com.bjtu.julie.R;
@@ -32,19 +25,11 @@ import com.bjtu.julie.Util.OrderInfoUtil2_0;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.xutils.common.Callback;
 import org.xutils.http.RequestParams;
 import org.xutils.x;
 
-import java.security.KeyManagementException;
-import java.security.NoSuchAlgorithmException;
-import java.security.SecureRandom;
-import java.security.cert.CertificateException;
-import java.security.cert.X509Certificate;
 import java.util.Map;
-
-import javax.net.ssl.SSLContext;
-import javax.net.ssl.TrustManager;
-import javax.net.ssl.X509TrustManager;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -81,6 +66,10 @@ public class WalletActivity extends AppCompatActivity {
     Double money;
     EditText dmTextMoney;
     EditText dmTextAccount;
+    @BindView(R.id.title_text)
+    TextView titleText;
+    @BindView(R.id.title_btn_ok)
+    TextView titleBtnOk;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -89,6 +78,8 @@ public class WalletActivity extends AppCompatActivity {
         EnvUtils.setEnv(EnvUtils.EnvEnum.SANDBOX);
         setContentView(R.layout.activity_wallet);
         ButterKnife.bind(this);
+        titleText.setText("我的钱包");
+        titleBtnOk.setText("");
         money = Double.valueOf(UserManager.getInstance().getUser().getWallet());
         walletTextBalance.setText(String.valueOf(money.floatValue()));
 
@@ -210,7 +201,7 @@ public class WalletActivity extends AppCompatActivity {
                         .setNegativeButton("取消", null)
                         .setNeutralButton("全部提现", null)
                         .show();
-                String account="exkxea4366@sandbox.com";
+                String account = "exkxea4366@sandbox.com";
                 //支付宝账号设置为用户手机号，沙箱环境下设置为上面的
                 //dmTextAccount.setText(UserManager.getInstance().getUser().getUsername());
                 dmTextAccount.setText(account);
@@ -229,12 +220,12 @@ public class WalletActivity extends AppCompatActivity {
                             return;
                         }
                         money = Double.valueOf(UserManager.getInstance().getUser().getWallet()) - Double.valueOf(dmTextMoney.getText().toString());
-                        if(money<0){
+                        if (money < 0) {
                             Toast.makeText(getApplicationContext(), "账户余额不足", Toast.LENGTH_LONG).show();
                             return;
                         }
 
-                        String account="exkxea4366@sandbox.com";
+                        String account = "exkxea4366@sandbox.com";
 
                         String url = "http://39.107.225.80:8080/julieServer/ChangeMoneyServlet";
                         RequestParams params = new RequestParams(url);
@@ -243,7 +234,7 @@ public class WalletActivity extends AppCompatActivity {
                         params.addParameter("operation", "-");
                         params.addParameter("account", dmTextAccount.getText().toString());
 
-                        x.http().get(params, new org.xutils.common.Callback.CommonCallback<String>() {
+                        x.http().get(params, new Callback.CommonCallback<String>() {
 
                             public void onSuccess(String result) {
                                 try {

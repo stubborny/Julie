@@ -39,7 +39,8 @@
                     android:layout_alignParentLeft="true"
                     android:layout_alignParentStart="true"
                     android:layout_alignParentTop="true"
-                    android:background="@mipmap/headpic"/>
+                    android:background="@mipmap/headpic" />
+
 
                 <TextView
                     android:id="@+id/foot_detail_text_nickname"

@@ -14,12 +14,17 @@ import com.bjtu.julie.Activity.P_MessageActivity;
 import com.bjtu.julie.Activity.Pub_footActivity;
 import com.bjtu.julie.Adapter.FootManAdaper;
 import com.bjtu.julie.FullyLinearLayoutManager;
+import com.bjtu.julie.Model.MessageEvent;
 import com.bjtu.julie.Model.Order;
 import com.bjtu.julie.Model.UserManager;
 import com.bjtu.julie.R;
 import com.lilei.springactionmenu.ActionMenu;
 import com.lilei.springactionmenu.OnActionItemClickListener;
+import com.jimi_wu.ptlrecyclerview.PullToRefresh.PullToRefreshRecyclerView;
 
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -40,6 +45,8 @@ public class FootManFragment extends Fragment {
     Unbinder unbinder;
     @BindView(R.id.actionMenu)
     ActionMenu actionMenu;
+    RecyclerView recyclerView;
+    FootManAdaper adapter;
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
@@ -96,7 +103,15 @@ public class FootManFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         final View orderLayout = inflater.inflate(R.layout.activity_foot_man, container, false);
-        //initGuide()
+        //initGuide();
+        // 注册订阅者
+        EventBus.getDefault().register(this);
+
+        recyclerView = (RecyclerView) orderLayout.findViewById(R.id.recycle_order_item);
+        FullyLinearLayoutManager layoutManager = new FullyLinearLayoutManager(getActivity());
+
+        recyclerView.setLayoutManager(layoutManager);
+        recyclerView.setNestedScrollingEnabled(false);
 
         String url = "http://39.107.225.80:8080//julieServer/FootManServlet";
         RequestParams params = new RequestParams(url);
@@ -111,7 +126,7 @@ public class FootManFragment extends Fragment {
                         for (int i = 0; i < orderArray.length(); i++) {
                             // 遍历 jsonarray 数组，把每一个对象转成 json 对象
                             JSONObject job = orderArray.getJSONObject(i);
-                            Order exorder = new Order(job.getString("footId"), job.getInt("userId"), job.getInt("receiveId"), job.getString("userpicUrl"), job.getString("username"), job.getString("state"), job.getString("content"), job.getString("address"), job.getString("reward"), job.getString("time"), job.getString("phone"),Integer.parseInt(job.getString("isEvaluate")));
+                            Order exorder = new Order(job.getString("footId"), job.getInt("userId"), job.getInt("receiveId"), job.getString("userpicUrl"), job.getString("username"), job.getString("state"), job.getString("content"), job.getString("address"), job.getString("reward"), job.getString("time"), job.getString("phone"), Integer.parseInt(job.getString("isEvaluate")));
                             exorder.setPayOnline(job.getInt("payOnline"));
                             exorder.setAddNeed(job.getString("addNeed"));
                             orderlist.add(exorder);
@@ -119,13 +134,8 @@ public class FootManFragment extends Fragment {
                     }
                     //Log.i("AAA", String.valueOf(jb.getInt("code"))+jb.getString("msg"));
                     //Toast.makeText(x.app(), jb.getString("msg"), Toast.LENGTH_LONG).show();
-                    RecyclerView recyclerView = (RecyclerView) orderLayout.findViewById(R.id.recycle_order_item);
-                    FullyLinearLayoutManager layoutManager = new FullyLinearLayoutManager(getActivity());
 
-                    recyclerView.setLayoutManager(layoutManager);
-                    recyclerView.setNestedScrollingEnabled(false);
-
-                    FootManAdaper adapter = new FootManAdaper(orderlist);
+                    adapter = new FootManAdaper(orderlist);
                     recyclerView.setAdapter(adapter);
 
                 } catch (JSONException e) {
@@ -189,6 +199,21 @@ public class FootManFragment extends Fragment {
         }
     }
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        // 注销订阅者
+        EventBus.getDefault().unregister(this);
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onMessageEvent(MessageEvent event) {
+        if (event.getMessage().equals("state"))
+            adapter.notifyItemChanged(1);
+    }
+
+
 }
+
 
 

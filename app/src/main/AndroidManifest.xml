@@ -42,6 +42,7 @@
             android:launchMode="singleTask">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -73,11 +74,12 @@
             android:name=".Activity.Pub_footActivity"
             android:label="@string/title_activity_pub_foot"
             android:theme="@style/AppTheme" />
+
         <activity
             android:name=".Activity.P_MessageActivity"
             android:label="@string/title_activity_p__message"
             android:theme="@style/AppTheme" />
-        <activity android:name=".Activity.MessageActivity" />
+        <activity android:name=".Activity.MyDiscountActivity" />
 
         <service
             android:name=".Service.PollingService"
@@ -102,9 +104,9 @@
         <activity android:name=".Activity.FeedBackActivity" />
         <activity android:name=".Activity.ImpressionActivity" />
         <activity android:name=".Activity.QuestionActivity" />
-        <activity android:name=".Activity.TicketActivity" />
+        <activity android:name=".Activity.MyLikeList" />
         <activity android:name=".Activity.EvaluateActivity" />
-        <activity android:name=".Activity.QualificationedActivity"></activity>
+        <activity android:name=".Activity.AuthenticateActivity"/>
     </application>
 
 </manifest>

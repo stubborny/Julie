@@ -1,5 +1,6 @@
 package com.bjtu.julie.Activity;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -49,6 +50,10 @@ public class MessageDetailActivity extends AppCompatActivity {
     ListView footDetailCommentList;
     @BindView(R.id.comment_btn)
     Button commentBtn;
+    @BindView(R.id.messWechat)
+    TextView messWechat;
+    @BindView(R.id.messPhoneNum)
+    TextView messPhoneNum;
     @BindView(R.id.imageLike)
     ImageView imageLike;
     Exchange exchange;
@@ -59,7 +64,8 @@ public class MessageDetailActivity extends AppCompatActivity {
     @BindView(R.id.title_btn_ok)
     TextView titleBtnOk;
     private List<Comment> commList = new ArrayList<>();
-    boolean isLike=false;
+    boolean isLike = false;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -83,12 +89,24 @@ public class MessageDetailActivity extends AppCompatActivity {
         x.image().bind(footDetailImgUserpic, exchange.getUserpicUrl(), imageOptions);
         //footDetailTextNickname.setText(order.getNickname());
         messDetailContent.setText(exchange.getContent());
+        messWechat.setText(exchange.getWechat());
+        messPhoneNum.setText(exchange.getPhone());
+        messDetailUserName.setText(exchange.getName());
         //footDetailTextAddress.setText(order.getAddress());
         messDetailTextTime.setText(new DateUtil().diffDate(exchange.getTime().substring(0, 19)));
         //footDetailTextReward.setText("已支付在线报酬" + order.getReward() + "元");
 
         initMessCommInfo();
         initLikeImage();
+
+        // int a = exchange.getUserId();
+        //int b = UserManager.getInstance().getUser().getId();
+        if (UserManager.getInstance().isLogined()) {
+
+            if (exchange.getUserId() == UserManager.getInstance().getUser().getId()) {
+                titleBtnOk.setText("删除");
+            }
+        }
         //CommentAdapter adapter=new CommentAdapter(MessageDetailActivity.this,R.layout.comment_item,commList);
 //        ListView listview=(ListView)findViewById(R.id.messCommList);
 //        listview.setAdapter(adapter);
@@ -152,10 +170,12 @@ public class MessageDetailActivity extends AppCompatActivity {
             @Override
             public void onFinished() {
 
+
             }
         });
 
     }
+
     private void initLikeImage() {
 
         if (UserManager.getInstance().isLogined()) {
@@ -170,13 +190,13 @@ public class MessageDetailActivity extends AppCompatActivity {
                 public void onSuccess(String result) {
                     try {
                         JSONObject jb = new JSONObject(result);
-                        if(jb.getString("msg").equals("已收藏")){
-                            imageLike.setImageResource(R.mipmap.like2);
-                            isLike=true;
-                        }
-                        else if(jb.getString("msg").equals("未收藏")){
-                            imageLike.setImageResource(R.mipmap.like1);
-                            isLike=false;
+                        if (jb.getString("msg").equals("请求成功")) {
+                            imageLike.setImageResource(R.mipmap.ic_action_star_10);
+                            //Toast.makeText(x.app(), "收藏成功", Toast.LENGTH_LONG).show();
+                            isLike = true;
+                        } else {
+                            imageLike.setImageResource(R.mipmap.ic_action_star_0);
+                            isLike = false;
                         }
                         //Toast.makeText(x.app(), jb.getString("msg"), Toast.LENGTH_LONG).show();
                         //finish();
@@ -202,20 +222,21 @@ public class MessageDetailActivity extends AppCompatActivity {
 
                 }
             });
-        }else{
-            imageLike.setImageResource(R.mipmap.like1);
+        } else {
+            imageLike.setImageResource(R.mipmap.ic_action_star_0);
         }
 
 
     }
-    @OnClick({ R.id.comment_btn,R.id.imageLike})
+
+    @OnClick({R.id.comment_btn, R.id.imageLike})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.comment_btn:
                 if (!UserManager.getInstance().isLogined()) {
                     Toast.makeText(getApplicationContext(), "还没登陆哦", Toast.LENGTH_SHORT).show();
                     return;
-                }else if (UserManager.getInstance().getUser().getIsLegal()==0) {
+                } else if (UserManager.getInstance().getUser().getIsLegal() == 0) {
                     Toast.makeText(getApplicationContext(), "信用差，功能暂不可用，请联系客服 （qq:stubborny）", Toast.LENGTH_SHORT).show();
                     return;
                 }
@@ -237,6 +258,7 @@ public class MessageDetailActivity extends AppCompatActivity {
                         String url = "http://39.107.225.80:8080/julieServer/PubMessCommentServlet";
                         RequestParams params = new RequestParams(url);
                         params.addParameter("userId", UserManager.getInstance().getUser().getId());
+                        //params.addParameter("userId", 1);
                         params.addParameter("messId", exchange.getMessId());
                         params.addParameter("comment", input);
                         x.http().get(params, new Callback.CommonCallback<String>() {
@@ -278,7 +300,7 @@ public class MessageDetailActivity extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(), "还没登陆哦", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                if(isLike==false){
+                if (isLike == false) {
                     String url = "http://39.107.225.80:8080/julieServer/PubLikeServlet";
                     RequestParams params = new RequestParams(url);
                     params.setCharset("utf-8");
@@ -291,10 +313,10 @@ public class MessageDetailActivity extends AppCompatActivity {
                             try {
                                 JSONObject jb = new JSONObject(result);
                                 //
-                                if(jb.getString("msg").equals("收藏成功")) {
+                                if (jb.getString("msg").equals("收藏成功")) {
                                     Toast.makeText(x.app(), jb.getString("msg"), Toast.LENGTH_LONG).show();
-                                    imageLike.setImageResource(R.mipmap.like2);
-                                    isLike=true;
+                                    imageLike.setImageResource(R.mipmap.ic_action_star_10);
+                                    isLike = true;
                                 }
                                 //finish();
                                 //Log.i("AAA", String.valueOf(jb.getInt("code"))+jb.getString("msg"));
@@ -320,8 +342,7 @@ public class MessageDetailActivity extends AppCompatActivity {
                         }
                     });
                     //Toast.makeText(,"发布成功",Toast.LENGTH_SHORT).show();
-                }
-                else{
+                } else {
                     String url = "http://39.107.225.80:8080/julieServer/DelectLikeServlet";
                     RequestParams params = new RequestParams(url);
                     params.setCharset("utf-8");
@@ -334,10 +355,11 @@ public class MessageDetailActivity extends AppCompatActivity {
                             try {
                                 JSONObject jb = new JSONObject(result);
                                 //Toast.makeText(x.app(), jb.getString("msg"), Toast.LENGTH_LONG).show();
-                                if(jb.getString("msg").equals("取消收藏成功")) {Toast.makeText(x.app(), jb.getString("msg"), Toast.LENGTH_LONG).show();
+                                if (jb.getString("msg").equals("取消收藏成功")) {
+                                    Toast.makeText(x.app(), jb.getString("msg"), Toast.LENGTH_LONG).show();
 
-                                    imageLike.setImageResource(R.mipmap.like1);
-                                    isLike=true;
+                                    imageLike.setImageResource(R.mipmap.ic_action_star_0);
+                                    isLike = false;
                                 }
                                 //finish();
                                 //Log.i("AAA", String.valueOf(jb.getInt("code"))+jb.getString("msg"));
@@ -364,8 +386,67 @@ public class MessageDetailActivity extends AppCompatActivity {
                     });
                 }
                 break;
+
         }
+
+
     }
+
+    @OnClick(R.id.title_btn_ok)
+    public void onViewClicked() {
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage("确定删除吗? ");
+
+        builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                String url = "http://39.107.225.80:8080//julieServer/DeleMessageServlet";
+
+                RequestParams params = new RequestParams(url);
+                params.addParameter("messId", exchange.getMessId());
+
+                x.http().get(params, new Callback.CommonCallback<String>() {
+
+                    public void onSuccess(String result) {
+                        try {
+                            JSONObject jb = new JSONObject(result);
+                            Toast.makeText(x.app(), jb.getString("msg"), Toast.LENGTH_LONG).show();
+                            finish();
+                            //Log.i("AAA", String.valueOf(jb.getInt("code"))+jb.getString("msg"));
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+                    }
+
+                    //请求异常后的回调方法
+                    @Override
+                    public void onError(Throwable ex, boolean isOnCallback) {
+                    }
+
+                    //主动调用取消请求的回调方法
+                    @Override
+                    public void onCancelled(CancelledException cex) {
+                    }
+
+                    @Override
+                    public void onFinished() {
+
+                    }
+                });
+            }
+        }).setNegativeButton("取消", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                return;
+            }
+        }).show();
+
+
+    }
+
+
 }
 
 

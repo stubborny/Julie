@@ -16,17 +16,16 @@ public class Exchange implements Serializable {
     private String messId;
     private String commentNum;
     private String likeNum;
+    private int userId;
 
     public String getLikeNum() {
         return likeNum;
     }
 
-    public void setLikeNum(String likeNum) {
-        this.likeNum = likeNum;
-    }
 
-    public Exchange(String messId, String name, String userpicUrl, String phone, String content, String wechat, String time, String commentNum,String likeNum){
+    public Exchange(String messId,int userId,String name,String userpicUrl,String phone,String content,String wechat,String time,String commentNum,String likeNum){
         this.name=name;
+        this.userId = userId;
         this.userpicUrl=userpicUrl;
         this.phone=phone;
         this.content=content;
@@ -35,6 +34,7 @@ public class Exchange implements Serializable {
         this.messId=messId;
         this.commentNum=commentNum;
         this.likeNum=likeNum;
+
     }
 
 
@@ -114,5 +114,17 @@ public class Exchange implements Serializable {
 
     public void setCommentNum(String commentNum) {
         this.commentNum = commentNum;
+    }
+
+    public void setLikeNum(String likeNum){
+        this.likeNum=likeNum;
+    }
+
+    public int getUserId() {
+        return userId;
+    }
+
+    public void setUserId(int userId) {
+        this.userId = userId;
     }
 }

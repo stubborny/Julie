@@ -1,9 +1,7 @@
 package com.bjtu.julie.Activity;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -18,16 +16,11 @@ import com.bjtu.julie.Model.User;
 import com.bjtu.julie.Model.UserManager;
 import com.bjtu.julie.R;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.xutils.common.Callback;
 import org.xutils.http.RequestParams;
 import org.xutils.x;
-
-import java.util.ArrayList;
-import java.util.List;
-
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -39,12 +32,6 @@ import static com.bjtu.julie.R.id.tv_userInfo_id;
 public class UserInfoActivity extends Activity {
 
     //声明变量
-    @BindView(R.id.person_title)
-    TextView personTitle;
-    @BindView(R.id.person_save)
-    Button personSave;
-    @BindView(R.id.person_titlebar)
-    RelativeLayout personTitlebar;
     @BindView(R.id.tv_userInfo_sex)
     Button tvUserInfoSex;
     @BindView(tv_userInfo_id)
@@ -55,6 +42,10 @@ public class UserInfoActivity extends Activity {
     EditText tvUserInfoLocation;
     @BindView(R.id.tv_userInfo_introduction)
     EditText tvUserInfoIntroduction;
+    @BindView(R.id.title_text)
+    TextView titleText;
+    @BindView(R.id.title_btn_ok)
+    TextView titleBtnOk;
     private String sex = "male";
 
     private User user = UserManager.getInstance().getUser();
@@ -64,8 +55,7 @@ public class UserInfoActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_info);
         ButterKnife.bind(this);
-
-
+        titleText.setText("修改资料");
         tvUserInfoId.setText(user.getUsername());
         if (user.getSex() != null) {
             if (user.getSex() == "female") {
@@ -94,7 +84,7 @@ public class UserInfoActivity extends Activity {
         }
     }
 
-    @OnClick(R.id.person_save)
+    @OnClick(R.id.title_btn_ok)
     public void onViewClicked() {
         String url = "http://39.107.225.80:8080/julieServer/ChangeInfoServlet";
         RequestParams params = new RequestParams(url);
@@ -103,7 +93,7 @@ public class UserInfoActivity extends Activity {
         params.addParameter("userlocation", tvUserInfoLocation.getText().toString());
         params.addParameter("userdescribe", tvUserInfoIntroduction.getText().toString());
         params.addParameter("nickname", tvUserInfoName.getText().toString());
-        x.http().get(params, new org.xutils.common.Callback.CommonCallback<String>() {
+        x.http().get(params, new Callback.CommonCallback<String>() {
 
             public void onSuccess(String result) {
                 try {
@@ -111,7 +101,7 @@ public class UserInfoActivity extends Activity {
                     if (!TextUtils.isEmpty(result)) {
                         JSONObject jb = new JSONObject(result);
                         //Log.i("AAA", String.valueOf(jb.getInt("code"))+jb.getString("msg"));
-                        if(jb.getInt("code")==1){
+                        if (jb.getInt("code") == 1) {
                             Toast.makeText(x.app(), jb.getString("msg"), Toast.LENGTH_LONG).show();
                             UserManager.getInstance().getUser().setSex(sex);
                             UserManager.getInstance().getUser().setDescribe(tvUserInfoIntroduction.getText().toString());

@@ -9,51 +9,12 @@
         android:background="@color/white"
         android:orientation="vertical">
 
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:orientation="vertical">
+        <com.bjtu.julie.TitleLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-            <RelativeLayout
-                android:id="@+id/person_titlebar"
-                android:layout_width="match_parent"
-                android:layout_height="52dp"
-                android:background="@color/theme">
-
-                <TextView
-                    android:id="@+id/person_title"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:ellipsize="marquee"
-                    android:gravity="center_horizontal|center"
-                    android:singleLine="true"
-                    android:text="信息修改"
-                    android:textColor="@color/white"
-                    android:textSize="22sp" />
-
-                <Button
-                    android:id="@+id/person_save"
-                    android:layout_width="90dp"
-                    android:layout_height="match_parent"
-                    android:background="@color/theme"
-                    android:drawablePadding="6dp"
-                    android:ellipsize="end"
-                    android:gravity="center"
-                    android:onClick="onClick"
-                    android:paddingLeft="5dp"
-                    android:singleLine="true"
-                    android:text="保存"
-                    android:textColor="@color/white"
-                    android:textSize="18sp"
-                    android:visibility="visible"
-                    android:layout_alignParentTop="true"
-                    android:layout_alignParentRight="true"
-                    android:layout_alignParentEnd="true" />
-
-            </RelativeLayout>
-
-        </LinearLayout>
+            <include layout="@layout/title1" />
+        </com.bjtu.julie.TitleLayout>
 
         <ScrollView
             android:layout_width="match_parent"
@@ -216,8 +177,8 @@
                         android:id="@+id/tv_userInfo_introduction"
                         android:layout_width="200dp"
                         android:layout_height="match_parent"
-                        android:gravity="start"
                         android:background="@drawable/bg_edittext_selector"
+                        android:gravity="start"
                         android:textColor="@color/black"
                         android:textSize="14sp" />
 

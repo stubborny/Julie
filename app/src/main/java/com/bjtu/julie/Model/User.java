@@ -17,22 +17,6 @@ public class User {
     private int isAuthentication;//1已认证0未认证
     private int isLegal;//1合法0非法
 
-    public int getIsLegal() {
-        return isLegal;
-    }
-
-    public void setIsLegal(int isLegal) {
-        this.isLegal = isLegal;
-    }
-
-    public int getIsAuthentication() {
-        return isAuthentication;
-    }
-
-    public void setIsAuthentication(int isAuthentication) {
-        this.isAuthentication = isAuthentication;
-    }
-
     public User(String username, String password, int id, String userpicUrl, String nickname, String sex, String location, String describe, String wallet,int isAuthentication,int isLegal) {
         this.username = username;
         this.password = password;
@@ -42,19 +26,15 @@ public class User {
         this.sex = sex;
         this.location = location;
         this.describe = describe;
-        this.wallet=wallet;
-        this.isAuthentication=isAuthentication;
-        this.isLegal=isLegal;
+        this.isAuthentication = isAuthentication;
+        this.sex = sex;
+        this.location = location;
+        this.describe = describe;
+        this.wallet = wallet;
+        this.isAuthentication = isAuthentication;
+        this.isLegal = isLegal;
     }
 
-//
-//    public User(String username, String password, int id, String userpicUrl, String nickname) {
-//        this.username = username;
-//        this.password = password;
-//        this.id = id;
-//        this.userpicUrl = userpicUrl;
-//        this.nickname = nickname;
-//    }
 
     public String getWallet() {
         return wallet;
@@ -62,6 +42,14 @@ public class User {
 
     public void setWallet(String wallet) {
         this.wallet = wallet;
+    }
+
+    public int getIsLegal() {
+        return isLegal;
+    }
+
+    public void setIsLegal(int isLegal) {
+        this.isLegal = isLegal;
     }
 
     public String getUserpicUrl() {
@@ -126,5 +114,13 @@ public class User {
 
     public void setDescribe(String describe) {
         this.describe = describe;
+    }
+
+    public int getIsAuthentication() {
+        return isAuthentication;
+    }
+
+    public void setIsAuthentication(int isAuthentication) {
+        this.isAuthentication = isAuthentication;
     }
 }

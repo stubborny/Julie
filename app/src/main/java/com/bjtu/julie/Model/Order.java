@@ -22,6 +22,19 @@ public class Order implements Serializable {
         this.phone = phone;
         this.isEvaluate=isEvaluate;
     }
+    public Order(String footId, int userId, int receiveId, String userpicUrl, String username, String state, String content, String address, String reward, String time, String phone) {
+        this.receiveId = receiveId;
+        this.userId = userId;
+        this.footId = footId;
+        this.userpicUrl = userpicUrl;
+        this.nickname = username;
+        this.state = state;
+        this.content = content;
+        this.address = address;
+        this.reward = reward;
+        this.time = time;
+        this.phone = phone;
+    }
 
     private String userpicUrl;
     private String nickname;

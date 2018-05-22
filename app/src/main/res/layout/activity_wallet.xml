@@ -1,4 +1,4 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/change_all"
     android:layout_width="match_parent"
@@ -6,28 +6,22 @@
     android:background="@color/white"
     android:orientation="vertical">
 
+    <com.bjtu.julie.TitleLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <include layout="@layout/title1" />
+    </com.bjtu.julie.TitleLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="@color/darkgrey" />
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/white"
         android:orientation="vertical">
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="52dp"
-            android:background="@color/theme">
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:ellipsize="marquee"
-                android:gravity="center_horizontal|center"
-                android:singleLine="true"
-                android:text="我的钱包"
-                android:textColor="@color/white"
-                android:textSize="22sp" />
-
-        </RelativeLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -168,7 +162,7 @@
                     android:layout_height="40dp"
                     android:layout_gravity="center"
                     android:layout_marginLeft="20dp"
-                    android:src="@drawable/ic_action_cart" />
+                    android:src="@drawable/ic_action_folder_tabs" />
 
                 <TextView
                     android:layout_width="0dp"
@@ -224,4 +218,4 @@
 
     </LinearLayout>
 
-</FrameLayout>
+</LinearLayout>

@@ -9,8 +9,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import org.xutils.x;
-
 import com.bjtu.julie.Activity.FootDetailActivity;
 import com.bjtu.julie.Activity.FootDetailOwnerActivity;
 import com.bjtu.julie.Activity.FootDetailVisitorActivity;
@@ -20,13 +18,15 @@ import com.bjtu.julie.R;
 import com.bjtu.julie.Util.DateUtil;
 
 import org.xutils.image.ImageOptions;
+import org.xutils.x;
 
 import java.util.List;
 
 /**
- * Created by carrey
+ * Created by Dell on 2018/4/27.
  */
-public class FootManAdaper extends RecyclerView.Adapter<FootManAdaper.ViewHolder> {
+
+public class MyFootManAdapter extends RecyclerView.Adapter<MyFootManAdapter.ViewHolder> {
     private List<Order> mOrderList;
 
     static class ViewHolder extends RecyclerView.ViewHolder {
@@ -52,27 +52,18 @@ public class FootManAdaper extends RecyclerView.Adapter<FootManAdaper.ViewHolder
         }
     }
 
-    public FootManAdaper(List<Order> oList) {
+    public MyFootManAdapter(List<Order> oList) {
         mOrderList = oList;
     }
 
-    @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.order_item, parent, false);
         final ViewHolder holder = new ViewHolder(view);
-
         holder.orderView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 int position = holder.getAdapterPosition();
                 Order order = mOrderList.get(position);
-                /**
-                 * 如果是发单者，跳转到 FootDetailOwnerActivity
-                 * 否则 如果订单状态为1新发布，跳转到 FootDetailActivity
-                 *      否则 判断是接单者，跳转到  FootDetailActivity
-                 *                 游客，跳转到 FootDetailVisitorActivity
-                 *
-                 */
                 Intent intent;
                 if (!UserManager.getInstance().isLogined()) {
                     Toast.makeText(v.getContext(), "登陆后才能接单哦", Toast.LENGTH_SHORT).show();
@@ -93,24 +84,7 @@ public class FootManAdaper extends RecyclerView.Adapter<FootManAdaper.ViewHolder
         return holder;
     }
 
-    /**
-     * 局部刷新的关键
-     *
-     * @param holder
-     * @param position
-     * @param payloads
-     */
-    @Override
-    public void onBindViewHolder(final ViewHolder holder, int position, List payloads) {
-        if (payloads.isEmpty()) {
-            onBindViewHolder(holder, position);
-        } else {
-            mOrderList.get(position).setState("4");
-            holder.mTextState.setText("哈哈哈");
-        }
-    }
 
-    @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         Order order = mOrderList.get(position);
         ImageOptions imageOptions = new ImageOptions.Builder()
@@ -144,4 +118,5 @@ public class FootManAdaper extends RecyclerView.Adapter<FootManAdaper.ViewHolder
     public int getItemCount() {
         return mOrderList.size();
     }
+
 }

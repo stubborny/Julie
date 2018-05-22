@@ -8,31 +8,13 @@
         android:background="@color/white"
         android:orientation="vertical">
 
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:orientation="vertical">
+        <com.bjtu.julie.TitleLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="52dp"
-                android:background="@color/theme">
+            <include layout="@layout/title1" />
+        </com.bjtu.julie.TitleLayout>
 
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:ellipsize="marquee"
-                    android:gravity="center_horizontal|center"
-                    android:singleLine="true"
-                    android:text="常见问题"
-                    android:textColor="@color/white"
-                    android:textSize="22sp" />
-
-
-            </RelativeLayout>
-        </LinearLayout>
         <TextView
             android:layout_width="40dp"
             android:layout_height="10dp"

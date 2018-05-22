@@ -1,4 +1,4 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/change_all"
     android:layout_width="match_parent"
@@ -6,73 +6,41 @@
     android:background="@color/white"
     android:orientation="vertical">
 
+    <com.bjtu.julie.TitleLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <include layout="@layout/title1" />
+    </com.bjtu.julie.TitleLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="@color/darkgrey" />
+
     <LinearLayout
-        android:layout_width="368dp"
-        android:layout_height="551dp"
-        android:background="@color/white"
-        android:orientation="vertical"
-        tools:layout_editor_absoluteY="8dp"
-        tools:layout_editor_absoluteX="8dp">
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:orientation="vertical">
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="52dp"
-                android:background="@color/theme">
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:ellipsize="marquee"
-                    android:gravity="center_horizontal|center"
-                    android:singleLine="true"
-                    android:text="我的接单"
-                    android:textColor="@color/white"
-                    android:textSize="22sp" />
-
-
-            </RelativeLayout>
-
-        </LinearLayout>
-
-        <LinearLayout
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:orientation="vertical">
+            android:layout_height="match_parent"
+            android:scrollbars="none">
 
-            <TextView
-                android:layout_width="30dp"
-                android:layout_height="10dp" />
-
-
-            <LinearLayout
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/my_recycle_rec_footman_item"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center">
+                android:layout_height="wrap_content"></android.support.v7.widget.RecyclerView>
+        </ScrollView>
 
-                <ScrollView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:scrollbars="none">
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="8dp"
+            android:background="@color/theme"
+            android:focusable="true"
+            android:focusableInTouchMode="true" />
 
-                    <ListView
-                        android:id="@+id/Irecieve"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:descendantFocusability="blocksDescendants"
-                        android:scrollbars="none" />
-
-                </ScrollView>
-            </LinearLayout>
-
-        </LinearLayout>
 
     </LinearLayout>
-
-</FrameLayout>
+</LinearLayout>

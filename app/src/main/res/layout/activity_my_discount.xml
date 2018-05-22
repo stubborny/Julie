@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:weightSum="1">
+
+    <com.bjtu.julie.TitleLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <include layout="@layout/title1" />
+    </com.bjtu.julie.TitleLayout>
+
+    <LinearLayout
+        android:id="@+id/my_discount_layout_nothing"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:gravity="center"
+        android:visibility="gone">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="没有抵用券"
+            android:textSize="20sp"
+            />
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/my_discount_layout_having"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        >
+
+        <ListView
+            android:id="@+id/my_discount_list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:choiceMode="singleChoice"
+            android:transcriptMode="normal"
+            android:fastScrollEnabled="true"/>
+    </LinearLayout>
+
+</LinearLayout>

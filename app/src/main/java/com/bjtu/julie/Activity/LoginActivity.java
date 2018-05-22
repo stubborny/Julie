@@ -96,7 +96,6 @@ public class LoginActivity extends AppCompatActivity {
                         try {
                             JSONObject jb = new JSONObject(result);
                             //Log.i("AAA", String.valueOf(jb.getInt("code"))+jb.getString("msg"));
-
                             if (jb.getInt("code") == 1) {
                                 us.setStatus(1);//设置用户状态为在线
 //                                //记住密码
@@ -133,7 +132,7 @@ public class LoginActivity extends AppCompatActivity {
 //                                edit.putString("name",textPhoneNumber.getText().toString());
 //                                edit.apply();
 //                                finish();
-                                Toast.makeText(x.app(), jb.getString("msg"), Toast.LENGTH_LONG).show();
+                                Toast.makeText(x.app(), jb.getString("msg"), Toast.LENGTH_SHORT).show();
                                 Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                                 startActivity(intent);
                             }

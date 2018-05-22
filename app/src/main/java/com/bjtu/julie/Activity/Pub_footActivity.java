@@ -190,8 +190,7 @@ public class Pub_footActivity extends AppCompatActivity {
             case R.id.title_btn_ok:
                 if (!UserManager.getInstance().isLogined()) {
                     Toast.makeText(getApplicationContext(), "还没登陆哦", Toast.LENGTH_SHORT).show();
-                }
-                else if (UserManager.getInstance().getUser().getIsLegal()==0) {
+                } else if (UserManager.getInstance().getUser().getIsLegal() == 0) {
                     Toast.makeText(getApplicationContext(), "信用差，功能暂不可用，请联系客服 （qq:stubborny）", Toast.LENGTH_SHORT).show();
 
                 } else if (pubFootEdit.getText().toString().equals("")) {
@@ -294,16 +293,21 @@ public class Pub_footActivity extends AppCompatActivity {
 
         dpTextMoney.setText(totalMoney.floatValue() + "元");
         dpTextAll.setText(UserManager.getInstance().getUser().getWallet());
-
+        dpTextRecharge.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(Pub_footActivity.this, WalletActivity.class));
+            }
+        });
         builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 Double wallet = Double.valueOf(UserManager.getInstance().getUser().getWallet()) - totalMoney.floatValue();
                 if (wallet < 0) {
-                    canCloseDialog(dialogInterface,false);
+                    canCloseDialog(dialogInterface, false);
                     Toast.makeText(getApplicationContext(), "余额不足，请充值或选择线下付款", Toast.LENGTH_SHORT).show();
                 } else {
-                    canCloseDialog(dialogInterface,true);
+                    canCloseDialog(dialogInterface, true);
                     String url = "http://39.107.225.80:8080/julieServer/PubFootServlet";
                     RequestParams params = new RequestParams(url);
                     params.setCharset("utf-8");
@@ -318,7 +322,7 @@ public class Pub_footActivity extends AppCompatActivity {
                     params.addParameter("payOnline", "1");
 
                     if (discount != null) {
-                        params.addParameter("udId", discount.getId());
+                        params.addParameter("udId", discount.getUdId());
                     } else {
                         params.addParameter("udId", "-1");
                     }
@@ -359,17 +363,17 @@ public class Pub_footActivity extends AppCompatActivity {
         builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                canCloseDialog(dialogInterface,true);
+                canCloseDialog(dialogInterface, true);
             }
         });
         builder.setNeutralButton("不想充钱，线下付款", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface arg0, int arg1) {
                 //  提示信息
-                canCloseDialog(arg0,true);
-                if(discount!=null){
+                canCloseDialog(arg0, true);
+                if (discount != null) {
                     Toast.makeText(getApplicationContext(), "线下付款不能使用优惠券哦", Toast.LENGTH_SHORT).show();
-                }else{
+                } else {
                     String url = "http://39.107.225.80:8080/julieServer/PubFootServlet";
                     RequestParams params = new RequestParams(url);
                     params.setCharset("utf-8");
@@ -398,10 +402,12 @@ public class Pub_footActivity extends AppCompatActivity {
                                 e.printStackTrace();
                             }
                         }
+
                         //请求异常后的回调方法
                         @Override
                         public void onError(Throwable ex, boolean isOnCallback) {
                         }
+
                         //主动调用取消请求的回调方法
                         @Override
                         public void onCancelled(CancelledException cex) {
