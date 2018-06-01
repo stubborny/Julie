@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#ffffff"
     android:orientation="vertical">
 
     <com.bjtu.julie.TitleLayout
@@ -14,228 +13,145 @@
         <include layout="@layout/title1" />
     </com.bjtu.julie.TitleLayout>
 
-    <View
+    <TextView
+        android:id="@+id/authentic_dear"
         android:layout_width="match_parent"
-        android:layout_height="0.5dp"
-        android:background="@color/darkgrey" />
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="10dp"
+        android:gravity="center_vertical"
+        android:text="亲爱的，请填写下列信息"
+        android:textColor="#000000"
+        android:textSize="18sp" />
 
-    <ScrollView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:orientation="horizontal">
 
-        <LinearLayout
+        <TextView
             android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="姓名"
+            android:textColor="@color/black"
+            android:textSize="15sp" />
+
+        <EditText
+            android:id="@+id/authentic_name"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="20dp"
+            android:layout_marginStart="20dp"
+            android:layout_weight="1"
+            android:background="@null"
+            android:hint="请填写您的姓名"
+            android:maxLines="1"
+            android:textColorHint="@color/darkgrey"
+            android:textCursorDrawable="@null"
+            android:textSize="15sp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="学号"
+            android:textColor="@color/black"
+            android:textSize="15sp" />
+
+        <EditText
+            android:id="@+id/authentic_no"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="20dp"
+            android:layout_marginStart="20dp"
+            android:layout_weight="1"
+            android:background="@null"
+            android:hint="请填写您的学号"
+            android:inputType="phone"
+            android:maxLines="1"
+            android:textColorHint="@color/darkgrey"
+            android:textCursorDrawable="@null"
+            android:textSize="15sp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/authentic_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="20dp"
+            android:gravity="center_vertical"
+            android:text="学生证件上传"
+            android:textColor="#000000"
+            android:textSize="18sp" />
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="20dp"
-                android:background="@color/whitesmoke"/>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@color/whitesmoke">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginLeft="5dp"
+            android:gravity="center_vertical"
+            android:text="请上传一张清晰学生证照片（含姓名、学号等信息一面）"
+            android:textSize="14sp" />
 
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:orientation="vertical">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginLeft="5dp"
+            android:gravity="center_vertical"
+            android:text="此照片仅为身份核验时使用,点击灰色区域上传"
+            android:textSize="14sp" />
 
-                    <ImageView
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
-                        android:src="@mipmap/ic_indeterminate_check_box_black_24dp" />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/darkgrey" />
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="40dp"
-                        android:gravity="center"
-                        android:text="学号认证"
-                        android:textSize="15sp" />
+        <ImageView
+            android:id="@+id/upload_img_show"
+            android:layout_width="130dp"
+            android:layout_height="130dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="20dp"
+            android:background="@color/whitesmoke"
+            android:gravity="center"
+            android:scaleType="center" />
 
-                    <ImageView
-                        android:layout_width="40dp"
-                        android:layout_height="25dp"
-                        android:src="@mipmap/rectangle" />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="10dp"
+            android:background="@color/darkgrey" />
 
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:orientation="vertical">
-
-                    <ImageView
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
-                        android:src="@mipmap/ic_check_box_outline_blank_black_24dp" />
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="40dp"
-                        android:gravity="center"
-                        android:text="缴纳押金"
-                        android:textSize="15sp" />
-
-
-                    <ImageView
-                        android:layout_width="40dp"
-                        android:layout_height="25dp"
-                        android:visibility="invisible"
-                        android:src="@mipmap/rectangle" />
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:orientation="vertical">
-
-                    <ImageView
-                        android:id="@+id/imageView11"
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
-                        android:src="@mipmap/ic_check_box_outline_blank_black_24dp" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="40dp"
-                        android:gravity="center"
-                        android:text="开始体验"
-                        android:textSize="15sp" />
-
-                    <ImageView
-                        android:layout_width="40dp"
-                        android:layout_height="25dp"
-                        android:src="@mipmap/rectangle"
-                        android:visibility="invisible" />
-                </LinearLayout>
-            </LinearLayout>
+        <Button
+            android:id="@+id/upload_btn_ok"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="30dp"
+            android:background="@drawable/round_radius2"
+            android:text="确定 "
+            android:textSize="15sp" />
+    </LinearLayout>
 
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="140dp"
-                android:orientation="vertical">
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="5dp"
-                    android:gravity="center_vertical"
-                    android:text="学生证件上传"
-                    android:layout_marginTop="20dp"
-                    android:textColor="#000000"
-                    android:textSize="18sp" />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="40dp"
-                    android:layout_marginLeft="5dp"
-                    android:gravity="center_vertical"
-                    android:text="请上传两张清晰手持学生证正反面与本人合照照片"
-                    android:textSize="14sp" />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="40dp"
-                    android:layout_marginLeft="5dp"
-                    android:gravity="center_vertical"
-                    android:text="此照片仅为身份核验时使用,点击灰色区域上传"
-                    android:textSize="14sp" />
-
-            </LinearLayout>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@color/darkgrey"
-                />
-            <LinearLayout
-                android:id="@+id/ly"
-                android:layout_width="match_parent"
-                android:layout_height="160dp"
-                android:orientation="horizontal"
-
-                >
-
-                <ImageView
-                    android:layout_width="4dp"
-                    android:layout_height="160dp"
-                    android:layout_weight="3" />
-
-                <ImageView
-                    android:id="@+id/pic1_show"
-                    android:layout_width="130dp"
-                    android:layout_height="130dp"
-                    android:layout_gravity="center"
-                    android:layout_weight="1"
-                    android:background="@color/whitesmoke" />
-
-                <ImageView
-                    android:layout_width="4dp"
-                    android:layout_height="160dp"
-                    android:layout_weight="3" />
-
-                <ImageView
-                    android:id="@+id/pic2_show"
-                    android:layout_width="130dp"
-                    android:layout_height="130dp"
-                    android:layout_gravity="center"
-                    android:layout_weight="1"
-                    android:background="@color/whitesmoke" />
-
-                <ImageView
-                    android:layout_width="4dp"
-                    android:layout_height="160dp"
-                    android:layout_weight="4" />
-                />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="30dp"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:id="@+id/tv1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="30dp"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:text="删除"
-                    android:textColor="@color/red"
-                    android:visibility="invisible" />
-
-                <TextView
-                    android:id="@+id/tv2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="30dp"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:text="删除"
-                    android:textColor="@color/red"
-                    android:visibility="invisible" />
-            </LinearLayout>
-
-
-
-            <Button
-                android:id="@+id/upload_pic"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:background="@drawable/round_radius2"
-                android:text="确定 "
-                android:textSize="15sp" />
-
-        </LinearLayout>
-    </ScrollView>
 </LinearLayout>

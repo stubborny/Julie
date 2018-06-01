@@ -31,11 +31,11 @@
                 android:background="@null"
                 android:gravity="top"
                 android:hint="帮取快递，食堂带饭等"
+                android:maxLines="6"
+                android:minLines="1"
                 android:textColorHint="@color/darkgrey"
                 android:textCursorDrawable="@null"
-                android:textSize="15sp"
-                android:minLines="1"
-                android:maxLines="6"/>
+                android:textSize="15sp" />
 
 
             <View
@@ -67,10 +67,10 @@
                     android:layout_weight="1"
                     android:background="@null"
                     android:hint="请填写送达地址"
+                    android:maxLines="1"
                     android:textColorHint="@color/darkgrey"
                     android:textCursorDrawable="@null"
-                    android:textSize="15sp"
-                    android:maxLines="1"/>
+                    android:textSize="15sp" />
 
             </LinearLayout>
 
@@ -101,8 +101,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
-                    android:background="@drawable/textview_border"
                     android:layout_marginLeft="20dp"
+                    android:background="@drawable/textview_border"
                     android:gravity="center_vertical"
                     android:text="送到宿舍"
                     android:textColor="@color/darkgrey"
@@ -113,8 +113,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
-                    android:background="@drawable/textview_border"
                     android:layout_marginLeft="11dp"
+                    android:background="@drawable/textview_border"
                     android:gravity="center_vertical"
                     android:text="代为保管"
                     android:textColor="@drawable/text_color"
@@ -125,8 +125,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
-                    android:background="@drawable/textview_border"
                     android:layout_marginLeft="11dp"
+                    android:background="@drawable/textview_border"
                     android:gravity="center_vertical"
                     android:text="超过十斤"
                     android:textColor="@drawable/text_color"
@@ -137,8 +137,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
-                    android:background="@drawable/textview_border"
                     android:layout_marginLeft="11dp"
+                    android:background="@drawable/textview_border"
                     android:gravity="center_vertical"
                     android:text="轻拿轻放"
                     android:textColor="@drawable/text_color"
@@ -170,10 +170,10 @@
                     android:background="@null"
                     android:hint="请填写费用"
                     android:inputType="number|numberDecimal"
+                    android:maxLines="1"
                     android:textColorHint="@color/darkgrey"
                     android:textCursorDrawable="@null"
-                    android:textSize="15sp"
-                    android:maxLines="1"/>
+                    android:textSize="15sp" />
 
             </LinearLayout>
 
@@ -247,10 +247,10 @@
                     android:background="@null"
                     android:hint="请填写联系电话"
                     android:inputType="phone"
+                    android:maxLines="1"
                     android:textColorHint="@color/darkgrey"
                     android:textCursorDrawable="@null"
-                    android:textSize="15sp"
-                    android:maxLines="1"/>
+                    android:textSize="15sp" />
 
             </LinearLayout>
 
@@ -278,10 +278,10 @@
                     android:layout_weight="1"
                     android:background="@null"
                     android:hint="请填写联系人姓名"
+                    android:maxLines="1"
                     android:textColorHint="@color/darkgrey"
                     android:textCursorDrawable="@null"
-                    android:textSize="15sp"
-                    android:maxLines="1"/>
+                    android:textSize="15sp" />
 
             </LinearLayout>
         </LinearLayout>

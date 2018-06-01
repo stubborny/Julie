@@ -125,6 +125,11 @@ public class LoginActivity extends AppCompatActivity {
 //                                }
                                 JSONObject job = jb.getJSONObject("data");
                                 User user = new User(job.getString("username"), job.getString("password"), job.getInt("id"), job.getString("userpicUrl"), job.getString("nickname"), job.getString("sex"), job.getString("location"), job.getString("describe"),job.getString("wallet"),job.getInt("isAuthentication"),job.getInt("isLegal"));
+
+                                if(user.getIsAuthentication()==2||user.getIsAuthentication()==1){
+                                    user.setName(jb.getJSONObject("authentic").getString("name"));
+                                    user.setNo(jb.getJSONObject("authentic").getInt("no"));
+                                }
                                 UserManager userManager = UserManager.getInstance();
                                 userManager.setUser(user);
 //                                sp = getSharedPreferences("userInfo", Context.MODE_PRIVATE);

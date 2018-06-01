@@ -107,6 +107,7 @@ public class UserInfoActivity extends Activity {
                             UserManager.getInstance().getUser().setDescribe(tvUserInfoIntroduction.getText().toString());
                             UserManager.getInstance().getUser().setNickname(tvUserInfoName.getText().toString());
                             UserManager.getInstance().getUser().setLocation(tvUserInfoLocation.getText().toString());
+
                             startActivity(new Intent(UserInfoActivity.this, MainActivity.class));
 
                         }

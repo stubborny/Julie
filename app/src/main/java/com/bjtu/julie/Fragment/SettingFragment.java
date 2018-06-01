@@ -1,27 +1,20 @@
 package com.bjtu.julie.Fragment;
 
 import android.Manifest;
-import android.app.Activity;
 import android.app.Dialog;
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
 import android.provider.MediaStore;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
-import android.util.Base64;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -45,11 +38,8 @@ import com.bjtu.julie.Activity.MyLikeList;
 import com.bjtu.julie.Activity.PublishActivity;
 import com.bjtu.julie.Activity.QuestionActivity;
 import com.bjtu.julie.Activity.RecieveActivity;
-import com.bjtu.julie.Activity.RegActivity;
 import com.bjtu.julie.Activity.UserInfoActivity;
 import com.bjtu.julie.Activity.WalletActivity;
-import com.bjtu.julie.MainActivity;
-import com.bjtu.julie.Model.Exchange;
 import com.bjtu.julie.Model.UserManager;
 import com.bjtu.julie.MyApplication;
 import com.bjtu.julie.R;
@@ -63,21 +53,15 @@ import org.xutils.x;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
 import pub.devrel.easypermissions.EasyPermissions;
-
-import static com.bjtu.julie.Activity.AuthenticateActivity.bitmapToBase64;
 
 public class SettingFragment extends Fragment {
     @BindView(R.id.user1_iv_prehead)
@@ -115,7 +99,6 @@ public class SettingFragment extends Fragment {
     LinearLayout llAuthenticate;
     @BindView(R.id.scrollView1)
     ScrollView scrollView1;
-    private String userpicstring = "haha";
 
     public ProgressDialog progressDialog;//上传图片时的进度条
     public Handler mHandler;//用于更新进度条
@@ -202,7 +185,6 @@ public class SettingFragment extends Fragment {
                 alertdialogbuilder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        String url = "http://39.107.225.80:8080/julieServer/UpdateOrderServlet";
                         UserManager.getInstance().setUser(null);
                         logout.setVisibility(View.GONE);
                         user1TvPrename.setText("登录/注册");

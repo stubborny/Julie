@@ -148,8 +148,8 @@ public class Pub_footActivity extends AppCompatActivity {
         });
         pubFootPhoneEdit.setText(UserManager.getInstance().getUser().getUsername());
         pubFootNameEdit.setText(UserManager.getInstance().getUser().getNickname());
-        pubFootEdit.setText("测试");
-        pubFootAddressEdit.setText("测试");
+        //pubFootEdit.setText("测试");
+        //pubFootAddressEdit.setText("测试");
         pubFootMoneyEdit.setText("3.0");
         titleText.setText("发布");
         pubFootMoneyEdit.addTextChangedListener(new TextWatcher() {
@@ -293,12 +293,7 @@ public class Pub_footActivity extends AppCompatActivity {
 
         dpTextMoney.setText(totalMoney.floatValue() + "元");
         dpTextAll.setText(UserManager.getInstance().getUser().getWallet());
-        dpTextRecharge.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(Pub_footActivity.this, WalletActivity.class));
-            }
-        });
+
         builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
@@ -424,7 +419,7 @@ public class Pub_footActivity extends AppCompatActivity {
         dpTextRecharge.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(getApplicationContext(), "充值", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(Pub_footActivity.this, WalletActivity.class));
             }
         });
         builder.create();

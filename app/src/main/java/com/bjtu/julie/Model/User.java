@@ -16,7 +16,8 @@ public class User {
     private String wallet;
     private int isAuthentication;//1已认证0未认证
     private int isLegal;//1合法0非法
-
+    private int no;
+    private String name;
     public User(String username, String password, int id, String userpicUrl, String nickname, String sex, String location, String describe, String wallet,int isAuthentication,int isLegal) {
         this.username = username;
         this.password = password;
@@ -35,6 +36,21 @@ public class User {
         this.isLegal = isLegal;
     }
 
+    public int getNo() {
+        return no;
+    }
+
+    public void setNo(int no) {
+        this.no = no;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
 
     public String getWallet() {
         return wallet;

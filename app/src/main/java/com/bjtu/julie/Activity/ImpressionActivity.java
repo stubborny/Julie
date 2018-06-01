@@ -154,21 +154,22 @@ public class ImpressionActivity extends AppCompatActivity {
                             .setImageScaleType(ImageView.ScaleType.CENTER_CROP)
                             .setFailureDrawableId(R.mipmap.load_error)
                             .setLoadingDrawableId(R.mipmap.loading)
+                            .setCircular(true)
                             .build();
                     x.image().bind(impression_head, UserManager.getInstance().getUser().getUserpicUrl(), imageOptions);
                     impression_name.setText(UserManager.getInstance().getUser().getNickname());
                     int islegal = UserManager.getInstance().getUser().getIsLegal();
-                    if (UserManager.getInstance().getUser().getIsAuthentication() == 0) {
-                        if (islegal == 0) {
-                            identification_text.setText("未认证(信用风险)");
-                        } else {
-                            identification_text.setText("未认证");
-                        }
-                    } else {
+                    if (UserManager.getInstance().getUser().getIsAuthentication() == 1) {
                         if (islegal == 0) {
                             identification_text.setText("已认证(信用风险)");
                         } else {
                             identification_text.setText("已认证");
+                        }
+                    } else {
+                        if (islegal == 0) {
+                            identification_text.setText("未认证(信用风险)");
+                        } else {
+                            identification_text.setText("未认证");
                         }
                     }
                     //Toast.makeText(x.app(), jb.getString("msg"), Toast.LENGTH_LONG).show();
