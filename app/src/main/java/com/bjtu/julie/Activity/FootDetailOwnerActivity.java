@@ -19,7 +19,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bjtu.julie.Adapter.CommentAdapter;
-import com.bjtu.julie.Adapter.MyFootManAdapter;
 import com.bjtu.julie.Fragment.ContactDialogFragment;
 import com.bjtu.julie.FullyLinearLayoutManager;
 import com.bjtu.julie.Model.Comment;
@@ -104,6 +103,7 @@ public class FootDetailOwnerActivity extends AppCompatActivity {
     @BindView(R.id.foot_detail_addNeed)
     LinearLayout footDetailAddNeed;
     private List<Comment> commList = new ArrayList<>();
+    int position;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -117,6 +117,7 @@ public class FootDetailOwnerActivity extends AppCompatActivity {
         titleBtnOk.setText("");
         footDetailTextContent.setMovementMethod(ScrollingMovementMethod.getInstance());
         order = (Order) getIntent().getSerializableExtra("order");
+        position = getIntent().getIntExtra("position", 0);
         if (order.getState().equals("1")) {
             titleBtnOk.setText("删除");
         }
@@ -243,7 +244,7 @@ public class FootDetailOwnerActivity extends AppCompatActivity {
 
     }
 
-    @OnClick({R.id.foot_detail_btn_receive, R.id.foot_detail_btn_comment,R.id.title_btn_ok})
+    @OnClick({R.id.foot_detail_btn_receive, R.id.foot_detail_btn_comment, R.id.title_btn_ok})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.foot_detail_btn_receive:
@@ -284,6 +285,11 @@ public class FootDetailOwnerActivity extends AppCompatActivity {
                                             footDetailBtnReceive.setText("可评价同学");
                                             oState = 4;//修改当前订单状态
                                             spv.setItems(list, 3, 200);
+                                            // 发布事件
+                                            MessageEvent messageEvent = new MessageEvent("state", position);
+                                            messageEvent.setState("4");
+                                            EventBus.getDefault().post(messageEvent);
+
                                         } else {
                                             Toast.makeText(x.app(), jb.getString("msg"), Toast.LENGTH_SHORT).show();
                                         }
@@ -312,7 +318,6 @@ public class FootDetailOwnerActivity extends AppCompatActivity {
                     alertdialogbuilder.setNegativeButton("取消", null);
                     AlertDialog alertdialog1 = alertdialogbuilder.create();
                     alertdialog1.show();
-
 
 
                 } else if (oState == 4) {
@@ -384,26 +389,37 @@ public class FootDetailOwnerActivity extends AppCompatActivity {
                 break;
 
             case R.id.title_btn_ok:
-               // String footId = order.getFootId();//把单号发送给服务器
+                // String footId = order.getFootId();//把单号发送给服务器
                 //Toast.makeText(this, footId, Toast.LENGTH_SHORT).show();
 
                 AlertDialog.Builder builder = new AlertDialog.Builder(this);
-                builder.setMessage("确定删除吗? ");
-
-                builder.setPositiveButton("确定",new DialogInterface.OnClickListener(){
+                builder.setTitle("确定删除吗? ");
+                if (order.getPayOnline() == 1) {
+                    builder.setMessage("此单为线上支付，稍后赏金将退回到您的钱包");
+                } else {
+                    builder.setMessage("此单为线下支付，不涉及赏金退回，将直接删除");
+                }
+                builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
                     @Override
-                    public void onClick(DialogInterface dialog, int which){
+                    public void onClick(DialogInterface dialog, int which) {
                         String url = "http://39.107.225.80:8080//julieServer/DeleMyOrderServlet";
 
                         RequestParams params = new RequestParams(url);
                         params.addParameter("footId", order.getFootId());
-
+                        params.addParameter("payonline", order.getPayOnline());
+                        params.addParameter("reward", order.getReward());
+                        params.addParameter("userId", UserManager.getInstance().getUser().getId());
                         x.http().get(params, new Callback.CommonCallback<String>() {
 
                             public void onSuccess(String result) {
                                 try {
                                     JSONObject jb = new JSONObject(result);
                                     Toast.makeText(x.app(), jb.getString("msg"), Toast.LENGTH_SHORT).show();
+                                    if (order.getPayOnline() == 1) {
+                                        Double wallet = Double.valueOf(UserManager.getInstance().getUser().getWallet()) + Double.valueOf(order.getReward()).floatValue();
+                                        UserManager.getInstance().getUser().setWallet(wallet.floatValue() + "");
+                                    }// 发布事件
+                                    EventBus.getDefault().post(new MessageEvent("delete", position));
                                     finish();
                                     //Log.i("AAA", String.valueOf(jb.getInt("code"))+jb.getString("msg"));
                                 } catch (JSONException e) {
@@ -428,20 +444,18 @@ public class FootDetailOwnerActivity extends AppCompatActivity {
                             }
                         });
                     }
-                }).setNegativeButton("取消", new DialogInterface.OnClickListener(){
+                }).setNegativeButton("取消", new DialogInterface.OnClickListener() {
                     @Override
-                    public void onClick(DialogInterface dialog, int which){
-                        return ;
+                    public void onClick(DialogInterface dialog, int which) {
+                        return;
                     }
                 }).show();
-
 
 
                 break;
 
         }
     }
-
 
 
     @OnClick(R.id.foot_detail_text_receive_phone)
@@ -510,6 +524,9 @@ public class FootDetailOwnerActivity extends AppCompatActivity {
     public void onMessageEvent(MessageEvent event) {
         if (event.getMessage().equals("评价成功")) {
             order.setIsEvaluate(1);
+            MessageEvent messageEvent = new MessageEvent("evaluate", position);
+            // 发布事件
+            EventBus.getDefault().post(messageEvent);
             footDetailBtnReceive.setText("已评价");
             footDetailBtnReceive.setBackgroundColor(footDetailBtnReceive.getResources().getColor(R.color.darkgrey));
             footDetailBtnReceive.setClickable(false);

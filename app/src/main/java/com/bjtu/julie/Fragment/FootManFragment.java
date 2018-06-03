@@ -18,6 +18,7 @@ import com.bjtu.julie.Model.MessageEvent;
 import com.bjtu.julie.Model.Order;
 import com.bjtu.julie.Model.UserManager;
 import com.bjtu.julie.R;
+import com.github.nuptboyzhb.lib.SuperSwipeRefreshLayout;
 import com.lilei.springactionmenu.ActionMenu;
 import com.lilei.springactionmenu.OnActionItemClickListener;
 import com.jimi_wu.ptlrecyclerview.PullToRefresh.PullToRefreshRecyclerView;
@@ -47,6 +48,7 @@ public class FootManFragment extends Fragment {
     ActionMenu actionMenu;
     RecyclerView recyclerView;
     FootManAdaper adapter;
+    SuperSwipeRefreshLayout swipeRefreshLayout;
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
@@ -132,9 +134,6 @@ public class FootManFragment extends Fragment {
                             orderlist.add(exorder);
                         }
                     }
-                    //Log.i("AAA", String.valueOf(jb.getInt("code"))+jb.getString("msg"));
-                    //Toast.makeText(x.app(), jb.getString("msg"), Toast.LENGTH_LONG).show();
-
                     adapter = new FootManAdaper(orderlist);
                     recyclerView.setAdapter(adapter);
 
@@ -162,6 +161,68 @@ public class FootManFragment extends Fragment {
         });
 
         unbinder = ButterKnife.bind(this, orderLayout);
+        swipeRefreshLayout = (SuperSwipeRefreshLayout) orderLayout.findViewById(R.id.swipe_refresh);
+        swipeRefreshLayout
+                .setOnPullRefreshListener(new SuperSwipeRefreshLayout.OnPullRefreshListener() {
+
+                    @Override
+                    public void onRefresh() {
+                        String url = "http://39.107.225.80:8080//julieServer/FootManServlet";
+                        RequestParams params = new RequestParams(url);
+                        x.http().get(params, new Callback.CommonCallback<String>() {
+
+                            public void onSuccess(String result) {
+                                try {
+                                    orderlist.clear();
+                                    JSONObject jb = new JSONObject(result);
+
+                                    JSONArray orderArray = jb.getJSONArray("orderList");
+                                    if (orderArray.length() > 0) {
+                                        for (int i = 0; i < orderArray.length(); i++) {
+                                            // 遍历 jsonarray 数组，把每一个对象转成 json 对象
+                                            JSONObject job = orderArray.getJSONObject(i);
+                                            Order exorder = new Order(job.getString("footId"), job.getInt("userId"), job.getInt("receiveId"), job.getString("userpicUrl"), job.getString("username"), job.getString("state"), job.getString("content"), job.getString("address"), job.getString("reward"), job.getString("time"), job.getString("phone"), Integer.parseInt(job.getString("isEvaluate")));
+                                            exorder.setPayOnline(job.getInt("payOnline"));
+                                            exorder.setAddNeed(job.getString("addNeed"));
+                                            orderlist.add(exorder);
+                                        }
+                                    }
+                                    //Log.i("AAA", String.valueOf(jb.getInt("code"))+jb.getString("msg"));
+                                    //Toast.makeText(x.app(), jb.getString("msg"), Toast.LENGTH_LONG).show();
+                                    adapter.notifyDataSetChanged();
+                                    swipeRefreshLayout.setRefreshing(false);
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+
+                            //请求异常后的回调方法
+                            @Override
+                            public void onError(Throwable ex, boolean isOnCallback) {
+                            }
+
+                            //主动调用取消请求的回调方法
+                            @Override
+                            public void onCancelled(CancelledException cex) {
+                            }
+
+                            @Override
+                            public void onFinished() {
+
+                            }
+                        });
+                    }
+
+                    @Override
+                    public void onPullDistance(int distance) {
+                        //TODO 下拉距离
+                    }
+
+                    @Override
+                    public void onPullEnable(boolean enable) {
+                        //TODO 下拉过程中，下拉的距离是否足够出发刷新
+                    }
+                });
         return orderLayout;
     }
 
@@ -208,8 +269,65 @@ public class FootManFragment extends Fragment {
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onMessageEvent(MessageEvent event) {
-        if (event.getMessage().equals("state"))
-            adapter.notifyItemChanged(1);
+
+        if (event.getMessage().equals("state")) {
+            int position = event.getPosition();
+            String state = event.getState();
+            orderlist.get(position).setState(state);
+            if (state.equals("2")) {
+                orderlist.get(position).setReceiveId(event.getReceivrId());
+            }
+            adapter.notifyItemChanged(position);
+        } else if (event.getMessage().equals("evaluate")) {
+            int position = event.getPosition();
+            orderlist.get(position).setIsEvaluate(1);
+            adapter.notifyItemChanged(position);
+        } else if (event.getMessage().equals("delete")) {
+            int position = event.getPosition();
+            orderlist.remove(position);
+            adapter.notifyItemRemoved(position);
+        } else if (event.getMessage().equals("pub")) {
+            String url = "http://39.107.225.80:8080//julieServer/FootManServlet";
+            RequestParams params = new RequestParams(url);
+            x.http().get(params, new Callback.CommonCallback<String>() {
+
+                public void onSuccess(String result) {
+                    try {
+                        orderlist.clear();
+                        JSONObject jb = new JSONObject(result);
+                        JSONArray orderArray = jb.getJSONArray("orderList");
+                        if (orderArray.length() > 0) {
+                            for (int i = 0; i < orderArray.length(); i++) {
+                                // 遍历 jsonarray 数组，把每一个对象转成 json 对象
+                                JSONObject job = orderArray.getJSONObject(i);
+                                Order exorder = new Order(job.getString("footId"), job.getInt("userId"), job.getInt("receiveId"), job.getString("userpicUrl"), job.getString("username"), job.getString("state"), job.getString("content"), job.getString("address"), job.getString("reward"), job.getString("time"), job.getString("phone"), Integer.parseInt(job.getString("isEvaluate")));
+                                exorder.setPayOnline(job.getInt("payOnline"));
+                                exorder.setAddNeed(job.getString("addNeed"));
+                                orderlist.add(exorder);
+                            }
+                        }
+                        adapter.notifyDataSetChanged();
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+                //请求异常后的回调方法
+                @Override
+                public void onError(Throwable ex, boolean isOnCallback) {
+                }
+
+                //主动调用取消请求的回调方法
+                @Override
+                public void onCancelled(CancelledException cex) {
+                }
+
+                @Override
+                public void onFinished() {
+
+                }
+            });
+        }
     }
 
 

@@ -88,7 +88,7 @@ public class FootDetailActivity extends AppCompatActivity {
     @BindView(R.id.foot_detail_addNeed)
     LinearLayout footDetailAddNeed;
     private List<Comment> commList = new ArrayList<>();
-
+    int position;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -99,7 +99,7 @@ public class FootDetailActivity extends AppCompatActivity {
         titleBtnOk.setText("");
         footDetailTextContent.setMovementMethod(ScrollingMovementMethod.getInstance());
         order = (Order) getIntent().getSerializableExtra("order");
-
+        position = getIntent().getIntExtra("position", 0);
         ImageOptions imageOptions = new ImageOptions.Builder()
                 .setIgnoreGif(false)//是否忽略gif图。false表示不忽略。不写这句，默认是true
                 .setImageScaleType(ImageView.ScaleType.CENTER_CROP)
@@ -263,6 +263,11 @@ public class FootDetailActivity extends AppCompatActivity {
                                             footDetailBtnReceive.setText("送达后点我");
                                             oState = 2;//修改当前订单状态
                                             spv.setItems(list, 0, 200);
+                                            MessageEvent messageEvent = new MessageEvent("state", position);
+                                            messageEvent.setState("2");
+                                            messageEvent.setReceivrId(UserManager.getInstance().getUser().getId());
+                                            // 发布事件
+                                            EventBus.getDefault().post(messageEvent);
                                         } else {
                                             Toast.makeText(x.app(), jb.getString("msg"), Toast.LENGTH_LONG).show();
                                         }
@@ -320,6 +325,11 @@ public class FootDetailActivity extends AppCompatActivity {
                                             footDetailBtnReceive.setBackgroundColor(footDetailBtnReceive.getResources().getColor(R.color.darkgrey));
                                             oState = 3;//修改当前订单状态
                                             spv.setItems(list, 2, 200);
+                                            MessageEvent messageEvent=new MessageEvent("state", position);
+                                            messageEvent.setState("3");
+                                            // 发布事件
+                                            EventBus.getDefault().post(messageEvent);
+
                                         } else {
                                             Toast.makeText(x.app(), jb.getString("msg"), Toast.LENGTH_LONG).show();
                                         }
@@ -350,8 +360,7 @@ public class FootDetailActivity extends AppCompatActivity {
                     alertdialog1.show();
 
                 }
-                // 发布事件
-                //EventBus.getDefault().post(new MessageEvent("state"));
+
                 break;
             case R.id.foot_detail_btn_comment:
                 if (!UserManager.getInstance().isLogined()) {

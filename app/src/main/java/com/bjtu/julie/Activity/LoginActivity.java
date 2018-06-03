@@ -89,7 +89,6 @@ public class LoginActivity extends AppCompatActivity {
                 RequestParams params = new RequestParams(url);
                 params.addParameter("username", textPhoneNumber.getText().toString());
                 params.addParameter("password", textPassword.getText().toString());
-
                 x.http().get(params, new Callback.CommonCallback<String>() {
 
                     public void onSuccess(String result) {
@@ -124,9 +123,9 @@ public class LoginActivity extends AppCompatActivity {
 //                                    editor.commit();
 //                                }
                                 JSONObject job = jb.getJSONObject("data");
-                                User user = new User(job.getString("username"), job.getString("password"), job.getInt("id"), job.getString("userpicUrl"), job.getString("nickname"), job.getString("sex"), job.getString("location"), job.getString("describe"),job.getString("wallet"),job.getInt("isAuthentication"),job.getInt("isLegal"));
+                                User user = new User(job.getString("username"), job.getString("password"), job.getInt("id"), job.getString("userpicUrl"), job.getString("nickname"), job.getString("sex"), job.getString("location"), job.getString("describe"), job.getString("wallet"), job.getInt("isAuthentication"), job.getInt("isLegal"));
 
-                                if(user.getIsAuthentication()==2||user.getIsAuthentication()==1){
+                                if (user.getIsAuthentication() == 2 || user.getIsAuthentication() == 1) {
                                     user.setName(jb.getJSONObject("authentic").getString("name"));
                                     user.setNo(jb.getJSONObject("authentic").getInt("no"));
                                 }
@@ -140,6 +139,8 @@ public class LoginActivity extends AppCompatActivity {
                                 Toast.makeText(x.app(), jb.getString("msg"), Toast.LENGTH_SHORT).show();
                                 Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                                 startActivity(intent);
+                            } else {
+                                Toast.makeText(x.app(), jb.getString("msg"), Toast.LENGTH_SHORT).show();
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();

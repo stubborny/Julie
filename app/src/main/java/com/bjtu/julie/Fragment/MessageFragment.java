@@ -18,8 +18,10 @@ import com.bjtu.julie.Activity.Pub_footActivity;
 import com.bjtu.julie.Adapter.MessageAdaper;
 import com.bjtu.julie.FullyLinearLayoutManager;
 import com.bjtu.julie.Model.Exchange;
+import com.bjtu.julie.Model.Order;
 import com.bjtu.julie.Model.UserManager;
 import com.bjtu.julie.R;
+import com.github.nuptboyzhb.lib.SuperSwipeRefreshLayout;
 import com.lilei.springactionmenu.ActionMenu;
 import com.lilei.springactionmenu.OnActionItemClickListener;
 
@@ -49,6 +51,8 @@ public class MessageFragment extends Fragment {
     Unbinder unbinder;
     @BindView(R.id.actionMenu)
     ActionMenu actionMenu;
+    SuperSwipeRefreshLayout swipeRefreshLayout;
+    MessageAdaper adapter;
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
@@ -100,6 +104,7 @@ public class MessageFragment extends Fragment {
     private int getItemColor(int colorID) {
         return getResources().getColor(colorID);
     }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -125,24 +130,21 @@ public class MessageFragment extends Fragment {
                             // 遍历 jsonarray 数组，把每一个对象转成 json 对象
                             JSONObject job = messArray.getJSONObject(i);
 
-                            Exchange exchange = new Exchange(job.getString("messId") ,job.getInt("userId"),job.getString("name"), job.getString("userpicUrl"),
+                            Exchange exchange = new Exchange(job.getString("messId"), job.getInt("userId"), job.getString("name"), job.getString("userpicUrl"),
                                     job.getString("phone"), job.getString("content"),
-                                    job.getString("wechat"), job.getString("time"), job.getString("commentNum"),job.getString("likeNum"));
+                                    job.getString("wechat"), job.getString("time"), job.getString("commentNum"), job.getString("likeNum"));
 
                             exchangeList.add(exchange);
                         }
                     }
-                    //Log.i("AAA", String.valueOf(jb.getInt("code"))+jb.getString("msg"));
-                    //Toast.makeText(x.app(), jb.getString("msg"), Toast.LENGTH_LONG).show();
 
-                    //finish();
                     RecyclerView recyclerView = (RecyclerView) messageLayout.findViewById(R.id.messRecycleView);
                     FullyLinearLayoutManager layoutManager = new FullyLinearLayoutManager(getActivity());
 
                     recyclerView.setLayoutManager(layoutManager);
                     recyclerView.setNestedScrollingEnabled(false);
 
-                    MessageAdaper adapter = new MessageAdaper(exchangeList);
+                    adapter = new MessageAdaper(exchangeList);
                     recyclerView.setAdapter(adapter);
 
                 } catch (JSONException e) {
@@ -172,13 +174,79 @@ public class MessageFragment extends Fragment {
 
         });
 
-        //initExchange();
+        swipeRefreshLayout = (SuperSwipeRefreshLayout) messageLayout.findViewById(R.id.swipe_refresh);
+        swipeRefreshLayout
+                .setOnPullRefreshListener(new SuperSwipeRefreshLayout.OnPullRefreshListener() {
 
-//        RecyclerView recyclerView = (RecyclerView) messageLayout.findViewById(R.id.messRecycleView);
-//        LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
-//        recyclerView.setLayoutManager(layoutManager);
-//        MessageAdaper adaper = new MessageAdaper(exchangeList);
-//        recyclerView.setAdapter(adaper);
+                    @Override
+                    public void onRefresh() {
+                        String url = "http://39.107.225.80:8080//julieServer/MessageServlet";
+                        RequestParams params = new RequestParams(url);
+                        //Toast.makeText(getActivity(),"you clicked button 1",Toast.LENGTH_SHORT).show();
+                        x.http().get(params, new Callback.CommonCallback<String>() {
+                            @Override
+                            public void onSuccess(String result) {
+                                try {
+                                    exchangeList.clear();
+                                    JSONObject jb = new JSONObject(result);
+
+                                    JSONArray messArray = jb.getJSONArray("messList");
+
+                                    if (messArray.length() > 0) {
+                                        for (int i = 0; i < messArray.length(); i++) {
+                                            // 遍历 jsonarray 数组，把每一个对象转成 json 对象
+                                            JSONObject job = messArray.getJSONObject(i);
+
+                                            Exchange exchange = new Exchange(job.getString("messId"), job.getInt("userId"), job.getString("name"), job.getString("userpicUrl"),
+                                                    job.getString("phone"), job.getString("content"),
+                                                    job.getString("wechat"), job.getString("time"), job.getString("commentNum"), job.getString("likeNum"));
+
+                                            exchangeList.add(exchange);
+                                        }
+                                    }
+                                    adapter.notifyDataSetChanged();
+                                    swipeRefreshLayout.setRefreshing(false);
+
+
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+
+                                }
+
+                            }
+
+                            //请求异常后的回调方法
+                            @Override
+                            public void onError(Throwable ex, boolean isOnCallback) {
+                                //Toast.makeText(getActivity(),"you clicked button 1",Toast.LENGTH_SHORT).show();
+                            }
+
+                            //主动调用取消请求的回调方法
+                            @Override
+                            public void onCancelled(CancelledException cex) {
+                                //Toast.makeText(getActivity(),"you clicked button 1",Toast.LENGTH_SHORT).show();
+                            }
+
+                            @Override
+                            public void onFinished() {
+                                //Toast.makeText(getActivity(),"you clicked button 1",Toast.LENGTH_SHORT).show();
+
+                            }
+
+                        });
+                    }
+
+                    @Override
+                    public void onPullDistance(int distance) {
+                        //TODO 下拉距离
+                    }
+
+                    @Override
+                    public void onPullEnable(boolean enable) {
+                        //TODO 下拉过程中，下拉的距离是否足够出发刷新
+                    }
+                });
+
         return messageLayout;
     }
 

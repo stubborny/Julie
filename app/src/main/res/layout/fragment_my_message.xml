@@ -1,43 +1,25 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.bjtu.julie.Fragment.MyMessageFragment">
+    android:orientation="vertical"
+    tools:context="com.bjtu.julie.Fragment.MyFootmanFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <LinearLayout
+    <com.bjtu.julie.TitleLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="52dp"
-            android:background="@color/theme">
+        android:layout_height="wrap_content">
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:ellipsize="marquee"
-                android:gravity="center_horizontal|center"
-                android:singleLine="true"
-                android:text="我的发布"
-                android:textColor="@color/white"
-                android:textSize="22sp" />
-        </RelativeLayout>
-        <ScrollView
+        <include layout="@layout/title1" />
+    </com.bjtu.julie.TitleLayout>
+
+    <com.github.nuptboyzhb.lib.SuperSwipeRefreshLayout
+        android:id="@+id/swipe_refresh"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/my_recycle_message_item"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            >
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/my_recycle_message_item"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-        </ScrollView>
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="8dp"
-            android:background="#EEEED1"
-            android:focusable="true"
-            android:focusableInTouchMode="true" />
-    </LinearLayout>
-</FrameLayout>
+            android:layout_height="wrap_content" />
+    </com.github.nuptboyzhb.lib.SuperSwipeRefreshLayout>
+</LinearLayout>

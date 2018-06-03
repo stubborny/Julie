@@ -46,7 +46,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Activity.FootManActivity" />
         <activity
             android:name=".Activity.LoginActivity"
             android:finishOnTaskLaunch="true" />

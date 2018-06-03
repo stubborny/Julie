@@ -106,7 +106,12 @@ public class MessageDetailActivity extends AppCompatActivity {
             if (exchange.getUserId() == UserManager.getInstance().getUser().getId()) {
                 titleBtnOk.setText("删除");
             }
+            else{
+                titleBtnOk.setText("");
+            }
+
         }
+
         //CommentAdapter adapter=new CommentAdapter(MessageDetailActivity.this,R.layout.comment_item,commList);
 //        ListView listview=(ListView)findViewById(R.id.messCommList);
 //        listview.setAdapter(adapter);

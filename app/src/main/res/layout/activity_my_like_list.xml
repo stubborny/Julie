@@ -5,6 +5,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:weightSum="1">
+
     <com.bjtu.julie.TitleLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -16,13 +17,18 @@
         android:id="@+id/my_like_nothing"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:text="    暂无收藏的消息哦~"
         android:textSize="15dp"
-        android:visibility="gone"
-        android:text="    暂无收藏的消息哦~" />
+        android:visibility="gone" />
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/MyLikeRecycleView"
+    <com.github.nuptboyzhb.lib.SuperSwipeRefreshLayout
+        android:id="@+id/swipe_refresh"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="match_parent">
 
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/MyLikeRecycleView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </com.github.nuptboyzhb.lib.SuperSwipeRefreshLayout>
 </LinearLayout>

@@ -7,6 +7,14 @@ import java.io.Serializable;
  */
 //信息实体类
 public class Exchange implements Serializable {
+    public int getIsLikePage() {
+        return isLikePage;
+    }
+
+    public void setIsLikePage(int isLikePage) {
+        this.isLikePage = isLikePage;
+    }
+
     private String name; //用户名
     private String userpicUrl; //用户头像
     private String phone; // 订单联系电话
@@ -17,6 +25,7 @@ public class Exchange implements Serializable {
     private String commentNum;
     private String likeNum;
     private int userId;
+    private int isLikePage;
 
     public String getLikeNum() {
         return likeNum;
@@ -35,6 +44,7 @@ public class Exchange implements Serializable {
         this.commentNum=commentNum;
         this.likeNum=likeNum;
 
+        this.isLikePage=0;
     }
 
 

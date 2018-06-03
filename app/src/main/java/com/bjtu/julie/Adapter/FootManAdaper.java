@@ -87,26 +87,32 @@ public class FootManAdaper extends RecyclerView.Adapter<FootManAdaper.ViewHolder
                     intent = new Intent(v.getContext(), FootDetailVisitorActivity.class);
                 }
                 intent.putExtra("order", order);
+                intent.putExtra("position", position);
                 v.getContext().startActivity(intent);
             }
         });
         return holder;
     }
 
-    /**
-     * 局部刷新的关键
-     *
-     * @param holder
-     * @param position
-     * @param payloads
-     */
     @Override
-    public void onBindViewHolder(final ViewHolder holder, int position, List payloads) {
+    public void onBindViewHolder(ViewHolder holder, int position, List<Object> payloads) {
+
         if (payloads.isEmpty()) {
             onBindViewHolder(holder, position);
         } else {
-            mOrderList.get(position).setState("4");
-            holder.mTextState.setText("哈哈哈");
+            if (mOrderList.get(position).getState().equals("1")) {
+                holder.mTextState.setText("新发布");
+                holder.mTextState.setTextColor(holder.mTextState.getResources().getColor(R.color.red));
+            } else if (mOrderList.get(position).getState().equals("2")) {
+                holder.mTextState.setText("被抢啦");
+                holder.mTextState.setTextColor(holder.mTextState.getResources().getColor(R.color.darkgrey));
+            } else if (mOrderList.get(position).getState().equals("3")) {
+                holder.mTextState.setText("已送达");
+                holder.mTextState.setTextColor(holder.mTextState.getResources().getColor(R.color.darkgrey));
+            } else if (mOrderList.get(position).getState().equals("4")) {
+                holder.mTextState.setText("已结单");
+                holder.mTextState.setTextColor(holder.mTextState.getResources().getColor(R.color.darkgrey));
+            }
         }
     }
 
@@ -126,6 +132,7 @@ public class FootManAdaper extends RecyclerView.Adapter<FootManAdaper.ViewHolder
         holder.mTextConent.setText(order.getContent());
         if (order.getState().equals("1")) {
             holder.mTextState.setText("新发布");
+            holder.mTextState.setTextColor(holder.mTextState.getResources().getColor(R.color.red));
         } else if (order.getState().equals("2")) {
             holder.mTextState.setText("被抢啦");
             holder.mTextState.setTextColor(holder.mTextState.getResources().getColor(R.color.darkgrey));

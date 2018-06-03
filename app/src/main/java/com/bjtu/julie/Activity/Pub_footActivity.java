@@ -329,6 +329,9 @@ public class Pub_footActivity extends AppCompatActivity {
                                 Toast.makeText(x.app(), jb.getString("msg"), Toast.LENGTH_LONG).show();
                                 Double wallet = Double.valueOf(UserManager.getInstance().getUser().getWallet()) - totalMoney.floatValue();
                                 UserManager.getInstance().getUser().setWallet(wallet.floatValue() + "");
+                                MessageEvent messageEvent = new MessageEvent("pub");
+                                // 发布事件
+                                EventBus.getDefault().post(messageEvent);
                                 finish();
                                 //Log.i("AAA", String.valueOf(jb.getInt("code"))+jb.getString("msg"));
                             } catch (JSONException e) {
@@ -391,6 +394,9 @@ public class Pub_footActivity extends AppCompatActivity {
                             try {
                                 JSONObject jb = new JSONObject(result);
                                 Toast.makeText(x.app(), jb.getString("msg"), Toast.LENGTH_LONG).show();
+                                MessageEvent messageEvent = new MessageEvent("pub");
+                                // 发布事件
+                                EventBus.getDefault().post(messageEvent);
                                 finish();
                                 //Log.i("AAA", String.valueOf(jb.getInt("code"))+jb.getString("msg"));
                             } catch (JSONException e) {
